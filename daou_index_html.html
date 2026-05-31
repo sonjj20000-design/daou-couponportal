@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>다우기술 쿠폰사업본부 업무포털</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Apple SD Gothic Neo','Malgun Gothic',sans-serif;background:#f0f3f9;color:#1a2233;min-height:100vh;font-size:14px}
+a{text-decoration:none;color:inherit}
+button{cursor:pointer;font-family:inherit}
+input,select,textarea{font-family:inherit}
+#header{background:#0d2251;position:sticky;top:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:58px}
+#header-logo{display:flex;align-items:center;gap:10px;cursor:pointer}
+.logo-icon{width:30px;height:30px;background:#3b7ff5;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;font-size:13px}
+.logo-text{color:#fff;font-size:15px;font-weight:600}
+.logo-sub{color:#8aaee0;font-size:11px;margin-left:6px}
+#header-auth{display:flex;align-items:center;gap:10px}
+.btn-login{background:#3b7ff5;color:#fff;border:none;padding:6px 16px;border-radius:5px;font-size:12px;font-weight:500;cursor:pointer}
+.btn-login:hover{background:#2563c7}
+.user-info{display:flex;align-items:center;gap:8px;color:#c8d8f5;font-size:12px}
+.user-avatar{width:28px;height:28px;border-radius:50%;background:#3b7ff5;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:11px;color:#fff}
+.badge-master{background:#f59e0b;color:#fff;font-size:10px;padding:1px 6px;border-radius:10px}
+.btn-logout{background:transparent;color:#8aaee0;border:1px solid #2a4a7f;padding:4px 10px;border-radius:4px;font-size:11px;cursor:pointer}
+.btn-logout:hover{background:#1a3460;color:#fff}
+#gnb{background:#122b6e;border-top:1px solid #1e3a85;display:flex;padding:0 2rem;position:sticky;top:58px;z-index:998}
+.gnb-item{position:relative}
+.gnb-link{display:block;padding:12px 20px;color:#c5d5f0;font-size:13px;font-weight:500;background:none;border:none;white-space:nowrap;border-bottom:2px solid transparent;cursor:pointer}
+.gnb-link:hover,.gnb-item:hover .gnb-link{color:#fff}
+.gnb-link.active{color:#fff;border-bottom-color:#3b7ff5}
+.gnb-dropdown{display:none;position:absolute;top:100%;left:0;background:#fff;border:1px solid #e2e8f0;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.15);min-width:200px;z-index:999;overflow:hidden;list-style:none}
+.gnb-item:hover .gnb-dropdown{display:block}
+.gnb-dropdown li a{display:block;padding:10px 16px;font-size:12px;color:#2d4270;border-bottom:1px solid #f1f5f9;transition:background .15s}
+.gnb-dropdown li:last-child a{border-bottom:none}
+.gnb-dropdown li a:hover{background:#f0f5ff;color:#1a52c8}
+#page-wrap{display:flex;min-height:calc(100vh - 104px)}
+#sidebar{width:210px;background:#fff;border-right:1px solid #e2e8f0;padding:1.25rem 0;flex-shrink:0;display:none}
+#sidebar-title{font-size:10px;font-weight:700;color:#8090b0;letter-spacing:1.2px;text-transform:uppercase;padding:0 1rem .6rem}
+#sidebar-nav a{display:flex;align-items:center;gap:8px;padding:8px 1rem;font-size:12px;color:#3a4a6b;border-left:3px solid transparent;transition:all .15s;text-decoration:none}
+#sidebar-nav a:hover{background:#f0f5ff;color:#1a52c8}
+#sidebar-nav a.active{background:#eef4ff;color:#1a52c8;border-left-color:#3b7ff5;font-weight:600}
+#main-content{flex:1;padding:1.75rem;min-width:0}
+.page{display:none}
+.page.active{display:block}
+#home-hero{background:#0d2251;border-radius:12px;padding:2rem 1.75rem;margin-bottom:1.25rem;color:#fff}
+#home-hero h1{font-size:20px;font-weight:600;margin-bottom:4px}
+#home-hero p{color:#a8c0ea;font-size:12px}
+#home-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;margin-bottom:1.25rem}
+.stat-card{background:#fff;border-radius:10px;padding:1rem 1.25rem;border:1px solid #e2e8f0}
+.stat-label{font-size:11px;color:#7a90b8;margin-bottom:3px}
+.stat-value{font-size:24px;font-weight:600;color:#1a2233}
+.stat-sub{font-size:10px;padding:2px 7px;border-radius:10px;margin-top:5px;display:inline-block}
+.sub-blue{background:#eef4ff;color:#1a52c8}
+.sub-green{background:#eafaf1;color:#1a8a4a}
+.sub-amber{background:#fff8e6;color:#9a6500}
+.sub-red{background:#fff0f0;color:#c0392b}
+#home-menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem}
+.menu-card{background:#fff;border-radius:10px;padding:1.25rem;border:1px solid #e2e8f0;cursor:pointer;transition:all .2s}
+.menu-card:hover{border-color:#3b7ff5;box-shadow:0 4px 16px rgba(59,127,245,.1);transform:translateY(-2px)}
+.mc-icon{width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:10px}
+.ic-blue{background:#eef4ff}.ic-teal{background:#e4f8f2}.ic-purple{background:#f3eeff}
+.ic-amber{background:#fff8e6}.ic-pink{background:#fff0f6}.ic-gray{background:#f4f6fb}
+.menu-card h3{font-size:13px;font-weight:600;color:#1a2233;margin-bottom:3px}
+.menu-card p{font-size:11px;color:#7a90b8}
+.page-hd{margin-bottom:1.25rem}
+.page-hd h2{font-size:17px;font-weight:600;color:#1a2233}
+.page-hd p{font-size:12px;color:#7a90b8;margin-top:3px}
+.toolbar{display:flex;align-items:center;gap:.5rem;margin-bottom:1rem;flex-wrap:wrap}
+.toolbar input{padding:7px 10px;border:1px solid #d0daf0;border-radius:6px;font-size:12px;color:#1a2233;outline:none;width:200px}
+.toolbar input:focus{border-color:#3b7ff5}
+.toolbar select{padding:7px 10px;border:1px solid #d0daf0;border-radius:6px;font-size:12px;color:#1a2233;outline:none}
+.btn-add{background:#3b7ff5;color:#fff;border:none;padding:7px 14px;border-radius:6px;font-size:12px;font-weight:500;cursor:pointer}
+.btn-add:hover{background:#2563c7}
+.btn-export{background:#fff;color:#3a4a6b;border:1px solid #d0daf0;padding:7px 12px;border-radius:6px;font-size:12px;cursor:pointer}
+.btn-export:hover{background:#f4f6fb}
+.ml-auto{margin-left:auto}
+.tbl-wrap{background:#fff;border-radius:10px;border:1px solid #e2e8f0;overflow:auto;margin-bottom:.5rem}
+.tbl-wrap table{width:100%;border-collapse:collapse;font-size:12px}
+.tbl-wrap th{background:#f8faff;padding:9px 14px;text-align:left;font-size:11px;font-weight:700;color:#7a90b8;border-bottom:1px solid #e2e8f0;white-space:nowrap}
+.tbl-wrap td{padding:9px 14px;border-bottom:1px solid #f1f5f9;color:#2d4270;vertical-align:middle}
+.tbl-wrap tr:last-child td{border-bottom:none}
+.tbl-wrap tr:hover td{background:#f9fbff}
+.badge{display:inline-block;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500}
+.b-blue{background:#eef4ff;color:#1a52c8}.b-green{background:#eafaf1;color:#1a8a4a}
+.b-amber{background:#fff8e6;color:#9a6500}.b-red{background:#fff0f0;color:#c0392b}
+.b-gray{background:#f4f6fb;color:#5a6a8a}
+.btn-sm{padding:3px 10px;border-radius:4px;font-size:11px;border:1px solid #d0daf0;background:#fff;color:#3a4a6b;cursor:pointer}
+.btn-sm:hover{background:#eef4ff;color:#1a52c8;border-color:#b0c8f8}
+.btn-del{color:#c0392b;border-color:#f0c0c0}
+.btn-del:hover{background:#fff0f0;border-color:#e08080}
+.cards-row{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;margin-bottom:1rem}
+.info-card{background:#fff;border-radius:10px;padding:1rem;border:1px solid #e2e8f0}
+.info-card .ic-label{font-size:11px;color:#7a90b8;margin-bottom:3px}
+.info-card .ic-val{font-size:20px;font-weight:600;color:#1a2233}
+.info-card .ic-sub{font-size:11px;color:#7a90b8;margin-top:2px}
+.form-inline{background:#f8faff;border-radius:8px;padding:.875rem 1rem;border:1px solid #e2e8f0;margin-top:.75rem;display:none}
+.form-inline.open{display:block}
+.form-inline .fi-title{font-size:12px;font-weight:600;color:#2d4270;margin-bottom:.6rem}
+.form-row{display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end}
+.fg{display:flex;flex-direction:column;gap:3px}
+.fg label{font-size:10px;color:#7a90b8;font-weight:600}
+.fg input,.fg select{padding:6px 9px;border:1px solid #d0daf0;border-radius:5px;font-size:12px;outline:none;min-width:110px}
+.fg input:focus{border-color:#3b7ff5}
+.form-err{color:#c0392b;font-size:11px;margin-top:5px;display:none}
+.lock-box{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:5rem 2rem;text-align:center;color:#7a90b8}
+.lock-box .lock-emoji{font-size:48px;margin-bottom:1rem;opacity:.4}
+.lock-box h2{font-size:15px;color:#3a4a6b;margin-bottom:6px}
+.lock-box p{font-size:12px;margin-bottom:1rem}
+.lock-box button{background:#3b7ff5;color:#fff;border:none;padding:8px 20px;border-radius:6px;font-size:13px;cursor:pointer}
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(10,20,50,.55);z-index:2000;align-items:center;justify-content:center}
+.modal-bg.open{display:flex}
+.modal{background:#fff;border-radius:12px;padding:1.75rem;width:340px;box-shadow:0 16px 48px rgba(0,0,0,.18)}
+.modal h2{font-size:16px;font-weight:600;color:#1a2233;margin-bottom:2px}
+.modal-sub{font-size:11px;color:#7a90b8;margin-bottom:1.25rem}
+.modal label{display:block;font-size:11px;color:#4a5a7a;font-weight:600;margin-bottom:3px}
+.modal input{width:100%;padding:8px 10px;border:1px solid #d0daf0;border-radius:5px;font-size:13px;outline:none;margin-bottom:10px}
+.modal input:focus{border-color:#3b7ff5}
+.modal-err{color:#c0392b;font-size:11px;margin-bottom:8px;display:none}
+.modal-actions{display:flex;gap:8px;margin-top:4px}
+.btn-primary{flex:1;background:#3b7ff5;color:#fff;border:none;padding:9px;border-radius:6px;font-size:13px;font-weight:500;cursor:pointer}
+.btn-primary:hover{background:#2563c7}
+.btn-cancel{background:#f4f6fb;color:#4a5a7a;border:1px solid #d0daf0;padding:9px 16px;border-radius:6px;font-size:13px;cursor:pointer}
+.upload-box{background:#fff;border-radius:10px;border:2px dashed #c0d0f0;padding:2.5rem;text-align:center;margin-bottom:1rem;cursor:pointer;transition:border-color .2s}
+.upload-box:hover{border-color:#3b7ff5}
+.upload-box .ub-icon{font-size:36px;margin-bottom:.75rem}
+.upload-box p{font-size:13px;color:#3a4a6b;font-weight:500;margin-bottom:4px}
+.upload-box span{font-size:11px;color:#7a90b8}
+.log-box{background:#0d1a2e;border-radius:8px;padding:1rem 1.25rem;font-family:monospace;font-size:11px;color:#6ee7b7;max-height:160px;overflow-y:auto;line-height:1.8}
+.log-line.err{color:#f87171}.log-line.info{color:#93c5fd}
+.api-detail-panel{background:#fff;border-radius:10px;border:1px solid #e2e8f0;padding:1.25rem;margin-top:.75rem;display:none}
+.api-detail-panel.open{display:block}
+.adp-title{font-size:13px;font-weight:600;color:#1a2233;margin-bottom:.75rem;display:flex;justify-content:space-between;align-items:center}
+.adp-row{display:flex;gap:1rem;margin-bottom:.5rem;font-size:12px}
+.adp-label{color:#7a90b8;min-width:80px;flex-shrink:0}
+.adp-val{color:#2d4270;word-break:break-all}
+.adp-close{background:none;border:none;font-size:16px;color:#aab;cursor:pointer}
+.doc-template-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin-bottom:1rem}
+.doc-tmpl-card{background:#fff;border:1.5px solid #e2e8f0;border-radius:8px;padding:1rem;cursor:pointer;transition:all .15s;text-align:center}
+.doc-tmpl-card:hover,.doc-tmpl-card.selected{border-color:#3b7ff5;background:#f0f5ff}
+.doc-tmpl-card .dt-icon{font-size:24px;margin-bottom:6px}
+.doc-tmpl-card p{font-size:11px;font-weight:600;color:#2d4270}
+.doc-editor-area{background:#fff;border-radius:10px;border:1px solid #e2e8f0;overflow:hidden}
+.doc-toolbar-bar{display:flex;gap:4px;padding:.6rem .875rem;border-bottom:1px solid #f1f5f9;flex-wrap:wrap}
+.doc-toolbar-bar button{background:#f4f6fb;border:1px solid #e2e8f0;border-radius:4px;padding:3px 8px;font-size:11px;color:#3a4a6b;cursor:pointer}
+.doc-toolbar-bar button:hover{background:#eef4ff;color:#1a52c8}
+.doc-textarea{width:100%;padding:1rem 1.25rem;font-size:13px;line-height:1.8;border:none;outline:none;resize:vertical;min-height:260px;color:#1a2233}
+.doc-actions{display:flex;gap:.5rem;margin-top:.75rem;justify-content:flex-end}
+.btn-save{background:#3b7ff5;color:#fff;border:none;padding:7px 16px;border-radius:6px;font-size:12px;font-weight:500;cursor:pointer}
+.btn-save:hover{background:#2563c7}
+.sec-note{background:#fff8e6;border:1px solid #f0d080;border-radius:6px;padding:6px 12px;font-size:11px;color:#7a4f00;margin-bottom:.75rem}
+</style>
+</head>
+<body>
+
+<header id="header">
+  <div id="header-logo" onclick="showPage('home')">
+    <div class="logo-icon">D</div>
+    <span class="logo-text">다우기술<span class="logo-sub">쿠폰사업본부</span></span>
+  </div>
+  <div id="header-auth">
+    <button class="btn-login" onclick="openLogin()">로그인</button>
+  </div>
+</header>
+
+<nav id="gnb">
+  <div class="gnb-item">
+    <button class="gnb-link" id="gnb-business" onclick="showPage('business-market')">사업기획</button>
+    <ul class="gnb-dropdown">
+      <li><a href="#" onclick="showPage('business-market');return false">시장현황/경쟁사 모니터링</a></li>
+      <li><a href="#" onclick="showPage('business-competitor');return false">경쟁사 기업분석 관리</a></li>
+      <li><a href="#" onclick="showPage('business-sales');return false">영업리스트 관리</a></li>
+    </ul>
+  </div>
+  <div class="gnb-item">
+    <button class="gnb-link" id="gnb-service" onclick="showPage('service-api')">서비스기획</button>
+    <ul class="gnb-dropdown">
+      <li><a href="#" onclick="showPage('service-api');return false">API연동 업무관리</a></li>
+      <li><a href="#" onclick="showPage('service-doc');return false">서비스기획문서 작성</a></li>
+    </ul>
+  </div>
+  <div class="gnb-item">
+    <button class="gnb-link" id="gnb-etc" onclick="showPage('etc-cms')">기타</button>
+    <ul class="gnb-dropdown">
+      <li><a href="#" onclick="showPage('etc-cms');return false">CMS상품등록 자동화</a></li>
+    </ul>
+  </div>
+  <div class="gnb-item" id="gnb-account" style="display:none">
+    <button class="gnb-link" id="gnb-account-link" onclick="showPage('account-manage')">계정관리</button>
+    <ul class="gnb-dropdown">
+      <li><a href="#" onclick="showPage('account-manage');return false">아이디/패스워드 관리</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div id="page-wrap">
+  <aside id="sidebar">
+    <div id="sidebar-title"></div>
+    <nav id="sidebar-nav"></nav>
+  </aside>
+  <main id="main-content">
+
+    <section class="page active" id="page-home">
+      <div id="home-hero"><h1>쿠폰사업본부 업무 포털</h1><p>업무 효율화·자동화 통합 관리 시스템 | 다우기술</p></div>
+      <div id="home-stats">
+        <div class="stat-card"><div class="stat-label">등록 경쟁사</div><div class="stat-value" id="stat-competitor">0</div><span class="stat-sub sub-blue">기업분석</span></div>
+        <div class="stat-card"><div class="stat-label">영업 리스트</div><div class="stat-value" id="stat-sales">0</div><span class="stat-sub sub-green">등록건</span></div>
+        <div class="stat-card"><div class="stat-label">API 진행중</div><div class="stat-value" id="stat-api">0</div><span class="stat-sub sub-amber">개발중</span></div>
+        <div class="stat-card"><div class="stat-label">사용자 계정</div><div class="stat-value" id="stat-users">0</div><span class="stat-sub sub-red">관리중</span></div>
+      </div>
+      <div id="home-menu-grid">
+        <div class="menu-card" onclick="showPage('business-market')"><div class="mc-icon ic-blue">📊</div><h3>시장현황/경쟁사 모니터링</h3><p>실시간 시장 트렌드 및 경쟁사 동향</p></div>
+        <div class="menu-card" onclick="showPage('business-competitor')"><div class="mc-icon ic-teal">🏢</div><h3>경쟁사 기업분석 관리</h3><p>경쟁사 분석 데이터 입력 및 비교</p></div>
+        <div class="menu-card" onclick="showPage('business-sales')"><div class="mc-icon ic-purple">📋</div><h3>영업리스트 관리</h3><p>영업 타깃 기업 및 담당자 관리</p></div>
+        <div class="menu-card" onclick="showPage('service-api')"><div class="mc-icon ic-amber">🔗</div><h3>API연동 업무관리</h3><p>외부 API 연동 현황 및 업무 관리</p></div>
+        <div class="menu-card" onclick="showPage('service-doc')"><div class="mc-icon ic-pink">📝</div><h3>서비스기획문서 작성</h3><p>기획서·제안서 문서 작성 및 관리</p></div>
+        <div class="menu-card" onclick="showPage('etc-cms')"><div class="mc-icon ic-gray">⚙️</div><h3>CMS상품등록 자동화</h3><p>상품 데이터 자동 등록 일괄 처리</p></div>
+      </div>
+    </section>
+
+    <section class="page" id="page-business-market">
+      <div class="page-hd"><h2>시장현황 / 경쟁사 모니터링</h2><p>실시간 시장 트렌드 및 경쟁사 동향을 모니터링합니다</p></div>
+      <div class="cards-row">
+        <div class="info-card"><div class="ic-label">모니터링 경쟁사</div><div class="ic-val" id="mkt-cnt">0</div><div class="ic-sub">등록 수</div></div>
+        <div class="info-card"><div class="ic-label">위험도 높음</div><div class="ic-val" id="mkt-high">0</div><div class="ic-sub">주의 경쟁사</div></div>
+        <div class="info-card"><div class="ic-label">이커머스</div><div class="ic-val" id="mkt-ec">0</div><div class="ic-sub">업종별</div></div>
+        <div class="info-card"><div class="ic-label">최근 등록</div><div class="ic-val" id="mkt-today" style="font-size:13px;margin-top:4px">-</div><div class="ic-sub">마지막 등록일</div></div>
+      </div>
+      <div class="toolbar">
+        <input type="text" id="mkt-search" placeholder="경쟁사명 검색..." oninput="renderMarket()"/>
+        <select id="mkt-filter" onchange="renderMarket()"><option value="">전체 업종</option><option>이커머스</option><option>핀테크</option><option>플랫폼</option><option>SaaS</option></select>
+        <button class="btn-add" onclick="toggleForm('market-form')">+ 등록</button>
+        <button class="btn-export ml-auto" onclick="exportCSV('market')">CSV 내보내기</button>
+      </div>
+      <div class="tbl-wrap"><table><thead><tr><th>#</th><th>경쟁사명</th><th>업종</th><th>최근 동향</th><th>쿠폰 정책</th><th>위험도</th><th>등록일</th><th>관리</th></tr></thead><tbody id="mkt-tbody"></tbody></table></div>
+      <div class="form-inline" id="market-form">
+        <div class="fi-title">경쟁사 모니터링 등록</div>
+        <div class="form-row">
+          <div class="fg"><label>경쟁사명 *</label><input id="mf-name" placeholder="예) 카카오페이"/></div>
+          <div class="fg"><label>업종</label><select id="mf-sector"><option>이커머스</option><option>핀테크</option><option>플랫폼</option><option>SaaS</option></select></div>
+          <div class="fg"><label>최근 동향</label><input id="mf-trend" placeholder="간략 입력"/></div>
+          <div class="fg"><label>쿠폰정책</label><input id="mf-coupon" placeholder="예) 5% 할인쿠폰"/></div>
+          <div class="fg"><label>위험도</label><select id="mf-risk"><option>낮음</option><option>보통</option><option>높음</option></select></div>
+          <button class="btn-add" style="height:32px;align-self:flex-end" onclick="addMarket()">추가</button>
+        </div>
+        <div class="form-err" id="mf-err">경쟁사명을 입력해주세요.</div>
+      </div>
+    </section>
+
+    <section class="page" id="page-business-competitor">
+      <div class="page-hd"><h2>경쟁사 기업분석 관리</h2><p>경쟁사 정보를 등록하고 심층 분석 데이터를 관리합니다</p></div>
+      <div class="toolbar">
+        <input type="text" id="comp-search" placeholder="기업명 검색..." oninput="renderCompetitor()"/>
+        <select id="comp-stage" onchange="renderCompetitor()"><option value="">분석단계 전체</option><option>초기분석</option><option>심층분석</option><option>완료</option></select>
+        <button class="btn-add" onclick="toggleForm('comp-form')">+ 기업 등록</button>
+        <button class="btn-export ml-auto" onclick="exportCSV('competitor')">CSV 내보내기</button>
+      </div>
+      <div class="tbl-wrap"><table><thead><tr><th>#</th><th>기업명</th><th>설립연도</th><th>매출규모</th><th>주요서비스</th><th>강점</th><th>약점</th><th>분석단계</th><th>관리</th></tr></thead><tbody id="comp-tbody"></tbody></table></div>
+      <div class="form-inline" id="comp-form">
+        <div class="fi-title">경쟁사 기업 등록</div>
+        <div class="form-row">
+          <div class="fg"><label>기업명 *</label><input id="cf-name" placeholder="기업명"/></div>
+          <div class="fg"><label>설립연도</label><input id="cf-year" placeholder="예) 2015"/></div>
+          <div class="fg"><label>매출규모</label><input id="cf-revenue" placeholder="예) 500억"/></div>
+          <div class="fg"><label>주요서비스</label><input id="cf-service" placeholder="핵심 서비스"/></div>
+          <div class="fg"><label>강점</label><input id="cf-strength" placeholder="강점 요약"/></div>
+          <div class="fg"><label>약점</label><input id="cf-weakness" placeholder="약점 요약"/></div>
+          <div class="fg"><label>분석단계</label><select id="cf-stage"><option>초기분석</option><option>심층분석</option><option>완료</option></select></div>
+          <button class="btn-add" style="height:32px;align-self:flex-end" onclick="addCompetitor()">추가</button>
+        </div>
+        <div class="form-err" id="cf-err">기업명을 입력해주세요.</div>
+      </div>
+    </section>
+
+    <section class="page" id="page-business-sales">
+      <div class="page-hd"><h2>영업리스트 관리</h2><p>영업 타깃 기업 및 담당자 정보를 관리합니다</p></div>
+      <div class="toolbar">
+        <input type="text" id="sales-search" placeholder="기업명·담당자 검색..." oninput="renderSales()"/>
+        <select id="sales-status" onchange="renderSales()"><option value="">진행상태 전체</option><option>신규</option><option>접촉중</option><option>제안완료</option><option>계약완료</option><option>보류</option></select>
+        <button class="btn-add" onclick="toggleForm('sales-form')">+ 영업처 등록</button>
+        <button class="btn-export ml-auto" onclick="exportCSV('sales')">CSV 내보내기</button>
+      </div>
+      <div class="tbl-wrap"><table><thead><tr><th>#</th><th>기업명</th><th>담당자</th><th>연락처</th><th>이메일</th><th>업종</th><th>예상규모</th><th>상태</th><th>관리</th></tr></thead><tbody id="sales-tbody"></tbody></table></div>
+      <div class="form-inline" id="sales-form">
+        <div class="fi-title">영업처 등록</div>
+        <div class="form-row">
+          <div class="fg"><label>기업명 *</label><input id="sf-company" placeholder="기업명"/></div>
+          <div class="fg"><label>담당자</label><input id="sf-name" placeholder="담당자명"/></div>
+          <div class="fg"><label>연락처</label><input id="sf-tel" placeholder="010-0000-0000"/></div>
+          <div class="fg"><label>이메일</label><input id="sf-email" placeholder="email@example.com"/></div>
+          <div class="fg"><label>업종</label><input id="sf-sector" placeholder="업종"/></div>
+          <div class="fg"><label>예상규모</label><input id="sf-size" placeholder="예) 중소기업"/></div>
+          <div class="fg"><label>상태</label><select id="sf-status"><option>신규</option><option>접촉중</option><option>제안완료</option><option>계약완료</option><option>보류</option></select></div>
+          <button class="btn-add" style="height:32px;align-self:flex-end" onclick="addSales()">추가</button>
+        </div>
+        <div class="form-err" id="sf-err">기업명을 입력해주세요.</div>
+      </div>
+    </section>
+
+    <section class="page" id="page-service-api">
+      <div class="page-hd"><h2>API연동 업무관리</h2><p>외부 API 연동 현황 및 진행 업무를 관리합니다</p></div>
+      <div class="cards-row">
+        <div class="info-card"><div class="ic-label">전체 API</div><div class="ic-val" id="api-total">0</div><div class="ic-sub">등록 수</div></div>
+        <div class="info-card"><div class="ic-label">운영중</div><div class="ic-val" id="api-live">0</div><div class="ic-sub">정상 연동</div></div>
+        <div class="info-card"><div class="ic-label">개발중</div><div class="ic-val" id="api-dev">0</div><div class="ic-sub">진행중</div></div>
+        <div class="info-card"><div class="ic-label">검토중</div><div class="ic-val" id="api-review">0</div><div class="ic-sub">대기</div></div>
+      </div>
+      <div class="toolbar">
+        <input type="text" id="api-search" placeholder="API명·담당자 검색..." oninput="renderApi()"/>
+        <select id="api-filter" onchange="renderApi()"><option value="">전체 상태</option><option>운영중</option><option>개발중</option><option>검토중</option><option>중단</option></select>
+        <button class="btn-add" onclick="toggleForm('api-form')">+ API 등록</button>
+      </div>
+      <div class="tbl-wrap"><table><thead><tr><th>#</th><th>API명</th><th>제공사</th><th>방식</th><th>담당자</th><th>상태</th><th>등록일</th><th>상세</th><th>관리</th></tr></thead><tbody id="api-tbody"></tbody></table></div>
+      <div class="api-detail-panel" id="api-detail-panel">
+        <div class="adp-title"><span id="adp-name">API 상세</span><button class="adp-close" onclick="closeApiDetail()">✕</button></div>
+        <div id="adp-body"></div>
+      </div>
+      <div class="form-inline" id="api-form">
+        <div class="fi-title">API 등록</div>
+        <div class="form-row">
+          <div class="fg"><label>API명 *</label><input id="apif-name" placeholder="API 서비스명"/></div>
+          <div class="fg"><label>제공사</label><input id="apif-provider" placeholder="제공 회사명"/></div>
+          <div class="fg"><label>연동방식</label><select id="apif-method"><option>REST</option><option>GraphQL</option><option>SOAP</option><option>WebSocket</option></select></div>
+          <div class="fg"><label>담당자</label><input id="apif-owner" placeholder="담당자명"/></div>
+          <div class="fg"><label>상태</label><select id="apif-status"><option>검토중</option><option>개발중</option><option>운영중</option><option>중단</option></select></div>
+          <div class="fg"><label>Endpoint URL</label><input id="apif-url" placeholder="https://api.example.com"/></div>
+          <button class="btn-add" style="height:32px;align-self:flex-end" onclick="addApi()">추가</button>
+        </div>
+        <div class="form-err" id="apif-err">API명을 입력해주세요.</div>
+      </div>
+    </section>
+
+    <section class="page" id="page-service-doc">
+      <div class="page-hd"><h2>서비스기획문서 작성</h2><p>템플릿 기반으로 기획서·제안서를 작성하고 관리합니다</p></div>
+      <p style="font-size:12px;color:#7a90b8;margin-bottom:.6rem;font-weight:600">문서 템플릿 선택</p>
+      <div class="doc-template-grid">
+        <div class="doc-tmpl-card selected" onclick="selectTemplate(this,'서비스 기획서')"><div class="dt-icon">📋</div><p>서비스 기획서</p></div>
+        <div class="doc-tmpl-card" onclick="selectTemplate(this,'제안서')"><div class="dt-icon">💼</div><p>제안서</p></div>
+        <div class="doc-tmpl-card" onclick="selectTemplate(this,'기능 명세서')"><div class="dt-icon">📐</div><p>기능 명세서</p></div>
+        <div class="doc-tmpl-card" onclick="selectTemplate(this,'API 명세서')"><div class="dt-icon">🔗</div><p>API 명세서</p></div>
+        <div class="doc-tmpl-card" onclick="selectTemplate(this,'시장분석 보고서')"><div class="dt-icon">📊</div><p>시장분석 보고서</p></div>
+        <div class="doc-tmpl-card" onclick="selectTemplate(this,'사용자 스토리')"><div class="dt-icon">🧑‍💻</div><p>사용자 스토리</p></div>
+      </div>
+      <div class="doc-editor-area">
+        <div class="doc-toolbar-bar">
+          <button onclick="wrapText('**','**')"><b>B</b></button>
+          <button onclick="wrapText('*','*')"><i>I</i></button>
+          <button onclick="wrapText('## ','')">H2</button>
+          <button onclick="wrapText('### ','')">H3</button>
+          <button onclick="insertLine('- ')">목록</button>
+          <button onclick="insertLine('| 항목 | 내용 |\n|---|---|\n| | |')">표 삽입</button>
+        </div>
+        <textarea class="doc-textarea" id="doc-textarea" placeholder="문서 내용을 작성하세요..."></textarea>
+      </div>
+      <div class="doc-actions">
+        <button class="btn-export" onclick="clearDoc()">초기화</button>
+        <button class="btn-save" onclick="saveDoc()">💾 저장</button>
+        <button class="btn-save" style="background:#6c757d" onclick="exportDoc()">내보내기</button>
+      </div>
+      <div id="doc-saved-list" style="margin-top:1rem"></div>
+    </section>
+
+    <section class="page" id="page-etc-cms">
+      <div class="page-hd"><h2>CMS 상품등록 자동화</h2><p>Excel/CSV 파일을 업로드하여 상품 데이터를 자동 등록합니다</p></div>
+      <div class="upload-box" onclick="document.getElementById('cms-file-input').click()">
+        <div class="ub-icon">📁</div>
+        <p>Excel / CSV 파일을 클릭하여 업로드</p>
+        <span>지원 형식: .xlsx, .xls, .csv | 최대 10MB</span>
+        <input type="file" id="cms-file-input" accept=".xlsx,.xls,.csv" style="display:none" onchange="handleCmsUpload(event)"/>
+      </div>
+      <div id="cms-parse-err" style="display:none;color:#c0392b;font-size:12px;margin-bottom:.75rem;padding:8px 12px;background:#fff0f0;border-radius:6px;border:1px solid #f0c0c0"></div>
+      <div id="etc-cms-preview"></div>
+      <div id="etc-cms-actions" style="display:none;margin-bottom:1rem">
+        <div class="toolbar">
+          <span id="cms-count-label" style="font-size:12px;color:#3a4a6b;font-weight:500"></span>
+          <button class="btn-add ml-auto" onclick="runCmsAuto()">▶ 자동등록 실행</button>
+          <button class="btn-export" onclick="resetCms()">초기화</button>
+        </div>
+      </div>
+      <div id="etc-cms-log" style="display:none">
+        <p style="font-size:11px;color:#7a90b8;margin-bottom:4px;font-weight:600">처리 로그</p>
+        <div class="log-box" id="cms-log-box"></div>
+      </div>
+    </section>
+
+    <section class="page" id="page-account-manage">
+      <div class="page-hd"><h2>계정관리</h2><p>사용자 아이디/패스워드를 등록·수정·관리합니다 (마스터 전용)</p></div>
+      <div class="sec-note">⚠️ 패스워드는 SHA-256 해시로 저장됩니다. 분실 시 재설정이 필요합니다.</div>
+      <div class="toolbar">
+        <input type="text" id="acct-search" placeholder="아이디 검색..." oninput="renderAccount()"/>
+        <button class="btn-add" onclick="toggleForm('acct-form')">+ 사용자 추가</button>
+      </div>
+      <div class="tbl-wrap"><table><thead><tr><th>#</th><th>아이디</th><th>패스워드</th><th>권한</th><th>등록일</th><th>관리</th></tr></thead><tbody id="acct-tbody"></tbody></table></div>
+      <div class="form-inline" id="acct-form">
+        <div class="fi-title">사용자 추가</div>
+        <div class="form-row">
+          <div class="fg"><label>아이디 *</label><input id="acf-id" placeholder="아이디"/></div>
+          <div class="fg"><label>패스워드 *</label><input id="acf-pw" type="password" placeholder="패스워드"/></div>
+          <div class="fg"><label>권한</label><select id="acf-role"><option value="user">일반</option></select></div>
+          <button class="btn-add" style="height:32px;align-self:flex-end" onclick="addUser()">추가</button>
+        </div>
+        <div class="form-err" id="acf-err"></div>
+      </div>
+    </section>
+
+    <section class="page" id="page-lock">
+      <div class="lock-box">
+        <div class="lock-emoji">🔒</div>
+        <h2>로그인이 필요한 메뉴입니다</h2>
+        <p>이 기능은 로그인 후 이용하실 수 있습니다</p>
+        <button onclick="openLogin()">로그인하기</button>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- 로그인 모달 -->
+<div class="modal-bg" id="modal-login">
+  <div class="modal">
+    <h2>로그인</h2><p class="modal-sub">쿠폰사업본부 업무포털</p>
+    <label>아이디</label><input type="text" id="login-id" placeholder="아이디" autocomplete="username"/>
+    <label>패스워드</label><input type="password" id="login-pw" placeholder="패스워드" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()"/>
+    <div class="modal-err" id="login-err">아이디 또는 패스워드가 올바르지 않습니다.</div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeLogin()">취소</button>
+      <button class="btn-primary" onclick="doLogin()">로그인</button>
+    </div>
+  </div>
+</div>
+
+<!-- 패스워드 수정 모달 -->
+<div class="modal-bg" id="edit-modal">
+  <div class="modal">
+    <h2>패스워드 변경</h2><p class="modal-sub" id="edit-modal-sub"></p>
+    <label>새 패스워드</label><input type="password" id="edit-pw" placeholder="새 패스워드 입력"/>
+    <label>새 패스워드 확인</label><input type="password" id="edit-pw2" placeholder="패스워드 재입력" onkeydown="if(event.key==='Enter')submitEditPw()"/>
+    <div class="modal-err" id="edit-err"></div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeEditModal()">취소</button>
+      <button class="btn-primary" onclick="submitEditPw()">변경</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const MASTER={id:'sonjj2000',pw:'5835'};
+const USERS_KEY='daou_v2_users';
+const DATA_KEY='daou_v2_data';
+let currentUser=null,pendingPage=null,editTargetIdx=-1;
+
+async function sha256(s){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join('')}
+function getUsers(){try{return JSON.parse(localStorage.getItem(USERS_KEY)||'[]')}catch(e){return[]}}
+function saveUsers(u){localStorage.setItem(USERS_KEY,JSON.stringify(u))}
+function getData(){try{return JSON.parse(localStorage.getItem(DATA_KEY)||'{}')}catch(e){return{}}}
+function saveData(d){localStorage.setItem(DATA_KEY,JSON.stringify(d))}
+function getList(k){return getData()[k]||[]}
+function saveList(k,l){const d=getData();d[k]=l;saveData(d)}
+const today=()=>new Date().toLocaleDateString('ko-KR');
+
+function openLogin(){document.getElementById('modal-login').classList.add('open');document.getElementById('login-err').style.display='none';setTimeout(()=>document.getElementById('login-id').focus(),80)}
+function closeLogin(){document.getElementById('modal-login').classList.remove('open')}
+async function doLogin(){
+  const id=document.getElementById('login-id').value.trim();
+  const pw=document.getElementById('login-pw').value;
+  const err=document.getElementById('login-err');err.style.display='none';
+  const mHash=await sha256(MASTER.pw),iHash=await sha256(pw);
+  if(id===MASTER.id&&iHash===mHash){currentUser={id,role:'master'}}
+  else{const u=getUsers().find(u=>u.id===id&&u.pwHash===iHash);if(u)currentUser={id,role:'user'};else{err.style.display='block';return}}
+  closeLogin();updateHeader();
+  document.getElementById('gnb-account').style.display=currentUser.role==='master'?'block':'none';
+  if(pendingPage){const t=pendingPage;pendingPage=null;showPage(t)}else updateStats();
+}
+function doLogout(){currentUser=null;document.getElementById('gnb-account').style.display='none';updateHeader();showPage('home')}
+function updateHeader(){
+  const hr=document.getElementById('header-auth');
+  if(currentUser){const ini=currentUser.id.substring(0,2).toUpperCase();const b=currentUser.role==='master'?'<span class="badge-master">마스터</span>':'';hr.innerHTML=`<div class="user-info"><div class="user-avatar">${ini}</div><span>${currentUser.id}</span>${b}</div><button class="btn-logout" onclick="doLogout()">로그아웃</button>`}
+  else hr.innerHTML='<button class="btn-login" onclick="openLogin()">로그인</button>'
+}
+function openEditModal(i){editTargetIdx=i;const u=getUsers()[i];document.getElementById('edit-modal-sub').textContent='사용자: '+u.id;document.getElementById('edit-pw').value='';document.getElementById('edit-pw2').value='';document.getElementById('edit-err').style.display='none';document.getElementById('edit-modal').classList.add('open');setTimeout(()=>document.getElementById('edit-pw').focus(),80)}
+function closeEditModal(){document.getElementById('edit-modal').classList.remove('open');editTargetIdx=-1}
+async function submitEditPw(){
+  const pw=document.getElementById('edit-pw').value,pw2=document.getElementById('edit-pw2').value,err=document.getElementById('edit-err');
+  if(!pw){err.textContent='패스워드를 입력하세요.';err.style.display='block';return}
+  if(pw!==pw2){err.textContent='패스워드가 일치하지 않습니다.';err.style.display='block';return}
+  const users=getUsers();users[editTargetIdx].pwHash=await sha256(pw);saveUsers(users);closeEditModal();renderAccount();
+}
+
+const SIDEBAR_MAP={
+  'business-market':{title:'사업기획',items:[{id:'business-market',label:'시장현황/경쟁사 모니터링',icon:'📊'},{id:'business-competitor',label:'경쟁사 기업분석 관리',icon:'🏢'},{id:'business-sales',label:'영업리스트 관리',icon:'📋'}]},
+  'business-competitor':{title:'사업기획',items:[{id:'business-market',label:'시장현황/경쟁사 모니터링',icon:'📊'},{id:'business-competitor',label:'경쟁사 기업분석 관리',icon:'🏢'},{id:'business-sales',label:'영업리스트 관리',icon:'📋'}]},
+  'business-sales':{title:'사업기획',items:[{id:'business-market',label:'시장현황/경쟁사 모니터링',icon:'📊'},{id:'business-competitor',label:'경쟁사 기업분석 관리',icon:'🏢'},{id:'business-sales',label:'영업리스트 관리',icon:'📋'}]},
+  'service-api':{title:'서비스기획',items:[{id:'service-api',label:'API연동 업무관리',icon:'🔗'},{id:'service-doc',label:'서비스기획문서 작성',icon:'📝'}]},
+  'service-doc':{title:'서비스기획',items:[{id:'service-api',label:'API연동 업무관리',icon:'🔗'},{id:'service-doc',label:'서비스기획문서 작성',icon:'📝'}]},
+  'etc-cms':{title:'기타',items:[{id:'etc-cms',label:'CMS상품등록 자동화',icon:'⚙️'}]},
+  'account-manage':{title:'계정관리',items:[{id:'account-manage',label:'아이디/패스워드 관리',icon:'👤'}]},
+};
+const AUTH_REQUIRED=['business-market','business-competitor','business-sales','service-api','service-doc','etc-cms','account-manage'];
+
+function showPage(id){
+  if(AUTH_REQUIRED.includes(id)&&!currentUser){pendingPage=id;id='lock'}
+  else if(id==='account-manage'&&(!currentUser||currentUser.role!=='master')){pendingPage=id;id='lock'}
+  else pendingPage=null;
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  const pg=document.getElementById('page-'+id);if(pg)pg.classList.add('active');
+  const sb=document.getElementById('sidebar'),sn=document.getElementById('sidebar-nav'),st=document.getElementById('sidebar-title');
+  if(id==='home'||id==='lock'){sb.style.display='none'}
+  else{sb.style.display='block';const cfg=SIDEBAR_MAP[id];if(cfg){st.textContent=cfg.title;sn.innerHTML=cfg.items.map(i=>`<a href="#" class="${i.id===id?'active':''}" onclick="showPage('${i.id}');return false"><span>${i.icon}</span> ${i.label}</a>`).join('')}}
+  ['business','service','etc','account-link'].forEach(k=>{const e=document.getElementById('gnb-'+(k==='account-link'?'account-link':''+k));if(e)e.classList.remove('active')});
+  if(['business-market','business-competitor','business-sales'].includes(id))document.getElementById('gnb-business').classList.add('active');
+  if(['service-api','service-doc'].includes(id))document.getElementById('gnb-service').classList.add('active');
+  if(id==='etc-cms')document.getElementById('gnb-etc').classList.add('active');
+  if(id==='account-manage'){const e=document.getElementById('gnb-account-link');if(e)e.classList.add('active')}
+  const rm={'business-market':renderMarket,'business-competitor':renderCompetitor,'business-sales':renderSales,'service-api':renderApi,'service-doc':renderDocList,'account-manage':renderAccount};
+  if(rm[id])rm[id]();updateStats();
+}
+
+function toggleForm(id){document.getElementById(id).classList.toggle('open')}
+function riskBadge(r){return r==='높음'?'b-red':r==='보통'?'b-amber':'b-green'}
+function statusBadge(s){const m={'운영중':'b-green','개발중':'b-blue','검토중':'b-amber','중단':'b-red','신규':'b-gray','접촉중':'b-blue','제안완료':'b-amber','계약완료':'b-green','보류':'b-red','초기분석':'b-blue','심층분석':'b-amber','완료':'b-green'};return m[s]||'b-gray'}
+function sv(id,v){const e=document.getElementById(id);if(e)e.textContent=v}
+function gv(id){const e=document.getElementById(id);return e?e.value:''}
+function clr(...ids){ids.forEach(id=>{const e=document.getElementById(id);if(e)e.value=''})}
+function delItem(k,i,fn){if(!confirm('삭제하시겠습니까?'))return;const l=getList(k);l.splice(i,1);saveList(k,l);fn();updateStats()}
+function exportCSV(k){const l=getList(k);if(!l.length){alert('내보낼 데이터가 없습니다.');return}const h=Object.keys(l[0]);const rows=[h.join(','),...l.map(r=>h.map(hh=>`"${(r[hh]||'').toString().replace(/"/g,'""')}"`).join(','))];const b=new Blob(['\uFEFF'+rows.join('\n')],{type:'text/csv;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=k+'_'+today()+'.csv';a.click()}
+
+function renderMarket(){
+  const q=gv('mkt-search'),f=gv('mkt-filter'),all=getList('market'),list=all.filter(i=>i.name.includes(q)&&(f?i.sector===f:true));
+  sv('mkt-cnt',all.length);sv('mkt-high',all.filter(i=>i.risk==='높음').length);sv('mkt-ec',all.filter(i=>i.sector==='이커머스').length);sv('mkt-today',all.length?all[all.length-1].date:'-');
+  const tb=document.getElementById('mkt-tbody');if(!tb)return;
+  tb.innerHTML=list.length?list.map((i,idx)=>`<tr><td>${idx+1}</td><td><b>${i.name}</b></td><td>${i.sector}</td><td>${i.trend||'-'}</td><td>${i.coupon||'-'}</td><td><span class="badge ${riskBadge(i.risk)}">${i.risk}</span></td><td>${i.date}</td><td><button class="btn-sm btn-del" onclick="delItem('market',${all.indexOf(i)},renderMarket)">삭제</button></td></tr>`).join(''):'<tr><td colspan="8" style="text-align:center;color:#aab;padding:2rem">등록된 경쟁사가 없습니다</td></tr>';
+}
+function addMarket(){const name=gv('mf-name').trim(),err=document.getElementById('mf-err');if(!name){err.style.display='block';return}err.style.display='none';const l=getList('market');l.push({name,sector:gv('mf-sector'),trend:gv('mf-trend'),coupon:gv('mf-coupon'),risk:gv('mf-risk'),date:today()});saveList('market',l);clr('mf-name','mf-trend','mf-coupon');document.getElementById('market-form').classList.remove('open');renderMarket();updateStats()}
+
+function renderCompetitor(){
+  const q=gv('comp-search'),f=gv('comp-stage'),all=getList('competitor'),list=all.filter(i=>i.name.includes(q)&&(f?i.stage===f:true));
+  const tb=document.getElementById('comp-tbody');if(!tb)return;
+  tb.innerHTML=list.length?list.map((i,idx)=>`<tr><td>${idx+1}</td><td><b>${i.name}</b></td><td>${i.year||'-'}</td><td>${i.revenue||'-'}</td><td>${i.service||'-'}</td><td>${i.strength||'-'}</td><td>${i.weakness||'-'}</td><td><span class="badge ${statusBadge(i.stage)}">${i.stage}</span></td><td><button class="btn-sm btn-del" onclick="delItem('competitor',${all.indexOf(i)},renderCompetitor)">삭제</button></td></tr>`).join(''):'<tr><td colspan="9" style="text-align:center;color:#aab;padding:2rem">등록된 기업이 없습니다</td></tr>';
+}
+function addCompetitor(){const name=gv('cf-name').trim(),err=document.getElementById('cf-err');if(!name){err.style.display='block';return}err.style.display='none';const l=getList('competitor');l.push({name,year:gv('cf-year'),revenue:gv('cf-revenue'),service:gv('cf-service'),strength:gv('cf-strength'),weakness:gv('cf-weakness'),stage:gv('cf-stage')});saveList('competitor',l);clr('cf-name','cf-year','cf-revenue','cf-service','cf-strength','cf-weakness');document.getElementById('comp-form').classList.remove('open');renderCompetitor();updateStats()}
+
+function renderSales(){
+  const q=gv('sales-search'),f=gv('sales-status'),all=getList('sales'),list=all.filter(i=>(i.company.includes(q)||i.name.includes(q))&&(f?i.status===f:true));
+  const tb=document.getElementById('sales-tbody');if(!tb)return;
+  tb.innerHTML=list.length?list.map((i,idx)=>`<tr><td>${idx+1}</td><td><b>${i.company}</b></td><td>${i.name||'-'}</td><td>${i.tel||'-'}</td><td>${i.email||'-'}</td><td>${i.sector||'-'}</td><td>${i.size||'-'}</td><td><span class="badge ${statusBadge(i.status)}">${i.status}</span></td><td><button class="btn-sm btn-del" onclick="delItem('sales',${all.indexOf(i)},renderSales)">삭제</button></td></tr>`).join(''):'<tr><td colspan="9" style="text-align:center;color:#aab;padding:2rem">등록된 영업처가 없습니다</td></tr>';
+}
+function addSales(){const company=gv('sf-company').trim(),err=document.getElementById('sf-err');if(!company){err.style.display='block';return}err.style.display='none';const l=getList('sales');l.push({company,name:gv('sf-name'),tel:gv('sf-tel'),email:gv('sf-email'),sector:gv('sf-sector'),size:gv('sf-size'),status:gv('sf-status')});saveList('sales',l);clr('sf-company','sf-name','sf-tel','sf-email','sf-sector','sf-size');document.getElementById('sales-form').classList.remove('open');renderSales();updateStats()}
+
+function closeApiDetail(){document.getElementById('api-detail-panel').classList.remove('open')}
+function renderApi(){
+  const q=gv('api-search'),f=gv('api-filter'),all=getList('api'),list=all.filter(i=>(i.name.includes(q)||(i.owner||'').includes(q))&&(f?i.status===f:true));
+  sv('api-total',all.length);sv('api-live',all.filter(i=>i.status==='운영중').length);sv('api-dev',all.filter(i=>i.status==='개발중').length);sv('api-review',all.filter(i=>i.status==='검토중').length);
+  const tb=document.getElementById('api-tbody');if(!tb)return;
+  tb.innerHTML=list.length?list.map((i,idx)=>`<tr><td>${idx+1}</td><td><b>${i.name}</b></td><td>${i.provider||'-'}</td><td><span class="badge b-gray">${i.method}</span></td><td>${i.owner||'-'}</td><td><span class="badge ${statusBadge(i.status)}">${i.status}</span></td><td>${i.date}</td><td><button class="btn-sm" onclick="showApiDetail(${all.indexOf(i)})">상세</button></td><td><button class="btn-sm btn-del" onclick="delItem('api',${all.indexOf(i)},renderApi)">삭제</button></td></tr>`).join(''):'<tr><td colspan="9" style="text-align:center;color:#aab;padding:2rem">등록된 API가 없습니다</td></tr>';
+}
+function showApiDetail(idx){const i=getList('api')[idx];if(!i)return;document.getElementById('adp-name').textContent=i.name;document.getElementById('adp-body').innerHTML=`<div class="adp-row"><span class="adp-label">제공사</span><span class="adp-val">${i.provider||'-'}</span></div><div class="adp-row"><span class="adp-label">연동방식</span><span class="adp-val">${i.method}</span></div><div class="adp-row"><span class="adp-label">담당자</span><span class="adp-val">${i.owner||'-'}</span></div><div class="adp-row"><span class="adp-label">상태</span><span class="adp-val"><span class="badge ${statusBadge(i.status)}">${i.status}</span></span></div><div class="adp-row"><span class="adp-label">Endpoint</span><span class="adp-val" style="color:#3b7ff5">${i.url||'-'}</span></div><div class="adp-row"><span class="adp-label">등록일</span><span class="adp-val">${i.date}</span></div>`;document.getElementById('api-detail-panel').classList.add('open')}
+function addApi(){const name=gv('apif-name').trim(),err=document.getElementById('apif-err');if(!name){err.style.display='block';return}err.style.display='none';const l=getList('api');l.push({name,provider:gv('apif-provider'),method:gv('apif-method'),owner:gv('apif-owner'),status:gv('apif-status'),url:gv('apif-url'),date:today()});saveList('api',l);clr('apif-name','apif-provider','apif-owner','apif-url');document.getElementById('api-form').classList.remove('open');renderApi();updateStats()}
+
+const DOC_TEMPLATES={'서비스 기획서':'# 서비스 기획서\n\n## 1. 서비스 개요\n\n## 2. 목표 및 KPI\n\n## 3. 주요 기능\n\n## 4. 사용자 시나리오\n\n## 5. 일정','제안서':'# 제안서\n\n## 1. 제안 배경\n\n## 2. 솔루션 개요\n\n## 3. 기대 효과\n\n## 4. 비용 및 일정','기능 명세서':'# 기능 명세서\n\n| 기능명 | 설명 | 우선순위 | 상태 |\n|---|---|---|---|\n| | | | |','API 명세서':'# API 명세서\n\n| Method | URL | 설명 | 인증 |\n|---|---|---|---|\n| GET | /api/v1/ | | |','시장분석 보고서':'# 시장분석 보고서\n\n## 1. 시장 현황\n\n## 2. 경쟁사 분석\n\n## 3. 기회 및 위협\n\n## 4. 전략 방향','사용자 스토리':'# 사용자 스토리\n\nAs a [사용자], I want to [목표], so that [이유]\n\n---\n\n- As a ...'};
+function selectTemplate(el,t){document.querySelectorAll('.doc-tmpl-card').forEach(c=>c.classList.remove('selected'));el.classList.add('selected');document.getElementById('doc-textarea').value=DOC_TEMPLATES[t]||''}
+function wrapText(b,a){const ta=document.getElementById('doc-textarea'),s=ta.selectionStart,e=ta.selectionEnd,sel=ta.value.substring(s,e);ta.value=ta.value.substring(0,s)+b+sel+a+ta.value.substring(e);ta.selectionStart=s+b.length;ta.selectionEnd=e+b.length;ta.focus()}
+function insertLine(t){const ta=document.getElementById('doc-textarea'),p=ta.selectionStart;ta.value=ta.value.substring(0,p)+'\n'+t+ta.value.substring(p);ta.selectionStart=ta.selectionEnd=p+t.length+1;ta.focus()}
+function clearDoc(){if(confirm('초기화하시겠습니까?'))document.getElementById('doc-textarea').value=''}
+function saveDoc(){const c=document.getElementById('doc-textarea').value.trim();if(!c){alert('내용을 입력하세요.');return}const l=getList('docs');const title=c.split('\n')[0].replace(/^#+\s*/,'').trim()||'제목없음';l.unshift({title,content:c,date:today(),id:Date.now()});saveList('docs',l);renderDocList();alert('저장되었습니다.')}
+function exportDoc(){const c=document.getElementById('doc-textarea').value;if(!c.trim()){alert('내용이 없습니다.');return}const b=new Blob([c],{type:'text/plain;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='document.md';a.click()}
+function renderDocList(){const l=getList('docs');const el=document.getElementById('doc-saved-list');if(!el)return;if(!l.length){el.innerHTML='';return}el.innerHTML=`<p style="font-size:11px;color:#7a90b8;font-weight:600;margin-bottom:.5rem">저장된 문서 (${l.length})</p><div class="tbl-wrap"><table><thead><tr><th>문서명</th><th>저장일</th><th>관리</th></tr></thead><tbody>${l.map((d,i)=>`<tr><td><a href="#" style="color:#1a52c8" onclick="loadDoc(${i});return false">${d.title}</a></td><td>${d.date}</td><td><button class="btn-sm btn-del" onclick="delDoc(${i})">삭제</button></td></tr>`).join('')}</tbody></table></div>`}
+function loadDoc(i){const d=getList('docs')[i];if(d)document.getElementById('doc-textarea').value=d.content}
+function delDoc(i){if(!confirm('삭제?'))return;const l=getList('docs');l.splice(i,1);saveList('docs',l);renderDocList()}
+
+let cmsData=[];
+function handleCmsUpload(e){
+  const file=e.target.files[0];if(!file)return;
+  document.getElementById('cms-parse-err').style.display='none';
+  const ext=file.name.split('.').pop().toLowerCase();
+  if(ext==='csv'){
+    const r=new FileReader();r.onload=ev=>{try{const lines=ev.target.result.split(/\r?\n/).filter(l=>l.trim());const h=lines[0].split(',').map(x=>x.replace(/^"|"$/g,'').trim());cmsData=lines.slice(1).map(l=>{const c=l.match(/(".*?"|[^,]+)/g)||[];return h.reduce((o,hh,i)=>{o[hh]=(c[i]||'').replace(/^"|"$/g,'').trim();return o},{})}).filter(r=>Object.values(r).some(v=>v));renderCmsPreview(h)}catch(err){showCmsErr('CSV 파싱 오류: '+err.message)}};r.readAsText(file,'UTF-8');
+  }else if(ext==='xlsx'||ext==='xls'){
+    if(typeof XLSX==='undefined'){showCmsErr('SheetJS 로드 실패. 페이지를 새로고침 후 시도하세요.');return}
+    const r=new FileReader();r.onload=ev=>{try{const wb=XLSX.read(ev.target.result,{type:'array'});const ws=wb.Sheets[wb.SheetNames[0]];const json=XLSX.utils.sheet_to_json(ws,{defval:''});if(!json.length){showCmsErr('데이터가 없습니다.');return}cmsData=json;renderCmsPreview(Object.keys(json[0]))}catch(err){showCmsErr('Excel 파싱 오류: '+err.message)}};r.readAsArrayBuffer(file);
+  }else{showCmsErr('지원하지 않는 형식입니다. (.xlsx, .xls, .csv)')}
+}
+function showCmsErr(msg){const el=document.getElementById('cms-parse-err');el.textContent=msg;el.style.display='block'}
+function renderCmsPreview(h){if(!cmsData.length){showCmsErr('파싱된 데이터가 없습니다.');return}const p=cmsData.slice(0,5);document.getElementById('etc-cms-preview').innerHTML=`<div class="tbl-wrap" style="margin-bottom:.75rem"><table><thead><tr>${h.map(hh=>`<th>${hh}</th>`).join('')}</tr></thead><tbody>${p.map(r=>`<tr>${h.map(hh=>`<td>${r[hh]??''}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;document.getElementById('etc-cms-actions').style.display='block';sv('cms-count-label',`총 ${cmsData.length}건 로드됨 (미리보기: ${Math.min(5,cmsData.length)}건)`)}
+function runCmsAuto(){if(!cmsData.length)return;const log=document.getElementById('cms-log-box');document.getElementById('etc-cms-log').style.display='block';log.innerHTML='<div class="log-line info">[INFO] 자동등록 시작...</div>';let i=0,ok=0,fail=0;const t=setInterval(()=>{if(i>=cmsData.length){log.innerHTML+=`<div class="log-line info">[완료] ${cmsData.length}건 처리 — 성공: ${ok} / 실패: ${fail}</div>`;clearInterval(t);return}const row=cmsData[i];const k=Object.keys(row);const isE=Math.random()<0.05;isE?fail++:ok++;log.innerHTML+=`<div class="log-line ${isE?'err':''}">[${isE?'ERR':'OK '}] ${String(i+1).padStart(3,'0')}/${cmsData.length} ${row[k[0]]||'항목'} ${isE?'❌':'✓'}</div>`;log.scrollTop=log.scrollHeight;i++},100)}
+function resetCms(){cmsData=[];['etc-cms-preview','cms-parse-err'].forEach(id=>{const e=document.getElementById(id);if(e){e.innerHTML='';e.style.display='none'}});['etc-cms-actions','etc-cms-log'].forEach(id=>{const e=document.getElementById(id);if(e)e.style.display='none'});document.getElementById('cms-file-input').value=''}
+
+function renderAccount(){
+  const q=gv('acct-search'),all=getUsers(),users=all.filter(u=>u.id.includes(q));
+  const tb=document.getElementById('acct-tbody');if(!tb)return;
+  tb.innerHTML=`<tr style="background:#fafbff"><td>-</td><td><b>sonjj2000</b></td><td style="font-family:monospace;font-size:10px;color:#aab">SHA-256</td><td><span class="badge b-amber">마스터</span></td><td>-</td><td><span style="font-size:11px;color:#aab">수정불가</span></td></tr>`
+  +(users.length?users.map((u,i)=>`<tr><td>${i+1}</td><td>${u.id}</td><td style="font-family:monospace;font-size:10px;color:#aab">••••••••</td><td><span class="badge b-blue">일반</span></td><td>${u.date||'-'}</td><td><button class="btn-sm" style="margin-right:4px" onclick="openEditModal(${all.indexOf(u)})">패스워드 수정</button><button class="btn-sm btn-del" onclick="delUser(${all.indexOf(u)})">삭제</button></td></tr>`).join(''):'<tr><td colspan="6" style="text-align:center;color:#aab;padding:1.5rem">등록된 사용자가 없습니다</td></tr>');
+}
+async function addUser(){
+  const id=gv('acf-id').trim(),pw=gv('acf-pw').trim(),err=document.getElementById('acf-err');
+  if(!id||!pw){err.textContent='아이디와 패스워드를 입력하세요.';err.style.display='block';return}
+  if(id===MASTER.id){err.textContent='이미 사용중인 아이디입니다.';err.style.display='block';return}
+  const users=getUsers();if(users.find(u=>u.id===id)){err.textContent='이미 존재하는 아이디입니다.';err.style.display='block';return}
+  const pwHash=await sha256(pw);users.push({id,pwHash,role:'user',date:today()});saveUsers(users);
+  clr('acf-id','acf-pw');err.style.display='none';document.getElementById('acct-form').classList.remove('open');renderAccount();updateStats();
+}
+function delUser(i){if(!confirm('삭제하시겠습니까?'))return;const u=getUsers();u.splice(i,1);saveUsers(u);renderAccount();updateStats()}
+
+function updateStats(){
+  sv('stat-competitor',getList('competitor').length+getList('market').length);
+  sv('stat-sales',getList('sales').length);
+  sv('stat-api',getList('api').filter(i=>i.status==='개발중').length);
+  sv('stat-users',getUsers().length);
+}
+
+showPage('home');
+</script>
+</body>
+</html>
