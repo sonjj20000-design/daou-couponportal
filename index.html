@@ -29,7 +29,7 @@ input,select,textarea{font-family:inherit}
 .gnb-link{display:block;padding:12px 20px;color:#c5d5f0;font-size:13px;font-weight:500;background:none;border:none;white-space:nowrap;border-bottom:2px solid transparent;cursor:pointer}
 .gnb-link:hover,.gnb-item:hover .gnb-link{color:#fff}
 .gnb-link.active{color:#fff;border-bottom-color:#3b7ff5}
-.gnb-dropdown{display:none;position:absolute;top:100%;left:0;background:#fff;border:1px solid #e2e8f0;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.15);min-width:200px;z-index:999;overflow:hidden;list-style:none}
+.gnb-dropdown{display:none;position:absolute;top:100%;left:0;background:#fff;border:1px solid #e2e8f0;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.15);min-width:220px;z-index:999;overflow:hidden;list-style:none}
 .gnb-item:hover .gnb-dropdown{display:block}
 .gnb-dropdown li a{display:block;padding:10px 16px;font-size:12px;color:#2d4270;border-bottom:1px solid #f1f5f9;transition:background .15s}
 .gnb-dropdown li:last-child a{border-bottom:none}
@@ -149,6 +149,124 @@ input,select,textarea{font-family:inherit}
 .btn-save{background:#3b7ff5;color:#fff;border:none;padding:7px 16px;border-radius:6px;font-size:12px;font-weight:500;cursor:pointer}
 .btn-save:hover{background:#2563c7}
 .sec-note{background:#fff8e6;border:1px solid #f0d080;border-radius:6px;padding:6px 12px;font-size:11px;color:#7a4f00;margin-bottom:.75rem}
+
+/* ===== 시장현황/경쟁사 모니터링 전용 스타일 ===== */
+.mm-tab-nav{display:flex;margin-bottom:1.25rem;border:1.5px solid #1565a8;border-radius:7px;overflow:hidden;width:fit-content}
+.mm-tab-btn{padding:8px 28px;font-size:13px;font-weight:500;border:none;background:#fff;color:#1565a8;cursor:pointer;white-space:nowrap;border-right:1.5px solid #1565a8}
+.mm-tab-btn:last-child{border-right:none}
+.mm-tab-btn:hover{background:#eef4ff}
+.mm-tab-btn.active{background:#1a8a7a;color:#fff}
+.mm-tab-panel{display:none}
+.mm-tab-panel.active{display:block}
+
+.mm-search-bar{background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:1rem 1.25rem;margin-bottom:1rem}
+.mm-search-row{display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap}
+.mm-sb-group{display:flex;align-items:center;gap:.6rem}
+.mm-sb-label{font-size:12px;font-weight:700;color:#2d4270;white-space:nowrap}
+.mm-sb-date{padding:6px 10px;border:1.5px solid #d8e2f0;border-radius:5px;font-size:12px;color:#1a2233;outline:none;width:138px}
+.mm-sb-date:focus{border-color:#1565a8}
+.mm-sb-sep{font-size:12px;color:#7a90b8}
+.mm-cb-group{display:flex;align-items:center;gap:1rem}
+.mm-cb-item{display:flex;align-items:center;gap:5px;font-size:13px;color:#2d4270;cursor:pointer}
+.mm-cb-item input[type=checkbox]{width:16px;height:16px;cursor:pointer}
+.mm-btn-run{background:#1a8a7a;color:#fff;border:none;padding:8px 24px;border-radius:6px;font-size:13px;font-weight:700;margin-left:auto;display:flex;align-items:center;gap:6px}
+.mm-btn-run:hover{opacity:.9}
+.mm-btn-run:disabled{opacity:.5;cursor:not-allowed}
+
+.mm-progress-box{background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:1rem 1.25rem;margin-bottom:1rem;display:none}
+.mm-progress-box.show{display:block}
+.mm-pb-title{font-size:12px;font-weight:700;color:#1a8a7a;margin-bottom:.6rem;display:flex;align-items:center;gap:6px}
+.mm-spinner{display:inline-block;width:13px;height:13px;border:2px solid #d0f0e8;border-top-color:#1a8a7a;border-radius:50%;animation:mm-spin .7s linear infinite}
+@keyframes mm-spin{to{transform:rotate(360deg)}}
+.mm-pb-step{font-size:11px;color:#4a5a7a;line-height:2.2;padding-left:.25rem}
+.mm-pb-step .ok{color:#1a8a7a;font-weight:600}
+.mm-pb-step .err{color:#c0392b}
+
+.mm-error-box{background:#fff5f5;border:1px solid #fcc;border-radius:8px;padding:1rem 1.25rem;margin-bottom:1rem;display:none}
+.mm-error-box.show{display:block}
+.mm-error-box-title{font-size:13px;font-weight:700;color:#c0392b;margin-bottom:.4rem}
+.mm-error-box p{font-size:12px;color:#8a3a3a;line-height:1.7}
+
+.mm-result-wrap{display:none}
+.mm-result-wrap.show{display:block}
+.mm-result-card{background:#fff;border:1px solid #e2e8f0;border-radius:10px;overflow:hidden}
+.mm-rc-header{display:flex;align-items:center;justify-content:space-between;padding:.875rem 1.25rem;border-bottom:1px solid #f1f5f9;flex-wrap:wrap;gap:.5rem}
+.mm-rc-title{font-size:13px;font-weight:700;color:#1a2233}
+.mm-rc-meta{font-size:11px;color:#7a90b8;margin-top:2px}
+.mm-rc-actions{display:flex;gap:.5rem}
+.mm-btn-copy{background:#fff;border:1px solid #d0daf0;color:#3a4a6b;padding:5px 12px;border-radius:5px;font-size:11px}
+.mm-btn-copy:hover{background:#f4f6fb}
+.mm-btn-save{background:#1a8a7a;color:#fff;border:none;padding:5px 16px;border-radius:5px;font-size:11px;font-weight:600}
+.mm-btn-save:hover{opacity:.9}
+.mm-btn-save:disabled{opacity:.5;cursor:not-allowed}
+.mm-rc-body{padding:1.25rem}
+
+.mm-news-section{margin-bottom:1.25rem}
+.mm-news-section:last-child{margin-bottom:0}
+.mm-ns-title{display:inline-flex;align-items:center;gap:6px;background:#1a2a5a;color:#fff;font-size:11px;font-weight:700;padding:4px 12px;border-radius:4px;margin-bottom:.875rem}
+.mm-ns-count{opacity:.7;font-weight:400}
+.mm-news-item{padding:.75rem 0;border-bottom:1px dashed #eef2fa}
+.mm-news-item:last-child{border-bottom:none;padding-bottom:0}
+.mm-ni-top{display:flex;align-items:center;gap:6px;margin-bottom:5px;flex-wrap:wrap}
+.mm-news-tag{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px}
+.mm-tag-market{background:#e8f4ff;color:#1a52c8}
+.mm-tag-brand{background:#e8fff4;color:#1a8a4a}
+.mm-tag-policy{background:#f3e8ff;color:#6c47ff}
+.mm-tag-tech{background:#fef3e8;color:#c25a00}
+.mm-ni-date{font-size:10px;color:#7a90b8;background:#f4f6fb;padding:2px 7px;border-radius:8px}
+.mm-ni-source{font-size:10px;color:#888;font-weight:600}
+.mm-news-headline{font-size:13px;font-weight:600;color:#1a2233;margin-bottom:4px;line-height:1.55}
+.mm-news-desc{font-size:11px;color:#8a96b0;margin-bottom:4px;line-height:1.6}
+.mm-news-url{font-size:11px;color:#3b7ff5;word-break:break-all}
+.mm-news-url:hover{text-decoration:underline}
+.mm-no-news{font-size:12px;color:#bbb;padding:.5rem 0;font-style:italic}
+
+.mm-board-toolbar{display:flex;align-items:center;justify-content:flex-end;gap:.5rem;margin-bottom:.75rem}
+.mm-btn-sel-all{background:#fff;border:1px solid #d0daf0;color:#3a4a6b;padding:6px 14px;border-radius:5px;font-size:12px}
+.mm-btn-sel-all:hover{background:#f4f6fb}
+.mm-btn-del-sel{background:#c0392b;color:#fff;border:none;padding:6px 14px;border-radius:5px;font-size:12px;font-weight:500}
+.mm-btn-del-sel:hover{opacity:.9}
+.mm-board-list{background:#fff;border:1px solid #e2e8f0;border-radius:10px;overflow:hidden}
+.mm-board-list-title{font-size:12px;font-weight:700;color:#3a4a6b;padding:.75rem 1.25rem;border-bottom:1px solid #f1f5f9}
+.mm-board-item{display:flex;align-items:center;gap:.875rem;padding:.875rem 1.25rem;border-bottom:1px solid #f1f5f9;cursor:pointer}
+.mm-board-item:last-child{border-bottom:none}
+.mm-board-item:hover{background:#f8faff}
+.mm-board-chk{width:16px;height:16px;flex-shrink:0;cursor:pointer}
+.mm-bi-body{flex:1;min-width:0}
+.mm-bi-title{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:#1a2233;margin-bottom:3px}
+.mm-bi-meta{font-size:11px;color:#7a90b8}
+.mm-bi-arrow{color:#ccc;font-size:11px}
+.mm-board-empty{text-align:center;padding:3rem 2rem;color:#7a90b8;font-size:13px}
+.mm-board-pg{display:flex;align-items:center;justify-content:center;gap:.5rem;padding:1rem}
+.mm-pg-num{width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:5px;font-size:12px;color:#3a4a6b;border:1px solid #d0daf0;background:#fff;cursor:pointer}
+.mm-pg-num.active{background:#1a8a7a;color:#fff;border-color:#1a8a7a}
+.mm-pg-num:hover:not(.active){background:#f4f6fb}
+
+.mm-det-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:.5rem}
+.mm-det-title{font-size:15px;font-weight:700;color:#1a2233}
+.mm-det-meta{font-size:11px;color:#7a90b8;margin-top:3px}
+.mm-det-btns{display:flex;gap:.5rem}
+.mm-btn-back{background:#fff;border:1px solid #d0daf0;color:#3a4a6b;padding:6px 14px;border-radius:5px;font-size:12px}
+.mm-btn-back:hover{background:#f4f6fb}
+.mm-det-card{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:1.25rem}
+
+.mm-kw-wrap{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.mm-kw-card{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:1.25rem}
+.mm-kw-card-title{font-size:13px;font-weight:700;color:#1a2233;margin-bottom:.875rem}
+.mm-kw-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1rem;min-height:68px;align-content:flex-start}
+.mm-chip{display:inline-flex;align-items:center;gap:5px;background:#eef4ff;color:#1a52c8;font-size:11px;font-weight:600;padding:4px 10px;border-radius:12px;border:1px solid #c8d8f8}
+.mm-chip.w{background:#fff8e6;color:#9a6500;border-color:#f0d88a}
+.mm-chip-del{background:none;border:none;color:#aab;font-size:12px;line-height:1;padding:0;cursor:pointer}
+.mm-chip-del:hover{color:#c0392b}
+.mm-kw-add{display:flex;gap:.5rem}
+.mm-kw-input{flex:1;padding:7px 10px;border:1.5px solid #d8e2f0;border-radius:5px;font-size:12px;outline:none}
+.mm-kw-input:focus{border-color:#1565a8}
+.mm-btn-kw-add{background:#1565a8;color:#fff;border:none;padding:7px 14px;border-radius:5px;font-size:12px;font-weight:500}
+.mm-btn-kw-add:hover{opacity:.9}
+
+.mm-source-badge{display:inline-flex;align-items:center;gap:4px;font-size:10px;background:#e8f8f0;color:#1a8a4a;padding:2px 9px;border-radius:10px;font-weight:600;margin-left:8px}
+.mm-toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(20px);background:#1a2a5a;color:#fff;padding:.75rem 1.5rem;border-radius:8px;font-size:13px;opacity:0;transition:all .3s;z-index:9999;pointer-events:none;white-space:nowrap}
+.mm-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 </style>
 </head>
 <body>
@@ -209,7 +327,7 @@ input,select,textarea{font-family:inherit}
         <div class="stat-card"><div class="stat-label">사용자 계정</div><div class="stat-value" id="stat-users">0</div><span class="stat-sub sub-red">관리중</span></div>
       </div>
       <div id="home-menu-grid">
-        <div class="menu-card" onclick="showPage('business-market')"><div class="mc-icon ic-blue">📊</div><h3>시장현황/경쟁사 모니터링</h3><p>실시간 시장 트렌드 및 경쟁사 동향</p></div>
+        <div class="menu-card" onclick="showPage('business-market')"><div class="mc-icon ic-blue">📊</div><h3>시장현황/경쟁사 모니터링</h3><p>네이버 뉴스 API로 실제 시장동향 수집·관리</p></div>
         <div class="menu-card" onclick="showPage('business-competitor')"><div class="mc-icon ic-teal">🏢</div><h3>경쟁사 기업분석 관리</h3><p>경쟁사 분석 데이터 입력 및 비교</p></div>
         <div class="menu-card" onclick="showPage('business-sales')"><div class="mc-icon ic-purple">📋</div><h3>영업리스트 관리</h3><p>영업 타깃 기업 및 담당자 관리</p></div>
         <div class="menu-card" onclick="showPage('service-api')"><div class="mc-icon ic-amber">🔗</div><h3>API연동 업무관리</h3><p>외부 API 연동 현황 및 업무 관리</p></div>
@@ -218,32 +336,122 @@ input,select,textarea{font-family:inherit}
       </div>
     </section>
 
+    <!-- ★★★ 시장현황 / 경쟁사 모니터링 — 네이버 API 연동 버전 ★★★ -->
     <section class="page" id="page-business-market">
-      <div class="page-hd"><h2>시장현황 / 경쟁사 모니터링</h2><p>실시간 시장 트렌드 및 경쟁사 동향을 모니터링합니다</p></div>
-      <div class="cards-row">
-        <div class="info-card"><div class="ic-label">모니터링 경쟁사</div><div class="ic-val" id="mkt-cnt">0</div><div class="ic-sub">등록 수</div></div>
-        <div class="info-card"><div class="ic-label">위험도 높음</div><div class="ic-val" id="mkt-high">0</div><div class="ic-sub">주의 경쟁사</div></div>
-        <div class="info-card"><div class="ic-label">이커머스</div><div class="ic-val" id="mkt-ec">0</div><div class="ic-sub">업종별</div></div>
-        <div class="info-card"><div class="ic-label">최근 등록</div><div class="ic-val" id="mkt-today" style="font-size:13px;margin-top:4px">-</div><div class="ic-sub">마지막 등록일</div></div>
+      <div class="page-hd">
+        <h2>시장현황 / 경쟁사 모니터링 <span class="mm-source-badge">🟢 네이버 뉴스 API 연동</span></h2>
+        <p>모바일쿠폰·복지서비스 관련 실제 뉴스를 발행일 기준으로 수집·관리합니다</p>
       </div>
-      <div class="toolbar">
-        <input type="text" id="mkt-search" placeholder="경쟁사명 검색..." oninput="renderMarket()"/>
-        <select id="mkt-filter" onchange="renderMarket()"><option value="">전체 업종</option><option>이커머스</option><option>핀테크</option><option>플랫폼</option><option>SaaS</option></select>
-        <button class="btn-add" onclick="toggleForm('market-form')">+ 등록</button>
-        <button class="btn-export ml-auto" onclick="exportCSV('market')">CSV 내보내기</button>
+
+      <div class="mm-tab-nav">
+        <button class="mm-tab-btn active" id="mm-tn1" onclick="mmSwitchTab(1)">뉴스수집</button>
+        <button class="mm-tab-btn" id="mm-tn2" onclick="mmSwitchTab(2)">모니터링 게시판</button>
+        <button class="mm-tab-btn" id="mm-tn3" onclick="mmSwitchTab(3)" style="display:none">상세보기</button>
+        <button class="mm-tab-btn" id="mm-tn4" onclick="mmSwitchTab(4)">키워드 관리</button>
       </div>
-      <div class="tbl-wrap"><table><thead><tr><th>#</th><th>경쟁사명</th><th>업종</th><th>최근 동향</th><th>쿠폰 정책</th><th>위험도</th><th>등록일</th><th>관리</th></tr></thead><tbody id="mkt-tbody"></tbody></table></div>
-      <div class="form-inline" id="market-form">
-        <div class="fi-title">경쟁사 모니터링 등록</div>
-        <div class="form-row">
-          <div class="fg"><label>경쟁사명 *</label><input id="mf-name" placeholder="예) 카카오페이"/></div>
-          <div class="fg"><label>업종</label><select id="mf-sector"><option>이커머스</option><option>핀테크</option><option>플랫폼</option><option>SaaS</option></select></div>
-          <div class="fg"><label>최근 동향</label><input id="mf-trend" placeholder="간략 입력"/></div>
-          <div class="fg"><label>쿠폰정책</label><input id="mf-coupon" placeholder="예) 5% 할인쿠폰"/></div>
-          <div class="fg"><label>위험도</label><select id="mf-risk"><option>낮음</option><option>보통</option><option>높음</option></select></div>
-          <button class="btn-add" style="height:32px;align-self:flex-end" onclick="addMarket()">추가</button>
+
+      <!-- TAB1 뉴스수집 -->
+      <div class="mm-tab-panel active" id="mm-tab1">
+        <div class="mm-search-bar">
+          <div class="mm-search-row">
+            <div class="mm-sb-group">
+              <span class="mm-sb-label">뉴스발행일</span>
+              <input type="date" class="mm-sb-date" id="mm-date-from"/>
+              <span class="mm-sb-sep">~</span>
+              <input type="date" class="mm-sb-date" id="mm-date-to"/>
+            </div>
+            <div class="mm-sb-group">
+              <span class="mm-sb-label">검색사이트</span>
+              <div class="mm-cb-group">
+                <label class="mm-cb-item"><input type="checkbox" id="mm-chk-naver" checked disabled/> 네이버 ✓</label>
+                <label class="mm-cb-item" style="opacity:.5" title="추후 지원 예정"><input type="checkbox" id="mm-chk-google" disabled/> 구글 (준비중)</label>
+              </div>
+            </div>
+            <button class="mm-btn-run" id="mm-btn-run" onclick="mmRunCollect()">🔍 뉴스수집 실행</button>
+          </div>
         </div>
-        <div class="form-err" id="mf-err">경쟁사명을 입력해주세요.</div>
+
+        <div class="mm-progress-box" id="mm-progress-box">
+          <div class="mm-pb-title"><span class="mm-spinner"></span> 실제 뉴스를 검색하고 있습니다... <span id="mm-pb-counter" style="font-weight:400;opacity:.7"></span></div>
+          <div class="mm-pb-step" id="mm-pb-step"></div>
+        </div>
+
+        <div class="mm-error-box" id="mm-error-box">
+          <div class="mm-error-box-title">⚠ 뉴스 수집 실패</div>
+          <p id="mm-error-msg"></p>
+        </div>
+
+        <div class="mm-result-wrap" id="mm-result-wrap">
+          <div class="mm-result-card">
+            <div class="mm-rc-header">
+              <div>
+                <div class="mm-rc-title" id="mm-rc-title"></div>
+                <div class="mm-rc-meta" id="mm-rc-meta"></div>
+              </div>
+              <div class="mm-rc-actions">
+                <button class="mm-btn-copy" onclick="mmCopyText(mmCurrentResult)">📋 리포트 복사</button>
+                <button class="mm-btn-save" id="mm-btn-save" onclick="mmSaveReport()">저장</button>
+              </div>
+            </div>
+            <div class="mm-rc-body" id="mm-rc-body"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB2 게시판 -->
+      <div class="mm-tab-panel" id="mm-tab2">
+        <div class="mm-board-toolbar">
+          <button class="mm-btn-sel-all" id="mm-btn-sel-all" onclick="mmToggleSelAll()">전체선택</button>
+          <button class="mm-btn-del-sel" onclick="mmDeleteSel()">삭제</button>
+        </div>
+        <div class="mm-board-list">
+          <div class="mm-board-list-title">시장동향 리포트</div>
+          <div id="mm-board-items"></div>
+        </div>
+        <div class="mm-board-pg" id="mm-board-pg"></div>
+      </div>
+
+      <!-- TAB3 상세보기 -->
+      <div class="mm-tab-panel" id="mm-tab3">
+        <div class="mm-det-header">
+          <div>
+            <div class="mm-det-title" id="mm-det-title"></div>
+            <div class="mm-det-meta" id="mm-det-meta"></div>
+          </div>
+          <div class="mm-det-btns">
+            <button class="mm-btn-copy" onclick="mmCopyText(mmDetailReport)">📋 리포트 복사</button>
+            <button class="mm-btn-back" onclick="mmBackToBoard()">← 목록으로</button>
+          </div>
+        </div>
+        <div class="mm-det-card" id="mm-det-body"></div>
+      </div>
+
+      <!-- TAB4 키워드 관리 -->
+      <div class="mm-tab-panel" id="mm-tab4">
+        <div style="background:#fff8e6;border:1px solid #f0d88a;border-radius:8px;padding:.75rem 1rem;margin-bottom:1rem;font-size:11px;color:#7a4f00">
+          💡 너무 일반적인 단어(예: "즐거운", "선물")는 무관한 기사가 많이 섞일 수 있어요.
+          브랜드명·서비스명처럼 구체적인 키워드를 권장합니다.
+        </div>
+        <div class="mm-kw-wrap">
+          <div class="mm-kw-card">
+            <div class="mm-kw-card-title">📱 모바일쿠폰 키워드</div>
+            <div class="mm-kw-chips" id="mm-chips-coupon"></div>
+            <div class="mm-kw-add">
+              <input type="text" class="mm-kw-input" id="mm-inp-coupon" placeholder="새 키워드 입력..."
+                onkeydown="if(event.key==='Enter')mmAddKw('coupon')"/>
+              <button class="mm-btn-kw-add" onclick="mmAddKw('coupon')">추가</button>
+            </div>
+          </div>
+          <div class="mm-kw-card">
+            <div class="mm-kw-card-title">🎁 복지서비스 키워드</div>
+            <div class="mm-kw-chips" id="mm-chips-welfare"></div>
+            <div class="mm-kw-add">
+              <input type="text" class="mm-kw-input" id="mm-inp-welfare" placeholder="새 키워드 입력..."
+                onkeydown="if(event.key==='Enter')mmAddKw('welfare')"/>
+              <button class="mm-btn-kw-add" onclick="mmAddKw('welfare')">추가</button>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -443,6 +651,8 @@ input,select,textarea{font-family:inherit}
   </div>
 </div>
 
+<div class="mm-toast" id="mm-toast"></div>
+
 <script>
 const MASTER={id:'sonjj2000',pw:'5835'};
 const USERS_KEY='daou_v2_users';
@@ -511,7 +721,7 @@ function showPage(id){
   if(['service-api','service-doc'].includes(id))document.getElementById('gnb-service').classList.add('active');
   if(id==='etc-cms')document.getElementById('gnb-etc').classList.add('active');
   if(id==='account-manage'){const e=document.getElementById('gnb-account-link');if(e)e.classList.add('active')}
-  const rm={'business-market':renderMarket,'business-competitor':renderCompetitor,'business-sales':renderSales,'service-api':renderApi,'service-doc':renderDocList,'account-manage':renderAccount};
+  const rm={'business-market':mmInit,'business-competitor':renderCompetitor,'business-sales':renderSales,'service-api':renderApi,'service-doc':renderDocList,'account-manage':renderAccount};
   if(rm[id])rm[id]();updateStats();
 }
 
@@ -523,14 +733,6 @@ function gv(id){const e=document.getElementById(id);return e?e.value:''}
 function clr(...ids){ids.forEach(id=>{const e=document.getElementById(id);if(e)e.value=''})}
 function delItem(k,i,fn){if(!confirm('삭제하시겠습니까?'))return;const l=getList(k);l.splice(i,1);saveList(k,l);fn();updateStats()}
 function exportCSV(k){const l=getList(k);if(!l.length){alert('내보낼 데이터가 없습니다.');return}const h=Object.keys(l[0]);const rows=[h.join(','),...l.map(r=>h.map(hh=>`"${(r[hh]||'').toString().replace(/"/g,'""')}"`).join(','))];const b=new Blob(['\uFEFF'+rows.join('\n')],{type:'text/csv;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=k+'_'+today()+'.csv';a.click()}
-
-function renderMarket(){
-  const q=gv('mkt-search'),f=gv('mkt-filter'),all=getList('market'),list=all.filter(i=>i.name.includes(q)&&(f?i.sector===f:true));
-  sv('mkt-cnt',all.length);sv('mkt-high',all.filter(i=>i.risk==='높음').length);sv('mkt-ec',all.filter(i=>i.sector==='이커머스').length);sv('mkt-today',all.length?all[all.length-1].date:'-');
-  const tb=document.getElementById('mkt-tbody');if(!tb)return;
-  tb.innerHTML=list.length?list.map((i,idx)=>`<tr><td>${idx+1}</td><td><b>${i.name}</b></td><td>${i.sector}</td><td>${i.trend||'-'}</td><td>${i.coupon||'-'}</td><td><span class="badge ${riskBadge(i.risk)}">${i.risk}</span></td><td>${i.date}</td><td><button class="btn-sm btn-del" onclick="delItem('market',${all.indexOf(i)},renderMarket)">삭제</button></td></tr>`).join(''):'<tr><td colspan="8" style="text-align:center;color:#aab;padding:2rem">등록된 경쟁사가 없습니다</td></tr>';
-}
-function addMarket(){const name=gv('mf-name').trim(),err=document.getElementById('mf-err');if(!name){err.style.display='block';return}err.style.display='none';const l=getList('market');l.push({name,sector:gv('mf-sector'),trend:gv('mf-trend'),coupon:gv('mf-coupon'),risk:gv('mf-risk'),date:today()});saveList('market',l);clr('mf-name','mf-trend','mf-coupon');document.getElementById('market-form').classList.remove('open');renderMarket();updateStats()}
 
 function renderCompetitor(){
   const q=gv('comp-search'),f=gv('comp-stage'),all=getList('competitor'),list=all.filter(i=>i.name.includes(q)&&(f?i.stage===f:true));
@@ -601,10 +803,416 @@ async function addUser(){
 function delUser(i){if(!confirm('삭제하시겠습니까?'))return;const u=getUsers();u.splice(i,1);saveUsers(u);renderAccount();updateStats()}
 
 function updateStats(){
-  sv('stat-competitor',getList('competitor').length+getList('market').length);
+  sv('stat-competitor',getList('competitor').length);
   sv('stat-sales',getList('sales').length);
   sv('stat-api',getList('api').filter(i=>i.status==='개발중').length);
   sv('stat-users',getUsers().length);
+}
+
+/* 구버전 잔존 데이터 정리 (market 키는 더 이상 사용하지 않음) */
+(function mmCleanupLegacyData(){
+  try {
+    const d = getData();
+    if(d.market) { delete d.market; saveData(d); }
+  } catch(e) {}
+})();
+
+/* ══════════════════════════════════════════════════════
+   시장현황 / 경쟁사 모니터링 — 네이버 뉴스 API 연동 모듈
+   (mm- 접두사로 기존 포털 함수와 네임스페이스 분리)
+   ══════════════════════════════════════════════════════ */
+
+const MM_NAVER_PROXY_URL = 'https://curly-cloud-775cnaver-news-proxy.sonjj20000.workers.dev';
+
+const MM_RK = 'moni_v5_reports';
+const MM_KK = 'moni_v5_kw';
+const MM_DEF_KW = {
+  coupon:  ['모바일쿠폰','e쿠폰','쿠프마케팅','즐거운','KT알파','기프티콘','윈큐브마케팅','GS엠비즈'],
+  welfare: ['복지서비스','임직원선물','복지몰','이지웰','베네피아','명절선물','근로자의날 선물']
+};
+const mmGetReports = () => { try{return JSON.parse(localStorage.getItem(MM_RK)||'[]')}catch{return[]} };
+const mmSetReports = a => localStorage.setItem(MM_RK, JSON.stringify(a));
+const mmGetKw = () => { try{const r=JSON.parse(localStorage.getItem(MM_KK));return r||MM_DEF_KW}catch{return MM_DEF_KW} };
+const mmSetKw = o => localStorage.setItem(MM_KK, JSON.stringify(o));
+
+let mmCurrentResult = null;
+let mmDetailReport  = null;
+let mmCurrentPage   = 1;
+const MM_PG = 10;
+let mmAllSel  = false;
+let mmRunning = false;
+let mmSaved   = false;
+let mmInitialized = false;
+
+/* 페이지 진입 시 초기화 (날짜 세팅 + 키워드 렌더 + 항상 1번 탭으로) */
+function mmInit() {
+  if(!mmInitialized) {
+    const pad = n => String(n).padStart(2,'0');
+    const fmt = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+    const now = new Date();
+    const yd  = new Date(now); yd.setDate(now.getDate()-1);
+    document.getElementById('mm-date-from').value = fmt(yd);
+    document.getElementById('mm-date-to').value   = fmt(now);
+    mmInitialized = true;
+  }
+  // 다른 메뉴를 거쳤다가 다시 들어와도 항상 뉴스수집(탭1)부터 시작
+  document.getElementById('mm-tn3').style.display = 'none';
+  mmSwitchTab(1);
+}
+
+function mmSwitchTab(n) {
+  [1,2,3,4].forEach(i => {
+    document.getElementById('mm-tab'+i).classList.toggle('active', i===n);
+    const b = document.getElementById('mm-tn'+i);
+    if(b) b.classList.toggle('active', i===n);
+  });
+  if(n===2) mmRenderBoard();
+  if(n===4) mmRenderKw();
+}
+
+async function mmRunCollect() {
+  if(mmRunning) return;
+  const from = document.getElementById('mm-date-from').value;
+  const to   = document.getElementById('mm-date-to').value;
+  if(!from || !to) { mmToast('⚠ 뉴스발행일을 입력해주세요'); return; }
+  if(from > to)    { mmToast('⚠ 시작일이 종료일보다 늦습니다'); return; }
+
+  const dayDiff = (new Date(to) - new Date(from)) / 86400000;
+  if(dayDiff > 31) { mmToast('⚠ 검색 기간은 최대 31일까지 가능합니다'); return; }
+
+  mmRunning = true; mmSaved = false;
+  const btnRun  = document.getElementById('mm-btn-run');
+  const btnSave = document.getElementById('mm-btn-save');
+  btnRun.disabled = true; btnRun.textContent = '수집 중...';
+  btnSave.disabled = false; btnSave.textContent = '저장';
+
+  document.getElementById('mm-result-wrap').classList.remove('show');
+  document.getElementById('mm-error-box').classList.remove('show');
+  const pb    = document.getElementById('mm-progress-box');
+  const pbLog = document.getElementById('mm-pb-step');
+  pb.classList.add('show'); pbLog.innerHTML = '';
+  document.getElementById('mm-pb-counter').textContent = '';
+
+  const log = (msg, type='') => { pbLog.innerHTML += `<div class="${type}">• ${msg}</div>`; };
+
+  const kw = mmGetKw();
+  log(`뉴스발행일 기간: <b>${from}</b> ~ <b>${to}</b>`);
+  log(`검색 사이트: 네이버 뉴스 API`);
+  log(`모바일쿠폰 키워드 (${kw.coupon.length}개)`);
+  log(`복지서비스 키워드 (${kw.welfare.length}개)`);
+  await mmWait(200);
+
+  let errMsg = '';
+  let couponItems = [], welfareItems = [];
+  const totalKw = kw.coupon.length + kw.welfare.length;
+  let doneKw = 0;
+  const counterEl = document.getElementById('mm-pb-counter');
+  const tick = () => { doneKw++; counterEl.textContent = `(${doneKw}/${totalKw})`; };
+
+  try {
+    log('네이버 뉴스 API 호출 중... (모바일쿠폰)');
+    couponItems  = await mmSearchNaverByKeywords(kw.coupon, from, to, log, tick);
+    log(`✅ 모바일쿠폰 발행일 필터 통과: ${couponItems.length}건`, 'ok');
+
+    log('네이버 뉴스 API 호출 중... (복지서비스)');
+    welfareItems = await mmSearchNaverByKeywords(kw.welfare, from, to, log, tick);
+    log(`✅ 복지서비스 발행일 필터 통과: ${welfareItems.length}건`, 'ok');
+  } catch(e) {
+    errMsg = e.message || String(e);
+    log(`❌ 수집 실패: ${errMsg}`, 'err');
+  }
+
+  await mmWait(200);
+  pb.classList.remove('show');
+  btnRun.disabled = false; btnRun.textContent = '🔍 뉴스수집 실행';
+  mmRunning = false;
+
+  if(errMsg) {
+    document.getElementById('mm-error-msg').innerHTML = errMsg.replace(/\n/g,'<br/>');
+    document.getElementById('mm-error-box').classList.add('show');
+    return;
+  }
+
+  if(couponItems.length===0 && welfareItems.length===0) {
+    document.getElementById('mm-error-msg').innerHTML =
+      `${from} ~ ${to} 기간에 해당하는 뉴스를 찾지 못했습니다.<br/>날짜 범위를 넓히거나 키워드 관리에서 키워드를 확인해보세요.`;
+    document.getElementById('mm-error-box').classList.add('show');
+    return;
+  }
+
+  const total = couponItems.length + welfareItems.length;
+  mmCurrentResult = {
+    id: Date.now().toString(),
+    dateKey: to, dateLabel: mmToLabel(to),
+    rangeFrom: from, rangeTo: to,
+    total, coupon: couponItems, welfare: welfareItems,
+    savedAt: new Date().toLocaleString('ko-KR')
+  };
+
+  document.getElementById('mm-rc-title').textContent = `📅 ${mmCurrentResult.dateLabel} 시장동향 리포트`;
+  document.getElementById('mm-rc-meta').textContent  = `뉴스발행일: ${from} ~ ${to} | 총 ${total}건 (네이버 뉴스 API)`;
+  document.getElementById('mm-rc-body').innerHTML    = mmBuildNewsHTML(mmCurrentResult);
+  document.getElementById('mm-result-wrap').classList.add('show');
+}
+
+async function mmSearchNaverByKeywords(keywords, from, to, log, tick) {
+  const fromDate = new Date(from + 'T00:00:00+09:00');
+  const toDate   = new Date(to   + 'T23:59:59+09:00');
+  const seen = new Set();
+  const result = [];
+
+  for(const kw of keywords) {
+    try {
+      const url = `${MM_NAVER_PROXY_URL}?query=${encodeURIComponent(kw)}&display=30&sort=date`;
+      const resp = await fetch(url);
+      if(!resp.ok) {
+        const errBody = await resp.json().catch(()=>({}));
+        throw new Error(errBody.error || `HTTP ${resp.status}`);
+      }
+      const data = await resp.json();
+      const items = data.items || [];
+
+      for(const it of items) {
+        const pub = new Date(it.pubDate);
+        if(pub < fromDate || pub > toDate) continue;
+
+        const link = it.originallink || it.link;
+        if(seen.has(link)) continue;
+        seen.add(link);
+
+        const cleanDesc = mmStripHtml(it.description);
+        result.push({
+          tag: mmClassifyTag(it.title + it.description),
+          headline: mmStripHtml(it.title),
+          desc: cleanDesc.length > 80 ? cleanDesc.slice(0,80)+'...' : cleanDesc,
+          url: link,
+          date: mmFmtPubDate(it.pubDate),
+          source: mmExtractSource(it.originallink || it.link)
+        });
+      }
+    } catch(e) {
+      log(`⚠ "${kw}" 검색 중 오류: ${e.message}`, 'err');
+    }
+    if(tick) tick();
+    await mmWait(150);
+  }
+
+  result.sort((a,b) => b.date.localeCompare(a.date));
+  return result.slice(0, 8);
+}
+
+function mmClassifyTag(text) {
+  if(/정책|공정위|법안|가이드라인|규제|제도/.test(text)) return '정책';
+  if(/출시|입점|런칭|신제품|브랜드|이벤트|프로모션/.test(text)) return '브랜드';
+  if(/기술|시스템|플랫폼|앱|솔루션|AI|개발/.test(text)) return '기술';
+  return '시장동향';
+}
+
+function mmStripHtml(s) { return String(s||'').replace(/<[^>]*>/g,'').replace(/&quot;/g,'"').replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>'); }
+
+function mmFmtPubDate(pubDateStr) {
+  const d = new Date(pubDateStr);
+  const pad = n => String(n).padStart(2,'0');
+  return `${d.getFullYear()}.${pad(d.getMonth()+1)}.${pad(d.getDate())}`;
+}
+
+function mmExtractSource(url) {
+  try {
+    const host = new URL(url).hostname.replace('www.','');
+    const map = {
+      'etnews.com':'전자신문','biz.chosun.com':'조선비즈','chosun.com':'조선일보',
+      'mt.co.kr':'머니투데이','fnnews.com':'파이낸셜뉴스','ftoday.co.kr':'파이낸셜투데이',
+      'hankooki.com':'한국경제TV','segye.com':'세계일보','ddaily.co.kr':'디지털데일리',
+      'theguru.co.kr':'더구루','enetnews.co.kr':'이넷뉴스','kdfnews.com':'한국디지털뉴스',
+      'shinailbo.co.kr':'신아일보','thepublic.kr':'더퍼블릭','gamesot.net':'게임샷',
+      'n.news.naver.com':'네이버뉴스','yna.co.kr':'연합뉴스','newsis.com':'뉴시스',
+      'hankyung.com':'한국경제','mk.co.kr':'매일경제','edaily.co.kr':'이데일리',
+      'news1.kr':'뉴스1','yonhapnews.co.kr':'연합뉴스','asiae.co.kr':'아시아경제',
+      'inews24.com':'아이뉴스24','zdnet.co.kr':'지디넷코리아','dt.co.kr':'디지털타임스'
+    };
+    for(const [k,v] of Object.entries(map)) if(host.includes(k)) return v;
+    const core = host.split('.')[0];
+    return core.length <= 12 ? core : host;
+  } catch { return ''; }
+}
+
+const MM_TAG_CLS = { 시장동향:'mm-tag-market', 브랜드:'mm-tag-brand', 정책:'mm-tag-policy', 기술:'mm-tag-tech' };
+
+function mmBuildNewsHTML(r) {
+  const items = arr => {
+    if(!arr.length) return '<p class="mm-no-news">해당 기간에 수집된 기사가 없습니다</p>';
+    return arr.map(it => `
+      <div class="mm-news-item">
+        <div class="mm-ni-top">
+          <span class="mm-news-tag ${MM_TAG_CLS[it.tag]||'mm-tag-market'}">${mmEsc(it.tag)}</span>
+          <span class="mm-ni-date">📅 ${mmEsc(it.date||'날짜미상')}</span>
+          ${it.source ? `<span class="mm-ni-source">${mmEsc(it.source)}</span>` : ''}
+        </div>
+        <div class="mm-news-headline">${mmEsc(it.headline)}</div>
+        ${it.desc ? `<div class="mm-news-desc">${mmEsc(it.desc)}</div>` : ''}
+        <a class="mm-news-url" href="${mmEsc(it.url)}" target="_blank" rel="noopener noreferrer">${mmEsc(it.url)}</a>
+      </div>`).join('');
+  };
+  return `
+    <div class="mm-news-section">
+      <div class="mm-ns-title">📱 1. 모바일쿠폰 <span class="mm-ns-count">(${r.coupon.length}건)</span></div>${items(r.coupon)}
+    </div>
+    <div class="mm-news-section">
+      <div class="mm-ns-title">🎁 2. 복지서비스 <span class="mm-ns-count">(${r.welfare.length}건)</span></div>${items(r.welfare)}
+    </div>`;
+}
+
+function mmSaveReport() {
+  if(!mmCurrentResult) return;
+  if(mmSaved) { mmToast('이미 저장된 리포트입니다'); return; }
+  const reports = mmGetReports();
+  reports.unshift({...mmCurrentResult});
+  mmSetReports(reports);
+  mmSaved = true;
+  const btnSave = document.getElementById('mm-btn-save');
+  btnSave.disabled = true; btnSave.textContent = '✅ 저장완료';
+  mmToast('✅ 게시판에 저장되었습니다');
+}
+
+function mmRenderBoard() {
+  const reports = mmGetReports();
+  const pages   = Math.max(1, Math.ceil(reports.length/MM_PG));
+  if(mmCurrentPage > pages) mmCurrentPage = pages;
+  const slice   = reports.slice((mmCurrentPage-1)*MM_PG, mmCurrentPage*MM_PG);
+  const el      = document.getElementById('mm-board-items');
+
+  if(!reports.length) {
+    el.innerHTML = '<div class="mm-board-empty">📭 저장된 리포트가 없습니다</div>';
+    document.getElementById('mm-board-pg').innerHTML = '';
+    return;
+  }
+
+  el.innerHTML = slice.map((r,i) => {
+    const abs = (mmCurrentPage-1)*MM_PG + i;
+    return `<div class="mm-board-item" onclick="mmOpenDetail(${abs})">
+      <input type="checkbox" class="mm-board-chk mm-bd-chk" data-abs="${abs}"
+        onclick="event.stopPropagation();mmSyncSel()"/>
+      <div class="mm-bi-body">
+        <div class="mm-bi-title">📅 ${mmEsc(r.dateLabel)} 시장동향 리포트</div>
+        <div class="mm-bi-meta">뉴스발행일: ${mmEsc(r.rangeFrom||'')} ~ ${mmEsc(r.rangeTo||'')} &nbsp;|&nbsp; 총 ${r.total}건 &nbsp;|&nbsp; 저장: ${mmEsc(r.savedAt||'')}</div>
+      </div>
+      <span class="mm-bi-arrow">▶</span>
+    </div>`;
+  }).join('');
+
+  const pg = document.getElementById('mm-board-pg');
+  pg.innerHTML = pages<=1 ? '' :
+    Array.from({length:pages},(_,i)=>
+      `<span class="mm-pg-num${i+1===mmCurrentPage?' active':''}" onclick="mmGoPage(${i+1})">${i+1}</span>`
+    ).join('');
+
+  mmAllSel = false;
+  document.getElementById('mm-btn-sel-all').textContent = '전체선택';
+}
+
+function mmGoPage(n) { mmCurrentPage=n; mmRenderBoard(); }
+
+function mmSyncSel() {
+  const all  = document.querySelectorAll('.mm-bd-chk');
+  const chkd = document.querySelectorAll('.mm-bd-chk:checked');
+  mmAllSel = all.length>0 && chkd.length===all.length;
+  document.getElementById('mm-btn-sel-all').textContent = mmAllSel ? '전체해제' : '전체선택';
+}
+
+function mmToggleSelAll() {
+  mmAllSel = !mmAllSel;
+  document.querySelectorAll('.mm-bd-chk').forEach(c => c.checked=mmAllSel);
+  document.getElementById('mm-btn-sel-all').textContent = mmAllSel ? '전체해제' : '전체선택';
+}
+
+function mmDeleteSel() {
+  const idxs = [...document.querySelectorAll('.mm-bd-chk:checked')].map(c=>parseInt(c.dataset.abs));
+  if(!idxs.length) { mmToast('⚠ 삭제할 항목을 선택하세요'); return; }
+  if(!confirm(`${idxs.length}건을 삭제하시겠습니까?`)) return;
+  let reports = mmGetReports();
+  [...idxs].sort((a,b)=>b-a).forEach(i=>reports.splice(i,1));
+  mmSetReports(reports);
+  mmAllSel=false;
+  document.getElementById('mm-btn-sel-all').textContent='전체선택';
+  const np = Math.max(1,Math.ceil(reports.length/MM_PG));
+  if(mmCurrentPage>np) mmCurrentPage=np;
+  mmRenderBoard();
+  mmToast(`🗑 ${idxs.length}건 삭제됐습니다`);
+}
+
+function mmOpenDetail(idx) {
+  const r = mmGetReports()[idx];
+  if(!r) return;
+  mmDetailReport = r;
+  document.getElementById('mm-det-title').textContent = `📅 ${r.dateLabel} 시장동향 리포트`;
+  document.getElementById('mm-det-meta').textContent  = `뉴스발행일: ${r.rangeFrom||''} ~ ${r.rangeTo||''} | 총 ${r.total}건`;
+  document.getElementById('mm-det-body').innerHTML    = mmBuildNewsHTML(r);
+  document.getElementById('mm-tn3').style.display = '';
+  mmSwitchTab(3);
+}
+
+function mmBackToBoard() {
+  document.getElementById('mm-tn3').style.display='none';
+  mmSwitchTab(2);
+}
+
+function mmCopyText(r) {
+  if(!r) { mmToast('⚠ 복사할 리포트가 없습니다'); return; }
+  let t = `[${r.dateLabel}] 모바일쿠폰 및 복지서비스 시장동향\n`;
+  t += `뉴스발행일: ${r.rangeFrom||''} ~ ${r.rangeTo||''}\n\n`;
+  t += `1. 모바일쿠폰\n\n`;
+  (r.coupon||[]).forEach(it => { t+=`[${it.tag}] ${it.headline}\n${it.url}\n\n`; });
+  t += `2. 복지\n\n`;
+  (r.welfare||[]).forEach(it => { t+=`[${it.tag}] ${it.headline}\n${it.url}\n\n`; });
+  navigator.clipboard.writeText(t)
+    .then(()=>mmToast('📋 복사 완료! Gmail에 바로 붙여넣기 하세요'))
+    .catch(()=>{
+      const ta=document.createElement('textarea');
+      ta.value=t; document.body.appendChild(ta);
+      ta.select(); document.execCommand('copy');
+      document.body.removeChild(ta);
+      mmToast('📋 복사 완료!');
+    });
+}
+
+function mmRenderKw() {
+  const kw = mmGetKw();
+  const mk = (k,type,i,cls) =>
+    `<span class="mm-chip ${cls}">${mmEsc(k)}<button class="mm-chip-del" onclick="mmRemoveKw('${type}',${i})">✕</button></span>`;
+  document.getElementById('mm-chips-coupon').innerHTML =
+    kw.coupon.length ? kw.coupon.map((k,i)=>mk(k,'coupon',i,'')).join('') : '<span style="font-size:11px;color:#bbb">키워드를 추가하세요</span>';
+  document.getElementById('mm-chips-welfare').innerHTML =
+    kw.welfare.length ? kw.welfare.map((k,i)=>mk(k,'welfare',i,'w')).join('') : '<span style="font-size:11px;color:#bbb">키워드를 추가하세요</span>';
+}
+
+function mmAddKw(type) {
+  const inp = document.getElementById('mm-inp-'+type);
+  const val = inp.value.trim();
+  if(!val) return;
+  const kw = mmGetKw();
+  if(kw[type].includes(val)) { mmToast('이미 등록된 키워드입니다'); return; }
+  kw[type].push(val);
+  mmSetKw(kw); inp.value=''; mmRenderKw();
+  mmToast(`✅ "${val}" 추가됨`);
+}
+
+function mmRemoveKw(type, idx) {
+  const kw = mmGetKw();
+  const rm = kw[type][idx];
+  kw[type].splice(idx,1);
+  mmSetKw(kw); mmRenderKw();
+  mmToast(`🗑 "${rm}" 삭제됨`);
+}
+
+function mmWait(ms){ return new Promise(r=>setTimeout(r,ms)); }
+function mmToLabel(s){ const [y,m,d]=s.split('-'); return `${y}. ${+m}. ${+d}.`; }
+function mmEsc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+let mm_tt;
+function mmToast(msg){
+  const el=document.getElementById('mm-toast');
+  el.textContent=msg; el.classList.add('show');
+  clearTimeout(mm_tt); mm_tt=setTimeout(()=>el.classList.remove('show'),3000);
 }
 
 showPage('home');
