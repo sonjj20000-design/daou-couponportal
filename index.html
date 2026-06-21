@@ -702,6 +702,7 @@ input,select,textarea{font-family:inherit}
             <div class="aapb-engine-select">
               <span class="aapb-engine-label">분석 엔진</span>
               <label class="aapb-engine-opt"><input type="radio" name="ai-engine" value="gemini" checked/> Gemini (무료)</label>
+              <label class="aapb-engine-opt"><input type="radio" name="ai-engine" value="mistral"/> Mistral AI (무료)</label>
               <label class="aapb-engine-opt"><input type="radio" name="ai-engine" value="claude"/> Claude (준비중)</label>
             </div>
             <button class="api-btn-analyze" id="api-btn-analyze" onclick="apiRunAnalysis()">✨ AI 분석 실행</button>
@@ -1519,6 +1520,7 @@ function mmToast(msg){
    ══════════════════════════════════════════════════════ */
 
 const API_GEMINI_PROXY_URL = 'https://wispy-water-a79bgemini-analysis-proxy.sonjj20000.workers.dev';
+const API_MISTRAL_PROXY_URL = 'https://damp-hall-81b2mistral-analysis-proxy.sonjj20000.workers.dev';
 const API_DOCS_STORAGE_URL = 'https://divine-breeze-4cddapi-docs-storage.sonjj20000.workers.dev';
 
 const AK_LIST = 'api_devops_list_v1';
@@ -1910,15 +1912,17 @@ ${prompt}
 인증 방식, 필수 파라미터, 주의사항이 있다면 구조적으로 정리해주세요.`;
 
   const engine = document.querySelector('input[name="ai-engine"]:checked').value;
+  const engineLabel = { gemini: 'Gemini', mistral: 'Mistral AI', claude: 'Claude' }[engine] || engine;
   const btn = document.getElementById('api-btn-analyze');
   btn.disabled = true;
-  btn.innerHTML = `<span class="api-spinner"></span> ${engine==='gemini'?'Gemini':'Claude'} 분석 중...`;
+  btn.innerHTML = `<span class="api-spinner"></span> ${engineLabel} 분석 중...`;
 
   try {
-    if(engine === 'gemini') {
+    if(engine === 'gemini' || engine === 'mistral') {
+      const proxyUrl = engine === 'gemini' ? API_GEMINI_PROXY_URL : API_MISTRAL_PROXY_URL;
       let resp;
       try {
-        resp = await fetch(`${API_GEMINI_PROXY_URL}`, {
+        resp = await fetch(proxyUrl, {
           method: 'POST',
           headers: {'Content-Type':'application/json'},
           body: JSON.stringify({ prompt: fullPrompt })
@@ -1931,7 +1935,7 @@ ${prompt}
       if(!data.text || !data.text.trim()) throw new Error('분석 결과가 비어있습니다. 분석 요청 내용을 더 구체적으로 입력해보세요.');
       apiCurrentAnalysisText = data.text;
     } else {
-      throw new Error('Claude 연동은 추후 별도 결제 설정 후 제공됩니다. 현재는 Gemini를 이용해주세요.');
+      throw new Error('Claude 연동은 추후 별도 결제 설정 후 제공됩니다. 현재는 Gemini 또는 Mistral AI를 이용해주세요.');
     }
 
     document.getElementById('api-analyze-content').textContent = apiCurrentAnalysisText;
