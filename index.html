@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>다우기술 쿠폰사업본부 업무포털</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pptxgenjs/3.12.0/pptxgen.bundle.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Apple SD Gothic Neo','Malgun Gothic',sans-serif;background:#f0f3f9;color:#1a2233;min-height:100vh;font-size:14px}
@@ -158,7 +159,6 @@ input,select,textarea{font-family:inherit}
 .mm-tab-btn.active{background:#1a8a7a;color:#fff}
 .mm-tab-panel{display:none}
 .mm-tab-panel.active{display:block}
-
 .mm-search-bar{background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:1rem 1.25rem;margin-bottom:1rem}
 .mm-search-row{display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap}
 .mm-sb-group{display:flex;align-items:center;gap:.6rem}
@@ -172,7 +172,6 @@ input,select,textarea{font-family:inherit}
 .mm-btn-run{background:#1a8a7a;color:#fff;border:none;padding:8px 24px;border-radius:6px;font-size:13px;font-weight:700;margin-left:auto;display:flex;align-items:center;gap:6px}
 .mm-btn-run:hover{opacity:.9}
 .mm-btn-run:disabled{opacity:.5;cursor:not-allowed}
-
 .mm-progress-box{background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:1rem 1.25rem;margin-bottom:1rem;display:none}
 .mm-progress-box.show{display:block}
 .mm-pb-title{font-size:12px;font-weight:700;color:#1a8a7a;margin-bottom:.6rem;display:flex;align-items:center;gap:6px}
@@ -181,12 +180,10 @@ input,select,textarea{font-family:inherit}
 .mm-pb-step{font-size:11px;color:#4a5a7a;line-height:2.2;padding-left:.25rem}
 .mm-pb-step .ok{color:#1a8a7a;font-weight:600}
 .mm-pb-step .err{color:#c0392b}
-
 .mm-error-box{background:#fff5f5;border:1px solid #fcc;border-radius:8px;padding:1rem 1.25rem;margin-bottom:1rem;display:none}
 .mm-error-box.show{display:block}
 .mm-error-box-title{font-size:13px;font-weight:700;color:#c0392b;margin-bottom:.4rem}
 .mm-error-box p{font-size:12px;color:#8a3a3a;line-height:1.7}
-
 .mm-result-wrap{display:none}
 .mm-result-wrap.show{display:block}
 .mm-result-card{background:#fff;border:1px solid #e2e8f0;border-radius:10px;overflow:hidden}
@@ -200,7 +197,6 @@ input,select,textarea{font-family:inherit}
 .mm-btn-save:hover{opacity:.9}
 .mm-btn-save:disabled{opacity:.5;cursor:not-allowed}
 .mm-rc-body{padding:1.25rem}
-
 .mm-news-section{margin-bottom:1.25rem}
 .mm-news-section:last-child{margin-bottom:0}
 .mm-ns-title{display:inline-flex;align-items:center;gap:6px;background:#1a2a5a;color:#fff;font-size:11px;font-weight:700;padding:4px 12px;border-radius:4px;margin-bottom:.875rem}
@@ -220,7 +216,6 @@ input,select,textarea{font-family:inherit}
 .mm-news-url{font-size:11px;color:#3b7ff5;word-break:break-all}
 .mm-news-url:hover{text-decoration:underline}
 .mm-no-news{font-size:12px;color:#bbb;padding:.5rem 0;font-style:italic}
-
 .mm-board-toolbar{display:flex;align-items:center;justify-content:flex-end;gap:.5rem;margin-bottom:.75rem}
 .mm-btn-sel-all{background:#fff;border:1px solid #d0daf0;color:#3a4a6b;padding:6px 14px;border-radius:5px;font-size:12px}
 .mm-btn-sel-all:hover{background:#f4f6fb}
@@ -241,7 +236,6 @@ input,select,textarea{font-family:inherit}
 .mm-pg-num{width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:5px;font-size:12px;color:#3a4a6b;border:1px solid #d0daf0;background:#fff;cursor:pointer}
 .mm-pg-num.active{background:#1a8a7a;color:#fff;border-color:#1a8a7a}
 .mm-pg-num:hover:not(.active){background:#f4f6fb}
-
 .mm-det-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:.5rem}
 .mm-det-title{font-size:15px;font-weight:700;color:#1a2233}
 .mm-det-meta{font-size:11px;color:#7a90b8;margin-top:3px}
@@ -249,7 +243,6 @@ input,select,textarea{font-family:inherit}
 .mm-btn-back{background:#fff;border:1px solid #d0daf0;color:#3a4a6b;padding:6px 14px;border-radius:5px;font-size:12px}
 .mm-btn-back:hover{background:#f4f6fb}
 .mm-det-card{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:1.25rem}
-
 .mm-kw-wrap{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
 .mm-kw-card{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:1.25rem}
 .mm-kw-card-title{font-size:13px;font-weight:700;color:#1a2233;margin-bottom:.875rem}
@@ -263,10 +256,148 @@ input,select,textarea{font-family:inherit}
 .mm-kw-input:focus{border-color:#1565a8}
 .mm-btn-kw-add{background:#1565a8;color:#fff;border:none;padding:7px 14px;border-radius:5px;font-size:12px;font-weight:500}
 .mm-btn-kw-add:hover{opacity:.9}
-
 .mm-source-badge{display:inline-flex;align-items:center;gap:4px;font-size:10px;background:#e8f8f0;color:#1a8a4a;padding:2px 9px;border-radius:10px;font-weight:600;margin-left:8px}
 .mm-toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(20px);background:#1a2a5a;color:#fff;padding:.75rem 1.5rem;border-radius:8px;font-size:13px;opacity:0;transition:all .3s;z-index:9999;pointer-events:none;white-space:nowrap}
 .mm-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ===== API연동 업무관리문서 전용 스타일 ===== */
+.api-menu-split{display:flex;gap:.75rem;margin-bottom:1.5rem}
+.api-split-card{flex:1;background:#fff;border:1.5px solid #d8e2f0;border-radius:10px;padding:1.25rem;cursor:pointer;transition:all .15s}
+.api-split-card:hover{border-color:#1565a8;box-shadow:0 4px 12px rgba(21,101,168,.1)}
+.api-split-card.active{border-color:#1a8a7a;background:#f4fbf9}
+.api-split-card .as-icon{font-size:22px;margin-bottom:.5rem}
+.api-split-card h3{font-size:14px;font-weight:700;margin-bottom:3px}
+.api-split-card p{font-size:11px;color:#7a90b8}
+.api-split-badge{display:inline-block;font-size:10px;font-weight:700;background:#fff3e0;color:#c25a00;padding:2px 8px;border-radius:10px;margin-top:6px}
+.api-dev-placeholder{background:#fff;border:1px solid #d8e2f0;border-radius:10px;padding:4rem 2rem;text-align:center;color:#7a90b8}
+.api-dev-placeholder .adp-icon{font-size:44px;margin-bottom:1rem;opacity:.4}
+.api-dev-placeholder h3{font-size:15px;color:#2d4270;margin-bottom:6px}
+.api-dev-placeholder p{font-size:12px}
+.api-plan-tabnav{display:flex;margin-bottom:1.5rem;border:1.5px solid #1565a8;border-radius:7px;overflow:hidden;width:fit-content}
+.api-plan-tab-btn{padding:8px 24px;font-size:13px;font-weight:500;border:none;background:#fff;color:#1565a8;cursor:pointer;white-space:nowrap;border-right:1.5px solid #1565a8}
+.api-plan-tab-btn:last-child{border-right:none}
+.api-plan-tab-btn:hover{background:#eef4ff}
+.api-plan-tab-btn.active{background:#1a8a7a;color:#fff}
+.api-plan-tab-panel{display:none}
+.api-plan-tab-panel.active{display:block}
+.api-list-dashboard{display:grid;grid-template-columns:repeat(6,1fr);gap:.6rem;margin-bottom:1.25rem}
+.api-dash-card{background:#fff;border:1px solid #d8e2f0;border-radius:10px;padding:.875rem;cursor:pointer;transition:all .15s}
+.api-dash-card:hover{border-color:#1565a8}
+.api-dash-card.active{border-color:#1565a8;background:#f0f5ff}
+.api-dash-card .adc-label{font-size:10px;color:#7a90b8;margin-bottom:3px}
+.api-dash-card .adc-val{font-size:20px;font-weight:700}
+.dash-review .adc-val{color:#9a6500}.dash-dev .adc-val{color:#1a52c8}
+.dash-done .adc-val{color:#1a8a4a}.dash-deployreq .adc-val{color:#6c47ff}
+.dash-live .adc-val{color:#0d8a6a}.dash-stop .adc-val{color:#c0392b}
+.api-list-toolbar{display:flex;gap:.5rem;margin-bottom:1rem;flex-wrap:wrap;align-items:center}
+.api-list-search{padding:7px 10px;border:1px solid #d8e2f0;border-radius:6px;font-size:12px;width:200px;outline:none}
+.api-list-search:focus{border-color:#1565a8}
+.api-list-filter{padding:7px 10px;border:1px solid #d8e2f0;border-radius:6px;font-size:12px;outline:none}
+.api-btn-register{background:#1565a8;color:#fff;border:none;padding:7px 16px;border-radius:6px;font-size:12px;font-weight:600;margin-left:auto}
+.api-btn-register:hover{opacity:.9}
+.api-list-table-wrap{background:#fff;border:1px solid #d8e2f0;border-radius:10px;overflow:auto;margin-bottom:.75rem}
+.api-list-table-wrap table{width:100%;border-collapse:collapse;font-size:12px}
+.api-list-table-wrap th{background:#f8faff;padding:9px 14px;text-align:left;font-size:11px;font-weight:700;color:#7a90b8;border-bottom:1px solid #d8e2f0;white-space:nowrap}
+.api-list-table-wrap td{padding:9px 14px;border-bottom:1px solid #f1f5f9;color:#2d4270}
+.api-list-table-wrap tr:last-child td{border-bottom:none}
+.api-list-table-wrap tr:hover td{background:#f9fbff}
+.api-status-badge{display:inline-block;font-size:10px;font-weight:600;padding:2px 9px;border-radius:10px;white-space:nowrap}
+.st-검토중{background:#fff8e6;color:#9a6500}.st-개발중{background:#eef4ff;color:#1a52c8}
+.st-개발완료{background:#eafaf1;color:#1a8a4a}.st-배포요청{background:#f3eeff;color:#6c47ff}
+.st-운영배포{background:#e4faf6;color:#0d8a6a}.st-중단{background:#fff0f0;color:#c0392b}
+.api-row-actions{display:flex;gap:5px}
+.api-btn-sm{padding:3px 9px;border-radius:4px;font-size:11px;border:1px solid #d8e2f0;background:#fff;color:#2d4270}
+.api-btn-sm:hover{background:#eef4ff}
+.api-btn-sm.del{color:#c0392b;border-color:#f0c0c0}
+.api-doc-chip{display:inline-flex;align-items:center;gap:4px;font-size:11px;color:#1565a8;cursor:pointer}
+.api-doc-chip:hover{text-decoration:underline}
+.api-empty-state{text-align:center;padding:2.5rem 2rem;color:#7a90b8;font-size:13px}
+.api-list-pagination{display:flex;justify-content:center;gap:.5rem;padding:.75rem 0}
+.api-page-num{width:28px;height:28px;display:flex;align-items:center;justify-content:center;border:1px solid #d8e2f0;border-radius:5px;background:#fff;font-size:12px;cursor:pointer}
+.api-page-num.active{background:#1a8a7a;color:#fff;border-color:#1a8a7a}
+.api-page-num:hover:not(.active){background:#f4f6fb}
+.api-modal-bg{display:none;position:fixed;inset:0;background:rgba(10,20,50,.5);z-index:2000;align-items:center;justify-content:center;padding:1rem}
+.api-modal-bg.open{display:flex}
+.api-register-modal{background:#fff;border-radius:12px;padding:1.75rem;width:480px;max-height:88vh;overflow-y:auto}
+.api-register-modal h3{font-size:15px;font-weight:700;margin-bottom:1rem}
+.arm-field{margin-bottom:.875rem}
+.arm-field label{display:block;font-size:11px;font-weight:600;color:#2d4270;margin-bottom:4px}
+.arm-field input,.arm-field select{width:100%;padding:8px 10px;border:1px solid #d8e2f0;border-radius:5px;font-size:12px;outline:none}
+.arm-field input:focus,.arm-field select:focus{border-color:#1565a8}
+.arm-upload-box{border:2px dashed #d8e2f0;border-radius:8px;padding:1.1rem;text-align:center;font-size:12px;color:#7a90b8;cursor:pointer}
+.arm-upload-box:hover{border-color:#1565a8}
+.arm-upload-box.has-file{border-color:#1a8a7a;background:#f4fbf9;color:#1a8a7a;font-weight:600}
+.arm-err{color:#c0392b;font-size:11px;margin-top:4px;display:none}
+.arm-actions{display:flex;gap:.5rem;margin-top:1rem;justify-content:flex-end}
+.arm-btn-cancel{background:#f4f6fb;border:1px solid #d8e2f0;padding:8px 16px;border-radius:6px;font-size:12px}
+.arm-btn-submit{background:#1565a8;color:#fff;border:none;padding:8px 18px;border-radius:6px;font-size:12px;font-weight:600}
+.api-detail-modal{background:#fff;border-radius:12px;padding:1.75rem;width:520px;max-height:88vh;overflow-y:auto}
+.adm-row{display:flex;gap:1rem;padding:.5rem 0;border-bottom:1px solid #f1f5f9;font-size:12px}
+.adm-label{color:#7a90b8;min-width:90px;flex-shrink:0}
+.adm-val{color:#2d4270;word-break:break-all}
+.adm-doc-download{display:flex;align-items:center;gap:6px;color:#1565a8;font-size:12px;cursor:pointer}
+.adm-actions{display:flex;gap:.5rem;margin-top:1.25rem;justify-content:flex-end}
+.adm-edit-mode .adm-val-display{display:none}
+.adm-edit-mode .adm-val-input{display:block!important}
+.adm-val-input{display:none;width:100%;padding:5px 8px;border:1px solid #d8e2f0;border-radius:4px;font-size:12px}
+.api-analyze-select-bar{background:#fff;border:1px solid #d8e2f0;border-radius:8px;padding:1rem 1.25rem;margin-bottom:1rem}
+.aasb-row{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.aasb-label{font-size:12px;font-weight:700;color:#2d4270}
+.aasb-select{flex:1;min-width:220px;padding:8px 10px;border:1px solid #d8e2f0;border-radius:6px;font-size:12px}
+.api-analyze-prompt-box{background:#fff;border:1px solid #d8e2f0;border-radius:8px;padding:1rem 1.25rem;margin-bottom:1rem}
+.aapb-title{font-size:12px;font-weight:700;color:#2d4270;margin-bottom:.6rem}
+.aapb-textarea{width:100%;min-height:90px;padding:.75rem;border:1px solid #d8e2f0;border-radius:6px;font-size:12px;outline:none;resize:vertical}
+.aapb-textarea:focus{border-color:#1565a8}
+.aapb-engine-select{display:flex;gap:.75rem;margin-top:.75rem;align-items:center}
+.aapb-engine-label{font-size:11px;color:#7a90b8}
+.aapb-engine-opt{display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer}
+.api-btn-analyze{background:linear-gradient(135deg,#3b7ff5,#6c47ff);color:#fff;border:none;padding:9px 22px;border-radius:7px;font-size:13px;font-weight:600;margin-top:.875rem;display:flex;align-items:center;gap:6px}
+.api-btn-analyze:hover{opacity:.9}
+.api-btn-analyze:disabled{opacity:.5;cursor:not-allowed}
+.api-spinner{display:inline-block;width:12px;height:12px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:api-spin .7s linear infinite}
+@keyframes api-spin{to{transform:rotate(360deg)}}
+.api-analyze-result-card{background:#fff;border:1px solid #d8e2f0;border-radius:10px;padding:1.25rem;margin-bottom:1rem;display:none}
+.api-analyze-result-card.show{display:block}
+.aarc-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.875rem;flex-wrap:wrap;gap:.5rem}
+.aarc-title{font-size:13px;font-weight:700}
+.aarc-actions{display:flex;gap:.5rem}
+.aarc-btn{padding:5px 12px;border-radius:5px;font-size:11px;border:1px solid #d8e2f0;background:#fff}
+.aarc-btn:hover{background:#f4f6fb}
+.aarc-content{font-size:12px;line-height:1.8;color:#2d4270;white-space:pre-wrap}
+.api-inquiry-box{background:#fff;border:1px solid #d8e2f0;border-radius:10px;padding:1.25rem;margin-bottom:1rem}
+.aib-title{font-size:13px;font-weight:700;margin-bottom:.875rem;display:flex;justify-content:space-between;align-items:center}
+.aib-add-btn{font-size:11px;background:#1565a8;color:#fff;border:none;padding:5px 12px;border-radius:5px}
+.aib-item{display:flex;gap:.6rem;padding:.6rem 0;border-bottom:1px dashed #eef2fa;font-size:12px;align-items:flex-start}
+.aib-item:last-child{border-bottom:none}
+.aib-item-num{color:#7a90b8;font-weight:700;flex-shrink:0}
+.aib-item-text{flex:1;color:#2d4270;line-height:1.6}
+.aib-item-actions{display:flex;gap:4px;flex-shrink:0}
+.api-saved-analysis-list{background:#fff;border:1px solid #d8e2f0;border-radius:10px;overflow:hidden}
+.asal-title{font-size:12px;font-weight:700;padding:.75rem 1.25rem;border-bottom:1px solid #f1f5f9;color:#2d4270}
+.asal-item{display:flex;justify-content:space-between;align-items:center;padding:.75rem 1.25rem;border-bottom:1px solid #f1f5f9;font-size:12px}
+.asal-item:last-child{border-bottom:none}
+.asal-item-name{color:#2d4270;font-weight:600}
+.asal-item-date{color:#7a90b8;font-size:11px;margin-left:6px}
+.asal-item-actions{display:flex;gap:5px}
+.api-doc-type-select{display:flex;gap:.75rem;margin-bottom:1rem}
+.adts-card{flex:1;background:#fff;border:1.5px solid #d8e2f0;border-radius:8px;padding:1rem;text-align:center;cursor:pointer}
+.adts-card.selected{border-color:#1565a8;background:#f0f5ff}
+.adts-card .adts-icon{font-size:22px;margin-bottom:.4rem}
+.adts-card p{font-size:12px;font-weight:600}
+.api-doc-source-box{background:#fff;border:1px solid #d8e2f0;border-radius:8px;padding:1rem 1.25rem;margin-bottom:1rem}
+.adsb-title{font-size:12px;font-weight:700;color:#2d4270;margin-bottom:.6rem}
+.adsb-summary{font-size:12px;color:#7a90b8;line-height:1.7;white-space:pre-wrap}
+.api-doc-editor-area{background:#fff;border:1px solid #d8e2f0;border-radius:10px;overflow:hidden}
+.adea-toolbar{display:flex;gap:4px;padding:.6rem .875rem;border-bottom:1px solid #f1f5f9}
+.adea-toolbar button{background:#f4f6fb;border:1px solid #d8e2f0;border-radius:4px;padding:3px 8px;font-size:11px}
+.adea-toolbar button:hover{background:#eef4ff}
+.adea-textarea{width:100%;padding:1rem 1.25rem;font-size:13px;line-height:1.8;border:none;outline:none;resize:vertical;min-height:280px;font-family:inherit}
+.api-doc-actions{display:flex;gap:.5rem;margin-top:.75rem;justify-content:flex-end}
+.api-doc-btn-save{background:#1565a8;color:#fff;border:none;padding:7px 16px;border-radius:6px;font-size:12px;font-weight:600}
+.api-doc-btn-export{background:#fff;border:1px solid #d8e2f0;padding:7px 14px;border-radius:6px;font-size:12px}
+.api-doc-saved-list{margin-top:1rem}
+.api-toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(20px);background:#1a2a5a;color:#fff;padding:.75rem 1.5rem;border-radius:8px;font-size:13px;opacity:0;transition:all .3s;z-index:9999;pointer-events:none;white-space:nowrap}
+.api-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 </style>
 </head>
 <body>
@@ -293,7 +424,7 @@ input,select,textarea{font-family:inherit}
   <div class="gnb-item">
     <button class="gnb-link" id="gnb-service" onclick="showPage('service-api')">서비스기획</button>
     <ul class="gnb-dropdown">
-      <li><a href="#" onclick="showPage('service-api');return false">API연동 업무관리</a></li>
+      <li><a href="#" onclick="showPage('service-api');return false">API연동 업무관리문서</a></li>
       <li><a href="#" onclick="showPage('service-doc');return false">서비스기획문서 작성</a></li>
     </ul>
   </div>
@@ -323,14 +454,14 @@ input,select,textarea{font-family:inherit}
       <div id="home-stats">
         <div class="stat-card"><div class="stat-label">등록 경쟁사</div><div class="stat-value" id="stat-competitor">0</div><span class="stat-sub sub-blue">기업분석</span></div>
         <div class="stat-card"><div class="stat-label">영업 리스트</div><div class="stat-value" id="stat-sales">0</div><span class="stat-sub sub-green">등록건</span></div>
-        <div class="stat-card"><div class="stat-label">API 진행중</div><div class="stat-value" id="stat-api">0</div><span class="stat-sub sub-amber">개발중</span></div>
+        <div class="stat-card"><div class="stat-label">API 업무</div><div class="stat-value" id="stat-api">0</div><span class="stat-sub sub-amber">등록건</span></div>
         <div class="stat-card"><div class="stat-label">사용자 계정</div><div class="stat-value" id="stat-users">0</div><span class="stat-sub sub-red">관리중</span></div>
       </div>
       <div id="home-menu-grid">
         <div class="menu-card" onclick="showPage('business-market')"><div class="mc-icon ic-blue">📊</div><h3>시장현황/경쟁사 모니터링</h3><p>네이버 뉴스 API로 실제 시장동향 수집·관리</p></div>
         <div class="menu-card" onclick="showPage('business-competitor')"><div class="mc-icon ic-teal">🏢</div><h3>경쟁사 기업분석 관리</h3><p>경쟁사 분석 데이터 입력 및 비교</p></div>
         <div class="menu-card" onclick="showPage('business-sales')"><div class="mc-icon ic-purple">📋</div><h3>영업리스트 관리</h3><p>영업 타깃 기업 및 담당자 관리</p></div>
-        <div class="menu-card" onclick="showPage('service-api')"><div class="mc-icon ic-amber">🔗</div><h3>API연동 업무관리</h3><p>외부 API 연동 현황 및 업무 관리</p></div>
+        <div class="menu-card" onclick="showPage('service-api')"><div class="mc-icon ic-amber">🔗</div><h3>API연동 업무관리문서</h3><p>API 분석·기획서 작성 AI 자동화</p></div>
         <div class="menu-card" onclick="showPage('service-doc')"><div class="mc-icon ic-pink">📝</div><h3>서비스기획문서 작성</h3><p>기획서·제안서 문서 작성 및 관리</p></div>
         <div class="menu-card" onclick="showPage('etc-cms')"><div class="mc-icon ic-gray">⚙️</div><h3>CMS상품등록 자동화</h3><p>상품 데이터 자동 등록 일괄 처리</p></div>
       </div>
@@ -342,15 +473,12 @@ input,select,textarea{font-family:inherit}
         <h2>시장현황 / 경쟁사 모니터링 <span class="mm-source-badge">🟢 네이버 뉴스 API 연동</span></h2>
         <p>모바일쿠폰·복지서비스 관련 실제 뉴스를 발행일 기준으로 수집·관리합니다</p>
       </div>
-
       <div class="mm-tab-nav">
         <button class="mm-tab-btn active" id="mm-tn1" onclick="mmSwitchTab(1)">뉴스수집</button>
         <button class="mm-tab-btn" id="mm-tn2" onclick="mmSwitchTab(2)">모니터링 게시판</button>
         <button class="mm-tab-btn" id="mm-tn3" onclick="mmSwitchTab(3)" style="display:none">상세보기</button>
         <button class="mm-tab-btn" id="mm-tn4" onclick="mmSwitchTab(4)">키워드 관리</button>
       </div>
-
-      <!-- TAB1 뉴스수집 -->
       <div class="mm-tab-panel active" id="mm-tab1">
         <div class="mm-search-bar">
           <div class="mm-search-row">
@@ -370,17 +498,14 @@ input,select,textarea{font-family:inherit}
             <button class="mm-btn-run" id="mm-btn-run" onclick="mmRunCollect()">🔍 뉴스수집 실행</button>
           </div>
         </div>
-
         <div class="mm-progress-box" id="mm-progress-box">
           <div class="mm-pb-title"><span class="mm-spinner"></span> 실제 뉴스를 검색하고 있습니다... <span id="mm-pb-counter" style="font-weight:400;opacity:.7"></span></div>
           <div class="mm-pb-step" id="mm-pb-step"></div>
         </div>
-
         <div class="mm-error-box" id="mm-error-box">
           <div class="mm-error-box-title">⚠ 뉴스 수집 실패</div>
           <p id="mm-error-msg"></p>
         </div>
-
         <div class="mm-result-wrap" id="mm-result-wrap">
           <div class="mm-result-card">
             <div class="mm-rc-header">
@@ -397,8 +522,6 @@ input,select,textarea{font-family:inherit}
           </div>
         </div>
       </div>
-
-      <!-- TAB2 게시판 -->
       <div class="mm-tab-panel" id="mm-tab2">
         <div class="mm-board-toolbar">
           <button class="mm-btn-sel-all" id="mm-btn-sel-all" onclick="mmToggleSelAll()">전체선택</button>
@@ -410,8 +533,6 @@ input,select,textarea{font-family:inherit}
         </div>
         <div class="mm-board-pg" id="mm-board-pg"></div>
       </div>
-
-      <!-- TAB3 상세보기 -->
       <div class="mm-tab-panel" id="mm-tab3">
         <div class="mm-det-header">
           <div>
@@ -425,8 +546,6 @@ input,select,textarea{font-family:inherit}
         </div>
         <div class="mm-det-card" id="mm-det-body"></div>
       </div>
-
-      <!-- TAB4 키워드 관리 -->
       <div class="mm-tab-panel" id="mm-tab4">
         <div style="background:#fff8e6;border:1px solid #f0d88a;border-radius:8px;padding:.75rem 1rem;margin-bottom:1rem;font-size:11px;color:#7a4f00">
           💡 너무 일반적인 단어(예: "즐거운", "선물")는 무관한 기사가 많이 섞일 수 있어요.
@@ -505,37 +624,231 @@ input,select,textarea{font-family:inherit}
       </div>
     </section>
 
+    <!-- ★★★ API연동 업무관리문서 — Gemini AI 연동 버전 ★★★ -->
     <section class="page" id="page-service-api">
-      <div class="page-hd"><h2>API연동 업무관리</h2><p>외부 API 연동 현황 및 진행 업무를 관리합니다</p></div>
-      <div class="cards-row">
-        <div class="info-card"><div class="ic-label">전체 API</div><div class="ic-val" id="api-total">0</div><div class="ic-sub">등록 수</div></div>
-        <div class="info-card"><div class="ic-label">운영중</div><div class="ic-val" id="api-live">0</div><div class="ic-sub">정상 연동</div></div>
-        <div class="info-card"><div class="ic-label">개발중</div><div class="ic-val" id="api-dev">0</div><div class="ic-sub">진행중</div></div>
-        <div class="info-card"><div class="ic-label">검토중</div><div class="ic-val" id="api-review">0</div><div class="ic-sub">대기</div></div>
+      <div class="page-hd">
+        <h2>API연동 업무관리문서</h2>
+        <p>API 문서 분석부터 기획서 작성까지 한 곳에서 관리합니다</p>
       </div>
-      <div class="toolbar">
-        <input type="text" id="api-search" placeholder="API명·담당자 검색..." oninput="renderApi()"/>
-        <select id="api-filter" onchange="renderApi()"><option value="">전체 상태</option><option>운영중</option><option>개발중</option><option>검토중</option><option>중단</option></select>
-        <button class="btn-add" onclick="toggleForm('api-form')">+ API 등록</button>
-      </div>
-      <div class="tbl-wrap"><table><thead><tr><th>#</th><th>API명</th><th>제공사</th><th>방식</th><th>담당자</th><th>상태</th><th>등록일</th><th>상세</th><th>관리</th></tr></thead><tbody id="api-tbody"></tbody></table></div>
-      <div class="api-detail-panel" id="api-detail-panel">
-        <div class="adp-title"><span id="adp-name">API 상세</span><button class="adp-close" onclick="closeApiDetail()">✕</button></div>
-        <div id="adp-body"></div>
-      </div>
-      <div class="form-inline" id="api-form">
-        <div class="fi-title">API 등록</div>
-        <div class="form-row">
-          <div class="fg"><label>API명 *</label><input id="apif-name" placeholder="API 서비스명"/></div>
-          <div class="fg"><label>제공사</label><input id="apif-provider" placeholder="제공 회사명"/></div>
-          <div class="fg"><label>연동방식</label><select id="apif-method"><option>REST</option><option>GraphQL</option><option>SOAP</option><option>WebSocket</option></select></div>
-          <div class="fg"><label>담당자</label><input id="apif-owner" placeholder="담당자명"/></div>
-          <div class="fg"><label>상태</label><select id="apif-status"><option>검토중</option><option>개발중</option><option>운영중</option><option>중단</option></select></div>
-          <div class="fg"><label>Endpoint URL</label><input id="apif-url" placeholder="https://api.example.com"/></div>
-          <button class="btn-add" style="height:32px;align-self:flex-end" onclick="addApi()">추가</button>
+
+      <div class="api-menu-split">
+        <div class="api-split-card active" id="split-plan" onclick="apiSwitchSplit('plan')">
+          <div class="as-icon">📋</div>
+          <h3>API연동 업무기획</h3>
+          <p>API 등록 → 문서 분석 → 기획서 작성까지 전체 흐름 관리</p>
         </div>
-        <div class="form-err" id="apif-err">API명을 입력해주세요.</div>
+        <div class="api-split-card" id="split-dev" onclick="apiSwitchSplit('dev')">
+          <div class="as-icon">⚙️</div>
+          <h3>API연동 개발</h3>
+          <p>실제 연동 개발 진행 (코드/배포 관리)</p>
+          <span class="api-split-badge">준비중</span>
+        </div>
       </div>
+
+      <div class="api-dev-placeholder" id="api-dev-section" style="display:none">
+        <div class="adp-icon">🚧</div>
+        <h3>API연동 개발 메뉴는 준비중입니다</h3>
+        <p>추후 업데이트를 통해 제공될 예정입니다</p>
+      </div>
+
+      <div id="api-plan-section">
+        <div class="api-plan-tabnav">
+          <button class="api-plan-tab-btn active" id="api-pt1" onclick="apiSwitchPlanTab(1)">① API 업무등록</button>
+          <button class="api-plan-tab-btn" id="api-pt2" onclick="apiSwitchPlanTab(2)">② API문서 분석</button>
+          <button class="api-plan-tab-btn" id="api-pt3" onclick="apiSwitchPlanTab(3)">③ 기획서 작성</button>
+        </div>
+
+        <!-- ① API 업무등록 -->
+        <div class="api-plan-tab-panel active" id="api-plan-tab1">
+          <div class="api-list-dashboard">
+            <div class="api-dash-card dash-review" onclick="apiFilterByStatus('검토중')"><div class="adc-label">검토중</div><div class="adc-val" id="dash-검토중">0</div></div>
+            <div class="api-dash-card dash-dev" onclick="apiFilterByStatus('개발중')"><div class="adc-label">개발중</div><div class="adc-val" id="dash-개발중">0</div></div>
+            <div class="api-dash-card dash-done" onclick="apiFilterByStatus('개발완료')"><div class="adc-label">개발완료</div><div class="adc-val" id="dash-개발완료">0</div></div>
+            <div class="api-dash-card dash-deployreq" onclick="apiFilterByStatus('배포요청')"><div class="adc-label">배포요청</div><div class="adc-val" id="dash-배포요청">0</div></div>
+            <div class="api-dash-card dash-live" onclick="apiFilterByStatus('운영배포')"><div class="adc-label">운영배포</div><div class="adc-val" id="dash-운영배포">0</div></div>
+            <div class="api-dash-card dash-stop" onclick="apiFilterByStatus('중단')"><div class="adc-label">중단</div><div class="adc-val" id="dash-중단">0</div></div>
+          </div>
+          <div class="api-list-toolbar">
+            <input type="text" class="api-list-search" id="api-list-search" placeholder="API명·담당자 검색..." oninput="apiListPage=1;apiRenderList()"/>
+            <select class="api-list-filter" id="api-list-filter" onchange="apiListPage=1;apiRenderList()">
+              <option value="">전체 상태</option>
+              <option>검토중</option><option>개발중</option><option>개발완료</option>
+              <option>배포요청</option><option>운영배포</option><option>중단</option>
+            </select>
+            <button class="api-btn-register" onclick="apiOpenRegisterModal()">+ API 등록</button>
+          </div>
+          <div class="api-list-table-wrap">
+            <table>
+              <thead><tr><th>#</th><th>API명</th><th>제공사</th><th>연동방식</th><th>담당자</th><th>상태</th><th>문서</th><th>등록일</th><th>관리</th></tr></thead>
+              <tbody id="api-list-tbody"></tbody>
+            </table>
+          </div>
+          <div class="api-list-pagination" id="api-list-pagination"></div>
+        </div>
+
+        <!-- ② API문서 분석 -->
+        <div class="api-plan-tab-panel" id="api-plan-tab2">
+          <div class="api-analyze-select-bar">
+            <div class="aasb-row">
+              <span class="aasb-label">분석할 API 업무</span>
+              <select class="aasb-select" id="api-analyze-target" onchange="apiOnAnalyzeTargetChange()">
+                <option value="">-- API 업무를 선택하세요 --</option>
+              </select>
+            </div>
+          </div>
+          <div class="api-analyze-prompt-box">
+            <div class="aapb-title">분석 요청 내용</div>
+            <textarea class="aapb-textarea" id="api-analyze-prompt" placeholder="예) 이 API 문서에서 인증 방식과 필수 파라미터를 정리해줘"></textarea>
+            <div class="aapb-engine-select">
+              <span class="aapb-engine-label">분석 엔진</span>
+              <label class="aapb-engine-opt"><input type="radio" name="ai-engine" value="gemini" checked/> Gemini (무료)</label>
+              <label class="aapb-engine-opt"><input type="radio" name="ai-engine" value="claude"/> Claude (준비중)</label>
+            </div>
+            <button class="api-btn-analyze" id="api-btn-analyze" onclick="apiRunAnalysis()">✨ AI 분석 실행</button>
+          </div>
+          <div class="api-analyze-result-card" id="api-analyze-result">
+            <div class="aarc-header">
+              <span class="aarc-title">📄 분석 결과</span>
+              <div class="aarc-actions">
+                <button class="aarc-btn" onclick="apiExportWord()">📄 Word 다운로드</button>
+                <button class="aarc-btn" onclick="apiSaveToNotion()">🗂 Notion 저장</button>
+                <button class="aarc-btn" onclick="apiSaveAnalysis()">💾 분석결과 저장</button>
+              </div>
+            </div>
+            <div class="aarc-content" id="api-analyze-content"></div>
+          </div>
+          <div class="api-inquiry-box">
+            <div class="aib-title">
+              <span>📨 연동처 문의사항</span>
+              <button class="aib-add-btn" onclick="apiAddInquiry()">+ 문의 추가</button>
+            </div>
+            <div id="api-inquiry-items"></div>
+          </div>
+          <div class="api-saved-analysis-list">
+            <div class="asal-title">저장된 분석 결과 (API 업무별)</div>
+            <div id="api-saved-analysis-items"></div>
+          </div>
+        </div>
+
+        <!-- ③ 기획서 작성 -->
+        <div class="api-plan-tab-panel" id="api-plan-tab3">
+          <div class="api-doc-type-select">
+            <div class="adts-card selected" id="adts-service" onclick="apiSelectDocType(this,'서비스기획서')">
+              <div class="adts-icon">📊</div><p>서비스 기획서 (PPT)</p>
+            </div>
+            <div class="adts-card" id="adts-devmd" onclick="apiSelectDocType(this,'개발MD')">
+              <div class="adts-icon">📝</div><p>개발 MD 파일 (Claude Code용)</p>
+            </div>
+          </div>
+          <div class="api-analyze-select-bar">
+            <div class="aasb-row">
+              <span class="aasb-label">연동 API 업무</span>
+              <select class="aasb-select" id="api-doc-target" onchange="apiOnDocTargetChange()">
+                <option value="">-- API 업무를 선택하세요 --</option>
+              </select>
+            </div>
+          </div>
+          <div class="api-doc-source-box">
+            <div class="adsb-title">📎 참고 자료 (분석결과 · 문의사항 자동 반영)</div>
+            <div class="adsb-summary" id="api-doc-source-summary">연동할 API 업무를 선택하면 분석결과와 문의사항이 표시됩니다</div>
+          </div>
+          <div class="api-analyze-prompt-box">
+            <div class="aapb-title" id="api-doc-prompt-title">📊 서비스 기획서 작성 요청</div>
+            <textarea class="aapb-textarea" id="api-doc-prompt" placeholder="예) 이지웰 복지몰 API 연동을 위한 서비스 기획서를 작성해줘. 쿠폰 발행/사용 관리자 시스템에 어떤 화면과 기능이 추가되어야 하는지 포함해서 정리해줘"></textarea>
+            <div class="aapb-engine-select">
+              <span class="aapb-engine-label">생성 엔진</span>
+              <label class="aapb-engine-opt"><input type="radio" name="doc-ai-engine" value="gemini" checked/> Gemini (무료)</label>
+            </div>
+            <button class="api-btn-analyze" id="api-btn-doc-generate" onclick="apiGenerateDoc()">✨ AI로 문서 내용 생성</button>
+          </div>
+          <div class="api-doc-editor-area">
+            <div class="adea-toolbar">
+              <span style="font-size:11px;color:#7a90b8;align-self:center;margin-right:6px" id="api-doc-editor-label">📄 생성된 내용 (수정 가능)</span>
+              <button onclick="apiDocWrap('**','**')" style="margin-left:auto"><b>B</b></button>
+              <button onclick="apiDocWrap('*','*')"><i>I</i></button>
+              <button onclick="apiDocInsert('## ')">H2</button>
+              <button onclick="apiDocInsert('- ')">목록</button>
+            </div>
+            <textarea class="adea-textarea" id="api-doc-textarea" placeholder="AI로 문서 내용을 생성하거나, 직접 입력하세요..."></textarea>
+          </div>
+          <div class="api-doc-actions">
+            <button class="api-doc-btn-export" id="api-doc-export-btn" onclick="apiDocExportPPT()">📊 PPT로 다운로드</button>
+            <button class="api-doc-btn-save" onclick="apiDocSave()">💾 저장</button>
+          </div>
+          <div class="api-doc-saved-list" id="api-doc-saved-list"></div>
+        </div>
+      </div>
+
+      <!-- 등록 모달 -->
+      <div class="api-modal-bg" id="api-register-modal-bg">
+        <div class="api-register-modal">
+          <h3 id="api-register-modal-title">API 업무 등록</h3>
+          <div class="arm-field"><label>API명 *</label><input id="arm-name" placeholder="API 서비스명"/></div>
+          <div class="arm-field"><label>제공사</label><input id="arm-provider" placeholder="제공 회사명"/></div>
+          <div class="arm-field">
+            <label>연동방식</label>
+            <select id="arm-method"><option>REST</option><option>SOAP</option><option>WebSocket</option></select>
+          </div>
+          <div class="arm-field"><label>담당자</label><input id="arm-owner" placeholder="담당자명"/></div>
+          <div class="arm-field">
+            <label>상태</label>
+            <select id="arm-status">
+              <option>검토중</option><option>개발중</option><option>개발완료</option>
+              <option>배포요청</option><option>운영배포</option><option>중단</option>
+            </select>
+          </div>
+          <div class="arm-field">
+            <label>API 문서 업로드</label>
+            <div class="arm-upload-box" id="arm-upload-box" onclick="document.getElementById('arm-file-input').click()">📁 클릭하여 API 문서 업로드 (PDF, Excel, Word, TXT, MD)</div>
+            <input type="file" id="arm-file-input" accept=".pdf,.xlsx,.xls,.csv,.docx,.doc,.txt,.md" style="display:none" onchange="apiHandleFileUpload(event)"/>
+            <div class="arm-err" id="arm-file-err" style="display:none">파일 크기가 너무 큽니다.</div>
+          </div>
+          <div class="arm-err" id="arm-err">API명을 입력해주세요.</div>
+          <div class="arm-actions">
+            <button class="arm-btn-cancel" onclick="apiCloseRegisterModal()">취소</button>
+            <button class="arm-btn-submit" onclick="apiSubmitRegister()">등록</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 상세 모달 -->
+      <div class="api-modal-bg" id="api-detail-modal-bg">
+        <div class="api-detail-modal" id="api-detail-modal">
+          <h3 style="font-size:15px;font-weight:700;margin-bottom:1rem">API 업무 상세</h3>
+          <div class="adm-row"><span class="adm-label">API명</span>
+            <span class="adm-val adm-val-display" id="adm-name">-</span>
+            <input class="adm-val-input" id="adm-name-input"/>
+          </div>
+          <div class="adm-row"><span class="adm-label">제공사</span>
+            <span class="adm-val adm-val-display" id="adm-provider">-</span>
+            <input class="adm-val-input" id="adm-provider-input"/>
+          </div>
+          <div class="adm-row"><span class="adm-label">연동방식</span>
+            <span class="adm-val adm-val-display" id="adm-method">-</span>
+            <select class="adm-val-input" id="adm-method-input"><option>REST</option><option>SOAP</option><option>WebSocket</option></select>
+          </div>
+          <div class="adm-row"><span class="adm-label">담당자</span>
+            <span class="adm-val adm-val-display" id="adm-owner">-</span>
+            <input class="adm-val-input" id="adm-owner-input"/>
+          </div>
+          <div class="adm-row"><span class="adm-label">상태</span>
+            <span class="adm-val adm-val-display" id="adm-status">-</span>
+            <select class="adm-val-input" id="adm-status-input">
+              <option>검토중</option><option>개발중</option><option>개발완료</option>
+              <option>배포요청</option><option>운영배포</option><option>중단</option>
+            </select>
+          </div>
+          <div class="adm-row"><span class="adm-label">등록일</span><span class="adm-val" id="adm-date">-</span></div>
+          <div class="adm-row"><span class="adm-label">API 문서</span><span class="adm-doc-download" id="adm-doc">문서 없음</span></div>
+          <div class="adm-actions">
+            <button class="arm-btn-cancel" onclick="apiCloseDetailModal()">닫기</button>
+            <button class="api-btn-sm" id="adm-edit-btn" onclick="apiToggleEditMode()">수정</button>
+            <button class="api-btn-sm del" onclick="apiDeleteCurrentDetail()">삭제</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="api-toast" id="api-toast"></div>
     </section>
 
     <section class="page" id="page-service-doc">
@@ -700,8 +1013,8 @@ const SIDEBAR_MAP={
   'business-market':{title:'사업기획',items:[{id:'business-market',label:'시장현황/경쟁사 모니터링',icon:'📊'},{id:'business-competitor',label:'경쟁사 기업분석 관리',icon:'🏢'},{id:'business-sales',label:'영업리스트 관리',icon:'📋'}]},
   'business-competitor':{title:'사업기획',items:[{id:'business-market',label:'시장현황/경쟁사 모니터링',icon:'📊'},{id:'business-competitor',label:'경쟁사 기업분석 관리',icon:'🏢'},{id:'business-sales',label:'영업리스트 관리',icon:'📋'}]},
   'business-sales':{title:'사업기획',items:[{id:'business-market',label:'시장현황/경쟁사 모니터링',icon:'📊'},{id:'business-competitor',label:'경쟁사 기업분석 관리',icon:'🏢'},{id:'business-sales',label:'영업리스트 관리',icon:'📋'}]},
-  'service-api':{title:'서비스기획',items:[{id:'service-api',label:'API연동 업무관리',icon:'🔗'},{id:'service-doc',label:'서비스기획문서 작성',icon:'📝'}]},
-  'service-doc':{title:'서비스기획',items:[{id:'service-api',label:'API연동 업무관리',icon:'🔗'},{id:'service-doc',label:'서비스기획문서 작성',icon:'📝'}]},
+  'service-api':{title:'서비스기획',items:[{id:'service-api',label:'API연동 업무관리문서',icon:'🔗'},{id:'service-doc',label:'서비스기획문서 작성',icon:'📝'}]},
+  'service-doc':{title:'서비스기획',items:[{id:'service-api',label:'API연동 업무관리문서',icon:'🔗'},{id:'service-doc',label:'서비스기획문서 작성',icon:'📝'}]},
   'etc-cms':{title:'기타',items:[{id:'etc-cms',label:'CMS상품등록 자동화',icon:'⚙️'}]},
   'account-manage':{title:'계정관리',items:[{id:'account-manage',label:'아이디/패스워드 관리',icon:'👤'}]},
 };
@@ -721,7 +1034,7 @@ function showPage(id){
   if(['service-api','service-doc'].includes(id))document.getElementById('gnb-service').classList.add('active');
   if(id==='etc-cms')document.getElementById('gnb-etc').classList.add('active');
   if(id==='account-manage'){const e=document.getElementById('gnb-account-link');if(e)e.classList.add('active')}
-  const rm={'business-market':mmInit,'business-competitor':renderCompetitor,'business-sales':renderSales,'service-api':renderApi,'service-doc':renderDocList,'account-manage':renderAccount};
+  const rm={'business-market':mmInit,'business-competitor':renderCompetitor,'business-sales':renderSales,'service-api':apiInit,'service-doc':renderDocList,'account-manage':renderAccount};
   if(rm[id])rm[id]();updateStats();
 }
 
@@ -747,16 +1060,6 @@ function renderSales(){
   tb.innerHTML=list.length?list.map((i,idx)=>`<tr><td>${idx+1}</td><td><b>${i.company}</b></td><td>${i.name||'-'}</td><td>${i.tel||'-'}</td><td>${i.email||'-'}</td><td>${i.sector||'-'}</td><td>${i.size||'-'}</td><td><span class="badge ${statusBadge(i.status)}">${i.status}</span></td><td><button class="btn-sm btn-del" onclick="delItem('sales',${all.indexOf(i)},renderSales)">삭제</button></td></tr>`).join(''):'<tr><td colspan="9" style="text-align:center;color:#aab;padding:2rem">등록된 영업처가 없습니다</td></tr>';
 }
 function addSales(){const company=gv('sf-company').trim(),err=document.getElementById('sf-err');if(!company){err.style.display='block';return}err.style.display='none';const l=getList('sales');l.push({company,name:gv('sf-name'),tel:gv('sf-tel'),email:gv('sf-email'),sector:gv('sf-sector'),size:gv('sf-size'),status:gv('sf-status')});saveList('sales',l);clr('sf-company','sf-name','sf-tel','sf-email','sf-sector','sf-size');document.getElementById('sales-form').classList.remove('open');renderSales();updateStats()}
-
-function closeApiDetail(){document.getElementById('api-detail-panel').classList.remove('open')}
-function renderApi(){
-  const q=gv('api-search'),f=gv('api-filter'),all=getList('api'),list=all.filter(i=>(i.name.includes(q)||(i.owner||'').includes(q))&&(f?i.status===f:true));
-  sv('api-total',all.length);sv('api-live',all.filter(i=>i.status==='운영중').length);sv('api-dev',all.filter(i=>i.status==='개발중').length);sv('api-review',all.filter(i=>i.status==='검토중').length);
-  const tb=document.getElementById('api-tbody');if(!tb)return;
-  tb.innerHTML=list.length?list.map((i,idx)=>`<tr><td>${idx+1}</td><td><b>${i.name}</b></td><td>${i.provider||'-'}</td><td><span class="badge b-gray">${i.method}</span></td><td>${i.owner||'-'}</td><td><span class="badge ${statusBadge(i.status)}">${i.status}</span></td><td>${i.date}</td><td><button class="btn-sm" onclick="showApiDetail(${all.indexOf(i)})">상세</button></td><td><button class="btn-sm btn-del" onclick="delItem('api',${all.indexOf(i)},renderApi)">삭제</button></td></tr>`).join(''):'<tr><td colspan="9" style="text-align:center;color:#aab;padding:2rem">등록된 API가 없습니다</td></tr>';
-}
-function showApiDetail(idx){const i=getList('api')[idx];if(!i)return;document.getElementById('adp-name').textContent=i.name;document.getElementById('adp-body').innerHTML=`<div class="adp-row"><span class="adp-label">제공사</span><span class="adp-val">${i.provider||'-'}</span></div><div class="adp-row"><span class="adp-label">연동방식</span><span class="adp-val">${i.method}</span></div><div class="adp-row"><span class="adp-label">담당자</span><span class="adp-val">${i.owner||'-'}</span></div><div class="adp-row"><span class="adp-label">상태</span><span class="adp-val"><span class="badge ${statusBadge(i.status)}">${i.status}</span></span></div><div class="adp-row"><span class="adp-label">Endpoint</span><span class="adp-val" style="color:#3b7ff5">${i.url||'-'}</span></div><div class="adp-row"><span class="adp-label">등록일</span><span class="adp-val">${i.date}</span></div>`;document.getElementById('api-detail-panel').classList.add('open')}
-function addApi(){const name=gv('apif-name').trim(),err=document.getElementById('apif-err');if(!name){err.style.display='block';return}err.style.display='none';const l=getList('api');l.push({name,provider:gv('apif-provider'),method:gv('apif-method'),owner:gv('apif-owner'),status:gv('apif-status'),url:gv('apif-url'),date:today()});saveList('api',l);clr('apif-name','apif-provider','apif-owner','apif-url');document.getElementById('api-form').classList.remove('open');renderApi();updateStats()}
 
 const DOC_TEMPLATES={'서비스 기획서':'# 서비스 기획서\n\n## 1. 서비스 개요\n\n## 2. 목표 및 KPI\n\n## 3. 주요 기능\n\n## 4. 사용자 시나리오\n\n## 5. 일정','제안서':'# 제안서\n\n## 1. 제안 배경\n\n## 2. 솔루션 개요\n\n## 3. 기대 효과\n\n## 4. 비용 및 일정','기능 명세서':'# 기능 명세서\n\n| 기능명 | 설명 | 우선순위 | 상태 |\n|---|---|---|---|\n| | | | |','API 명세서':'# API 명세서\n\n| Method | URL | 설명 | 인증 |\n|---|---|---|---|\n| GET | /api/v1/ | | |','시장분석 보고서':'# 시장분석 보고서\n\n## 1. 시장 현황\n\n## 2. 경쟁사 분석\n\n## 3. 기회 및 위협\n\n## 4. 전략 방향','사용자 스토리':'# 사용자 스토리\n\nAs a [사용자], I want to [목표], so that [이유]\n\n---\n\n- As a ...'};
 function selectTemplate(el,t){document.querySelectorAll('.doc-tmpl-card').forEach(c=>c.classList.remove('selected'));el.classList.add('selected');document.getElementById('doc-textarea').value=DOC_TEMPLATES[t]||''}
@@ -805,7 +1108,7 @@ function delUser(i){if(!confirm('삭제하시겠습니까?'))return;const u=getU
 function updateStats(){
   sv('stat-competitor',getList('competitor').length);
   sv('stat-sales',getList('sales').length);
-  sv('stat-api',getList('api').filter(i=>i.status==='개발중').length);
+  sv('stat-api', aGetList().length);
   sv('stat-users',getUsers().length);
 }
 
@@ -819,11 +1122,8 @@ function updateStats(){
 
 /* ══════════════════════════════════════════════════════
    시장현황 / 경쟁사 모니터링 — 네이버 뉴스 API 연동 모듈
-   (mm- 접두사로 기존 포털 함수와 네임스페이스 분리)
    ══════════════════════════════════════════════════════ */
-
 const MM_NAVER_PROXY_URL = 'https://curly-cloud-775cnaver-news-proxy.sonjj20000.workers.dev';
-
 const MM_RK = 'moni_v5_reports';
 const MM_KK = 'moni_v5_kw';
 const MM_DEF_KW = {
@@ -844,7 +1144,6 @@ let mmRunning = false;
 let mmSaved   = false;
 let mmInitialized = false;
 
-/* 페이지 진입 시 초기화 (날짜 세팅 + 키워드 렌더 + 항상 1번 탭으로) */
 function mmInit() {
   if(!mmInitialized) {
     const pad = n => String(n).padStart(2,'0');
@@ -855,7 +1154,6 @@ function mmInit() {
     document.getElementById('mm-date-to').value   = fmt(now);
     mmInitialized = true;
   }
-  // 다른 메뉴를 거쳤다가 다시 들어와도 항상 뉴스수집(탭1)부터 시작
   document.getElementById('mm-tn3').style.display = 'none';
   mmSwitchTab(1);
 }
@@ -1213,6 +1511,829 @@ function mmToast(msg){
   const el=document.getElementById('mm-toast');
   el.textContent=msg; el.classList.add('show');
   clearTimeout(mm_tt); mm_tt=setTimeout(()=>el.classList.remove('show'),3000);
+}
+
+/* ══════════════════════════════════════════════════════
+   API연동 업무관리문서 — Gemini AI 연동 모듈
+   (api- 접두사로 기존 포털 함수와 네임스페이스 분리)
+   ══════════════════════════════════════════════════════ */
+
+const API_GEMINI_PROXY_URL = 'https://wispy-water-a79bgemini-analysis-proxy.sonjj20000.workers.dev';
+const API_DOCS_STORAGE_URL = 'https://divine-breeze-4cddapi-docs-storage.sonjj20000.workers.dev';
+
+const AK_LIST = 'api_devops_list_v1';
+const AK_ANALYSIS = 'api_devops_analysis_v1';
+const AK_DOCS = 'api_devops_docs_v1';
+const AK_INQUIRY = 'api_devops_inquiry_v1';
+
+const aGetList = () => { try{return JSON.parse(localStorage.getItem(AK_LIST)||'[]')}catch{return[]} };
+const aSetList = v => localStorage.setItem(AK_LIST, JSON.stringify(v));
+const aGetAnalysis = () => { try{return JSON.parse(localStorage.getItem(AK_ANALYSIS)||'[]')}catch{return[]} };
+const aSetAnalysis = v => localStorage.setItem(AK_ANALYSIS, JSON.stringify(v));
+const aGetDocs = () => { try{return JSON.parse(localStorage.getItem(AK_DOCS)||'[]')}catch{return[]} };
+const aSetDocs = v => localStorage.setItem(AK_DOCS, JSON.stringify(v));
+const aGetInquiry = () => { try{return JSON.parse(localStorage.getItem(AK_INQUIRY)||'[]')}catch{return[]} };
+const aSetInquiry = v => localStorage.setItem(AK_INQUIRY, JSON.stringify(v));
+
+let apiUploadedFile = null;
+let apiPendingUploadFile = null;
+let apiSubmitting = false;
+let apiEditingId = null;
+let apiDetailId = null;
+let apiListPage = 1;
+const API_PAGE_SIZE = 5;
+let apiStatusFilter = '';
+let apiCurrentAnalysisText = '';
+let apiSelectedDocType = '서비스기획서';
+let apiInitialized = false;
+
+/* 페이지 진입 시 초기화 (최초 1회만 1번 탭으로 세팅, 이후엔 마지막 탭 유지) */
+function apiInit() {
+  if(!apiInitialized) {
+    apiSwitchSplit('plan');
+    apiSwitchPlanTab(1);
+    apiInitialized = true;
+  } else {
+    apiRenderList();
+    apiRenderDocList();
+  }
+}
+
+function apiSwitchSplit(which) {
+  document.getElementById('split-plan').classList.toggle('active', which==='plan');
+  document.getElementById('split-dev').classList.toggle('active', which==='dev');
+  document.getElementById('api-plan-section').style.display = which==='plan' ? 'block' : 'none';
+  document.getElementById('api-dev-section').style.display = which==='dev' ? 'block' : 'none';
+}
+
+function apiSwitchPlanTab(n) {
+  [1,2,3].forEach(i=>document.getElementById('api-plan-tab'+i).classList.toggle('active', i===n));
+  document.querySelectorAll('.api-plan-tab-btn').forEach((b,i)=>b.classList.toggle('active', i===n-1));
+  if(n===1) apiRenderList();
+  if(n===2) apiRefreshAnalyzeTargets();
+  if(n===3) apiRefreshDocTargets();
+}
+
+function apiOpenRegisterModal(editId) {
+  apiEditingId = editId || null;
+  apiUploadedFile = null;
+  apiPendingUploadFile = null;
+  document.getElementById('arm-err').style.display = 'none';
+  document.getElementById('arm-file-err').style.display = 'none';
+  document.getElementById('arm-upload-box').classList.remove('has-file');
+  document.getElementById('arm-upload-box').textContent = '📁 클릭하여 API 문서 업로드 (PDF, Excel, Word, TXT, MD)';
+  document.getElementById('arm-file-input').value = '';
+
+  if(editId) {
+    const item = aGetList().find(x=>x.id===editId);
+    if(!item) { aToast('⚠ 해당 항목을 찾을 수 없습니다'); return; }
+    document.getElementById('api-register-modal-title').textContent = 'API 업무 수정';
+    document.getElementById('arm-name').value = item.name;
+    document.getElementById('arm-provider').value = item.provider;
+    document.getElementById('arm-method').value = item.method;
+    document.getElementById('arm-owner').value = item.owner;
+    document.getElementById('arm-status').value = item.status;
+    if(item.doc) {
+      apiUploadedFile = item.doc;
+      document.getElementById('arm-upload-box').classList.add('has-file');
+      const sizeLabel = item.doc.size ? ` (${(item.doc.size/1024).toFixed(0)}KB)` : '';
+      document.getElementById('arm-upload-box').textContent = `📄 ${item.doc.name}${sizeLabel} — 변경하려면 클릭`;
+    }
+  } else {
+    document.getElementById('api-register-modal-title').textContent = 'API 업무 등록';
+    ['arm-name','arm-provider','arm-owner'].forEach(id=>document.getElementById(id).value='');
+    document.getElementById('arm-method').value = 'REST';
+    document.getElementById('arm-status').value = '검토중';
+  }
+  document.getElementById('api-register-modal-bg').classList.add('open');
+}
+function apiCloseRegisterModal(){ document.getElementById('api-register-modal-bg').classList.remove('open'); }
+
+function apiHandleFileUpload(e) {
+  const file = e.target.files[0];
+  if(!file) return;
+  const errEl = document.getElementById('arm-file-err');
+  errEl.style.display = 'none';
+  const MAX_SIZE = 20 * 1024 * 1024;
+  if(file.size > MAX_SIZE) {
+    errEl.textContent = `파일 크기가 너무 큽니다 (${(file.size/1024/1024).toFixed(1)}MB). 20MB 이하 파일만 업로드 가능합니다.`;
+    errEl.style.display = 'block';
+    e.target.value = '';
+    return;
+  }
+  apiPendingUploadFile = file;
+  document.getElementById('arm-upload-box').classList.add('has-file');
+  document.getElementById('arm-upload-box').textContent = `📄 ${file.name} (${(file.size/1024).toFixed(0)}KB) — 변경하려면 클릭`;
+}
+
+async function apiUploadFileToServer(file) {
+  const resp = await fetch(`${API_DOCS_STORAGE_URL}/upload`, {
+    method: 'POST',
+    headers: { 'Content-Type': file.type || 'application/octet-stream', 'X-File-Name': encodeURIComponent(file.name) },
+    body: file,
+  });
+  if(!resp.ok) {
+    const err = await resp.json().catch(()=>({error:'업로드 실패'}));
+    throw new Error(err.error || `업로드 실패 (${resp.status})`);
+  }
+  return await resp.json();
+}
+
+async function apiSubmitRegister() {
+  if(apiSubmitting) return;
+  const name = document.getElementById('arm-name').value.trim();
+  const err = document.getElementById('arm-err');
+  if(!name) { err.style.display='block'; return; }
+  err.style.display='none';
+
+  apiSubmitting = true;
+  const submitBtn = document.querySelector('.arm-btn-submit');
+  submitBtn.disabled = true;
+  submitBtn.textContent = '처리 중...';
+
+  let docInfo = apiUploadedFile;
+
+  try {
+    if(apiPendingUploadFile) {
+      submitBtn.textContent = '파일 업로드 중...';
+      const uploaded = await apiUploadFileToServer(apiPendingUploadFile);
+      docInfo = { name: uploaded.fileName, fileKey: uploaded.fileKey, downloadUrl: uploaded.downloadUrl, size: uploaded.size, type: uploaded.fileType };
+    }
+  } catch(e) {
+    aToast('❌ 파일 업로드 실패: ' + e.message);
+    apiSubmitting = false;
+    submitBtn.disabled = false;
+    submitBtn.textContent = '등록';
+    return;
+  }
+
+  const list = aGetList();
+  const data = {
+    name,
+    provider: document.getElementById('arm-provider').value.trim(),
+    method: document.getElementById('arm-method').value,
+    owner: document.getElementById('arm-owner').value.trim(),
+    status: document.getElementById('arm-status').value,
+    doc: docInfo,
+    date: new Date().toLocaleDateString('ko-KR')
+  };
+
+  if(apiEditingId) {
+    const idx = list.findIndex(x=>x.id===apiEditingId);
+    if(idx>=0) list[idx] = {...list[idx], ...data};
+  } else {
+    list.unshift({ id: Date.now().toString(), ...data });
+  }
+
+  try {
+    aSetList(list);
+  } catch(e) {
+    aToast('❌ 저장 공간이 부족합니다.');
+    apiSubmitting = false;
+    submitBtn.disabled = false;
+    submitBtn.textContent = '등록';
+    return;
+  }
+
+  aToast(apiEditingId ? '✅ 수정되었습니다' : '✅ 등록되었습니다');
+  apiSubmitting = false;
+  submitBtn.disabled = false;
+  submitBtn.textContent = '등록';
+  apiCloseRegisterModal();
+  apiRenderList();
+}
+
+function apiFilterByStatus(status) {
+  apiStatusFilter = (apiStatusFilter === status) ? '' : status;
+  document.getElementById('api-list-filter').value = apiStatusFilter;
+  apiListPage = 1;
+  apiRenderList();
+}
+
+function apiRenderList() {
+  const q = document.getElementById('api-list-search').value.trim();
+  const filterSel = document.getElementById('api-list-filter').value;
+  apiStatusFilter = filterSel;
+  const all = aGetList();
+
+  const statuses = ['검토중','개발중','개발완료','배포요청','운영배포','중단'];
+  statuses.forEach(s => {
+    const el = document.getElementById('dash-'+s);
+    if(el) el.textContent = all.filter(x=>x.status===s).length;
+  });
+  document.querySelectorAll('.api-dash-card').forEach(c=>c.classList.remove('active'));
+  if(apiStatusFilter) {
+    const map = {'검토중':'.dash-review','개발중':'.dash-dev','개발완료':'.dash-done','배포요청':'.dash-deployreq','운영배포':'.dash-live','중단':'.dash-stop'};
+    const el = document.querySelector(map[apiStatusFilter]);
+    if(el) el.classList.add('active');
+  }
+
+  const filtered = all.filter(x =>
+    (x.name.includes(q) || (x.owner||'').includes(q)) &&
+    (apiStatusFilter ? x.status===apiStatusFilter : true)
+  );
+
+  const totalPages = Math.max(1, Math.ceil(filtered.length/API_PAGE_SIZE));
+  if(apiListPage > totalPages) apiListPage = totalPages;
+  const slice = filtered.slice((apiListPage-1)*API_PAGE_SIZE, apiListPage*API_PAGE_SIZE);
+
+  const tb = document.getElementById('api-list-tbody');
+  tb.innerHTML = slice.length ? slice.map((it,i) => {
+    const absIdx = all.indexOf(it);
+    const docCell = it.doc
+      ? `<span class="api-doc-chip" onclick="apiDownloadDoc('${it.id}')">📄 ${aEsc(it.doc.name)}</span>`
+      : '<span style="color:#bbb">-</span>';
+    return `<tr>
+      <td>${(apiListPage-1)*API_PAGE_SIZE+i+1}</td>
+      <td><b>${aEsc(it.name)}</b></td>
+      <td>${aEsc(it.provider)||'-'}</td>
+      <td><span class="api-status-badge" style="background:#f4f6fb;color:#5a6a8a">${it.method}</span></td>
+      <td>${aEsc(it.owner)||'-'}</td>
+      <td><span class="api-status-badge st-${it.status}">${it.status}</span></td>
+      <td>${docCell}</td>
+      <td>${it.date}</td>
+      <td class="api-row-actions">
+        <button class="api-btn-sm" onclick="apiOpenDetailModal('${it.id}')">확인</button>
+        <button class="api-btn-sm" onclick="apiOpenRegisterModal('${it.id}')">수정</button>
+        <button class="api-btn-sm del" onclick="apiDeleteItem('${it.id}')">삭제</button>
+      </td>
+    </tr>`;
+  }).join('') : '<tr><td colspan="9" class="api-empty-state">등록된 API 업무가 없습니다</td></tr>';
+
+  const pg = document.getElementById('api-list-pagination');
+  pg.innerHTML = totalPages<=1 ? '' :
+    Array.from({length:totalPages},(_,i)=>
+      `<span class="api-page-num${i+1===apiListPage?' active':''}" onclick="apiGoPage(${i+1})">${i+1}</span>`
+    ).join('');
+
+  apiRefreshAnalyzeTargets();
+  apiRefreshDocTargets();
+  updateStats();
+}
+function apiGoPage(n){ apiListPage=n; apiRenderList(); }
+
+function apiDownloadDoc(id) {
+  const item = aGetList().find(x=>x.id===id);
+  if(!item || !item.doc) return;
+  if(item.doc.downloadUrl) {
+    window.open(item.doc.downloadUrl, '_blank');
+  } else if(item.doc.dataUrl) {
+    const a = document.createElement('a');
+    a.href = item.doc.dataUrl;
+    a.download = item.doc.name;
+    a.click();
+  } else {
+    aToast('⚠ 다운로드할 파일 정보가 없습니다');
+  }
+}
+
+async function apiDeleteServerFile(fileKey) {
+  if(!fileKey) return;
+  try { await fetch(`${API_DOCS_STORAGE_URL}/delete/${encodeURIComponent(fileKey)}`, { method: 'DELETE' }); } catch(e) {}
+}
+
+function apiDeleteItem(id) {
+  if(!confirm('이 API 업무를 삭제하시겠습니까?\n관련된 분석결과·문의사항과 업로드된 문서도 함께 삭제됩니다.')) return;
+  const target = aGetList().find(x=>x.id===id);
+  if(target && target.doc && target.doc.fileKey) apiDeleteServerFile(target.doc.fileKey);
+  let list = aGetList().filter(x=>x.id!==id);
+  aSetList(list);
+  aSetAnalysis(aGetAnalysis().filter(x=>x.apiId!==id));
+  aSetInquiry(aGetInquiry().filter(x=>x.apiId!==id));
+  aToast('🗑 삭제되었습니다');
+  apiRenderList();
+}
+
+function apiOpenDetailModal(id) {
+  apiDetailId = id;
+  const item = aGetList().find(x=>x.id===id);
+  if(!item) return;
+  document.getElementById('api-detail-modal').classList.remove('adm-edit-mode');
+  document.getElementById('adm-edit-btn').textContent = '수정';
+
+  document.getElementById('adm-name').textContent = item.name;
+  document.getElementById('adm-provider').textContent = item.provider || '-';
+  document.getElementById('adm-method').textContent = item.method;
+  document.getElementById('adm-owner').textContent = item.owner || '-';
+  document.getElementById('adm-status').textContent = item.status;
+  document.getElementById('adm-date').textContent = item.date;
+  document.getElementById('adm-name-input').value = item.name;
+  document.getElementById('adm-provider-input').value = item.provider || '';
+  document.getElementById('adm-method-input').value = item.method;
+  document.getElementById('adm-owner-input').value = item.owner || '';
+  document.getElementById('adm-status-input').value = item.status;
+
+  document.getElementById('adm-doc').innerHTML = item.doc
+    ? `📄 ${aEsc(item.doc.name)}${item.doc.size ? ' ('+(item.doc.size/1024).toFixed(0)+'KB)' : ''} ⬇ <span onclick="apiDownloadDoc('${id}')" style="text-decoration:underline">다운로드</span>`
+    : '문서 없음';
+
+  document.getElementById('api-detail-modal-bg').classList.add('open');
+}
+function apiCloseDetailModal(){
+  document.getElementById('api-detail-modal-bg').classList.remove('open');
+  apiDetailId = null; // 모달 닫을 때 ID 초기화로 잘못된 재사용 방지
+}
+
+function apiToggleEditMode() {
+  const modal = document.getElementById('api-detail-modal');
+  const isEdit = modal.classList.contains('adm-edit-mode');
+  if(isEdit) {
+    const newName = document.getElementById('adm-name-input').value.trim();
+    if(!newName) { aToast('⚠ API명은 비워둘 수 없습니다'); return; }
+    const list = aGetList();
+    const idx = list.findIndex(x=>x.id===apiDetailId);
+    if(idx>=0) {
+      list[idx].name = newName;
+      list[idx].provider = document.getElementById('adm-provider-input').value.trim();
+      list[idx].method = document.getElementById('adm-method-input').value;
+      list[idx].owner = document.getElementById('adm-owner-input').value.trim();
+      list[idx].status = document.getElementById('adm-status-input').value;
+      aSetList(list);
+      aToast('✅ 수정되었습니다');
+    }
+    modal.classList.remove('adm-edit-mode');
+    document.getElementById('adm-edit-btn').textContent = '수정';
+    apiOpenDetailModal(apiDetailId);
+    apiRenderList();
+  } else {
+    modal.classList.add('adm-edit-mode');
+    document.getElementById('adm-edit-btn').textContent = '저장';
+  }
+}
+
+function apiDeleteCurrentDetail() {
+  if(!apiDetailId) return;
+  const idToDelete = apiDetailId;
+  apiCloseDetailModal();
+  apiDeleteItem(idToDelete);
+}
+
+function apiRefreshAnalyzeTargets() {
+  const sel = document.getElementById('api-analyze-target');
+  if(!sel) return;
+  const cur = sel.value;
+  const list = aGetList();
+  sel.innerHTML = '<option value="">-- API 업무를 선택하세요 --</option>' +
+    list.map(it=>`<option value="${it.id}">${aEsc(it.name)} (${it.provider||'제공사 미입력'})</option>`).join('');
+  if(list.find(x=>x.id===cur)) sel.value = cur;
+}
+
+function apiOnAnalyzeTargetChange() {
+  const id = document.getElementById('api-analyze-target').value;
+  document.getElementById('api-analyze-result').classList.remove('show');
+  apiRenderInquiries(id);
+  apiRenderSavedAnalysis(id);
+}
+
+async function apiRunAnalysis() {
+  const targetId = document.getElementById('api-analyze-target').value;
+  const prompt = document.getElementById('api-analyze-prompt').value.trim();
+  if(!targetId) { aToast('⚠ 분석할 API 업무를 선택하세요'); return; }
+  if(!prompt)   { aToast('⚠ 분석 요청 내용을 입력하세요'); return; }
+
+  const item = aGetList().find(x=>x.id===targetId);
+
+  const fullPrompt = `당신은 쿠폰관리시스템(CMS) API연동 전문가입니다.
+아래 API 업무에 대해 분석 요청에 답해주세요.
+
+[API 업무 정보]
+- API명: ${item.name}
+- 제공사: ${item.provider || '미입력'}
+- 연동방식: ${item.method}
+- 담당자: ${item.owner || '미입력'}
+${item.doc ? `- 첨부 문서: ${item.doc.name} (업로드되어 있으나 텍스트 추출은 별도 처리 필요)` : '- 첨부 문서: 없음'}
+
+[분석 요청]
+${prompt}
+
+실행자가 이해하기 쉬운 평이한 말로, 전문용어는 풀어서 설명하며 답변해주세요.
+인증 방식, 필수 파라미터, 주의사항이 있다면 구조적으로 정리해주세요.`;
+
+  const engine = document.querySelector('input[name="ai-engine"]:checked').value;
+  const btn = document.getElementById('api-btn-analyze');
+  btn.disabled = true;
+  btn.innerHTML = `<span class="api-spinner"></span> ${engine==='gemini'?'Gemini':'Claude'} 분석 중...`;
+
+  try {
+    if(engine === 'gemini') {
+      let resp;
+      try {
+        resp = await fetch(`${API_GEMINI_PROXY_URL}`, {
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify({ prompt: fullPrompt })
+        });
+      } catch(networkErr) {
+        throw new Error('네트워크 연결에 실패했습니다. 인터넷 연결을 확인해주세요.');
+      }
+      const data = await resp.json();
+      if(!resp.ok || data.error) throw new Error(data.error || `서버 응답 오류 (상태코드: ${resp.status})`);
+      if(!data.text || !data.text.trim()) throw new Error('분석 결과가 비어있습니다. 분석 요청 내용을 더 구체적으로 입력해보세요.');
+      apiCurrentAnalysisText = data.text;
+    } else {
+      throw new Error('Claude 연동은 추후 별도 결제 설정 후 제공됩니다. 현재는 Gemini를 이용해주세요.');
+    }
+
+    document.getElementById('api-analyze-content').textContent = apiCurrentAnalysisText;
+    document.getElementById('api-analyze-result').classList.add('show');
+    aToast('✅ 분석이 완료되었습니다');
+  } catch(e) {
+    aToast('❌ 분석 실패: ' + e.message);
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '✨ AI 분석 실행';
+  }
+}
+
+function apiExportWord() {
+  if(!apiCurrentAnalysisText) { aToast('⚠ 내보낼 분석 결과가 없습니다'); return; }
+  const html = `<html><head><meta charset="utf-8"></head><body><pre style="font-family:맑은고딕;white-space:pre-wrap">${aEsc(apiCurrentAnalysisText)}</pre></body></html>`;
+  const blob = new Blob(['\ufeff', html], {type:'application/msword'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `API분석결과_${Date.now()}.doc`;
+  a.click();
+  aToast('📄 Word 파일로 다운로드되었습니다');
+}
+
+function apiSaveToNotion() {
+  aToast('🗂 Notion 연동은 추후 제공됩니다 (Notion API 키 설정 필요)');
+}
+
+function apiSaveAnalysis() {
+  const targetId = document.getElementById('api-analyze-target').value;
+  if(!targetId) { aToast('⚠ API 업무를 먼저 선택하세요'); return; }
+  if(!apiCurrentAnalysisText) { aToast('⚠ 저장할 분석 결과가 없습니다'); return; }
+
+  const analysis = aGetAnalysis();
+  analysis.unshift({
+    id: Date.now().toString(),
+    apiId: targetId,
+    prompt: document.getElementById('api-analyze-prompt').value,
+    content: apiCurrentAnalysisText,
+    date: new Date().toLocaleString('ko-KR')
+  });
+  aSetAnalysis(analysis);
+  aToast('💾 분석결과가 저장되었습니다');
+  apiRenderSavedAnalysis(targetId);
+}
+
+function apiRenderSavedAnalysis(targetId) {
+  const el = document.getElementById('api-saved-analysis-items');
+  if(!targetId) { el.innerHTML = '<p class="api-empty-state">API 업무를 선택하면 저장된 분석결과가 표시됩니다</p>'; return; }
+  const list = aGetAnalysis().filter(x=>x.apiId===targetId);
+  el.innerHTML = list.length ? list.map(x=>`
+    <div class="asal-item">
+      <div><span class="asal-item-name">${aEsc(x.prompt.slice(0,40))}${x.prompt.length>40?'...':''}</span><span class="asal-item-date">${x.date}</span></div>
+      <div class="asal-item-actions">
+        <button class="api-btn-sm" onclick="apiLoadSavedAnalysis('${x.id}')">불러오기</button>
+        <button class="api-btn-sm del" onclick="apiDeleteSavedAnalysis('${x.id}','${targetId}')">삭제</button>
+      </div>
+    </div>`).join('') : '<p class="api-empty-state">저장된 분석 결과가 없습니다</p>';
+}
+
+function apiLoadSavedAnalysis(id) {
+  const x = aGetAnalysis().find(a=>a.id===id);
+  if(!x) return;
+  apiCurrentAnalysisText = x.content;
+  document.getElementById('api-analyze-prompt').value = x.prompt;
+  document.getElementById('api-analyze-content').textContent = x.content;
+  document.getElementById('api-analyze-result').classList.add('show');
+  aToast('📂 분석결과를 불러왔습니다');
+}
+
+function apiDeleteSavedAnalysis(id, targetId) {
+  if(!confirm('삭제하시겠습니까?')) return;
+  aSetAnalysis(aGetAnalysis().filter(x=>x.id!==id));
+  apiRenderSavedAnalysis(targetId);
+  aToast('🗑 삭제되었습니다');
+}
+
+function apiRenderInquiries(targetId) {
+  const el = document.getElementById('api-inquiry-items');
+  if(!targetId) { el.innerHTML = '<p class="api-empty-state">API 업무를 선택하면 문의사항을 정리할 수 있습니다</p>'; return; }
+  const list = aGetInquiry().filter(x=>x.apiId===targetId);
+  el.innerHTML = list.length ? list.map((x,i)=>`
+    <div class="aib-item">
+      <span class="aib-item-num">${i+1}.</span>
+      <span class="aib-item-text" id="inq-text-${x.id}">${aEsc(x.text)}</span>
+      <div class="aib-item-actions">
+        <button class="api-btn-sm" onclick="apiEditInquiry('${x.id}')">수정</button>
+        <button class="api-btn-sm del" onclick="apiDeleteInquiry('${x.id}','${targetId}')">삭제</button>
+      </div>
+    </div>`).join('') : '<p class="api-empty-state">정리된 문의사항이 없습니다</p>';
+}
+
+function apiAddInquiry() {
+  const targetId = document.getElementById('api-analyze-target').value;
+  if(!targetId) { aToast('⚠ API 업무를 먼저 선택하세요'); return; }
+  const text = prompt('연동처(상대방)에 문의할 내용을 입력하세요:');
+  if(!text || !text.trim()) return;
+  const list = aGetInquiry();
+  list.push({ id: Date.now().toString(), apiId: targetId, text: text.trim() });
+  aSetInquiry(list);
+  apiRenderInquiries(targetId);
+  aToast('✅ 문의사항이 추가되었습니다');
+}
+
+function apiEditInquiry(id) {
+  const list = aGetInquiry();
+  const item = list.find(x=>x.id===id);
+  if(!item) return;
+  const newText = prompt('문의 내용 수정:', item.text);
+  if(newText===null || !newText.trim()) return;
+  item.text = newText.trim();
+  aSetInquiry(list);
+  apiRenderInquiries(item.apiId);
+}
+
+function apiDeleteInquiry(id, targetId) {
+  if(!confirm('삭제하시겠습니까?')) return;
+  aSetInquiry(aGetInquiry().filter(x=>x.id!==id));
+  apiRenderInquiries(targetId);
+}
+
+/* ── ③ 기획서 작성 — AI 생성 + PPT/MD 다운로드 ── */
+function apiSelectDocType(el, type) {
+  document.querySelectorAll('.adts-card').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');
+  apiSelectedDocType = type;
+
+  const promptTitle = document.getElementById('api-doc-prompt-title');
+  const promptArea = document.getElementById('api-doc-prompt');
+  const editorLabel = document.getElementById('api-doc-editor-label');
+  const exportBtn = document.getElementById('api-doc-export-btn');
+
+  if(type === '개발MD') {
+    promptTitle.textContent = '📝 개발 MD 파일 작성 요청';
+    promptArea.placeholder = '예) 쿠폰 발행/사용 관리자 시스템에 이지웰 API 연동 기능을 추가하려고 해. Claude Code로 바로 개발할 수 있도록 작업 범위, 수정할 파일, API 스펙을 정리해줘';
+    editorLabel.textContent = '📝 생성된 개발 문서 (수정 가능)';
+    exportBtn.textContent = '📝 MD로 다운로드';
+    exportBtn.onclick = apiDocExportMD;
+  } else {
+    promptTitle.textContent = '📊 서비스 기획서 작성 요청';
+    promptArea.placeholder = '예) 이지웰 복지몰 API 연동을 위한 서비스 기획서를 작성해줘. 쿠폰 발행/사용 관리자 시스템에 어떤 화면과 기능이 추가되어야 하는지 포함해서 정리해줘';
+    editorLabel.textContent = '📄 생성된 내용 (수정 가능)';
+    exportBtn.textContent = '📊 PPT로 다운로드';
+    exportBtn.onclick = apiDocExportPPT;
+  }
+}
+
+function apiRefreshDocTargets() {
+  const sel = document.getElementById('api-doc-target');
+  if(!sel) return;
+  const cur = sel.value;
+  const list = aGetList();
+  sel.innerHTML = '<option value="">-- API 업무를 선택하세요 --</option>' +
+    list.map(it=>`<option value="${it.id}">${aEsc(it.name)}</option>`).join('');
+  if(list.find(x=>x.id===cur)) sel.value = cur;
+}
+
+function apiOnDocTargetChange() {
+  const id = document.getElementById('api-doc-target').value;
+  const summaryEl = document.getElementById('api-doc-source-summary');
+  if(!id) {
+    summaryEl.textContent = '연동할 API 업무를 선택하면 분석결과와 문의사항이 표시됩니다';
+    return;
+  }
+  const analyses = aGetAnalysis().filter(x=>x.apiId===id);
+  const inquiries = aGetInquiry().filter(x=>x.apiId===id);
+  let summary = '';
+  if(analyses.length) summary += `📄 분석결과 ${analyses.length}건 있음 — AI 생성 시 자동으로 참고합니다\n`;
+  if(inquiries.length) summary += `📨 정리된 문의사항 ${inquiries.length}건 있음 — AI 생성 시 자동으로 참고합니다\n`;
+  if(!analyses.length && !inquiries.length) summary = '이 API 업무에 대한 분석결과/문의사항이 아직 없습니다.\n②탭에서 먼저 분석을 진행하면 더 정확한 문서가 생성됩니다.';
+  summaryEl.textContent = summary;
+}
+
+async function apiGenerateDoc() {
+  const targetId = document.getElementById('api-doc-target').value;
+  const userPrompt = document.getElementById('api-doc-prompt').value.trim();
+  if(!userPrompt) { aToast('⚠ 작성 요청 내용을 입력하세요'); return; }
+
+  const btn = document.getElementById('api-btn-doc-generate');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="api-spinner"></span> 생성 중...';
+
+  let context = '';
+  if(targetId) {
+    const item = aGetList().find(x=>x.id===targetId);
+    const analyses = aGetAnalysis().filter(x=>x.apiId===targetId);
+    const inquiries = aGetInquiry().filter(x=>x.apiId===targetId);
+    context += `[연동 대상 API]\n- API명: ${item.name}\n- 제공사: ${item.provider||'-'}\n- 연동방식: ${item.method}\n\n`;
+    if(analyses.length) {
+      context += `[기존 분석 결과]\n`;
+      analyses.forEach(a=>{ context += `질문: ${a.prompt}\n답변: ${a.content}\n\n`; });
+    }
+    if(inquiries.length) {
+      context += `[연동처(상대방) 문의사항]\n`;
+      inquiries.forEach((q,i)=>{ context += `${i+1}. ${q.text}\n`; });
+    }
+  }
+
+  let fullPrompt;
+  if(apiSelectedDocType === '개발MD') {
+    fullPrompt = `당신은 쿠폰관리시스템(CMS) API연동 개발 문서 작성 전문가입니다.
+아래 내용을 바탕으로 "Claude Code 등 AI 코딩 도구가 바로 읽고 개발에 착수할 수 있는" 개발 MD 문서를 작성해주세요.
+
+${context}
+
+[작성 요청]
+${userPrompt}
+
+[필수 포함 구조]
+## 1. 개요
+## 2. 현재 시스템 (쿠폰 발행/사용 관리자 시스템) 영향 범위
+## 3. 수정/추가할 기능 목록
+## 4. API 연동 스펙 (요청/응답 형식, 인증 방식)
+## 5. 수정이 필요한 파일/화면 (구체적으로 추정)
+## 6. 작업 순서 (Claude Code 실행 단계)
+## 7. 테스트 체크리스트
+
+전문용어는 풀어서 설명하고, 마크다운 형식(##, -, 코드블록)을 정확히 사용해주세요.`;
+  } else {
+    fullPrompt = `당신은 쿠폰관리시스템(CMS) 서비스 기획 전문가입니다.
+아래 내용을 바탕으로 PPT 슬라이드로 만들 서비스 기획서 내용을 작성해주세요.
+
+${context}
+
+[작성 요청]
+${userPrompt}
+
+[출력 형식 — 매우 중요]
+각 슬라이드를 "## 슬라이드제목" 으로 구분하고, 그 아래 핵심 내용을 "- " 목록으로 3~5개씩 작성해주세요.
+반드시 아래 슬라이드 순서를 따르세요:
+## 서비스 개요
+## 추진 배경
+## 주요 기능
+## 시스템 구성도 (텍스트로 설명)
+## 일정 계획
+## 기대 효과
+
+목록 항목은 짧고 명확하게, 발표 슬라이드에 어울리는 간결한 문장으로 작성해주세요.`;
+  }
+
+  try {
+    const resp = await fetch(API_GEMINI_PROXY_URL, {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ prompt: fullPrompt })
+    });
+    const data = await resp.json();
+    if(!resp.ok || data.error) throw new Error(data.error || `서버 오류 (${resp.status})`);
+    if(!data.text || !data.text.trim()) throw new Error('생성된 내용이 비어있습니다. 다시 시도해주세요.');
+
+    document.getElementById('api-doc-textarea').value = data.text;
+    aToast('✅ 내용이 생성되었습니다. 필요시 직접 수정 후 다운로드하세요.');
+  } catch(e) {
+    aToast('❌ 생성 실패: ' + e.message);
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '✨ AI로 문서 내용 생성';
+  }
+}
+
+function apiDocWrap(b,a) {
+  const ta = document.getElementById('api-doc-textarea');
+  const s=ta.selectionStart, e=ta.selectionEnd, sel=ta.value.substring(s,e);
+  ta.value = ta.value.substring(0,s)+b+sel+a+ta.value.substring(e);
+  ta.selectionStart=s+b.length; ta.selectionEnd=e+b.length; ta.focus();
+}
+function apiDocInsert(t) {
+  const ta = document.getElementById('api-doc-textarea');
+  const p = ta.selectionStart;
+  ta.value = ta.value.substring(0,p)+'\n'+t+ta.value.substring(p);
+  ta.selectionStart=ta.selectionEnd=p+t.length+1; ta.focus();
+}
+
+function apiDocSave() {
+  const content = document.getElementById('api-doc-textarea').value.trim();
+  if(!content) { aToast('⚠ 내용을 입력하세요'); return; }
+  const targetId = document.getElementById('api-doc-target').value;
+  const docs = aGetDocs();
+  const title = content.split('\n')[0].replace(/^#+\s*/,'').trim() || '제목없음';
+  docs.unshift({ id: Date.now().toString(), apiId: targetId, type: apiSelectedDocType, title, content, date: new Date().toLocaleString('ko-KR') });
+  aSetDocs(docs);
+  aToast('💾 저장되었습니다');
+  apiRenderDocList();
+}
+
+function apiRenderDocList() {
+  const docs = aGetDocs();
+  const el = document.getElementById('api-doc-saved-list');
+  if(!el) return;
+  if(!docs.length) { el.innerHTML=''; return; }
+  el.innerHTML = `<div class="api-saved-analysis-list" style="margin-top:1rem">
+    <div class="asal-title">저장된 문서 (${docs.length})</div>
+    ${docs.map(d=>`
+      <div class="asal-item">
+        <div><span class="asal-item-name">[${d.type}] ${aEsc(d.title)}</span><span class="asal-item-date">${d.date}</span></div>
+        <div class="asal-item-actions">
+          <button class="api-btn-sm" onclick="apiLoadDoc('${d.id}')">불러오기</button>
+          <button class="api-btn-sm del" onclick="apiDeleteDoc('${d.id}')">삭제</button>
+        </div>
+      </div>`).join('')}
+  </div>`;
+}
+function apiLoadDoc(id) {
+  const d = aGetDocs().find(x=>x.id===id);
+  if(!d) return;
+  document.getElementById('api-doc-textarea').value = d.content;
+  if(d.apiId) document.getElementById('api-doc-target').value = d.apiId;
+  const card = d.type === '개발MD' ? document.getElementById('adts-devmd') : document.getElementById('adts-service');
+  if(card) apiSelectDocType(card, d.type);
+  apiOnDocTargetChange();
+  aToast('📂 불러왔습니다');
+}
+function apiDeleteDoc(id) {
+  if(!confirm('삭제하시겠습니까?')) return;
+  aSetDocs(aGetDocs().filter(x=>x.id!==id));
+  apiRenderDocList();
+}
+
+function apiDocExportMD() {
+  const content = document.getElementById('api-doc-textarea').value;
+  if(!content.trim()) { aToast('⚠ 내용이 없습니다. 먼저 AI 생성을 실행하세요'); return; }
+  const blob = new Blob([content], {type:'text/markdown;charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `개발MD_${Date.now()}.md`;
+  a.click();
+  aToast('📝 MD 파일이 다운로드되었습니다');
+}
+
+function apiParseSlidesFromText(text) {
+  const slides = [];
+  const lines = text.split('\n');
+  let current = null;
+  for(const line of lines) {
+    const trimmed = line.trim();
+    if(!trimmed) continue;
+    const h2 = trimmed.match(/^##\s+(.+)/);
+    if(h2) {
+      if(current && current.bullets.length) slides.push(current);
+      current = { title: h2[1].trim().replace(/[*_]/g,''), bullets: [] };
+      continue;
+    }
+    const bullet = trimmed.match(/^[-*]\s+(.+)/);
+    if(bullet && current) {
+      current.bullets.push(bullet[1].trim());
+      continue;
+    }
+    if(current && !trimmed.startsWith('#')) {
+      current.bullets.push(trimmed.replace(/^[-*]\s*/, ''));
+    }
+  }
+  if(current && current.bullets.length) slides.push(current);
+  return slides;
+}
+
+function apiDocExportPPT() {
+  const content = document.getElementById('api-doc-textarea').value;
+  if(!content.trim()) { aToast('⚠ 내용이 없습니다. 먼저 AI 생성을 실행하세요'); return; }
+
+  const slides = apiParseSlidesFromText(content);
+  if(!slides.length) { aToast('⚠ 슬라이드 구조(## 제목)를 찾을 수 없습니다. "## 제목" 형식으로 작성해주세요'); return; }
+
+  const targetId = document.getElementById('api-doc-target').value;
+  const item = targetId ? aGetList().find(x=>x.id===targetId) : null;
+
+  const pptx = new PptxGenJS();
+  pptx.defineLayout({ name: 'A4', width: 10, height: 5.63 });
+  pptx.layout = 'A4';
+
+  const cover = pptx.addSlide();
+  cover.background = { color: '0D2251' };
+  cover.addText('서비스 기획서', { x:0.5, y:1.8, w:9, h:1, fontSize:32, bold:true, color:'FFFFFF', align:'center' });
+  cover.addText(item ? item.name : '쿠폰사업본부 API 연동', { x:0.5, y:2.9, w:9, h:0.6, fontSize:18, color:'8AAEE0', align:'center' });
+  cover.addText('다우기술 쿠폰사업본부', { x:0.5, y:4.8, w:9, h:0.4, fontSize:12, color:'8AAEE0', align:'center' });
+
+  slides.forEach(s => {
+    const slide = pptx.addSlide();
+    slide.background = { color: 'FFFFFF' };
+    slide.addText(s.title, { x:0.4, y:0.3, w:9.2, h:0.7, fontSize:24, bold:true, color:'0D2251' });
+    slide.addShape(pptx.ShapeType.line, { x:0.4, y:1.0, w:9.2, h:0, line:{color:'3B7FF5', width:2} });
+
+    const bulletText = s.bullets.length
+      ? s.bullets.map(b=>({text:b, options:{bullet:true, fontSize:16, color:'2D4270', breakLine:true}}))
+      : [{text:'(내용 없음)', options:{fontSize:16, color:'AAAAAA'}}];
+
+    slide.addText(bulletText, { x:0.6, y:1.3, w:8.8, h:3.9, valign:'top', lineSpacingMultiple:1.4 });
+  });
+
+  const fileName = `서비스기획서_${item?item.name.replace(/[^\w가-힣]/g,''):'문서'}_${Date.now()}.pptx`;
+  pptx.writeFile({ fileName }).then(()=>{
+    aToast('📊 PPT 파일이 다운로드되었습니다');
+  }).catch(e=>{
+    aToast('❌ PPT 생성 실패: ' + e.message);
+  });
+}
+
+function aEsc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+let a_tt;
+function aToast(msg){
+  const el=document.getElementById('api-toast');
+  el.textContent=msg; el.classList.add('show');
+  clearTimeout(a_tt); a_tt=setTimeout(()=>el.classList.remove('show'),2800);
 }
 
 showPage('home');
