@@ -73,6 +73,7 @@ input,select,textarea{font-family:inherit}
 .ic-amber{background:var(--gold-light)}.ic-pink{background:#fdedf3}.ic-gray{background:#f1f3f7}
 .menu-card h3{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:4px;letter-spacing:-.1px}
 .menu-card p{font-size:11.5px;color:var(--ink-faint);line-height:1.5}
+.mc-badge{font-size:10px;color:#8a6d2f;background:var(--gold-light);padding:1px 8px;border-radius:8px;font-weight:700;margin-left:4px;vertical-align:middle}
 .page-hd{margin-bottom:1.5rem;display:flex;align-items:baseline;gap:.75rem;flex-wrap:wrap}
 .page-hd h2{font-size:19px;font-weight:800;color:var(--ink);letter-spacing:-.3px}
 .page-hd p{font-size:12.5px;color:var(--ink-faint);width:100%;margin-top:2px}
@@ -146,18 +147,6 @@ input,select,textarea{font-family:inherit}
 .adp-label{color:#7a90b8;min-width:80px;flex-shrink:0}
 .adp-val{color:#2d4270;word-break:break-all}
 .adp-close{background:none;border:none;font-size:16px;color:#aab;cursor:pointer}
-.doc-template-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin-bottom:1.1rem}
-.doc-tmpl-card{background:#fff;border:1.5px solid var(--line);border-radius:11px;padding:1.1rem;cursor:pointer;transition:all .2s;text-align:center}
-.doc-tmpl-card:hover,.doc-tmpl-card.selected{border-color:var(--daou-blue);background:var(--daou-blue-light)}
-.doc-tmpl-card .dt-icon{font-size:25px;margin-bottom:7px}
-.doc-tmpl-card p{font-size:11.5px;font-weight:700;color:var(--ink)}
-.doc-editor-area{background:#fff;border-radius:14px;border:1px solid var(--line);overflow:hidden}
-.doc-toolbar-bar{display:flex;gap:5px;padding:.7rem .95rem;border-bottom:1px solid var(--line);flex-wrap:wrap;background:#fafbfd}
-.doc-toolbar-bar button{background:#fff;border:1px solid var(--line);border-radius:6px;padding:4px 9px;font-size:11px;color:var(--ink-soft);cursor:pointer}
-.doc-toolbar-bar button:hover{background:var(--daou-blue-light);color:var(--daou-blue-dark)}
-.doc-textarea{width:100%;padding:1.1rem 1.35rem;font-size:13px;line-height:1.8;border:none;outline:none;resize:vertical;min-height:260px;color:var(--ink)}
-.doc-actions{display:flex;gap:.6rem;margin-top:.8rem;justify-content:flex-end}
-.btn-save{background:var(--daou-blue);color:#fff;border:none;padding:8px 18px;border-radius:8px;font-size:12.5px;font-weight:700;cursor:pointer;transition:all .15s}
 .btn-save:hover{background:var(--daou-blue-dark);box-shadow:0 3px 12px rgba(26,127,184,.3)}
 .sec-note{background:var(--gold-light);border:1px solid #e8d4a8;border-radius:8px;padding:7px 13px;font-size:11px;color:#7a5a1a;margin-bottom:.8rem}
 
@@ -221,6 +210,7 @@ input,select,textarea{font-family:inherit}
 .mm-tag-tech{background:var(--gold-light);color:#8a6d2f}
 .mm-ni-date{font-size:10px;color:var(--ink-faint);background:var(--bg);padding:2px 8px;border-radius:8px}
 .mm-ni-source{font-size:10px;color:#9099ab;font-weight:600}
+.mm-ni-kw{font-size:10px;color:var(--daou-blue-dark);background:var(--daou-blue-light);padding:2px 8px;border-radius:8px;font-weight:700}
 .mm-news-headline{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:4px;line-height:1.55}
 .mm-news-desc{font-size:11px;color:var(--ink-faint);margin-bottom:4px;line-height:1.6}
 .mm-news-url{font-size:11px;color:var(--daou-blue);word-break:break-all}
@@ -259,7 +249,10 @@ input,select,textarea{font-family:inherit}
 .mm-det-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:1.35rem}
 .mm-kw-wrap{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
 .mm-kw-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:1.35rem}
-.mm-kw-card-title{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:.9rem}
+.mm-kw-card-title-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:.9rem;gap:.6rem}
+.mm-kw-card-title{font-size:13px;font-weight:700;color:var(--ink)}
+.mm-btn-kw-clearall{background:#fff;border:1px solid #f3d4d0;color:var(--danger);padding:5px 12px;border-radius:7px;font-size:11px;font-weight:600;white-space:nowrap;transition:all .15s}
+.mm-btn-kw-clearall:hover{background:#fdf0ef;border-color:#eba89f}
 .mm-kw-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1.1rem;min-height:68px;align-content:flex-start}
 .mm-chip{display:inline-flex;align-items:center;gap:5px;background:var(--daou-blue-light);color:var(--daou-blue-dark);font-size:11px;font-weight:600;padding:5px 11px;border-radius:13px;border:1px solid #c5e0f0}
 .mm-chip.w{background:var(--gold-light);color:#8a6d2f;border-color:#e8d4a8}
@@ -287,6 +280,11 @@ input,select,textarea{font-family:inherit}
 .api-dev-placeholder .adp-icon{font-size:46px;margin-bottom:1.1rem;opacity:.35}
 .api-dev-placeholder h3{font-size:15.5px;color:var(--ink);margin-bottom:7px;font-weight:700}
 .api-dev-placeholder p{font-size:12.5px}
+.sd-prep-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.1rem}
+.sd-prep-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:2.4rem 1.6rem;text-align:center;color:var(--ink-faint)}
+.sd-prep-card .adp-icon{font-size:38px;margin-bottom:.9rem;opacity:.35}
+.sd-prep-card h3{font-size:14.5px;color:var(--ink);margin-bottom:6px;font-weight:700}
+.sd-prep-card p{font-size:12px;line-height:1.6;margin-top:8px}
 .api-plan-tabnav{display:flex;margin-bottom:1.6rem;border:1.5px solid var(--daou-blue);border-radius:9px;overflow:hidden;width:fit-content}
 .api-plan-tab-btn{padding:9px 26px;font-size:13px;font-weight:600;border:none;background:#fff;color:var(--daou-blue);cursor:pointer;white-space:nowrap;border-right:1.5px solid var(--daou-blue);transition:all .15s}
 .api-plan-tab-btn:last-child{border-right:none}
@@ -378,6 +376,21 @@ input,select,textarea{font-family:inherit}
 .aarc-btn{padding:6px 13px;border-radius:7px;font-size:11px;border:1px solid var(--line);background:#fff}
 .aarc-btn:hover{background:var(--bg)}
 .aarc-content{font-size:12px;line-height:1.8;color:var(--ink-soft);white-space:pre-wrap}
+.cda-hint{font-size:11px;color:var(--ink-faint);margin:.4rem 0 .8rem}
+.cda-error{color:var(--danger)}
+.cda-company-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:1.1rem 1.3rem;margin-bottom:.9rem}
+.cda-company-card.cda-error-card{border-color:#f3d4d0;background:#fdf6f5}
+.cda-company-hd{display:flex;align-items:center;gap:.6rem;margin-bottom:.7rem;font-size:14px}
+.cda-company-biz{font-size:11px;color:var(--ink-faint);font-weight:500}
+.cda-disclosure-tbl{width:100%;border-collapse:collapse;font-size:11.5px}
+.cda-disclosure-tbl th{text-align:left;color:var(--ink-faint);font-weight:600;padding:6px 8px;border-bottom:1px solid var(--line)}
+.cda-disclosure-tbl td{padding:6px 8px;border-bottom:1px solid #f2f4f8;color:var(--ink-soft)}
+.aarc-textarea{width:100%;min-height:220px;border:1px solid var(--line);border-radius:8px;padding:.9rem 1rem;font-family:inherit;resize:vertical;outline:none}
+.aarc-textarea:focus{border-color:var(--daou-blue)}
+.api-prompt-sample-row{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.65rem}
+.api-prompt-sample-btn{background:var(--daou-blue-light);color:var(--daou-blue-dark);border:1px solid #c5e0f0;padding:6px 14px;border-radius:16px;font-size:11.5px;font-weight:700;transition:all .15s}
+.api-prompt-sample-btn:hover{background:var(--daou-blue);color:#fff;border-color:var(--daou-blue)}
+.api-prompt-sample-empty{font-size:11px;color:var(--ink-faint)}
 .api-inquiry-box{background:#fff;border:1px solid var(--line);border-radius:14px;padding:1.35rem;margin-bottom:1.1rem}
 .aib-title{font-size:13.5px;font-weight:700;margin-bottom:.95rem;display:flex;justify-content:space-between;align-items:center}
 .aib-add-btn{font-size:11px;background:var(--daou-blue);color:#fff;border:none;padding:6px 13px;border-radius:7px;font-weight:700}
@@ -433,21 +446,27 @@ input,select,textarea{font-family:inherit}
     <button class="gnb-link" id="gnb-business" onclick="showPage('business-market')">사업기획</button>
     <ul class="gnb-dropdown">
       <li><a href="#" onclick="showPage('business-market');return false">시장현황/경쟁사 모니터링</a></li>
-      <li><a href="#" onclick="showPage('business-competitor');return false">경쟁사 기업분석 관리</a></li>
-      <li><a href="#" onclick="showPage('business-sales');return false">영업리스트 관리</a></li>
+      <li><a href="#" onclick="showPage('business-competitor');return false">경쟁사 기업분석 관리 (준비중)</a></li>
     </ul>
   </div>
   <div class="gnb-item">
     <button class="gnb-link" id="gnb-service" onclick="showPage('service-api')">서비스기획</button>
     <ul class="gnb-dropdown">
       <li><a href="#" onclick="showPage('service-api');return false">API연동 업무관리문서</a></li>
-      <li><a href="#" onclick="showPage('service-doc');return false">서비스기획문서 작성</a></li>
+      <li><a href="#" onclick="showPage('service-doc');return false">서비스기획문서 작성 (준비중)</a></li>
     </ul>
   </div>
   <div class="gnb-item">
     <button class="gnb-link" id="gnb-etc" onclick="showPage('etc-cms')">기타</button>
     <ul class="gnb-dropdown">
-      <li><a href="#" onclick="showPage('etc-cms');return false">CMS상품등록 자동화</a></li>
+      <li><a href="#" onclick="showPage('etc-cms');return false">CMS상품등록 자동화 (준비중)</a></li>
+      <li><a href="#" onclick="showPage('business-sales');return false">쿠폰데이터 분석 (준비중)</a></li>
+    </ul>
+  </div>
+  <div class="gnb-item" id="gnb-sitemanage" style="display:none">
+    <button class="gnb-link" id="gnb-sitemanage-link" onclick="showPage('site-prompt')">사이트관리</button>
+    <ul class="gnb-dropdown">
+      <li><a href="#" onclick="showPage('site-prompt');return false">API프롬프트 관리</a></li>
     </ul>
   </div>
   <div class="gnb-item" id="gnb-account" style="display:none">
@@ -468,18 +487,18 @@ input,select,textarea{font-family:inherit}
     <section class="page active" id="page-home">
       <div id="home-hero"><h1>쿠폰사업본부 업무 포털</h1><p>업무 효율화·자동화 통합 관리 시스템 | 다우기술</p></div>
       <div id="home-stats">
-        <div class="stat-card"><div class="stat-label">등록 경쟁사</div><div class="stat-value" id="stat-competitor">0</div><span class="stat-sub sub-blue">기업분석</span></div>
-        <div class="stat-card"><div class="stat-label">영업 리스트</div><div class="stat-value" id="stat-sales">0</div><span class="stat-sub sub-green">등록건</span></div>
+        <div class="stat-card"><div class="stat-label">경쟁사 기업분석</div><div class="stat-value" id="stat-competitor">0</div><span class="stat-sub sub-blue">DART 분석 저장건</span></div>
+        <div class="stat-card"><div class="stat-label">쿠폰데이터 분석</div><div class="stat-value" id="stat-sales">-</div><span class="stat-sub sub-amber">준비중</span></div>
         <div class="stat-card"><div class="stat-label">API 업무</div><div class="stat-value" id="stat-api">0</div><span class="stat-sub sub-amber">등록건</span></div>
         <div class="stat-card"><div class="stat-label">사용자 계정</div><div class="stat-value" id="stat-users">0</div><span class="stat-sub sub-red">관리중</span></div>
       </div>
       <div id="home-menu-grid">
         <div class="menu-card" onclick="showPage('business-market')"><div class="mc-icon ic-blue">📊</div><h3>시장현황/경쟁사 모니터링</h3><p>네이버 뉴스 API로 실제 시장동향 수집·관리</p></div>
-        <div class="menu-card" onclick="showPage('business-competitor')"><div class="mc-icon ic-teal">🏢</div><h3>경쟁사 기업분석 관리</h3><p>경쟁사 분석 데이터 입력 및 비교</p></div>
-        <div class="menu-card" onclick="showPage('business-sales')"><div class="mc-icon ic-purple">📋</div><h3>영업리스트 관리</h3><p>영업 타깃 기업 및 담당자 관리</p></div>
+        <div class="menu-card" onclick="showPage('business-competitor')"><div class="mc-icon ic-teal">🏢</div><h3>경쟁사 기업분석 관리 <span class="mc-badge">준비중</span></h3><p>사업자번호로 DART 기업공시를 조회하고 AI로 가공·저장</p></div>
         <div class="menu-card" onclick="showPage('service-api')"><div class="mc-icon ic-amber">🔗</div><h3>API연동 업무관리문서</h3><p>API 분석·기획서 작성 AI 자동화</p></div>
-        <div class="menu-card" onclick="showPage('service-doc')"><div class="mc-icon ic-pink">📝</div><h3>서비스기획문서 작성</h3><p>기획서·제안서 문서 작성 및 관리</p></div>
-        <div class="menu-card" onclick="showPage('etc-cms')"><div class="mc-icon ic-gray">⚙️</div><h3>CMS상품등록 자동화</h3><p>상품 데이터 자동 등록 일괄 처리</p></div>
+        <div class="menu-card" onclick="showPage('service-doc')"><div class="mc-icon ic-pink">📝</div><h3>서비스기획문서 작성 <span class="mc-badge">준비중</span></h3><p>PPT·개발 MD·피그마 작성 자동화 기능을 준비하고 있습니다</p></div>
+        <div class="menu-card" onclick="showPage('etc-cms')"><div class="mc-icon ic-gray">⚙️</div><h3>CMS상품등록 자동화 <span class="mc-badge">준비중</span></h3><p>상품 데이터 자동 등록 일괄 처리</p></div>
+        <div class="menu-card" onclick="showPage('business-sales')"><div class="mc-icon ic-purple">📊</div><h3>쿠폰데이터 분석 <span class="mc-badge">준비중</span></h3><p>쿠폰 발행·사용 데이터 분석 기능을 준비하고 있습니다</p></div>
       </div>
     </section>
 
@@ -566,10 +585,14 @@ input,select,textarea{font-family:inherit}
         <div style="background:#fff8e6;border:1px solid #f0d88a;border-radius:8px;padding:.75rem 1rem;margin-bottom:1rem;font-size:11px;color:#7a4f00">
           💡 너무 일반적인 단어(예: "즐거운", "선물")는 무관한 기사가 많이 섞일 수 있어요.
           브랜드명·서비스명처럼 구체적인 키워드를 권장합니다.
+          <br/>✅ 정확도 향상을 위해 기사 본문(제목+요약)에 설정된 키워드가 실제로 포함된 경우만 결과에 표시됩니다.
         </div>
         <div class="mm-kw-wrap">
           <div class="mm-kw-card">
-            <div class="mm-kw-card-title">📱 모바일쿠폰 키워드</div>
+            <div class="mm-kw-card-title-row">
+              <div class="mm-kw-card-title">📱 모바일쿠폰 키워드</div>
+              <button class="mm-btn-kw-clearall" onclick="mmClearAllKw('coupon')">키워드 일괄삭제</button>
+            </div>
             <div class="mm-kw-chips" id="mm-chips-coupon"></div>
             <div class="mm-kw-add">
               <input type="text" class="mm-kw-input" id="mm-inp-coupon" placeholder="새 키워드 입력..."
@@ -578,7 +601,10 @@ input,select,textarea{font-family:inherit}
             </div>
           </div>
           <div class="mm-kw-card">
-            <div class="mm-kw-card-title">🎁 복지서비스 키워드</div>
+            <div class="mm-kw-card-title-row">
+              <div class="mm-kw-card-title">🎁 복지서비스 키워드</div>
+              <button class="mm-btn-kw-clearall" onclick="mmClearAllKw('welfare')">키워드 일괄삭제</button>
+            </div>
             <div class="mm-kw-chips" id="mm-chips-welfare"></div>
             <div class="mm-kw-add">
               <input type="text" class="mm-kw-input" id="mm-inp-welfare" placeholder="새 키워드 입력..."
@@ -591,52 +617,53 @@ input,select,textarea{font-family:inherit}
     </section>
 
     <section class="page" id="page-business-competitor">
-      <div class="page-hd"><h2>경쟁사 기업분석 관리</h2><p>경쟁사 정보를 등록하고 심층 분석 데이터를 관리합니다</p></div>
-      <div class="toolbar">
-        <input type="text" id="comp-search" placeholder="기업명 검색..." oninput="renderCompetitor()"/>
-        <select id="comp-stage" onchange="renderCompetitor()"><option value="">분석단계 전체</option><option>초기분석</option><option>심층분석</option><option>완료</option></select>
-        <button class="btn-add" onclick="toggleForm('comp-form')">+ 기업 등록</button>
-        <button class="btn-export ml-auto" onclick="exportCSV('competitor')">CSV 내보내기</button>
+      <div class="page-hd"><h2>경쟁사 기업분석 관리 <span class="mc-badge">준비중</span></h2><p>사업자번호로 DART 기업공시를 조회하고 AI로 원하는 형태로 가공·저장합니다</p></div>
+
+      <div class="api-analyze-prompt-box">
+        <div class="aapb-title">사업자번호 입력 (1건 ~ 10건, 줄바꿈 또는 쉼표로 구분)</div>
+        <textarea class="aapb-textarea" id="cda-bizno-input" placeholder="예)&#10;123-45-67890&#10;234-56-78901" style="min-height:110px"></textarea>
+        <div class="cda-hint">💡 최대 10건까지 한 번에 조회할 수 있습니다. 하이픈(-) 포함/미포함 모두 입력 가능합니다.</div>
+        <button class="api-btn-analyze" id="cda-btn-lookup" onclick="cdaLookupDart()">🔍 DART 기업공시 조회</button>
       </div>
-      <div class="tbl-wrap"><table><thead><tr><th>#</th><th>기업명</th><th>설립연도</th><th>매출규모</th><th>주요서비스</th><th>강점</th><th>약점</th><th>분석단계</th><th>관리</th></tr></thead><tbody id="comp-tbody"></tbody></table></div>
-      <div class="form-inline" id="comp-form">
-        <div class="fi-title">경쟁사 기업 등록</div>
-        <div class="form-row">
-          <div class="fg"><label>기업명 *</label><input id="cf-name" placeholder="기업명"/></div>
-          <div class="fg"><label>설립연도</label><input id="cf-year" placeholder="예) 2015"/></div>
-          <div class="fg"><label>매출규모</label><input id="cf-revenue" placeholder="예) 500억"/></div>
-          <div class="fg"><label>주요서비스</label><input id="cf-service" placeholder="핵심 서비스"/></div>
-          <div class="fg"><label>강점</label><input id="cf-strength" placeholder="강점 요약"/></div>
-          <div class="fg"><label>약점</label><input id="cf-weakness" placeholder="약점 요약"/></div>
-          <div class="fg"><label>분석단계</label><select id="cf-stage"><option>초기분석</option><option>심층분석</option><option>완료</option></select></div>
-          <button class="btn-add" style="height:32px;align-self:flex-end" onclick="addCompetitor()">추가</button>
+
+      <div class="api-empty-state cda-error" id="cda-lookup-error" style="display:none"></div>
+
+      <div id="cda-lookup-results"></div>
+
+      <div class="api-analyze-prompt-box" id="cda-ai-box" style="display:none">
+        <div class="aapb-title">AI 프롬프트 (조회된 공시 내용을 원하는 형태로 가공)</div>
+        <textarea class="aapb-textarea" id="cda-ai-prompt" placeholder="예) 최근 공시 중 자금조달·투자 관련 내용만 추려서 요약해줘"></textarea>
+        <div class="aapb-engine-select">
+          <span class="aapb-engine-label">분석 엔진</span>
+          <label class="aapb-engine-opt" style="opacity:.5" title="추후 지원 예정"><input type="radio" name="cda-ai-engine" value="gemini" disabled/> Gemini (준비중)</label>
+          <label class="aapb-engine-opt"><input type="radio" name="cda-ai-engine" value="mistral" checked/> Mistral AI (무료)</label>
+          <label class="aapb-engine-opt" style="opacity:.5" title="추후 지원 예정"><input type="radio" name="cda-ai-engine" value="claude" disabled/> Claude (준비중)</label>
         </div>
-        <div class="form-err" id="cf-err">기업명을 입력해주세요.</div>
+        <button class="api-btn-analyze" id="cda-btn-analyze" onclick="cdaRunAnalysis()">✨ AI 분석 실행</button>
+      </div>
+
+      <div class="api-analyze-result-card" id="cda-analyze-result">
+        <div class="aarc-header">
+          <span class="aarc-title">📄 AI 가공 결과 <span style="font-weight:400;color:#9099ab;font-size:11px">(직접 수정 가능)</span></span>
+          <div class="aarc-actions">
+            <button class="aarc-btn" onclick="cdaSaveAnalysis()">💾 분석내용저장</button>
+          </div>
+        </div>
+        <textarea class="aarc-content aarc-textarea" id="cda-analyze-content"></textarea>
+      </div>
+
+      <div class="api-saved-analysis-list">
+        <div class="asal-title">저장된 분석 결과 (모든 계정 · 모든 기기 공통)</div>
+        <div id="cda-saved-list"></div>
       </div>
     </section>
 
     <section class="page" id="page-business-sales">
-      <div class="page-hd"><h2>영업리스트 관리</h2><p>영업 타깃 기업 및 담당자 정보를 관리합니다</p></div>
-      <div class="toolbar">
-        <input type="text" id="sales-search" placeholder="기업명·담당자 검색..." oninput="renderSales()"/>
-        <select id="sales-status" onchange="renderSales()"><option value="">진행상태 전체</option><option>신규</option><option>접촉중</option><option>제안완료</option><option>계약완료</option><option>보류</option></select>
-        <button class="btn-add" onclick="toggleForm('sales-form')">+ 영업처 등록</button>
-        <button class="btn-export ml-auto" onclick="exportCSV('sales')">CSV 내보내기</button>
-      </div>
-      <div class="tbl-wrap"><table><thead><tr><th>#</th><th>기업명</th><th>담당자</th><th>연락처</th><th>이메일</th><th>업종</th><th>예상규모</th><th>상태</th><th>관리</th></tr></thead><tbody id="sales-tbody"></tbody></table></div>
-      <div class="form-inline" id="sales-form">
-        <div class="fi-title">영업처 등록</div>
-        <div class="form-row">
-          <div class="fg"><label>기업명 *</label><input id="sf-company" placeholder="기업명"/></div>
-          <div class="fg"><label>담당자</label><input id="sf-name" placeholder="담당자명"/></div>
-          <div class="fg"><label>연락처</label><input id="sf-tel" placeholder="010-0000-0000"/></div>
-          <div class="fg"><label>이메일</label><input id="sf-email" placeholder="email@example.com"/></div>
-          <div class="fg"><label>업종</label><input id="sf-sector" placeholder="업종"/></div>
-          <div class="fg"><label>예상규모</label><input id="sf-size" placeholder="예) 중소기업"/></div>
-          <div class="fg"><label>상태</label><select id="sf-status"><option>신규</option><option>접촉중</option><option>제안완료</option><option>계약완료</option><option>보류</option></select></div>
-          <button class="btn-add" style="height:32px;align-self:flex-end" onclick="addSales()">추가</button>
-        </div>
-        <div class="form-err" id="sf-err">기업명을 입력해주세요.</div>
+      <div class="page-hd"><h2>쿠폰데이터 분석 <span style="font-size:11px;color:#8a6d2f;background:var(--gold-light);padding:2px 10px;border-radius:10px;font-weight:700;margin-left:4px;vertical-align:middle">준비중</span></h2><p>쿠폰 발행·사용 데이터를 분석하는 기능을 준비하고 있습니다</p></div>
+      <div class="api-dev-placeholder">
+        <div class="adp-icon">📊</div>
+        <h3>쿠폰데이터 분석 메뉴는 준비중입니다</h3>
+        <p>쿠폰 발행/사용 데이터 기반 분석 기능을 개발 중입니다. 추후 업데이트를 통해 제공될 예정입니다.</p>
       </div>
     </section>
 
@@ -714,25 +741,26 @@ input,select,textarea{font-family:inherit}
           </div>
           <div class="api-analyze-prompt-box">
             <div class="aapb-title">분석 요청 내용</div>
+            <div class="api-prompt-sample-row" id="api-prompt-sample-row"></div>
             <textarea class="aapb-textarea" id="api-analyze-prompt" placeholder="예) 이 API 문서에서 인증 방식과 필수 파라미터를 정리해줘"></textarea>
             <div class="aapb-engine-select">
               <span class="aapb-engine-label">분석 엔진</span>
-              <label class="aapb-engine-opt"><input type="radio" name="ai-engine" value="gemini" checked/> Gemini (무료)</label>
-              <label class="aapb-engine-opt"><input type="radio" name="ai-engine" value="mistral"/> Mistral AI (무료)</label>
-              <label class="aapb-engine-opt"><input type="radio" name="ai-engine" value="claude"/> Claude (준비중)</label>
+              <label class="aapb-engine-opt" style="opacity:.5" title="추후 지원 예정"><input type="radio" name="ai-engine" value="gemini" disabled/> Gemini (준비중)</label>
+              <label class="aapb-engine-opt"><input type="radio" name="ai-engine" value="mistral" checked/> Mistral AI (무료)</label>
+              <label class="aapb-engine-opt" style="opacity:.5" title="추후 지원 예정"><input type="radio" name="ai-engine" value="claude" disabled/> Claude (준비중)</label>
             </div>
             <button class="api-btn-analyze" id="api-btn-analyze" onclick="apiRunAnalysis()">✨ AI 분석 실행</button>
           </div>
           <div class="api-analyze-result-card" id="api-analyze-result">
             <div class="aarc-header">
-              <span class="aarc-title">📄 분석 결과</span>
+              <span class="aarc-title">📄 분석된 내용 + API연동처 문의사항 <span style="font-weight:400;color:#9099ab;font-size:11px">(직접 수정 가능)</span></span>
               <div class="aarc-actions">
                 <button class="aarc-btn" onclick="apiExportWord()">📄 Word 다운로드</button>
                 <button class="aarc-btn" onclick="apiSaveToNotion()">🗂 Notion 저장</button>
-                <button class="aarc-btn" onclick="apiSaveAnalysis()">💾 분석결과 저장</button>
+                <button class="aarc-btn" onclick="apiSaveAnalysis()">💾 분석내용저장</button>
               </div>
             </div>
-            <div class="aarc-content" id="api-analyze-content"></div>
+            <textarea class="aarc-content aarc-textarea" id="api-analyze-content"></textarea>
           </div>
           <div class="api-inquiry-box">
             <div class="aib-title">
@@ -869,37 +897,31 @@ input,select,textarea{font-family:inherit}
     </section>
 
     <section class="page" id="page-service-doc">
-      <div class="page-hd"><h2>서비스기획문서 작성</h2><p>템플릿 기반으로 기획서·제안서를 작성하고 관리합니다</p></div>
-      <p style="font-size:12px;color:#7a90b8;margin-bottom:.6rem;font-weight:600">문서 템플릿 선택</p>
-      <div class="doc-template-grid">
-        <div class="doc-tmpl-card selected" onclick="selectTemplate(this,'서비스 기획서')"><div class="dt-icon">📋</div><p>서비스 기획서</p></div>
-        <div class="doc-tmpl-card" onclick="selectTemplate(this,'제안서')"><div class="dt-icon">💼</div><p>제안서</p></div>
-        <div class="doc-tmpl-card" onclick="selectTemplate(this,'기능 명세서')"><div class="dt-icon">📐</div><p>기능 명세서</p></div>
-        <div class="doc-tmpl-card" onclick="selectTemplate(this,'API 명세서')"><div class="dt-icon">🔗</div><p>API 명세서</p></div>
-        <div class="doc-tmpl-card" onclick="selectTemplate(this,'시장분석 보고서')"><div class="dt-icon">📊</div><p>시장분석 보고서</p></div>
-        <div class="doc-tmpl-card" onclick="selectTemplate(this,'사용자 스토리')"><div class="dt-icon">🧑‍💻</div><p>사용자 스토리</p></div>
-      </div>
-      <div class="doc-editor-area">
-        <div class="doc-toolbar-bar">
-          <button onclick="wrapText('**','**')"><b>B</b></button>
-          <button onclick="wrapText('*','*')"><i>I</i></button>
-          <button onclick="wrapText('## ','')">H2</button>
-          <button onclick="wrapText('### ','')">H3</button>
-          <button onclick="insertLine('- ')">목록</button>
-          <button onclick="insertLine('| 항목 | 내용 |\n|---|---|\n| | |')">표 삽입</button>
+      <div class="page-hd"><h2>서비스기획문서 작성 <span class="mc-badge">준비중</span></h2><p>아래 기능들을 순차적으로 준비하고 있습니다</p></div>
+      <div class="sd-prep-grid">
+        <div class="sd-prep-card">
+          <div class="adp-icon">📊</div>
+          <h3>PPT 문서 작성 및 수정</h3>
+          <span class="mc-badge">준비중</span>
+          <p>서비스기획서·제안서 등 PPT 문서를 AI로 자동 생성하고 수정하는 기능을 준비하고 있습니다.</p>
         </div>
-        <textarea class="doc-textarea" id="doc-textarea" placeholder="문서 내용을 작성하세요..."></textarea>
+        <div class="sd-prep-card">
+          <div class="adp-icon">📝</div>
+          <h3>개발 MD파일 작성 및 수정</h3>
+          <span class="mc-badge">준비중</span>
+          <p>기능 명세서·API 명세서 등 개발 문서를 Markdown 형식으로 자동 생성하고 수정하는 기능을 준비하고 있습니다.</p>
+        </div>
+        <div class="sd-prep-card">
+          <div class="adp-icon">🎨</div>
+          <h3>피그마 작성 및 수정</h3>
+          <span class="mc-badge">준비중</span>
+          <p>서비스 화면 와이어프레임·목업을 Figma와 연동해 자동 생성하고 수정하는 기능을 준비하고 있습니다.</p>
+        </div>
       </div>
-      <div class="doc-actions">
-        <button class="btn-export" onclick="clearDoc()">초기화</button>
-        <button class="btn-save" onclick="saveDoc()">💾 저장</button>
-        <button class="btn-save" style="background:#6c757d" onclick="exportDoc()">내보내기</button>
-      </div>
-      <div id="doc-saved-list" style="margin-top:1rem"></div>
     </section>
 
     <section class="page" id="page-etc-cms">
-      <div class="page-hd"><h2>CMS 상품등록 자동화</h2><p>Excel/CSV 파일을 업로드하여 상품 데이터를 자동 등록합니다</p></div>
+      <div class="page-hd"><h2>CMS 상품등록 자동화 <span class="mc-badge">준비중</span></h2><p>Excel/CSV 파일을 업로드하여 상품 데이터를 자동 등록합니다</p></div>
       <div class="upload-box" onclick="document.getElementById('cms-file-input').click()">
         <div class="ub-icon">📁</div>
         <p>Excel / CSV 파일을 클릭하여 업로드</p>
@@ -938,6 +960,27 @@ input,select,textarea{font-family:inherit}
           <button class="btn-add" style="height:32px;align-self:flex-end" onclick="addUser()">추가</button>
         </div>
         <div class="form-err" id="acf-err"></div>
+      </div>
+    </section>
+
+    <section class="page" id="page-site-prompt">
+      <div class="page-hd"><h2>API프롬프트 관리</h2><p>API연동 업무관리문서 &gt; API문서 분석 화면에 노출되는 분석요청 예시 샘플을 관리합니다 (마스터 전용)</p></div>
+      <div class="sec-note">💡 여기서 추가·수정한 샘플 버튼은 모든 계정의 'API문서 분석' 화면에 동일하게 노출됩니다.</div>
+      <div class="toolbar">
+        <button class="btn-add" onclick="apSampleOpenForm()">+ 샘플 추가</button>
+      </div>
+      <div class="tbl-wrap">
+        <table><thead><tr><th>#</th><th>버튼 이름</th><th>샘플 내용</th><th>관리</th></tr></thead><tbody id="ap-sample-tbody"></tbody></table>
+      </div>
+      <div class="form-inline" id="ap-sample-form">
+        <div class="fi-title" id="ap-sample-form-title">샘플 추가</div>
+        <div class="form-row">
+          <div class="fg"><label>버튼 이름 *</label><input id="aps-label" placeholder="예) 인증API 샘플" style="min-width:180px"/></div>
+          <div class="fg" style="flex:1"><label>샘플 내용 *</label><input id="aps-text" placeholder="분석요청 프롬프트 예시 내용" style="min-width:320px"/></div>
+          <button class="btn-add" style="height:32px;align-self:flex-end" id="ap-sample-submit-btn" onclick="apSampleSubmit()">추가</button>
+          <button class="btn-export" style="height:32px;align-self:flex-end" onclick="apSampleCancelForm()">취소</button>
+        </div>
+        <div class="form-err" id="aps-err">버튼 이름과 샘플 내용을 모두 입력해주세요.</div>
       </div>
     </section>
 
@@ -1010,8 +1053,6 @@ function getUsers(){try{return JSON.parse(localStorage.getItem(USERS_KEY)||'[]')
 function saveUsers(u){localStorage.setItem(USERS_KEY,JSON.stringify(u))}
 function getData(){try{return JSON.parse(uGetItem(DATA_KEY)||'{}')}catch(e){return{}}}
 function saveData(d){uSetItem(DATA_KEY,JSON.stringify(d))}
-function getList(k){return getData()[k]||[]}
-function saveList(k,l){const d=getData();d[k]=l;saveData(d)}
 const today=()=>new Date().toLocaleDateString('ko-KR');
 
 function openLogin(){document.getElementById('modal-login').classList.add('open');document.getElementById('login-err').style.display='none';setTimeout(()=>document.getElementById('login-id').focus(),80)}
@@ -1027,11 +1068,13 @@ async function doLogin(){
   cleanupLegacyMarketData(); // 로그인한 사용자 스코프에서 구버전 잔존 데이터 정리
   closeLogin();updateHeader();
   document.getElementById('gnb-account').style.display=currentUser.role==='master'?'block':'none';
+  document.getElementById('gnb-sitemanage').style.display=currentUser.role==='master'?'block':'none';
   if(pendingPage){const t=pendingPage;pendingPage=null;showPage(t)}else updateStats();
 }
 function doLogout(){
   currentUser=null;
   document.getElementById('gnb-account').style.display='none';
+  document.getElementById('gnb-sitemanage').style.display='none';
   updateHeader();
   resetSessionMemoryState(); // 계정 전환 시 메모리에 남은 이전 사용자 데이터 정리
   showPage('home');
@@ -1049,7 +1092,11 @@ function resetSessionMemoryState(){
   if(typeof apiEditingId!=='undefined') apiEditingId=null;
   if(typeof apiDetailId!=='undefined') apiDetailId=null;
   if(typeof apiCurrentAnalysisText!=='undefined') apiCurrentAnalysisText='';
+  if(typeof apiSavedAnalysisEditId!=='undefined') apiSavedAnalysisEditId=null;
+  if(typeof apSampleEditId!=='undefined') apSampleEditId=null;
   if(typeof apiInitialized!=='undefined') apiInitialized=false;
+  if(typeof cdaLookupData!=='undefined') cdaLookupData=[];
+  if(typeof cdaSavedEditId!=='undefined') cdaSavedEditId=null;
   // 계정 전환 시 다른 계정에서 열려있던 상세보기 탭/모달이 남아있지 않도록 정리
   const mmTn3=document.getElementById('mm-tn3'); if(mmTn3) mmTn3.style.display='none';
   const apiDetailModal=document.getElementById('api-detail-modal-bg'); if(apiDetailModal) apiDetailModal.classList.remove('open');
@@ -1073,67 +1120,287 @@ async function submitEditPw(){
 }
 
 const SIDEBAR_MAP={
-  'business-market':{title:'사업기획',items:[{id:'business-market',label:'시장현황/경쟁사 모니터링',icon:'📊'},{id:'business-competitor',label:'경쟁사 기업분석 관리',icon:'🏢'},{id:'business-sales',label:'영업리스트 관리',icon:'📋'}]},
-  'business-competitor':{title:'사업기획',items:[{id:'business-market',label:'시장현황/경쟁사 모니터링',icon:'📊'},{id:'business-competitor',label:'경쟁사 기업분석 관리',icon:'🏢'},{id:'business-sales',label:'영업리스트 관리',icon:'📋'}]},
-  'business-sales':{title:'사업기획',items:[{id:'business-market',label:'시장현황/경쟁사 모니터링',icon:'📊'},{id:'business-competitor',label:'경쟁사 기업분석 관리',icon:'🏢'},{id:'business-sales',label:'영업리스트 관리',icon:'📋'}]},
-  'service-api':{title:'서비스기획',items:[{id:'service-api',label:'API연동 업무관리문서',icon:'🔗'},{id:'service-doc',label:'서비스기획문서 작성',icon:'📝'}]},
-  'service-doc':{title:'서비스기획',items:[{id:'service-api',label:'API연동 업무관리문서',icon:'🔗'},{id:'service-doc',label:'서비스기획문서 작성',icon:'📝'}]},
-  'etc-cms':{title:'기타',items:[{id:'etc-cms',label:'CMS상품등록 자동화',icon:'⚙️'}]},
+  'business-market':{title:'사업기획',items:[{id:'business-market',label:'시장현황/경쟁사 모니터링',icon:'📊'},{id:'business-competitor',label:'경쟁사 기업분석 관리 (준비중)',icon:'🏢'}]},
+  'business-competitor':{title:'사업기획',items:[{id:'business-market',label:'시장현황/경쟁사 모니터링',icon:'📊'},{id:'business-competitor',label:'경쟁사 기업분석 관리 (준비중)',icon:'🏢'}]},
+  'service-api':{title:'서비스기획',items:[{id:'service-api',label:'API연동 업무관리문서',icon:'🔗'},{id:'service-doc',label:'서비스기획문서 작성 (준비중)',icon:'📝'}]},
+  'service-doc':{title:'서비스기획',items:[{id:'service-api',label:'API연동 업무관리문서',icon:'🔗'},{id:'service-doc',label:'서비스기획문서 작성 (준비중)',icon:'📝'}]},
+  'etc-cms':{title:'기타',items:[{id:'etc-cms',label:'CMS상품등록 자동화 (준비중)',icon:'⚙️'},{id:'business-sales',label:'쿠폰데이터 분석 (준비중)',icon:'📊'}]},
+  'business-sales':{title:'기타',items:[{id:'etc-cms',label:'CMS상품등록 자동화 (준비중)',icon:'⚙️'},{id:'business-sales',label:'쿠폰데이터 분석 (준비중)',icon:'📊'}]},
   'account-manage':{title:'계정관리',items:[{id:'account-manage',label:'아이디/패스워드 관리',icon:'👤'}]},
+  'site-prompt':{title:'사이트관리',items:[{id:'site-prompt',label:'API프롬프트 관리',icon:'🧩'}]},
 };
-const AUTH_REQUIRED=['business-market','business-competitor','business-sales','service-api','service-doc','etc-cms','account-manage'];
+const AUTH_REQUIRED=['business-market','business-competitor','business-sales','service-api','service-doc','etc-cms','account-manage','site-prompt'];
 
 function showPage(id){
   if(AUTH_REQUIRED.includes(id)&&!currentUser){pendingPage=id;id='lock'}
   else if(id==='account-manage'&&(!currentUser||currentUser.role!=='master')){pendingPage=id;id='lock'}
+  else if(id==='site-prompt'&&(!currentUser||currentUser.role!=='master')){pendingPage=id;id='lock'}
   else pendingPage=null;
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   const pg=document.getElementById('page-'+id);if(pg)pg.classList.add('active');
   const sb=document.getElementById('sidebar'),sn=document.getElementById('sidebar-nav'),st=document.getElementById('sidebar-title');
   if(id==='home'||id==='lock'){sb.style.display='none'}
   else{sb.style.display='block';const cfg=SIDEBAR_MAP[id];if(cfg){st.textContent=cfg.title;sn.innerHTML=cfg.items.map(i=>`<a href="#" class="${i.id===id?'active':''}" onclick="showPage('${i.id}');return false"><span>${i.icon}</span> ${i.label}</a>`).join('')}}
-  ['business','service','etc','account-link'].forEach(k=>{const e=document.getElementById('gnb-'+(k==='account-link'?'account-link':''+k));if(e)e.classList.remove('active')});
-  if(['business-market','business-competitor','business-sales'].includes(id))document.getElementById('gnb-business').classList.add('active');
+  ['business','service','etc','account-link','sitemanage-link'].forEach(k=>{const e=document.getElementById('gnb-'+k);if(e)e.classList.remove('active')});
+  if(['business-market','business-competitor'].includes(id))document.getElementById('gnb-business').classList.add('active');
   if(['service-api','service-doc'].includes(id))document.getElementById('gnb-service').classList.add('active');
-  if(id==='etc-cms')document.getElementById('gnb-etc').classList.add('active');
+  if(['etc-cms','business-sales'].includes(id))document.getElementById('gnb-etc').classList.add('active');
   if(id==='account-manage'){const e=document.getElementById('gnb-account-link');if(e)e.classList.add('active')}
-  const rm={'business-market':mmInit,'business-competitor':renderCompetitor,'business-sales':renderSales,'service-api':apiInit,'service-doc':renderDocList,'account-manage':renderAccount};
+  if(id==='site-prompt'){const e=document.getElementById('gnb-sitemanage-link');if(e)e.classList.add('active')}
+  const rm={'business-market':mmInit,'business-competitor':cdaInit,'service-api':apiInit,'account-manage':renderAccount,'site-prompt':renderApSampleList};
   if(rm[id])rm[id]();updateStats();
 }
 
 function toggleForm(id){document.getElementById(id).classList.toggle('open')}
-function riskBadge(r){return r==='높음'?'b-red':r==='보통'?'b-amber':'b-green'}
-function statusBadge(s){const m={'운영중':'b-green','개발중':'b-blue','검토중':'b-amber','중단':'b-red','신규':'b-gray','접촉중':'b-blue','제안완료':'b-amber','계약완료':'b-green','보류':'b-red','초기분석':'b-blue','심층분석':'b-amber','완료':'b-green'};return m[s]||'b-gray'}
+/* riskBadge/statusBadge/delItem/exportCSV: 경쟁사기업분석·영업리스트 화면이 각각
+   DART연동/준비중으로 전환되며 더 이상 호출되지 않아 제거함
+   (API 업무 상태 배지는 별도 api-status-badge 클래스 사용) */
 function sv(id,v){const e=document.getElementById(id);if(e)e.textContent=v}
 function gv(id){const e=document.getElementById(id);return e?e.value:''}
 function clr(...ids){ids.forEach(id=>{const e=document.getElementById(id);if(e)e.value=''})}
-function delItem(k,i,fn){if(!confirm('삭제하시겠습니까?'))return;const l=getList(k);l.splice(i,1);saveList(k,l);fn();updateStats()}
-function exportCSV(k){const l=getList(k);if(!l.length){alert('내보낼 데이터가 없습니다.');return}const h=Object.keys(l[0]);const rows=[h.join(','),...l.map(r=>h.map(hh=>`"${(r[hh]||'').toString().replace(/"/g,'""')}"`).join(','))];const b=new Blob(['\uFEFF'+rows.join('\n')],{type:'text/csv;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=k+'_'+today()+'.csv';a.click()}
 
-function renderCompetitor(){
-  const q=gv('comp-search'),f=gv('comp-stage'),all=getList('competitor'),list=all.filter(i=>i.name.includes(q)&&(f?i.stage===f:true));
-  const tb=document.getElementById('comp-tbody');if(!tb)return;
-  tb.innerHTML=list.length?list.map((i,idx)=>`<tr><td>${idx+1}</td><td><b>${i.name}</b></td><td>${i.year||'-'}</td><td>${i.revenue||'-'}</td><td>${i.service||'-'}</td><td>${i.strength||'-'}</td><td>${i.weakness||'-'}</td><td><span class="badge ${statusBadge(i.stage)}">${i.stage}</span></td><td><button class="btn-sm btn-del" onclick="delItem('competitor',${all.indexOf(i)},renderCompetitor)">삭제</button></td></tr>`).join(''):'<tr><td colspan="9" style="text-align:center;color:#aab;padding:2rem">등록된 기업이 없습니다</td></tr>';
+/* ══════════════════════════════════════════════════════
+   경쟁사 기업분석 관리 — DART 기업공시 조회 + AI 가공 (준비중)
+   (cda- 접두사로 다른 모듈과 네임스페이스 분리)
+   ══════════════════════════════════════════════════════ */
+
+/* DART 오픈API는 브라우저에서 직접 호출할 수 없어(CORS/키 노출 문제) 별도 프록시가 필요하다.
+   sync 서버와 동일한 방식으로 Cloudflare Worker를 배포한 뒤 이 값을 채워 넣어야 실제 조회가 동작한다.
+   (dart-proxy-worker.js / README_DART연동_배포방법.md 참고) */
+const DART_PROXY_URL = 'https://red-limit-60b6daou-dart-proxy.sonjj20000.workers.dev'; // 배포된 DART 연동 서버 주소
+
+/* 분석 저장 목록은 '모든 계정 · 모든 기기'에서 동일하게 보여야 하므로
+   localStorage 캐시 + syncSave/syncRefresh(서버 KV) 동기화 방식을 그대로 재사용한다. */
+const CDA_ANALYSIS_KEY = 'competitor_dart_analysis_v1';
+const cdaGetAnalysisList = () => { try{return JSON.parse(localStorage.getItem(CDA_ANALYSIS_KEY)||'[]')}catch{return[]} };
+const cdaSetAnalysisList = v => syncSave(CDA_ANALYSIS_KEY, JSON.stringify(v));
+
+let cdaLookupData = []; // 최근 DART 조회 결과 (AI 프롬프트에 참조용으로 사용)
+let cdaSavedEditId = null; // 저장목록 수정모드 여부
+
+function cdaInit(){
+  document.getElementById('cda-analyze-result').classList.remove('show');
+  document.getElementById('cda-ai-box').style.display = 'none';
+  document.getElementById('cda-lookup-results').innerHTML = '';
+  document.getElementById('cda-lookup-error').style.display = 'none';
+  cdaLookupData = [];
+  cdaSavedEditId = null;
+  cdaRenderSavedList();
 }
-function addCompetitor(){const name=gv('cf-name').trim(),err=document.getElementById('cf-err');if(!name){err.style.display='block';return}err.style.display='none';const l=getList('competitor');l.push({name,year:gv('cf-year'),revenue:gv('cf-revenue'),service:gv('cf-service'),strength:gv('cf-strength'),weakness:gv('cf-weakness'),stage:gv('cf-stage')});saveList('competitor',l);clr('cf-name','cf-year','cf-revenue','cf-service','cf-strength','cf-weakness');document.getElementById('comp-form').classList.remove('open');renderCompetitor();updateStats()}
 
-function renderSales(){
-  const q=gv('sales-search'),f=gv('sales-status'),all=getList('sales'),list=all.filter(i=>(i.company.includes(q)||i.name.includes(q))&&(f?i.status===f:true));
-  const tb=document.getElementById('sales-tbody');if(!tb)return;
-  tb.innerHTML=list.length?list.map((i,idx)=>`<tr><td>${idx+1}</td><td><b>${i.company}</b></td><td>${i.name||'-'}</td><td>${i.tel||'-'}</td><td>${i.email||'-'}</td><td>${i.sector||'-'}</td><td>${i.size||'-'}</td><td><span class="badge ${statusBadge(i.status)}">${i.status}</span></td><td><button class="btn-sm btn-del" onclick="delItem('sales',${all.indexOf(i)},renderSales)">삭제</button></td></tr>`).join(''):'<tr><td colspan="9" style="text-align:center;color:#aab;padding:2rem">등록된 영업처가 없습니다</td></tr>';
+function cdaParseBizNos(raw){
+  return [...new Set(raw.split(/[\n,]/).map(s=>s.trim()).filter(Boolean).map(s=>s.replace(/-/g,'')))];
 }
-function addSales(){const company=gv('sf-company').trim(),err=document.getElementById('sf-err');if(!company){err.style.display='block';return}err.style.display='none';const l=getList('sales');l.push({company,name:gv('sf-name'),tel:gv('sf-tel'),email:gv('sf-email'),sector:gv('sf-sector'),size:gv('sf-size'),status:gv('sf-status')});saveList('sales',l);clr('sf-company','sf-name','sf-tel','sf-email','sf-sector','sf-size');document.getElementById('sales-form').classList.remove('open');renderSales();updateStats()}
 
-const DOC_TEMPLATES={'서비스 기획서':'# 서비스 기획서\n\n## 1. 서비스 개요\n\n## 2. 목표 및 KPI\n\n## 3. 주요 기능\n\n## 4. 사용자 시나리오\n\n## 5. 일정','제안서':'# 제안서\n\n## 1. 제안 배경\n\n## 2. 솔루션 개요\n\n## 3. 기대 효과\n\n## 4. 비용 및 일정','기능 명세서':'# 기능 명세서\n\n| 기능명 | 설명 | 우선순위 | 상태 |\n|---|---|---|---|\n| | | | |','API 명세서':'# API 명세서\n\n| Method | URL | 설명 | 인증 |\n|---|---|---|---|\n| GET | /api/v1/ | | |','시장분석 보고서':'# 시장분석 보고서\n\n## 1. 시장 현황\n\n## 2. 경쟁사 분석\n\n## 3. 기회 및 위협\n\n## 4. 전략 방향','사용자 스토리':'# 사용자 스토리\n\nAs a [사용자], I want to [목표], so that [이유]\n\n---\n\n- As a ...'};
-function selectTemplate(el,t){document.querySelectorAll('.doc-tmpl-card').forEach(c=>c.classList.remove('selected'));el.classList.add('selected');document.getElementById('doc-textarea').value=DOC_TEMPLATES[t]||''}
-function wrapText(b,a){const ta=document.getElementById('doc-textarea'),s=ta.selectionStart,e=ta.selectionEnd,sel=ta.value.substring(s,e);ta.value=ta.value.substring(0,s)+b+sel+a+ta.value.substring(e);ta.selectionStart=s+b.length;ta.selectionEnd=e+b.length;ta.focus()}
-function insertLine(t){const ta=document.getElementById('doc-textarea'),p=ta.selectionStart;ta.value=ta.value.substring(0,p)+'\n'+t+ta.value.substring(p);ta.selectionStart=ta.selectionEnd=p+t.length+1;ta.focus()}
-function clearDoc(){if(confirm('초기화하시겠습니까?'))document.getElementById('doc-textarea').value=''}
-function saveDoc(){const c=document.getElementById('doc-textarea').value.trim();if(!c){alert('내용을 입력하세요.');return}const l=getList('docs');const title=c.split('\n')[0].replace(/^#+\s*/,'').trim()||'제목없음';l.unshift({title,content:c,date:today(),id:Date.now()});saveList('docs',l);renderDocList();alert('저장되었습니다.')}
-function exportDoc(){const c=document.getElementById('doc-textarea').value;if(!c.trim()){alert('내용이 없습니다.');return}const b=new Blob([c],{type:'text/plain;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='document.md';a.click()}
-function renderDocList(){const l=getList('docs');const el=document.getElementById('doc-saved-list');if(!el)return;if(!l.length){el.innerHTML='';return}el.innerHTML=`<p style="font-size:11px;color:#7a90b8;font-weight:600;margin-bottom:.5rem">저장된 문서 (${l.length})</p><div class="tbl-wrap"><table><thead><tr><th>문서명</th><th>저장일</th><th>관리</th></tr></thead><tbody>${l.map((d,i)=>`<tr><td><a href="#" style="color:#1a52c8" onclick="loadDoc(${i});return false">${d.title}</a></td><td>${d.date}</td><td><button class="btn-sm btn-del" onclick="delDoc(${i})">삭제</button></td></tr>`).join('')}</tbody></table></div>`}
-function loadDoc(i){const d=getList('docs')[i];if(d)document.getElementById('doc-textarea').value=d.content}
-function delDoc(i){if(!confirm('삭제?'))return;const l=getList('docs');l.splice(i,1);saveList('docs',l);renderDocList()}
+async function cdaLookupDart(){
+  const raw = document.getElementById('cda-bizno-input').value.trim();
+  const errBox = document.getElementById('cda-lookup-error');
+  errBox.style.display = 'none';
+
+  if(!raw) { aToast('⚠ 사업자번호를 입력하세요'); return; }
+  const bizNos = cdaParseBizNos(raw);
+  if(!bizNos.length) { aToast('⚠ 사업자번호를 입력하세요'); return; }
+  if(bizNos.length > 10) { aToast('⚠ 사업자번호는 한 번에 최대 10건까지 입력할 수 있습니다'); return; }
+  const invalid = bizNos.filter(n => !/^\d{9,10}$/.test(n));
+  if(invalid.length) { aToast(`⚠ 형식이 올바르지 않은 사업자번호가 있습니다: ${invalid.join(', ')}`); return; }
+
+  if(!DART_PROXY_URL) {
+    errBox.textContent = '⚠ DART 연동 서버 주소가 아직 설정되지 않았습니다. 관리자에게 문의해주세요. (DART_PROXY_URL 미설정)';
+    errBox.style.display = 'block';
+    return;
+  }
+
+  const btn = document.getElementById('cda-btn-lookup');
+  btn.disabled = true; btn.textContent = '조회 중...';
+  document.getElementById('cda-lookup-results').innerHTML = '';
+  document.getElementById('cda-ai-box').style.display = 'none';
+  document.getElementById('cda-analyze-result').classList.remove('show');
+
+  try {
+    let resp;
+    try {
+      resp = await fetch(`${DART_PROXY_URL}/lookup`, {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({ bizNos })
+      });
+    } catch(networkErr) {
+      throw new Error('네트워크 연결에 실패했습니다. 인터넷 연결 또는 서버 상태를 확인해주세요.');
+    }
+    const data = await resp.json();
+    if(!resp.ok || data.error) throw new Error(data.error || `서버 응답 오류 (상태코드: ${resp.status})`);
+
+    cdaLookupData = data.results || [];
+    cdaRenderLookupResults();
+    const hasValid = cdaLookupData.some(r=>!r.error);
+    document.getElementById('cda-ai-box').style.display = hasValid ? 'block' : 'none';
+    aToast(hasValid ? '✅ 조회가 완료되었습니다' : '⚠ 조회 가능한 기업이 없습니다');
+  } catch(e) {
+    errBox.textContent = '❌ 조회 실패: ' + e.message;
+    errBox.style.display = 'block';
+  } finally {
+    btn.disabled = false; btn.textContent = '🔍 DART 기업공시 조회';
+  }
+}
+
+function cdaRenderLookupResults(){
+  const el = document.getElementById('cda-lookup-results');
+  if(!cdaLookupData.length) { el.innerHTML = ''; return; }
+  el.innerHTML = cdaLookupData.map(r => {
+    if(r.error) {
+      return `<div class="cda-company-card cda-error-card"><b>사업자번호 ${aEsc(r.bizNo)}</b> — 조회 실패: ${aEsc(r.error)}</div>`;
+    }
+    const rows = (r.disclosures||[]).slice(0,10).map(d=>`<tr><td>${aEsc(d.rcept_dt||'-')}</td><td>${aEsc(d.report_nm||'-')}</td><td>${aEsc(d.flr_nm||'-')}</td></tr>`).join('');
+    return `
+      <div class="cda-company-card">
+        <div class="cda-company-hd"><b>${aEsc(r.corpName||'-')}</b><span class="cda-company-biz">사업자번호 ${aEsc(r.bizNo)}</span></div>
+        <table class="cda-disclosure-tbl">
+          <thead><tr><th>공시일</th><th>보고서명</th><th>제출인</th></tr></thead>
+          <tbody>${rows || '<tr><td colspan="3" style="text-align:center;color:#aab;padding:1rem">최근 공시 내역이 없습니다</td></tr>'}</tbody>
+        </table>
+      </div>`;
+  }).join('');
+}
+
+async function cdaRunAnalysis(){
+  const prompt = document.getElementById('cda-ai-prompt').value.trim();
+  if(!prompt) { aToast('⚠ AI 프롬프트를 입력하세요'); return; }
+  const validResults = cdaLookupData.filter(r=>!r.error);
+  if(!validResults.length) { aToast('⚠ 먼저 DART 기업공시를 조회하세요'); return; }
+
+  const engine = document.querySelector('input[name="cda-ai-engine"]:checked').value;
+  const btn = document.getElementById('cda-btn-analyze');
+  btn.disabled = true; btn.textContent = '분석 중...';
+
+  const dataSummary = validResults.map(r =>
+    `- ${r.corpName} (사업자번호 ${r.bizNo}): ${(r.disclosures||[]).slice(0,10).map(d=>`[${d.rcept_dt}] ${d.report_nm}`).join(' / ') || '최근 공시 없음'}`
+  ).join('\n');
+
+  const fullPrompt = `당신은 기업 공시 분석 전문가입니다. 아래 DART 기업공시 조회 결과를 참고해 요청에 답해주세요.
+
+[조회된 기업공시 데이터]
+${dataSummary}
+
+[분석 요청]
+${prompt}
+
+실행자가 이해하기 쉬운 평이한 말로, 전문용어는 풀어서 설명하며 답변해주세요.`;
+
+  try {
+    if(engine !== 'mistral') throw new Error('해당 엔진은 준비중입니다. 현재는 Mistral AI를 이용해주세요.');
+    // API연동 업무관리문서와 동일한 Mistral AI 연동 프록시(API_MISTRAL_PROXY_URL)를 그대로 사용한다.
+    let resp;
+    try {
+      resp = await fetch(API_MISTRAL_PROXY_URL, {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({ prompt: fullPrompt })
+      });
+    } catch(networkErr) {
+      throw new Error('네트워크 연결에 실패했습니다. 인터넷 연결을 확인해주세요.');
+    }
+    const data = await resp.json();
+    if(!resp.ok || data.error) throw new Error(data.error || `서버 응답 오류 (상태코드: ${resp.status})`);
+    if(!data.text || !data.text.trim()) throw new Error('분석 결과가 비어있습니다. 프롬프트를 더 구체적으로 입력해보세요.');
+
+    cdaSavedEditId = null;
+    document.getElementById('cda-analyze-content').value = data.text;
+    document.getElementById('cda-analyze-result').classList.add('show');
+    aToast('✅ 분석이 완료되었습니다. 아래 내용은 직접 수정할 수 있습니다');
+  } catch(e) {
+    aToast('❌ 분석 실패: ' + e.message);
+  } finally {
+    btn.disabled = false; btn.textContent = '✨ AI 분석 실행';
+  }
+}
+
+function cdaSaveAnalysis(){
+  const content = document.getElementById('cda-analyze-content').value.trim();
+  if(!content) { aToast('⚠ 저장할 분석 내용이 없습니다'); return; }
+
+  const list = cdaGetAnalysisList();
+  const bizNos = cdaLookupData.filter(r=>!r.error).map(r=>r.bizNo);
+  const corpNames = cdaLookupData.filter(r=>!r.error).map(r=>r.corpName);
+
+  if(cdaSavedEditId) {
+    const idx = list.findIndex(x=>x.id===cdaSavedEditId);
+    if(idx>=0) {
+      list[idx].content = content;
+      list[idx].prompt = document.getElementById('cda-ai-prompt').value;
+      list[idx].date = new Date().toLocaleString('ko-KR') + ' (수정됨)';
+    }
+    cdaSetAnalysisList(list);
+    cdaSavedEditId = null;
+    aToast('✅ 분석내용이 수정되었습니다');
+  } else {
+    list.unshift({
+      id: Date.now().toString(),
+      bizNos, corpNames,
+      prompt: document.getElementById('cda-ai-prompt').value,
+      content,
+      date: new Date().toLocaleString('ko-KR')
+    });
+    cdaSetAnalysisList(list);
+    aToast('💾 저장되었습니다 (모든 계정 · 모든 기기에서 확인 가능)');
+  }
+  cdaRenderSavedList();
+  updateStats();
+}
+
+function cdaRenderSavedListInner(){
+  const el = document.getElementById('cda-saved-list');
+  if(!el) return;
+  const list = cdaGetAnalysisList();
+  el.innerHTML = list.length ? list.map(x=>`
+    <div class="asal-item">
+      <div><span class="asal-item-name">${aEsc((x.corpNames||x.bizNos||[]).join(', '))||'(기업 미상)'} — ${aEsc((x.prompt||'').slice(0,30))}${(x.prompt||'').length>30?'...':''}</span><span class="asal-item-date">${x.date}</span></div>
+      <div class="asal-item-actions">
+        <button class="api-btn-sm" onclick="cdaEditAnalysis('${x.id}')">수정</button>
+        <button class="api-btn-sm" onclick="cdaLoadAnalysis('${x.id}')">불러오기</button>
+        <button class="api-btn-sm del" onclick="cdaDeleteAnalysis('${x.id}')">삭제</button>
+      </div>
+    </div>`).join('') : '<p class="api-empty-state">저장된 분석 결과가 없습니다</p>';
+}
+function cdaRenderSavedList(){
+  cdaRenderSavedListInner();
+  syncRefresh(CDA_ANALYSIS_KEY, cdaRenderSavedListInner); // 다른 기기에서 저장한 최신 목록 반영
+}
+function cdaEditAnalysis(id){
+  const x = cdaGetAnalysisList().find(a=>a.id===id);
+  if(!x) return;
+  cdaSavedEditId = id;
+  document.getElementById('cda-ai-prompt').value = x.prompt || '';
+  document.getElementById('cda-analyze-content').value = x.content;
+  document.getElementById('cda-analyze-result').classList.add('show');
+  document.getElementById('cda-ai-box').style.display = 'block';
+  aToast('✏️ 수정모드 — 내용을 편집한 후 "분석내용저장"을 눌러주세요');
+}
+function cdaLoadAnalysis(id){
+  const x = cdaGetAnalysisList().find(a=>a.id===id);
+  if(!x) return;
+  cdaSavedEditId = null;
+  document.getElementById('cda-ai-prompt').value = x.prompt || '';
+  document.getElementById('cda-analyze-content').value = x.content;
+  document.getElementById('cda-analyze-result').classList.add('show');
+  document.getElementById('cda-ai-box').style.display = 'block';
+  aToast('📂 분석결과를 불러왔습니다');
+}
+function cdaDeleteAnalysis(id){
+  if(!confirm('삭제하시겠습니까?')) return;
+  cdaSetAnalysisList(cdaGetAnalysisList().filter(x=>x.id!==id));
+  if(cdaSavedEditId===id) cdaSavedEditId = null;
+  cdaRenderSavedList();
+  updateStats();
+  aToast('🗑 삭제되었습니다');
+}
+
+/* 영업리스트 관리 → 쿠폰데이터 분석(준비중)으로 전환되어 renderSales/addSales는 더 이상 사용하지 않음 */
+
+
+
+/* 서비스기획문서 작성 → 준비중 안내 화면으로 전환되어
+   DOC_TEMPLATES/selectTemplate/wrapText/insertLine/saveDoc/exportDoc/renderDocList/loadDoc/delDoc는
+   더 이상 사용하지 않음 */
 
 let cmsData=[];
 function handleCmsUpload(e){
@@ -1177,8 +1444,7 @@ function delUser(i){
 }
 
 function updateStats(){
-  sv('stat-competitor',getList('competitor').length);
-  sv('stat-sales',getList('sales').length);
+  sv('stat-competitor', cdaGetAnalysisList().length);
   sv('stat-api', aGetList().length);
   sv('stat-users',getUsers().length);
 }
@@ -1216,8 +1482,12 @@ const MM_DEF_KW = {
 };
 const mmGetReports = () => { try{return JSON.parse(uGetItem(MM_RK)||'[]')}catch{return[]} };
 const mmSetReports = a => uSetItem(MM_RK, JSON.stringify(a));
-const mmGetKw = () => { try{const r=JSON.parse(uGetItem(MM_KK));return r||MM_DEF_KW}catch{return MM_DEF_KW} };
-const mmSetKw = o => uSetItem(MM_KK, JSON.stringify(o));
+/* 키워드는 계정별 데이터가 아니라 '모든 계정 + 모든 기기 공통' 데이터이므로
+   userScopedKey(u:아이디::...)를 거치지 않고 localStorage를 캐시로 사용하면서
+   syncSave/syncRefresh로 서버(KV)와 동기화한다 (SYNC_API_BASE 참고).
+   ⚠ 재배포 후에도 값이 유지되도록 MM_KK 키 이름은 절대 변경하지 않는다. */
+const mmGetKw = () => { try{const r=JSON.parse(localStorage.getItem(MM_KK));return r||MM_DEF_KW}catch{return MM_DEF_KW} };
+const mmSetKw = o => syncSave(MM_KK, JSON.stringify(o));
 
 let mmCurrentResult = null;
 let mmDetailReport  = null;
@@ -1249,7 +1519,7 @@ function mmSwitchTab(n) {
     if(b) b.classList.toggle('active', i===n);
   });
   if(n===2) mmRenderBoard();
-  if(n===4) mmRenderKw();
+  if(n===4) { mmRenderKw(); syncRefresh(MM_KK, mmRenderKw); } // 캐시로 즉시 표시 후 서버 최신값으로 갱신
 }
 
 async function mmRunCollect() {
@@ -1277,6 +1547,7 @@ async function mmRunCollect() {
 
   const log = (msg, type='') => { pbLog.innerHTML += `<div class="${type}">• ${msg}</div>`; };
 
+  await syncRefresh(MM_KK); // 다른 기기에서 추가/삭제한 최신 키워드를 반영한 뒤 수집 시작
   const kw = mmGetKw();
   log(`뉴스발행일 기간: <b>${from}</b> ~ <b>${to}</b>`);
   log(`검색 사이트: 네이버 뉴스 API`);
@@ -1367,16 +1638,22 @@ async function mmSearchNaverByKeywords(keywords, from, to, log, tick) {
 
         const link = it.originallink || it.link;
         if(!link) continue; // 링크 없는 항목 제외
-        if(seen.has(link)) continue; // 중복 제거
-        seen.add(link);
 
         const cleanTitle = mmStripHtml(it.title);
         const cleanDesc   = mmStripHtml(it.description);
         // title + description을 합쳐 분류 정확도 향상 (네이버가 주는 두 텍스트 필드 모두 반영)
         const combinedText = cleanTitle + ' ' + cleanDesc;
 
+        // 정확도 필터(후처리): 네이버 검색은 형태소 분석 기반이라 키워드와 무관한 기사가
+        // 섞여 들어올 수 있다. 실제 본문(제목+요약)에 설정 키워드가 그대로 포함된 경우만 채택한다.
+        if(!combinedText.toLowerCase().includes(kw.toLowerCase())) continue;
+
+        if(seen.has(link)) continue; // 중복 제거
+        seen.add(link);
+
         result.push({
           tag: mmClassifyTag(combinedText),
+          keyword: kw, // 이 기사를 찾아낸 검색 키워드 — 화면에 노출용
           headline: cleanTitle,
           desc: cleanDesc.length > 80 ? cleanDesc.slice(0,80)+'...' : cleanDesc,
           url: link,
@@ -1440,6 +1717,7 @@ function mmNewsItemHTML(it) {
   return `<div class="mm-news-item">
     <div class="mm-ni-top">
       <span class="mm-news-tag ${MM_TAG_CLS[it.tag]||'mm-tag-market'}">${mmEsc(it.tag)}</span>
+      ${it.keyword ? `<span class="mm-ni-kw">키워드 : ${mmEsc(it.keyword)}</span>` : ''}
       <span class="mm-ni-date">📅 ${mmEsc(it.date||'날짜미상')}</span>
       ${it.source ? `<span class="mm-ni-source">${mmEsc(it.source)}</span>` : ''}
     </div>
@@ -1642,6 +1920,17 @@ function mmRemoveKw(type, idx) {
   mmToast(`🗑 "${rm}" 삭제됨`);
 }
 
+function mmClearAllKw(type) {
+  const label = type==='coupon' ? '모바일쿠폰' : '복지서비스';
+  const kw = mmGetKw();
+  if(!kw[type].length) { mmToast(`⚠ 삭제할 ${label} 키워드가 없습니다`); return; }
+  if(!confirm(`${label} 키워드 ${kw[type].length}개를 전체 삭제하시겠습니까?\n(모든 계정에 공통 적용됩니다)`)) return;
+  kw[type] = [];
+  mmSetKw(kw);
+  mmRenderKw();
+  mmToast(`🗑 ${label} 키워드가 전체 삭제되었습니다`);
+}
+
 function mmWait(ms){ return new Promise(r=>setTimeout(r,ms)); }
 function mmToLabel(s){ const [y,m,d]=s.split('-'); return `${y}. ${+m}. ${+d}.`; }
 function mmEsc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
@@ -1651,6 +1940,80 @@ function mmToast(msg){
   const el=document.getElementById('mm-toast');
   el.textContent=msg; el.classList.add('show');
   clearTimeout(mm_tt); mm_tt=setTimeout(()=>el.classList.remove('show'),3000);
+}
+
+/* ══════════════════════════════════════════════════════
+   전역 데이터 서버 동기화 레이어 (Cloudflare Worker + KV)
+   ──────────────────────────────────────────────────────
+   기존에는 '모든 계정 공통' 데이터(키워드/API 업무목록/프롬프트 샘플)를
+   브라우저 localStorage에만 저장했다. 이 경우 같은 PC/브라우저에서
+   계정을 바꿔가며 접속할 때는 공유되지만, 서로 다른 PC·브라우저 간에는
+   절대 동기화될 수 없다 (localStorage는 브라우저별 로컬 저장소이기 때문).
+
+   완전한 기기간 동기화를 위해서는 반드시 별도의 서버(백엔드) 저장소가
+   필요하다. 아래는 Gemini/Mistral 프록시와 동일한 방식으로 Cloudflare
+   Worker + KV를 이용한 아주 단순한 key-value 동기화 API를 호출하는
+   클라이언트 코드다.
+
+   ⚠ 사용 방법:
+   1) 함께 제공된 sync-worker.js / wrangler.toml 을 Cloudflare Workers에 배포한다.
+   2) 배포된 Worker 주소(https://xxx.workers.dev)를 아래 SYNC_API_BASE 에 입력한다.
+   3) SYNC_API_BASE 를 채워 넣으면 이후부터는 실제로 여러 PC/브라우저에서
+      동일한 데이터가 보인다. 비워두거나 서버가 응답하지 않으면 이 앱은
+      자동으로 이전처럼 '같은 브라우저 내 로컬 저장'으로 안전하게 동작한다
+      (즉, 배포 전이라도 앱이 깨지지 않는다).
+   ══════════════════════════════════════════════════════ */
+const SYNC_API_BASE = 'https://small-sound-02aedaou-portal-sync.sonjj20000.workers.dev'; // 배포된 동기화 서버 (Cloudflare Worker + KV) 주소
+let SYNC_ONLINE = false;          // 현재 세션에서 서버 동기화 연결 성공 여부
+let SYNC_WARNED = false;          // 연결 실패 안내는 세션당 1회만
+
+async function syncGet(key) {
+  if(!SYNC_API_BASE) return null;
+  try {
+    const resp = await fetch(`${SYNC_API_BASE}/kv/${encodeURIComponent(key)}`, { method:'GET' });
+    if(resp.status === 404) { SYNC_ONLINE = true; return null; } // 서버는 살아있으나 값이 아직 없음
+    if(!resp.ok) throw new Error('bad status '+resp.status);
+    const text = await resp.text();
+    SYNC_ONLINE = true;
+    return text;
+  } catch(e) {
+    SYNC_ONLINE = false;
+    return null;
+  }
+}
+async function syncPut(key, valueString) {
+  if(!SYNC_API_BASE) return false;
+  try {
+    const resp = await fetch(`${SYNC_API_BASE}/kv/${encodeURIComponent(key)}`, {
+      method: 'PUT',
+      headers: { 'Content-Type':'application/json' },
+      body: valueString
+    });
+    if(!resp.ok) throw new Error('bad status '+resp.status);
+    SYNC_ONLINE = true;
+    return true;
+  } catch(e) {
+    SYNC_ONLINE = false;
+    if(!SYNC_WARNED) { SYNC_WARNED = true; mmToast_safe('⚠ 동기화 서버에 연결할 수 없어 이 기기에만 저장되었습니다'); }
+    return false;
+  }
+}
+// mmToast가 아직 정의되기 전 시점에도 안전하게 호출하기 위한 래퍼
+function mmToast_safe(msg){ try{ if(typeof mmToast==='function') mmToast(msg); else if(typeof aToast==='function') aToast(msg); }catch(e){} }
+
+/* 로컬 캐시(localStorage)를 우선 읽어 즉시 렌더링에 쓰고, 뒤에서 서버 최신값을
+   비동기로 받아와 캐시를 갱신한 뒤 필요하면 화면을 다시 그린다 (stale-while-revalidate). */
+async function syncRefresh(key, onUpdated) {
+  const remote = await syncGet(key);
+  if(remote !== null && remote !== localStorage.getItem(key)) {
+    localStorage.setItem(key, remote);
+    if(onUpdated) onUpdated();
+  }
+}
+/* 로컬에 즉시 저장(항상 동작) + 서버로 비동기 반영(성공 시 다른 기기에도 전파) */
+function syncSave(key, valueString) {
+  localStorage.setItem(key, valueString);
+  syncPut(key, valueString); // fire-and-forget: 실패해도 로컬 저장은 이미 완료된 상태
 }
 
 /* ══════════════════════════════════════════════════════
@@ -1667,14 +2030,30 @@ const AK_ANALYSIS = 'api_devops_analysis_v1';
 const AK_DOCS = 'api_devops_docs_v1';
 const AK_INQUIRY = 'api_devops_inquiry_v1';
 
-const aGetList = () => { try{return JSON.parse(uGetItem(AK_LIST)||'[]')}catch{return[]} };
-const aSetList = v => uSetItem(AK_LIST, JSON.stringify(v));
+/* API 업무 등록 목록(AK_LIST)은 마스터·서브 모든 계정 + 모든 기기에서 동일하게
+   보여야 하는 공통 데이터이므로 userScopedKey를 거치지 않고, localStorage를
+   캐시로 쓰면서 syncSave/syncRefresh를 통해 서버(KV)와 동기화한다.
+   ⚠ 재배포 후에도 값이 유지되도록 AK_LIST 키 이름은 절대 변경하지 않는다. */
+const aGetList = () => { try{return JSON.parse(localStorage.getItem(AK_LIST)||'[]')}catch{return[]} };
+const aSetList = v => syncSave(AK_LIST, JSON.stringify(v));
 const aGetAnalysis = () => { try{return JSON.parse(uGetItem(AK_ANALYSIS)||'[]')}catch{return[]} };
 const aSetAnalysis = v => uSetItem(AK_ANALYSIS, JSON.stringify(v));
 const aGetDocs = () => { try{return JSON.parse(uGetItem(AK_DOCS)||'[]')}catch{return[]} };
 const aSetDocs = v => uSetItem(AK_DOCS, JSON.stringify(v));
 const aGetInquiry = () => { try{return JSON.parse(uGetItem(AK_INQUIRY)||'[]')}catch{return[]} };
 const aSetInquiry = v => uSetItem(AK_INQUIRY, JSON.stringify(v));
+
+/* ── API 프롬프트 샘플 (사이트관리 > API프롬프트 관리, 마스터 전용 편집) ──
+   '②API문서 분석' 화면에 노출되는 예시 버튼들의 원본 데이터.
+   마스터가 관리하고 모든 계정 + 모든 기기가 동일하게 보는 전역 데이터이므로
+   localStorage 캐시 + 서버(KV) 동기화 방식을 사용한다. */
+const AK_PROMPT_SAMPLES = 'api_prompt_samples_v1';
+const API_PROMPT_SAMPLE_DEFAULTS = [
+  { id:'default-issue', label:'발행API 샘플', text:'이 API 문서에서 쿠폰 발행 요청/응답 파라미터와 에러 코드를 표로 정리해줘' },
+  { id:'default-auth',  label:'인증API 샘플', text:'이 API 문서에서 인증 방식(토큰 발급/갱신 절차 포함)과 필수 파라미터를 정리해줘' }
+];
+const apGetSamples = () => { try{const r=JSON.parse(localStorage.getItem(AK_PROMPT_SAMPLES));return (r&&r.length)?r:API_PROMPT_SAMPLE_DEFAULTS}catch{return API_PROMPT_SAMPLE_DEFAULTS} };
+const apSetSamples = v => syncSave(AK_PROMPT_SAMPLES, JSON.stringify(v));
 
 let apiUploadedFile = null;
 let apiPendingUploadFile = null;
@@ -1685,6 +2064,8 @@ let apiListPage = 1;
 const API_PAGE_SIZE = 5;
 let apiStatusFilter = '';
 let apiCurrentAnalysisText = '';
+let apiSavedAnalysisEditId = null;
+let apSampleEditId = null;
 let apiSelectedDocType = '서비스기획서';
 let apiInitialized = false;
 
@@ -1698,6 +2079,7 @@ function apiInit() {
     apiRenderList();
     apiRenderDocList();
   }
+  syncRefresh(AK_LIST, apiRenderList); // 다른 기기에서 등록한 API 업무를 반영
 }
 
 function apiSwitchSplit(which) {
@@ -1711,7 +2093,7 @@ function apiSwitchPlanTab(n) {
   [1,2,3].forEach(i=>document.getElementById('api-plan-tab'+i).classList.toggle('active', i===n));
   document.querySelectorAll('.api-plan-tab-btn').forEach((b,i)=>b.classList.toggle('active', i===n-1));
   if(n===1) apiRenderList();
-  if(n===2) apiRefreshAnalyzeTargets();
+  if(n===2) { apiRefreshAnalyzeTargets(); apiRenderPromptSamples(); }
   if(n===3) apiRefreshDocTargets();
 }
 
@@ -2022,6 +2404,7 @@ function apiRefreshAnalyzeTargets() {
 function apiOnAnalyzeTargetChange() {
   const id = document.getElementById('api-analyze-target').value;
   document.getElementById('api-analyze-result').classList.remove('show');
+  apiSavedAnalysisEditId = null; // 대상 변경 시 이전 수정모드는 해제
   apiRenderInquiries(id);
   apiRenderSavedAnalysis(id);
 }
@@ -2074,12 +2457,13 @@ ${prompt}
       if(!data.text || !data.text.trim()) throw new Error('분석 결과가 비어있습니다. 분석 요청 내용을 더 구체적으로 입력해보세요.');
       apiCurrentAnalysisText = data.text;
     } else {
-      throw new Error('Claude 연동은 추후 별도 결제 설정 후 제공됩니다. 현재는 Gemini 또는 Mistral AI를 이용해주세요.');
+      throw new Error('해당 엔진은 준비중입니다. 현재는 Mistral AI를 이용해주세요.');
     }
 
-    document.getElementById('api-analyze-content').textContent = apiCurrentAnalysisText;
+    apiSavedAnalysisEditId = null; // 새로 분석 실행 시 기존 수정모드는 해제
+    document.getElementById('api-analyze-content').value = apiBuildCombinedContent(targetId);
     document.getElementById('api-analyze-result').classList.add('show');
-    aToast('✅ 분석이 완료되었습니다');
+    aToast('✅ 분석이 완료되었습니다. 아래 내용은 직접 수정할 수 있습니다');
   } catch(e) {
     aToast('❌ 분석 실패: ' + e.message);
   } finally {
@@ -2088,9 +2472,21 @@ ${prompt}
   }
 }
 
+/* AI가 생성한 분석 내용 + 정리된 연동처 문의사항을 하나의 편집 가능한 텍스트로 결합한다.
+   ('분석된 내용 + API연동처 문의사항'을 화면 아래에 함께 노출하기 위함) */
+function apiBuildCombinedContent(targetId) {
+  const inquiries = aGetInquiry().filter(x=>x.apiId===targetId);
+  let combined = `[분석된 내용]\n${apiCurrentAnalysisText}\n\n[API연동처 문의사항]\n`;
+  combined += inquiries.length
+    ? inquiries.map((q,i)=>`${i+1}. ${q.text}`).join('\n')
+    : '(등록된 문의사항이 없습니다)';
+  return combined;
+}
+
 function apiExportWord() {
-  if(!apiCurrentAnalysisText) { aToast('⚠ 내보낼 분석 결과가 없습니다'); return; }
-  const html = `<html><head><meta charset="utf-8"></head><body><pre style="font-family:맑은고딕;white-space:pre-wrap">${aEsc(apiCurrentAnalysisText)}</pre></body></html>`;
+  const content = document.getElementById('api-analyze-content').value.trim();
+  if(!content) { aToast('⚠ 내보낼 분석 내용이 없습니다'); return; }
+  const html = `<html><head><meta charset="utf-8"></head><body><pre style="font-family:맑은고딕;white-space:pre-wrap">${aEsc(content)}</pre></body></html>`;
   const blob = new Blob(['\ufeff', html], {type:'application/msword'});
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
@@ -2103,21 +2499,37 @@ function apiSaveToNotion() {
   aToast('🗂 Notion 연동은 추후 제공됩니다 (Notion API 키 설정 필요)');
 }
 
+/* '분석내용저장' — 분석된 내용 + 문의사항이 결합된(그리고 직접 수정했을 수도 있는)
+   텍스트를 저장한다. apiSavedAnalysisEditId가 설정되어 있으면 기존 항목을 수정,
+   없으면 새 항목으로 목록에 추가한다. */
 function apiSaveAnalysis() {
   const targetId = document.getElementById('api-analyze-target').value;
   if(!targetId) { aToast('⚠ API 업무를 먼저 선택하세요'); return; }
-  if(!apiCurrentAnalysisText) { aToast('⚠ 저장할 분석 결과가 없습니다'); return; }
+  const content = document.getElementById('api-analyze-content').value.trim();
+  if(!content) { aToast('⚠ 저장할 분석 내용이 없습니다'); return; }
 
   const analysis = aGetAnalysis();
-  analysis.unshift({
-    id: Date.now().toString(),
-    apiId: targetId,
-    prompt: document.getElementById('api-analyze-prompt').value,
-    content: apiCurrentAnalysisText,
-    date: new Date().toLocaleString('ko-KR')
-  });
-  aSetAnalysis(analysis);
-  aToast('💾 분석결과가 저장되었습니다');
+  if(apiSavedAnalysisEditId) {
+    const idx = analysis.findIndex(x=>x.id===apiSavedAnalysisEditId);
+    if(idx>=0) {
+      analysis[idx].content = content;
+      analysis[idx].prompt = document.getElementById('api-analyze-prompt').value;
+      analysis[idx].date = new Date().toLocaleString('ko-KR') + ' (수정됨)';
+      aSetAnalysis(analysis);
+      aToast('✅ 분석내용이 수정되었습니다');
+    }
+    apiSavedAnalysisEditId = null;
+  } else {
+    analysis.unshift({
+      id: Date.now().toString(),
+      apiId: targetId,
+      prompt: document.getElementById('api-analyze-prompt').value,
+      content,
+      date: new Date().toLocaleString('ko-KR')
+    });
+    aSetAnalysis(analysis);
+    aToast('💾 분석내용이 저장되었습니다');
+  }
   apiRenderSavedAnalysis(targetId);
 }
 
@@ -2129,18 +2541,33 @@ function apiRenderSavedAnalysis(targetId) {
     <div class="asal-item">
       <div><span class="asal-item-name">${aEsc(x.prompt.slice(0,40))}${x.prompt.length>40?'...':''}</span><span class="asal-item-date">${x.date}</span></div>
       <div class="asal-item-actions">
+        <button class="api-btn-sm" onclick="apiEditSavedAnalysis('${x.id}')">수정</button>
         <button class="api-btn-sm" onclick="apiLoadSavedAnalysis('${x.id}')">불러오기</button>
         <button class="api-btn-sm del" onclick="apiDeleteSavedAnalysis('${x.id}','${targetId}')">삭제</button>
       </div>
     </div>`).join('') : '<p class="api-empty-state">저장된 분석 결과가 없습니다</p>';
 }
 
+/* 저장된 목록에서 '수정'을 누르면 편집 텍스트를 화면에 불러오고 수정모드로 전환한다.
+   이 상태에서 '분석내용저장'을 다시 누르면 새 항목 추가가 아닌 기존 항목 업데이트가 된다. */
+function apiEditSavedAnalysis(id) {
+  const x = aGetAnalysis().find(a=>a.id===id);
+  if(!x) return;
+  apiSavedAnalysisEditId = id;
+  apiCurrentAnalysisText = x.content;
+  document.getElementById('api-analyze-prompt').value = x.prompt;
+  document.getElementById('api-analyze-content').value = x.content;
+  document.getElementById('api-analyze-result').classList.add('show');
+  aToast('✏️ 수정모드 — 내용을 편집한 후 "분석내용저장"을 눌러주세요');
+}
+
 function apiLoadSavedAnalysis(id) {
   const x = aGetAnalysis().find(a=>a.id===id);
   if(!x) return;
+  apiSavedAnalysisEditId = null; // 불러오기는 수정모드가 아닌 새 참고용 열람
   apiCurrentAnalysisText = x.content;
   document.getElementById('api-analyze-prompt').value = x.prompt;
-  document.getElementById('api-analyze-content').textContent = x.content;
+  document.getElementById('api-analyze-content').value = x.content;
   document.getElementById('api-analyze-result').classList.add('show');
   aToast('📂 분석결과를 불러왔습니다');
 }
@@ -2148,6 +2575,7 @@ function apiLoadSavedAnalysis(id) {
 function apiDeleteSavedAnalysis(id, targetId) {
   if(!confirm('삭제하시겠습니까?')) return;
   aSetAnalysis(aGetAnalysis().filter(x=>x.id!==id));
+  if(apiSavedAnalysisEditId===id) apiSavedAnalysisEditId = null;
   apiRenderSavedAnalysis(targetId);
   aToast('🗑 삭제되었습니다');
 }
@@ -2194,6 +2622,94 @@ function apiDeleteInquiry(id, targetId) {
   if(!confirm('삭제하시겠습니까?')) return;
   aSetInquiry(aGetInquiry().filter(x=>x.id!==id));
   apiRenderInquiries(targetId);
+}
+
+/* ── 분석요청 프롬프트 예시 버튼 (②API문서 분석 화면) ──
+   버튼을 누르면 분석요청 textarea에 샘플 내용이 자동 입력된다.
+   샘플 자체는 '사이트관리 > API프롬프트 관리'에서 마스터가 관리한다. */
+function apiRenderPromptSamplesInner() {
+  const el = document.getElementById('api-prompt-sample-row');
+  if(!el) return;
+  const samples = apGetSamples();
+  el.innerHTML = samples.length
+    ? samples.map(s=>`<button type="button" class="api-prompt-sample-btn" onclick="apiUsePromptSample('${s.id}')">${aEsc(s.label)}</button>`).join('')
+    : '<span class="api-prompt-sample-empty">등록된 예시가 없습니다 (사이트관리 &gt; API프롬프트 관리에서 추가)</span>';
+}
+function apiRenderPromptSamples() {
+  apiRenderPromptSamplesInner();
+  syncRefresh(AK_PROMPT_SAMPLES, apiRenderPromptSamplesInner); // 다른 기기(마스터)가 관리한 최신 샘플 반영
+}
+function apiUsePromptSample(id) {
+  const s = apGetSamples().find(x=>x.id===id);
+  if(!s) return;
+  document.getElementById('api-analyze-prompt').value = s.text;
+  aToast(`✅ "${s.label}" 예시가 입력되었습니다`);
+}
+
+/* ── 사이트관리 > API프롬프트 관리 (마스터 전용) ──
+   샘플버튼/샘플내용 추가·수정·삭제 */
+function apSampleOpenForm(editId) {
+  apSampleEditId = editId || null;
+  document.getElementById('ap-sample-form').classList.add('open');
+  document.getElementById('aps-err').style.display = 'none';
+  if(editId) {
+    const s = apGetSamples().find(x=>x.id===editId);
+    if(!s) return;
+    document.getElementById('ap-sample-form-title').textContent = '샘플 수정';
+    document.getElementById('aps-label').value = s.label;
+    document.getElementById('aps-text').value = s.text;
+    document.getElementById('ap-sample-submit-btn').textContent = '수정';
+  } else {
+    document.getElementById('ap-sample-form-title').textContent = '샘플 추가';
+    document.getElementById('aps-label').value = '';
+    document.getElementById('aps-text').value = '';
+    document.getElementById('ap-sample-submit-btn').textContent = '추가';
+  }
+}
+function apSampleCancelForm() {
+  apSampleEditId = null;
+  document.getElementById('ap-sample-form').classList.remove('open');
+}
+function apSampleSubmit() {
+  const label = gv('aps-label').trim(), text = gv('aps-text').trim();
+  const err = document.getElementById('aps-err');
+  if(!label || !text) { err.style.display = 'block'; return; }
+  err.style.display = 'none';
+  const list = apGetSamples();
+  if(apSampleEditId) {
+    const idx = list.findIndex(x=>x.id===apSampleEditId);
+    if(idx>=0) { list[idx].label = label; list[idx].text = text; }
+    aToast('✅ 샘플이 수정되었습니다');
+  } else {
+    list.push({ id: 'smp_'+Date.now().toString(), label, text });
+    aToast('✅ 샘플이 추가되었습니다');
+  }
+  apSetSamples(list);
+  apSampleEditId = null;
+  document.getElementById('ap-sample-form').classList.remove('open');
+  renderApSampleList();
+}
+function apSampleDelete(id) {
+  if(!confirm('이 샘플을 삭제하시겠습니까?')) return;
+  apSetSamples(apGetSamples().filter(x=>x.id!==id));
+  renderApSampleList();
+  aToast('🗑 삭제되었습니다');
+}
+function renderApSampleListInner() {
+  const tb = document.getElementById('ap-sample-tbody');
+  if(!tb) return;
+  const list = apGetSamples();
+  tb.innerHTML = list.length ? list.map((s,i)=>`
+    <tr>
+      <td>${i+1}</td>
+      <td><b>${aEsc(s.label)}</b></td>
+      <td>${aEsc(s.text)}</td>
+      <td><button class="btn-sm" onclick="apSampleOpenForm('${s.id}')">수정</button> <button class="btn-sm btn-del" onclick="apSampleDelete('${s.id}')">삭제</button></td>
+    </tr>`).join('') : '<tr><td colspan="4" style="text-align:center;color:#aab;padding:2rem">등록된 샘플이 없습니다</td></tr>';
+}
+function renderApSampleList() {
+  renderApSampleListInner();
+  syncRefresh(AK_PROMPT_SAMPLES, renderApSampleListInner); // 다른 기기에서 편집한 최신 샘플 반영
 }
 
 /* ── ③ 기획서 작성 — AI 생성 + PPT/MD 다운로드 ── */
