@@ -3,9 +3,10 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>다우기술 쿠폰기획팀 업무포털...</title>
+<title>다우기술 쿠폰사업본부 업무포털</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pptxgenjs/3.12.0/pptxgen.bundle.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -292,6 +293,55 @@ input,select,textarea{font-family:inherit}
 .api-plan-tab-btn.active{background:var(--daou-blue);color:#fff}
 .api-plan-tab-panel{display:none}
 .api-plan-tab-panel.active{display:block}
+.cms-tabnav{display:flex;align-items:center;gap:.6rem;margin-bottom:.9rem;flex-wrap:wrap}
+.cms-tab-group{display:flex;border:1.5px solid var(--daou-blue);border-radius:9px;overflow:hidden}
+.cms-tab-btn{padding:9px 24px;font-size:13px;font-weight:600;border:none;background:#fff;color:var(--daou-blue);cursor:pointer;white-space:nowrap;transition:all .15s}
+.cms-tab-group .cms-tab-btn{border-right:1.5px solid var(--daou-blue)}
+.cms-tab-group .cms-tab-btn:last-child{border-right:none}
+.cms-tab-btn:hover{background:var(--daou-blue-light)}
+.cms-tab-btn.active{background:var(--daou-blue);color:#fff}
+.cms-tab-btn.cms-tab-excel{border:1.5px solid var(--daou-blue);border-radius:9px}
+.cms-crumb{font-size:12px;color:var(--ink-faint);font-weight:600;margin-bottom:1.1rem}
+.cms-crumb b{color:var(--ink)}
+.cms-tab-panel{display:none}
+.cms-tab-panel.active{display:block}
+.cms-form-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:1.7rem 1.9rem;max-width:640px;box-shadow:0 2px 8px rgba(13,34,81,.03)}
+.cms-form-row{display:flex;align-items:center;gap:14px;margin-bottom:1.15rem}
+.cms-form-row label{width:132px;flex-shrink:0;font-size:12.5px;font-weight:700;color:var(--ink-soft)}
+.cms-form-row label .req{color:var(--danger);margin-right:2px}
+.cms-form-row input,.cms-form-row select{flex:1;padding:9px 12px;border:1px solid var(--line);border-radius:7px;font-size:12.5px;color:var(--ink);outline:none;transition:border-color .15s}
+.cms-form-row input:focus,.cms-form-row select:focus{border-color:var(--daou-blue);box-shadow:0 0 0 3px rgba(26,127,184,.1)}
+.cms-input-suffix{flex:1;display:flex;align-items:center;border:1px solid var(--line);border-radius:7px;overflow:hidden;transition:border-color .15s}
+.cms-input-suffix:focus-within{border-color:var(--daou-blue);box-shadow:0 0 0 3px rgba(26,127,184,.1)}
+.cms-input-suffix input{border:none;flex:1;padding:9px 12px;font-size:12.5px;outline:none}
+.cms-input-suffix span{padding:0 13px;font-size:11.5px;color:var(--ink-faint);background:#fafbfd;border-left:1px solid var(--line);align-self:stretch;display:flex;align-items:center}
+.cms-form-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:.6rem}
+.cms-excel-toolbar{display:flex;align-items:center;gap:.7rem;margin:.8rem 0 .3rem;flex-wrap:wrap}
+.cms-excel-hint{font-size:11px;color:var(--ink-faint)}
+.cms-excel-cell-input{width:100%;min-width:80px;padding:6px 8px;border:1px solid var(--line);border-radius:5px;font-size:12px;outline:none;transition:border-color .15s}
+.cms-excel-cell-input:focus{border-color:var(--daou-blue);box-shadow:0 0 0 2px rgba(26,127,184,.1)}
+.csa-tabnav{display:flex;align-items:center;gap:.6rem;margin-bottom:1.1rem;flex-wrap:wrap}
+.csa-tab-group{display:flex;border:1.5px solid var(--daou-blue);border-radius:9px;overflow:hidden;width:fit-content}
+.csa-tab-btn{padding:9px 24px;font-size:13px;font-weight:600;border:none;background:#fff;color:var(--daou-blue);cursor:pointer;white-space:nowrap;border-right:1.5px solid var(--daou-blue);transition:all .15s}
+.csa-tab-btn:last-child{border-right:none}
+.csa-tab-btn:hover{background:var(--daou-blue-light)}
+.csa-tab-btn.active{background:var(--daou-blue);color:#fff}
+.csa-tab-panel{display:none}
+.csa-tab-panel.active{display:block}
+.csa-count-label{font-size:12px;color:var(--ink-faint);font-weight:600}
+.csa-pagination{display:flex;justify-content:center;gap:5px;margin-top:.9rem;flex-wrap:wrap}
+.csa-page-btn{min-width:30px;padding:6px 9px;border:1px solid var(--line);background:#fff;color:var(--ink-soft);border-radius:6px;font-size:12px;cursor:pointer;transition:all .15s}
+.csa-page-btn:hover{background:var(--daou-blue-light);color:var(--daou-blue-dark)}
+.csa-page-btn.active{background:var(--daou-blue);color:#fff;border-color:var(--daou-blue);font-weight:700}
+.csa-page-btn:disabled{opacity:.4;cursor:not-allowed}
+.csa-detail-textarea{width:100%;min-height:320px;border:1px solid var(--line);border-radius:8px;padding:1rem;font-size:12.5px;line-height:1.75;color:var(--ink-soft);resize:vertical;outline:none;font-family:inherit;white-space:pre-wrap}
+.csa-detail-actions{display:flex;gap:8px;margin:.9rem 0}
+.csa-detail-actions .aarc-btn{flex:1;text-align:center;font-size:12px;padding:9px 0;font-weight:600}
+.csa-stats-card{margin-bottom:1.1rem}
+.sd-ref-list{display:flex;flex-wrap:wrap;gap:8px;margin:.7rem 0 1.1rem}
+.sd-ref-chip{display:inline-flex;align-items:center;gap:7px;background:var(--bg);border:1px solid var(--line);border-radius:20px;padding:6px 8px 6px 14px;font-size:11.5px;color:var(--ink-soft)}
+.sd-ref-chip button{border:none;background:var(--line);color:var(--ink-faint);width:18px;height:18px;border-radius:50%;cursor:pointer;font-size:11px;line-height:1;flex-shrink:0}
+.sd-ref-chip button:hover{background:var(--danger);color:#fff}
 .api-list-dashboard{display:grid;grid-template-columns:repeat(6,1fr);gap:.65rem;margin-bottom:1.3rem}
 .api-dash-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:.95rem;cursor:pointer;transition:all .2s}
 .api-dash-card:hover{border-color:var(--daou-blue)}
@@ -391,14 +441,6 @@ input,select,textarea{font-family:inherit}
 .api-prompt-sample-btn{background:var(--daou-blue-light);color:var(--daou-blue-dark);border:1px solid #c5e0f0;padding:6px 14px;border-radius:16px;font-size:11.5px;font-weight:700;transition:all .15s}
 .api-prompt-sample-btn:hover{background:var(--daou-blue);color:#fff;border-color:var(--daou-blue)}
 .api-prompt-sample-empty{font-size:11px;color:var(--ink-faint)}
-.api-inquiry-box{background:#fff;border:1px solid var(--line);border-radius:14px;padding:1.35rem;margin-bottom:1.1rem}
-.aib-title{font-size:13.5px;font-weight:700;margin-bottom:.95rem;display:flex;justify-content:space-between;align-items:center}
-.aib-add-btn{font-size:11px;background:var(--daou-blue);color:#fff;border:none;padding:6px 13px;border-radius:7px;font-weight:700}
-.aib-item{display:flex;gap:.65rem;padding:.65rem 0;border-bottom:1px dashed var(--line-soft);font-size:12px;align-items:flex-start}
-.aib-item:last-child{border-bottom:none}
-.aib-item-num{color:var(--ink-faint);font-weight:700;flex-shrink:0}
-.aib-item-text{flex:1;color:var(--ink-soft);line-height:1.6}
-.aib-item-actions{display:flex;gap:4px;flex-shrink:0}
 .api-saved-analysis-list{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}
 .asal-title{font-size:12px;font-weight:700;padding:.8rem 1.35rem;border-bottom:1px solid var(--line);color:var(--ink-soft)}
 .asal-item{display:flex;justify-content:space-between;align-items:center;padding:.8rem 1.35rem;border-bottom:1px solid var(--line-soft);font-size:12px}
@@ -414,6 +456,12 @@ input,select,textarea{font-family:inherit}
 .api-doc-source-box{background:#fff;border:1px solid var(--line);border-radius:12px;padding:1.1rem 1.35rem;margin-bottom:1.1rem}
 .adsb-title{font-size:12px;font-weight:700;color:var(--ink);margin-bottom:.65rem}
 .adsb-summary{font-size:12px;color:var(--ink-faint);line-height:1.7;white-space:pre-wrap}
+.adsb-analysis-item{border:1px solid var(--line-soft);border-radius:10px;padding:.8rem .95rem;margin-bottom:.6rem;background:var(--bg)}
+.adsb-analysis-item:last-child{margin-bottom:0}
+.adsb-analysis-head{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:.45rem}
+.adsb-analysis-head span:first-child{font-size:12px;font-weight:700;color:var(--ink)}
+.adsb-analysis-date{font-size:10.5px;color:var(--ink-faint);flex-shrink:0;white-space:nowrap}
+.adsb-analysis-body{font-size:11.5px;color:var(--ink-soft);line-height:1.65;white-space:pre-wrap;max-height:130px;overflow-y:auto}
 .api-doc-editor-area{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}
 .adea-toolbar{display:flex;gap:5px;padding:.7rem .95rem;border-bottom:1px solid var(--line);background:#fafbfd}
 .adea-toolbar button{background:#fff;border:1px solid var(--line);border-radius:6px;padding:4px 9px;font-size:11px}
@@ -453,20 +501,22 @@ input,select,textarea{font-family:inherit}
     <button class="gnb-link" id="gnb-service" onclick="showPage('service-api')">서비스기획</button>
     <ul class="gnb-dropdown">
       <li><a href="#" onclick="showPage('service-api');return false">API연동 업무관리문서</a></li>
-      <li><a href="#" onclick="showPage('service-doc');return false">서비스기획문서 작성 (준비중)</a></li>
+      <li><a href="#" onclick="showPage('service-doc');return false">서비스기획문서 작성</a></li>
     </ul>
   </div>
   <div class="gnb-item">
     <button class="gnb-link" id="gnb-etc" onclick="showPage('etc-cms')">기타</button>
     <ul class="gnb-dropdown">
-      <li><a href="#" onclick="showPage('etc-cms');return false">CMS상품등록 자동화 (준비중)</a></li>
-      <li><a href="#" onclick="showPage('business-sales');return false">쿠폰데이터 분석 (준비중)</a></li>
+      <li><a href="#" onclick="showPage('etc-cms');return false">CMS상품등록 자동화 (테스트페이지)</a></li>
+      <li><a href="#" onclick="showPage('business-sales');return false">쿠폰데이터 분석</a></li>
     </ul>
   </div>
   <div class="gnb-item" id="gnb-sitemanage" style="display:none">
-    <button class="gnb-link" id="gnb-sitemanage-link" onclick="showPage('site-prompt')">사이트관리</button>
+    <button class="gnb-link" id="gnb-sitemanage-link" onclick="showPage('site-prompt-doc')">사이트관리</button>
     <ul class="gnb-dropdown">
-      <li><a href="#" onclick="showPage('site-prompt');return false">API프롬프트 관리</a></li>
+      <li id="gnb-li-site-prompt"><a href="#" onclick="showPage('site-prompt');return false">API프롬프트 관리</a></li>
+      <li id="gnb-li-site-prompt-csa"><a href="#" onclick="showPage('site-prompt-csa');return false">쿠폰데이터 분석 프롬프트 관리</a></li>
+      <li><a href="#" onclick="showPage('site-prompt-doc');return false">서비스 기획문서 양식파일 관리</a></li>
     </ul>
   </div>
   <div class="gnb-item" id="gnb-account" style="display:none">
@@ -488,7 +538,7 @@ input,select,textarea{font-family:inherit}
       <div id="home-hero"><h1>쿠폰사업본부 업무 포털</h1><p>업무 효율화·자동화 통합 관리 시스템 | 다우기술</p></div>
       <div id="home-stats">
         <div class="stat-card"><div class="stat-label">경쟁사 기업분석</div><div class="stat-value" id="stat-competitor">0</div><span class="stat-sub sub-blue">DART 분석 저장건</span></div>
-        <div class="stat-card"><div class="stat-label">쿠폰데이터 분석</div><div class="stat-value" id="stat-sales">-</div><span class="stat-sub sub-amber">준비중</span></div>
+        <div class="stat-card"><div class="stat-label">쿠폰데이터 분석</div><div class="stat-value" id="stat-sales">0</div><span class="stat-sub sub-amber">분석 저장건</span></div>
         <div class="stat-card"><div class="stat-label">API 업무</div><div class="stat-value" id="stat-api">0</div><span class="stat-sub sub-amber">등록건</span></div>
         <div class="stat-card"><div class="stat-label">사용자 계정</div><div class="stat-value" id="stat-users">0</div><span class="stat-sub sub-red">관리중</span></div>
       </div>
@@ -496,9 +546,9 @@ input,select,textarea{font-family:inherit}
         <div class="menu-card" onclick="showPage('business-market')"><div class="mc-icon ic-blue">📊</div><h3>시장현황/경쟁사 모니터링</h3><p>네이버 뉴스 API로 실제 시장동향 수집·관리</p></div>
         <div class="menu-card" onclick="showPage('business-competitor')"><div class="mc-icon ic-teal">🏢</div><h3>경쟁사 기업분석 관리 <span class="mc-badge">준비중</span></h3><p>사업자번호로 DART 기업공시를 조회하고 AI로 가공·저장</p></div>
         <div class="menu-card" onclick="showPage('service-api')"><div class="mc-icon ic-amber">🔗</div><h3>API연동 업무관리문서</h3><p>API 분석·기획서 작성 AI 자동화</p></div>
-        <div class="menu-card" onclick="showPage('service-doc')"><div class="mc-icon ic-pink">📝</div><h3>서비스기획문서 작성 <span class="mc-badge">준비중</span></h3><p>PPT·개발 MD·피그마 작성 자동화 기능을 준비하고 있습니다</p></div>
-        <div class="menu-card" onclick="showPage('etc-cms')"><div class="mc-icon ic-gray">⚙️</div><h3>CMS상품등록 자동화 <span class="mc-badge">준비중</span></h3><p>상품 데이터 자동 등록 일괄 처리</p></div>
-        <div class="menu-card" onclick="showPage('business-sales')"><div class="mc-icon ic-purple">📊</div><h3>쿠폰데이터 분석 <span class="mc-badge">준비중</span></h3><p>쿠폰 발행·사용 데이터 분석 기능을 준비하고 있습니다</p></div>
+        <div class="menu-card" onclick="showPage('service-doc')"><div class="mc-icon ic-pink">📝</div><h3>서비스기획문서 작성</h3><p>AI로 서비스 기획문서(PPT)를 자동 작성합니다</p></div>
+        <div class="menu-card" onclick="showPage('etc-cms')"><div class="mc-icon ic-gray">⚙️</div><h3>CMS상품등록 자동화 <span class="mc-badge">테스트페이지</span></h3><p>상품 데이터 등록·엑셀 일괄 등록·등록상품 관리</p></div>
+        <div class="menu-card" onclick="showPage('business-sales')"><div class="mc-icon ic-purple">📊</div><h3>쿠폰데이터 분석</h3><p>쿠폰 데이터 파일 업로드 후 AI로 발행·사용 데이터 분석</p></div>
       </div>
     </section>
 
@@ -659,11 +709,85 @@ input,select,textarea{font-family:inherit}
     </section>
 
     <section class="page" id="page-business-sales">
-      <div class="page-hd"><h2>쿠폰데이터 분석 <span style="font-size:11px;color:#8a6d2f;background:var(--gold-light);padding:2px 10px;border-radius:10px;font-weight:700;margin-left:4px;vertical-align:middle">준비중</span></h2><p>쿠폰 발행·사용 데이터를 분석하는 기능을 준비하고 있습니다</p></div>
-      <div class="api-dev-placeholder">
-        <div class="adp-icon">📊</div>
-        <h3>쿠폰데이터 분석 메뉴는 준비중입니다</h3>
-        <p>쿠폰 발행/사용 데이터 기반 분석 기능을 개발 중입니다. 추후 업데이트를 통해 제공될 예정입니다.</p>
+      <div class="page-hd"><h2>쿠폰데이터 분석</h2><p>쿠폰 발행·사용 데이터 파일을 업로드하고 AI로 분석합니다</p></div>
+
+      <div class="csa-tabnav">
+        <div class="csa-tab-group">
+          <button class="csa-tab-btn active" onclick="csaSwitchTab(1)">파일 업로드</button>
+          <button class="csa-tab-btn" onclick="csaSwitchTab(2)">AI 분석</button>
+          <button class="csa-tab-btn" onclick="csaSwitchTab(3)">분석 결과</button>
+        </div>
+      </div>
+
+      <!-- 탭1: 파일 업로드 -->
+      <div class="csa-tab-panel active" id="csa-tab-1">
+        <div class="upload-box" onclick="document.getElementById('csa-file-input').click()">
+          <div class="ub-icon">📁</div>
+          <p>Excel / CSV 파일을 클릭하여 업로드</p>
+          <span>지원 형식: .xlsx, .xls, .csv | 최대 10MB</span>
+          <input type="file" id="csa-file-input" accept=".xlsx,.xls,.csv" style="display:none" onchange="csaHandleUpload(event)"/>
+        </div>
+        <div class="form-err" id="csa-upload-err" style="display:none"></div>
+
+        <div class="toolbar">
+          <input type="text" id="csa-file-search" placeholder="파일명 검색..." oninput="csaFilePage=1;csaRenderFileList()"/>
+          <span class="csa-count-label ml-auto" id="csa-file-count"></span>
+        </div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th style="width:40px">#</th><th>파일명</th><th>행 / 열</th><th>크기</th><th>업로드일</th><th>수정</th><th>삭제</th></tr></thead>
+            <tbody id="csa-file-tbody"></tbody>
+          </table>
+        </div>
+        <div class="csa-pagination" id="csa-file-pagination"></div>
+      </div>
+
+      <!-- 탭2: AI 분석 -->
+      <div class="csa-tab-panel" id="csa-tab-2">
+        <div class="api-analyze-select-bar">
+          <div class="aasb-row">
+            <span class="aasb-label">분석할 파일</span>
+            <select class="aasb-select" id="csa-analyze-target" onchange="csaOnTargetChange()">
+              <option value="">-- 저장된 파일을 선택하세요 --</option>
+            </select>
+          </div>
+        </div>
+        <div class="csa-stats-card" id="csa-stats-card" style="display:none"></div>
+        <div class="api-analyze-prompt-box">
+          <div class="aapb-title">분석 요청 내용</div>
+          <div class="api-prompt-sample-row" id="csa-prompt-sample-row"></div>
+          <textarea class="aapb-textarea" id="csa-analyze-prompt" placeholder="예) 월별 발행량과 사용량 추이를 분석하고 이상치가 있으면 짚어줘"></textarea>
+          <div class="aapb-engine-select">
+            <span class="aapb-engine-label">분석 엔진</span>
+            <label class="aapb-engine-opt" style="opacity:.5" title="추후 지원 예정"><input type="radio" name="csa-ai-engine" value="gemini" disabled/> Gemini (준비중)</label>
+            <label class="aapb-engine-opt"><input type="radio" name="csa-ai-engine" value="mistral" checked/> Mistral AI (무료)</label>
+            <label class="aapb-engine-opt" style="opacity:.5" title="추후 지원 예정"><input type="radio" name="csa-ai-engine" value="claude" disabled/> Claude (준비중)</label>
+          </div>
+          <button class="api-btn-analyze" id="csa-btn-analyze" onclick="csaRunAnalysis()">✨ AI 분석 실행</button>
+        </div>
+        <div class="api-analyze-result-card" id="csa-analyze-result">
+          <div class="aarc-header">
+            <span class="aarc-title">📄 분석 결과 <span style="font-weight:400;color:#9099ab;font-size:11px">(직접 수정 가능)</span></span>
+            <div class="aarc-actions">
+              <button class="aarc-btn" onclick="csaSaveAnalysis()">💾 분석결과 저장</button>
+            </div>
+          </div>
+          <textarea class="aarc-content aarc-textarea" id="csa-analyze-content"></textarea>
+        </div>
+      </div>
+
+      <!-- 탭3: 분석 결과 -->
+      <div class="csa-tab-panel" id="csa-tab-3">
+        <div class="toolbar">
+          <input type="text" id="csa-result-search" placeholder="파일명 / 요청내용 검색..." oninput="csaResultPage=1;csaRenderResultList()"/>
+        </div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th style="width:40px">#</th><th>파일명</th><th>분석 요청 내용</th><th>날짜</th><th>상세보기</th><th>삭제</th></tr></thead>
+            <tbody id="csa-result-tbody"></tbody>
+          </table>
+        </div>
+        <div class="csa-pagination" id="csa-result-pagination"></div>
       </div>
     </section>
 
@@ -753,7 +877,7 @@ input,select,textarea{font-family:inherit}
           </div>
           <div class="api-analyze-result-card" id="api-analyze-result">
             <div class="aarc-header">
-              <span class="aarc-title">📄 분석된 내용 + API연동처 문의사항 <span style="font-weight:400;color:#9099ab;font-size:11px">(직접 수정 가능)</span></span>
+              <span class="aarc-title">📄 분석된 내용 <span style="font-weight:400;color:#9099ab;font-size:11px">(직접 수정 가능)</span></span>
               <div class="aarc-actions">
                 <button class="aarc-btn" onclick="apiExportWord()">📄 Word 다운로드</button>
                 <button class="aarc-btn" onclick="apiSaveToNotion()">🗂 Notion 저장</button>
@@ -761,13 +885,6 @@ input,select,textarea{font-family:inherit}
               </div>
             </div>
             <textarea class="aarc-content aarc-textarea" id="api-analyze-content"></textarea>
-          </div>
-          <div class="api-inquiry-box">
-            <div class="aib-title">
-              <span>📨 연동처 문의사항</span>
-              <button class="aib-add-btn" onclick="apiAddInquiry()">+ 문의 추가</button>
-            </div>
-            <div id="api-inquiry-items"></div>
           </div>
           <div class="api-saved-analysis-list">
             <div class="asal-title">저장된 분석 결과 (API 업무별)</div>
@@ -794,15 +911,17 @@ input,select,textarea{font-family:inherit}
             </div>
           </div>
           <div class="api-doc-source-box">
-            <div class="adsb-title">📎 참고 자료 (분석결과 · 문의사항 자동 반영)</div>
-            <div class="adsb-summary" id="api-doc-source-summary">연동할 API 업무를 선택하면 분석결과와 문의사항이 표시됩니다</div>
+            <div class="adsb-title">📎 참고 자료 (분석결과)</div>
+            <div class="adsb-summary" id="api-doc-source-summary">연동할 API 업무를 선택하면 API문서 분석 결과가 표시됩니다</div>
           </div>
           <div class="api-analyze-prompt-box">
             <div class="aapb-title" id="api-doc-prompt-title">📊 서비스 기획서 작성 요청</div>
             <textarea class="aapb-textarea" id="api-doc-prompt" placeholder="예) 이지웰 복지몰 API 연동을 위한 서비스 기획서를 작성해줘. 쿠폰 발행/사용 관리자 시스템에 어떤 화면과 기능이 추가되어야 하는지 포함해서 정리해줘"></textarea>
             <div class="aapb-engine-select">
-              <span class="aapb-engine-label">생성 엔진</span>
-              <label class="aapb-engine-opt"><input type="radio" name="doc-ai-engine" value="gemini" checked/> Gemini (무료)</label>
+              <span class="aapb-engine-label">분석 엔진</span>
+              <label class="aapb-engine-opt" style="opacity:.5" title="추후 지원 예정"><input type="radio" name="doc-ai-engine" value="gemini" disabled/> Gemini (준비중)</label>
+              <label class="aapb-engine-opt"><input type="radio" name="doc-ai-engine" value="mistral" checked/> Mistral AI (무료)</label>
+              <label class="aapb-engine-opt" style="opacity:.5" title="추후 지원 예정"><input type="radio" name="doc-ai-engine" value="claude" disabled/> Claude (준비중)</label>
             </div>
             <button class="api-btn-analyze" id="api-btn-doc-generate" onclick="apiGenerateDoc()">✨ AI로 문서 내용 생성</button>
           </div>
@@ -897,49 +1016,110 @@ input,select,textarea{font-family:inherit}
     </section>
 
     <section class="page" id="page-service-doc">
-      <div class="page-hd"><h2>서비스기획문서 작성 <span class="mc-badge">준비중</span></h2><p>아래 기능들을 순차적으로 준비하고 있습니다</p></div>
-      <div class="sd-prep-grid">
-        <div class="sd-prep-card">
-          <div class="adp-icon">📊</div>
-          <h3>PPT 문서 작성 및 수정</h3>
-          <span class="mc-badge">준비중</span>
-          <p>서비스기획서·제안서 등 PPT 문서를 AI로 자동 생성하고 수정하는 기능을 준비하고 있습니다.</p>
-        </div>
-        <div class="sd-prep-card">
-          <div class="adp-icon">📝</div>
-          <h3>개발 MD파일 작성 및 수정</h3>
-          <span class="mc-badge">준비중</span>
-          <p>기능 명세서·API 명세서 등 개발 문서를 Markdown 형식으로 자동 생성하고 수정하는 기능을 준비하고 있습니다.</p>
-        </div>
-        <div class="sd-prep-card">
-          <div class="adp-icon">🎨</div>
-          <h3>피그마 작성 및 수정</h3>
-          <span class="mc-badge">준비중</span>
-          <p>서비스 화면 와이어프레임·목업을 Figma와 연동해 자동 생성하고 수정하는 기능을 준비하고 있습니다.</p>
+      <div class="page-hd"><h2>서비스기획문서 작성</h2><p>참고자료와 요청 내용을 바탕으로 AI가 서비스 기획문서(PPT)를 작성합니다</p></div>
+
+      <div class="csa-tabnav">
+        <div class="csa-tab-group">
+          <button class="csa-tab-btn active" onclick="sdSwitchTab('ops')">운영페이지 개선개발</button>
+          <button class="csa-tab-btn" onclick="sdSwitchTab('new')">신규 서비스 개발</button>
         </div>
       </div>
+
+      <div class="csa-tab-panel active" id="sd-panel-ops" data-cat="ops"></div>
+      <div class="csa-tab-panel" id="sd-panel-new" data-cat="new"></div>
     </section>
 
     <section class="page" id="page-etc-cms">
-      <div class="page-hd"><h2>CMS 상품등록 자동화 <span class="mc-badge">준비중</span></h2><p>Excel/CSV 파일을 업로드하여 상품 데이터를 자동 등록합니다</p></div>
-      <div class="upload-box" onclick="document.getElementById('cms-file-input').click()">
-        <div class="ub-icon">📁</div>
-        <p>Excel / CSV 파일을 클릭하여 업로드</p>
-        <span>지원 형식: .xlsx, .xls, .csv | 최대 10MB</span>
-        <input type="file" id="cms-file-input" accept=".xlsx,.xls,.csv" style="display:none" onchange="handleCmsUpload(event)"/>
+      <div class="page-hd"><h2>CMS 상품등록 자동화 <span class="mc-badge">테스트페이지</span></h2><p>상품등록 · 엑셀 일괄등록 · 등록상품 관리를 한 화면에서 처리합니다</p></div>
+
+      <div class="cms-tabnav">
+        <div class="cms-tab-group">
+          <button class="cms-tab-btn active" onclick="cmsSwitchTab(1)">상품등록</button>
+          <button class="cms-tab-btn" onclick="cmsSwitchTab(2)">등록상품 관리</button>
+        </div>
+        <button class="cms-tab-btn cms-tab-excel ml-auto" onclick="cmsSwitchTab(3)">엑셀 등록</button>
       </div>
-      <div id="cms-parse-err" style="display:none;color:#c0392b;font-size:12px;margin-bottom:.75rem;padding:8px 12px;background:#fff0f0;border-radius:6px;border:1px solid #f0c0c0"></div>
-      <div id="etc-cms-preview"></div>
-      <div id="etc-cms-actions" style="display:none;margin-bottom:1rem">
-        <div class="toolbar">
-          <span id="cms-count-label" style="font-size:12px;color:#3a4a6b;font-weight:500"></span>
-          <button class="btn-add ml-auto" onclick="runCmsAuto()">▶ 자동등록 실행</button>
-          <button class="btn-export" onclick="resetCms()">초기화</button>
+      <div class="cms-crumb" id="cms-crumb">CMS 상품등록 <span>&gt;</span> <b>상품등록</b></div>
+
+      <!-- 탭1: 상품등록 -->
+      <div class="cms-tab-panel active" id="cms-tab-1">
+        <div class="cms-form-card">
+          <div class="cms-form-row">
+            <label>상품명 :</label>
+            <input type="text" id="cms-f-name" placeholder="상품명을 입력하세요"/>
+          </div>
+          <div class="cms-form-row">
+            <label><span class="req">*</span>상품업체 :</label>
+            <select id="cms-f-vendor">
+              <option value="교촌치킨">교촌치킨</option>
+              <option value="BHC치킨">BHC치킨</option>
+              <option value="푸라닭치킨">푸라닭치킨</option>
+            </select>
+          </div>
+          <div class="cms-form-row">
+            <label><span class="req">*</span>상품(공급)단가 :</label>
+            <div class="cms-input-suffix"><input type="number" id="cms-f-price" min="0" placeholder="0"/><span>원</span></div>
+          </div>
+          <div class="cms-form-row">
+            <label>이벤트코드 :</label>
+            <input type="text" id="cms-f-eventcode" placeholder="이벤트코드를 입력하세요"/>
+          </div>
+          <div class="cms-form-row">
+            <label><span class="req">*</span>상품코드 :</label>
+            <input type="text" id="cms-f-code" placeholder="상품코드를 입력하세요"/>
+          </div>
+          <div class="cms-form-row">
+            <label><span class="req">*</span>쿠폰 종류 :</label>
+            <select id="cms-f-type">
+              <option value="상품교환권">상품교환권</option>
+              <option value="금액권">금액권</option>
+            </select>
+          </div>
+          <div class="cms-form-row">
+            <label><span class="req">*</span>쿠폰유효기간 :</label>
+            <div class="cms-input-suffix"><input type="number" id="cms-f-period" min="1" value="59"/><span>일</span></div>
+          </div>
+          <div class="form-err" id="cms-f-err"></div>
+          <div class="cms-form-actions">
+            <button class="btn-export" id="cms-f-cancel-btn" style="display:none" onclick="cmsResetForm()">취소</button>
+            <button class="btn-add" id="cms-f-submit-btn" onclick="cmsSubmitProduct()">등록</button>
+          </div>
         </div>
       </div>
-      <div id="etc-cms-log" style="display:none">
-        <p style="font-size:11px;color:#7a90b8;margin-bottom:4px;font-weight:600">처리 로그</p>
-        <div class="log-box" id="cms-log-box"></div>
+
+      <!-- 탭2: 등록상품 관리 -->
+      <div class="cms-tab-panel" id="cms-tab-2">
+        <div class="toolbar">
+          <input type="text" id="cms-list-search" placeholder="상품명 / 상품코드 검색..." oninput="cmsRenderList()"/>
+          <button class="btn-export ml-auto" onclick="cmsDeleteSelected()">선택 삭제</button>
+        </div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr>
+              <th style="width:36px"><input type="checkbox" id="cms-list-check-all" onchange="cmsToggleAll(this)"/></th>
+              <th>#</th><th>등록일</th><th>상품명</th><th>상품(공급)단가</th><th>이벤트코드</th><th>상품코드</th><th>쿠폰종류</th><th>쿠폰유효기간</th><th>확인 및 수정</th><th>삭제</th>
+            </tr></thead>
+            <tbody id="cms-list-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 탭3: 엑셀 등록 -->
+      <div class="cms-tab-panel" id="cms-tab-3">
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr>
+              <th style="width:44px">구분</th><th>상품명</th><th>상품(공급)단가</th><th>이벤트코드</th><th>상품코드</th><th>쿠폰종류</th><th>쿠폰유효기간</th>
+            </tr></thead>
+            <tbody id="cms-excel-tbody"></tbody>
+          </table>
+        </div>
+        <div class="cms-excel-toolbar">
+          <button class="btn-export" onclick="cmsExcelAddRow()">+ 행 추가</button>
+          <span class="cms-excel-hint">💡 엑셀에서 표를 복사한 뒤 첫 칸을 클릭하고 붙여넣기(Ctrl+V) 하면 자동으로 채워집니다</span>
+          <button class="btn-add ml-auto" onclick="cmsExcelSubmit()">등록</button>
+        </div>
+        <div class="form-err" id="cms-excel-err"></div>
       </div>
     </section>
 
@@ -984,6 +1164,57 @@ input,select,textarea{font-family:inherit}
       </div>
     </section>
 
+    <section class="page" id="page-site-prompt-csa">
+      <div class="page-hd"><h2>쿠폰데이터 분석 프롬프트 관리</h2><p>쿠폰데이터 분석 &gt; AI 분석 화면에 노출되는 분석요청 예시 샘플을 관리합니다 (마스터 전용)</p></div>
+      <div class="sec-note">💡 여기서 추가·수정한 샘플 버튼은 모든 계정의 '쿠폰데이터 분석 &gt; AI 분석' 화면에 동일하게 노출됩니다.</div>
+      <div class="toolbar">
+        <button class="btn-add" onclick="csaSampleOpenForm()">+ 샘플 추가</button>
+      </div>
+      <div class="tbl-wrap">
+        <table><thead><tr><th>#</th><th>버튼 이름</th><th>샘플 내용</th><th>관리</th></tr></thead><tbody id="csa-sample-tbody"></tbody></table>
+      </div>
+      <div class="form-inline" id="csa-sample-form">
+        <div class="fi-title" id="csa-sample-form-title">샘플 추가</div>
+        <div class="form-row">
+          <div class="fg"><label>버튼 이름 *</label><input id="csas-label" placeholder="예) 발행/사용 추이 분석" style="min-width:180px"/></div>
+          <div class="fg" style="flex:1"><label>샘플 내용 *</label><input id="csas-text" placeholder="분석요청 프롬프트 예시 내용" style="min-width:320px"/></div>
+          <button class="btn-add" style="height:32px;align-self:flex-end" id="csa-sample-submit-btn" onclick="csaSampleSubmit()">추가</button>
+          <button class="btn-export" style="height:32px;align-self:flex-end" onclick="csaSampleCancelForm()">취소</button>
+        </div>
+        <div class="form-err" id="csas-err">버튼 이름과 샘플 내용을 모두 입력해주세요.</div>
+      </div>
+    </section>
+
+    <section class="page" id="page-site-prompt-doc">
+      <div class="page-hd"><h2>서비스 기획문서 양식파일 관리</h2><p>내가 등록한 양식파일은 같은 계정으로 로그인했을 때만 보이고 적용됩니다 (계정별 개별 관리)</p></div>
+      <div class="sec-note">💡 여기서 등록한 양식파일은 같은 계정으로 로그인 시 '서비스기획문서 작성' 화면에서 AI가 참고하는 기본 양식으로 자동 반영됩니다. 마스터·서브 계정 모두 본인 계정에 등록할 수 있으며, 다른 계정에는 보이지 않습니다.</div>
+
+      <div class="csa-tabnav">
+        <div class="csa-tab-group">
+          <button class="csa-tab-btn active" onclick="sdtSwitchCat('ops')">운영페이지 개선개발</button>
+          <button class="csa-tab-btn" onclick="sdtSwitchCat('new')">신규 서비스 개발</button>
+        </div>
+      </div>
+
+      <div class="toolbar">
+        <button class="btn-add" onclick="sdtOpenForm()">+ 샘플 추가</button>
+      </div>
+      <div class="tbl-wrap">
+        <table><thead><tr><th>#</th><th>양식파일</th><th>설명</th><th>등록일</th><th>관리</th></tr></thead><tbody id="sdt-tbody"></tbody></table>
+      </div>
+      <div class="form-inline" id="sdt-form">
+        <div class="fi-title" id="sdt-form-title">양식파일 추가</div>
+        <div class="form-row">
+          <div class="fg"><label>양식파일 * (PPT/PDF/이미지)</label><input type="file" id="sdt-file" accept=".pptx,.ppt,.pdf,image/*"/></div>
+          <div class="fg" style="flex:1"><label>설명 (선택)</label><input id="sdt-desc" placeholder="예) 표준 서비스 기획서 양식"/></div>
+          <button class="btn-add" style="height:32px;align-self:flex-end" id="sdt-submit-btn" onclick="sdtSubmit()">추가</button>
+          <button class="btn-export" style="height:32px;align-self:flex-end" onclick="sdtCancelForm()">취소</button>
+        </div>
+        <div style="font-size:11px;color:var(--ink-faint);margin-bottom:6px" id="sdt-file-label"></div>
+        <div class="form-err" id="sdt-err"></div>
+      </div>
+    </section>
+
     <section class="page" id="page-lock">
       <div class="lock-box">
         <div class="lock-emoji">🔒</div>
@@ -1020,6 +1251,80 @@ input,select,textarea{font-family:inherit}
     <div class="modal-actions">
       <button class="btn-cancel" onclick="closeEditModal()">취소</button>
       <button class="btn-primary" onclick="submitEditPw()">변경</button>
+    </div>
+  </div>
+</div>
+
+<!-- CMS상품등록 자동화: 삭제 확인 모달 (네이티브 confirm() 대신 사용) -->
+<div class="modal-bg" id="cms-confirm-modal-bg">
+  <div class="modal">
+    <h2>삭제 확인</h2><p class="modal-sub" id="cms-confirm-msg"></p>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="cmsConfirmCancel()">취소</button>
+      <button class="btn-primary" style="background:var(--danger)" onclick="cmsConfirmOk()">삭제</button>
+    </div>
+  </div>
+</div>
+
+<!-- 쿠폰데이터 분석: 파일명 수정 모달 -->
+<div class="modal-bg" id="csa-rename-modal-bg">
+  <div class="modal">
+    <h2>파일명 수정</h2>
+    <label>파일명</label><input type="text" id="csa-rename-input" placeholder="파일명 입력"/>
+    <div class="modal-err" id="csa-rename-err"></div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="csaCloseRenameModal()">취소</button>
+      <button class="btn-primary" onclick="csaSubmitRename()">저장</button>
+    </div>
+  </div>
+</div>
+
+<!-- 쿠폰데이터 분석: 삭제 확인 모달 (네이티브 confirm() 대신 사용) -->
+<div class="modal-bg" id="csa-confirm-modal-bg">
+  <div class="modal">
+    <h2>삭제 확인</h2><p class="modal-sub" id="csa-confirm-msg"></p>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="csaConfirmCancel()">취소</button>
+      <button class="btn-primary" style="background:var(--danger)" onclick="csaConfirmOk()">삭제</button>
+    </div>
+  </div>
+</div>
+
+<!-- 쿠폰데이터 분석: 분석결과 상세보기 모달 -->
+<div class="modal-bg" id="csa-detail-modal-bg">
+  <div class="modal" style="width:640px;max-width:92vw">
+    <h2>분석 결과 상세</h2>
+    <p class="modal-sub" id="csa-detail-sub"></p>
+    <textarea class="csa-detail-textarea" id="csa-detail-content" readonly></textarea>
+    <div class="csa-detail-actions">
+      <button class="aarc-btn" onclick="csaExportWord()">📄 Word 다운로드</button>
+      <button class="aarc-btn" onclick="csaExportExcel()">📊 Excel 다운로드</button>
+      <button class="aarc-btn" onclick="csaExportPPT()">🖥 PPT 다운로드</button>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-cancel" style="flex:1" onclick="csaCloseDetailModal()">닫기</button>
+    </div>
+  </div>
+</div>
+
+<!-- 서비스 기획문서 양식파일 관리: 삭제 확인 모달 (네이티브 confirm() 대신 사용) -->
+<div class="modal-bg" id="sdt-confirm-modal-bg">
+  <div class="modal">
+    <h2>삭제 확인</h2><p class="modal-sub" id="sdt-confirm-msg"></p>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="sdtConfirmCancel()">취소</button>
+      <button class="btn-primary" style="background:var(--danger)" onclick="sdtConfirmOk()">삭제</button>
+    </div>
+  </div>
+</div>
+
+<!-- 서비스기획문서 작성: 저장된 기획서 삭제 확인 모달 -->
+<div class="modal-bg" id="sd-confirm-modal-bg">
+  <div class="modal">
+    <h2>삭제 확인</h2><p class="modal-sub" id="sd-confirm-msg"></p>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="sdConfirmCancel()">취소</button>
+      <button class="btn-primary" style="background:var(--danger)" onclick="sdConfirmOk()">삭제</button>
     </div>
   </div>
 </div>
@@ -1068,7 +1373,9 @@ async function doLogin(){
   cleanupLegacyMarketData(); // 로그인한 사용자 스코프에서 구버전 잔존 데이터 정리
   closeLogin();updateHeader();
   document.getElementById('gnb-account').style.display=currentUser.role==='master'?'block':'none';
-  document.getElementById('gnb-sitemanage').style.display=currentUser.role==='master'?'block':'none';
+  document.getElementById('gnb-sitemanage').style.display='block';
+  document.getElementById('gnb-li-site-prompt').style.display=currentUser.role==='master'?'block':'none';
+  document.getElementById('gnb-li-site-prompt-csa').style.display=currentUser.role==='master'?'block':'none';
   if(pendingPage){const t=pendingPage;pendingPage=null;showPage(t)}else updateStats();
 }
 function doLogout(){
@@ -1097,6 +1404,8 @@ function resetSessionMemoryState(){
   if(typeof apiInitialized!=='undefined') apiInitialized=false;
   if(typeof cdaLookupData!=='undefined') cdaLookupData=[];
   if(typeof cdaSavedEditId!=='undefined') cdaSavedEditId=null;
+  if(typeof sdInitialized!=='undefined') sdInitialized=false; // 계정 전환 시 서비스기획문서 작성 화면을 완전히 새로 그려, 이전 계정의 참고자료/작성중이던 내용이 남지 않도록 함
+  if(typeof sdRefFiles!=='undefined') sdRefFiles={ops:[],new:[]};
   // 계정 전환 시 다른 계정에서 열려있던 상세보기 탭/모달이 남아있지 않도록 정리
   const mmTn3=document.getElementById('mm-tn3'); if(mmTn3) mmTn3.style.display='none';
   const apiDetailModal=document.getElementById('api-detail-modal-bg'); if(apiDetailModal) apiDetailModal.classList.remove('open');
@@ -1122,32 +1431,34 @@ async function submitEditPw(){
 const SIDEBAR_MAP={
   'business-market':{title:'사업기획',items:[{id:'business-market',label:'시장현황/경쟁사 모니터링',icon:'📊'},{id:'business-competitor',label:'경쟁사 기업분석 관리 (준비중)',icon:'🏢'}]},
   'business-competitor':{title:'사업기획',items:[{id:'business-market',label:'시장현황/경쟁사 모니터링',icon:'📊'},{id:'business-competitor',label:'경쟁사 기업분석 관리 (준비중)',icon:'🏢'}]},
-  'service-api':{title:'서비스기획',items:[{id:'service-api',label:'API연동 업무관리문서',icon:'🔗'},{id:'service-doc',label:'서비스기획문서 작성 (준비중)',icon:'📝'}]},
-  'service-doc':{title:'서비스기획',items:[{id:'service-api',label:'API연동 업무관리문서',icon:'🔗'},{id:'service-doc',label:'서비스기획문서 작성 (준비중)',icon:'📝'}]},
-  'etc-cms':{title:'기타',items:[{id:'etc-cms',label:'CMS상품등록 자동화 (준비중)',icon:'⚙️'},{id:'business-sales',label:'쿠폰데이터 분석 (준비중)',icon:'📊'}]},
-  'business-sales':{title:'기타',items:[{id:'etc-cms',label:'CMS상품등록 자동화 (준비중)',icon:'⚙️'},{id:'business-sales',label:'쿠폰데이터 분석 (준비중)',icon:'📊'}]},
+  'service-api':{title:'서비스기획',items:[{id:'service-api',label:'API연동 업무관리문서',icon:'🔗'},{id:'service-doc',label:'서비스기획문서 작성',icon:'📝'}]},
+  'service-doc':{title:'서비스기획',items:[{id:'service-api',label:'API연동 업무관리문서',icon:'🔗'},{id:'service-doc',label:'서비스기획문서 작성',icon:'📝'}]},
+  'etc-cms':{title:'기타',items:[{id:'etc-cms',label:'CMS상품등록 자동화 (테스트페이지)',icon:'⚙️'},{id:'business-sales',label:'쿠폰데이터 분석',icon:'📊'}]},
+  'business-sales':{title:'기타',items:[{id:'etc-cms',label:'CMS상품등록 자동화 (테스트페이지)',icon:'⚙️'},{id:'business-sales',label:'쿠폰데이터 분석',icon:'📊'}]},
   'account-manage':{title:'계정관리',items:[{id:'account-manage',label:'아이디/패스워드 관리',icon:'👤'}]},
-  'site-prompt':{title:'사이트관리',items:[{id:'site-prompt',label:'API프롬프트 관리',icon:'🧩'}]},
+  'site-prompt':{title:'사이트관리',items:[{id:'site-prompt',label:'API프롬프트 관리',icon:'🧩',masterOnly:true},{id:'site-prompt-csa',label:'쿠폰데이터 분석 프롬프트 관리',icon:'📊',masterOnly:true},{id:'site-prompt-doc',label:'서비스 기획문서 양식파일 관리',icon:'📁'}]},
+  'site-prompt-csa':{title:'사이트관리',items:[{id:'site-prompt',label:'API프롬프트 관리',icon:'🧩',masterOnly:true},{id:'site-prompt-csa',label:'쿠폰데이터 분석 프롬프트 관리',icon:'📊',masterOnly:true},{id:'site-prompt-doc',label:'서비스 기획문서 양식파일 관리',icon:'📁'}]},
+  'site-prompt-doc':{title:'사이트관리',items:[{id:'site-prompt',label:'API프롬프트 관리',icon:'🧩',masterOnly:true},{id:'site-prompt-csa',label:'쿠폰데이터 분석 프롬프트 관리',icon:'📊',masterOnly:true},{id:'site-prompt-doc',label:'서비스 기획문서 양식파일 관리',icon:'📁'}]},
 };
-const AUTH_REQUIRED=['business-market','business-competitor','business-sales','service-api','service-doc','etc-cms','account-manage','site-prompt'];
+const AUTH_REQUIRED=['business-market','business-competitor','business-sales','service-api','service-doc','etc-cms','account-manage','site-prompt','site-prompt-csa','site-prompt-doc'];
 
 function showPage(id){
   if(AUTH_REQUIRED.includes(id)&&!currentUser){pendingPage=id;id='lock'}
   else if(id==='account-manage'&&(!currentUser||currentUser.role!=='master')){pendingPage=id;id='lock'}
-  else if(id==='site-prompt'&&(!currentUser||currentUser.role!=='master')){pendingPage=id;id='lock'}
+  else if((id==='site-prompt'||id==='site-prompt-csa')&&(!currentUser||currentUser.role!=='master')){pendingPage=id;id='lock'}
   else pendingPage=null;
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   const pg=document.getElementById('page-'+id);if(pg)pg.classList.add('active');
   const sb=document.getElementById('sidebar'),sn=document.getElementById('sidebar-nav'),st=document.getElementById('sidebar-title');
   if(id==='home'||id==='lock'){sb.style.display='none'}
-  else{sb.style.display='block';const cfg=SIDEBAR_MAP[id];if(cfg){st.textContent=cfg.title;sn.innerHTML=cfg.items.map(i=>`<a href="#" class="${i.id===id?'active':''}" onclick="showPage('${i.id}');return false"><span>${i.icon}</span> ${i.label}</a>`).join('')}}
+  else{sb.style.display='block';const cfg=SIDEBAR_MAP[id];if(cfg){st.textContent=cfg.title;const visibleItems=cfg.items.filter(i=>!i.masterOnly||(currentUser&&currentUser.role==='master'));sn.innerHTML=visibleItems.map(i=>`<a href="#" class="${i.id===id?'active':''}" onclick="showPage('${i.id}');return false"><span>${i.icon}</span> ${i.label}</a>`).join('')}}
   ['business','service','etc','account-link','sitemanage-link'].forEach(k=>{const e=document.getElementById('gnb-'+k);if(e)e.classList.remove('active')});
   if(['business-market','business-competitor'].includes(id))document.getElementById('gnb-business').classList.add('active');
   if(['service-api','service-doc'].includes(id))document.getElementById('gnb-service').classList.add('active');
   if(['etc-cms','business-sales'].includes(id))document.getElementById('gnb-etc').classList.add('active');
   if(id==='account-manage'){const e=document.getElementById('gnb-account-link');if(e)e.classList.add('active')}
-  if(id==='site-prompt'){const e=document.getElementById('gnb-sitemanage-link');if(e)e.classList.add('active')}
-  const rm={'business-market':mmInit,'business-competitor':cdaInit,'service-api':apiInit,'account-manage':renderAccount,'site-prompt':renderApSampleList};
+  if(id==='site-prompt'||id==='site-prompt-csa'||id==='site-prompt-doc'){const e=document.getElementById('gnb-sitemanage-link');if(e)e.classList.add('active')}
+  const rm={'business-market':mmInit,'business-competitor':cdaInit,'service-api':apiInit,'account-manage':renderAccount,'site-prompt':renderApSampleList,'etc-cms':cmsInit,'business-sales':csaInit,'site-prompt-csa':renderCsaSampleList,'service-doc':sdInit,'site-prompt-doc':sdtInit};
   if(rm[id])rm[id]();updateStats();
 }
 
@@ -1402,22 +1713,1383 @@ function cdaDeleteAnalysis(id){
    DOC_TEMPLATES/selectTemplate/wrapText/insertLine/saveDoc/exportDoc/renderDocList/loadDoc/delDoc는
    더 이상 사용하지 않음 */
 
-let cmsData=[];
-function handleCmsUpload(e){
-  const file=e.target.files[0];if(!file)return;
-  document.getElementById('cms-parse-err').style.display='none';
-  const ext=file.name.split('.').pop().toLowerCase();
-  if(ext==='csv'){
-    const r=new FileReader();r.onload=ev=>{try{const lines=ev.target.result.split(/\r?\n/).filter(l=>l.trim());const h=lines[0].split(',').map(x=>x.replace(/^"|"$/g,'').trim());cmsData=lines.slice(1).map(l=>{const c=l.match(/(".*?"|[^,]+)/g)||[];return h.reduce((o,hh,i)=>{o[hh]=(c[i]||'').replace(/^"|"$/g,'').trim();return o},{})}).filter(r=>Object.values(r).some(v=>v));renderCmsPreview(h)}catch(err){showCmsErr('CSV 파싱 오류: '+err.message)}};r.readAsText(file,'UTF-8');
-  }else if(ext==='xlsx'||ext==='xls'){
-    if(typeof XLSX==='undefined'){showCmsErr('SheetJS 로드 실패. 페이지를 새로고침 후 시도하세요.');return}
-    const r=new FileReader();r.onload=ev=>{try{const wb=XLSX.read(ev.target.result,{type:'array'});const ws=wb.Sheets[wb.SheetNames[0]];const json=XLSX.utils.sheet_to_json(ws,{defval:''});if(!json.length){showCmsErr('데이터가 없습니다.');return}cmsData=json;renderCmsPreview(Object.keys(json[0]))}catch(err){showCmsErr('Excel 파싱 오류: '+err.message)}};r.readAsArrayBuffer(file);
-  }else{showCmsErr('지원하지 않는 형식입니다. (.xlsx, .xls, .csv)')}
+/* ══════════════════════════════════════════════════════
+   CMS상품등록 자동화 (테스트페이지)
+   기획서(20260702_01_상품등록 페이지 개발) 기준 개발:
+   - 탭1 상품등록 / 탭2 등록상품 관리 / 탭3 엑셀 등록
+   - 등록상품 목록(CMS_PRODUCTS_KEY)은 회사 공용 데이터이므로
+     AK_LIST와 동일하게 syncSave/syncRefresh(서버 KV)로 동기화한다.
+   ══════════════════════════════════════════════════════ */
+const CMS_PRODUCTS_KEY = 'cms_products_v1';
+const cmsGetProducts = () => { try{return JSON.parse(localStorage.getItem(CMS_PRODUCTS_KEY)||'[]')}catch{return[]} };
+const cmsSetProducts = v => syncSave(CMS_PRODUCTS_KEY, JSON.stringify(v));
+let cmsEditId = null;
+let cmsExcelRows = [];
+
+function cmsInit(){
+  cmsEditId = null;
+  cmsExcelInit();
+  cmsSwitchTab(1);
+  syncRefresh(CMS_PRODUCTS_KEY, ()=>{ if(document.getElementById('cms-tab-2')?.classList.contains('active')) cmsRenderList(); });
 }
-function showCmsErr(msg){const el=document.getElementById('cms-parse-err');el.textContent=msg;el.style.display='block'}
-function renderCmsPreview(h){if(!cmsData.length){showCmsErr('파싱된 데이터가 없습니다.');return}const p=cmsData.slice(0,5);document.getElementById('etc-cms-preview').innerHTML=`<div class="tbl-wrap" style="margin-bottom:.75rem"><table><thead><tr>${h.map(hh=>`<th>${hh}</th>`).join('')}</tr></thead><tbody>${p.map(r=>`<tr>${h.map(hh=>`<td>${r[hh]??''}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;document.getElementById('etc-cms-actions').style.display='block';sv('cms-count-label',`총 ${cmsData.length}건 로드됨 (미리보기: ${Math.min(5,cmsData.length)}건)`)}
-function runCmsAuto(){if(!cmsData.length)return;const log=document.getElementById('cms-log-box');document.getElementById('etc-cms-log').style.display='block';log.innerHTML='<div class="log-line info">[INFO] 자동등록 시작...</div>';let i=0,ok=0,fail=0;const t=setInterval(()=>{if(i>=cmsData.length){log.innerHTML+=`<div class="log-line info">[완료] ${cmsData.length}건 처리 — 성공: ${ok} / 실패: ${fail}</div>`;clearInterval(t);return}const row=cmsData[i];const k=Object.keys(row);const isE=Math.random()<0.05;isE?fail++:ok++;log.innerHTML+=`<div class="log-line ${isE?'err':''}">[${isE?'ERR':'OK '}] ${String(i+1).padStart(3,'0')}/${cmsData.length} ${row[k[0]]||'항목'} ${isE?'❌':'✓'}</div>`;log.scrollTop=log.scrollHeight;i++},100)}
-function resetCms(){cmsData=[];['etc-cms-preview','cms-parse-err'].forEach(id=>{const e=document.getElementById(id);if(e){e.innerHTML='';e.style.display='none'}});['etc-cms-actions','etc-cms-log'].forEach(id=>{const e=document.getElementById(id);if(e)e.style.display='none'});document.getElementById('cms-file-input').value=''}
+
+function cmsSwitchTab(n){
+  document.querySelectorAll('#page-etc-cms .cms-tab-btn').forEach((b,i)=>b.classList.toggle('active', i===n-1));
+  document.querySelectorAll('#page-etc-cms .cms-tab-panel').forEach((p,i)=>p.classList.toggle('active', i===n-1));
+  const crumbs={1:'상품등록',2:'등록상품 관리',3:'엑셀 등록'};
+  const crumbEl=document.getElementById('cms-crumb');
+  if(crumbEl) crumbEl.innerHTML=`CMS 상품등록 <span>&gt;</span> <b>${crumbs[n]}</b>`;
+  if(n===2) cmsRenderList();
+  if(n!==1 && cmsEditId===null) cmsResetForm();
+}
+
+/* ── 탭1: 상품등록 ── */
+function cmsResetForm(){
+  cmsEditId = null;
+  clr('cms-f-name','cms-f-price','cms-f-eventcode','cms-f-code');
+  const vendor=document.getElementById('cms-f-vendor'); if(vendor) vendor.value='교촌치킨';
+  const type=document.getElementById('cms-f-type'); if(type) type.value='상품교환권';
+  const period=document.getElementById('cms-f-period'); if(period) period.value=59;
+  const err=document.getElementById('cms-f-err'); if(err) err.style.display='none';
+  const submitBtn=document.getElementById('cms-f-submit-btn'); if(submitBtn) submitBtn.textContent='등록';
+  const cancelBtn=document.getElementById('cms-f-cancel-btn'); if(cancelBtn) cancelBtn.style.display='none';
+}
+function cmsSubmitProduct(){
+  const name=gv('cms-f-name').trim();
+  const vendor=gv('cms-f-vendor');
+  const price=gv('cms-f-price').trim();
+  const eventcode=gv('cms-f-eventcode').trim();
+  const code=gv('cms-f-code').trim();
+  const type=gv('cms-f-type');
+  const period=gv('cms-f-period').trim();
+  const errEl=document.getElementById('cms-f-err');
+  if(!vendor||!price||!code||!type||!period){
+    errEl.textContent='* 표시된 필수 항목(상품업체 / 상품(공급)단가 / 상품코드 / 쿠폰종류 / 쿠폰유효기간)을 모두 입력해주세요.';
+    errEl.style.display='block';
+    return;
+  }
+  if(isNaN(Number(price))||Number(price)<0){
+    errEl.textContent='상품(공급)단가는 0 이상의 숫자로 입력해주세요.';
+    errEl.style.display='block';
+    return;
+  }
+  if(isNaN(Number(period))||Number(period)<1){
+    errEl.textContent='쿠폰유효기간은 1 이상의 숫자로 입력해주세요.';
+    errEl.style.display='block';
+    return;
+  }
+  errEl.style.display='none';
+  const products=cmsGetProducts();
+  if(cmsEditId){
+    const idx=products.findIndex(p=>p.id===cmsEditId);
+    if(idx>-1) products[idx]={...products[idx],name,vendor,price,eventcode,code,type,period};
+    cmsSetProducts(products);
+    aToast('✏️ 상품 정보가 수정되었습니다');
+  }else{
+    products.push({id:'cms_'+Date.now()+'_'+Math.random().toString(36).slice(2,7),name,vendor,price,eventcode,code,type,period,date:new Date().toISOString().slice(0,10)});
+    cmsSetProducts(products);
+    aToast('✅ 상품이 등록되었습니다');
+  }
+  cmsResetForm();
+  cmsSwitchTab(2);
+}
+function cmsEditProduct(id){
+  const p=cmsGetProducts().find(x=>x.id===id);
+  if(!p)return;
+  cmsEditId=id;
+  sv2('cms-f-name',p.name);sv2('cms-f-vendor',p.vendor||'교촌치킨');sv2('cms-f-price',p.price);
+  sv2('cms-f-eventcode',p.eventcode||'');sv2('cms-f-code',p.code);sv2('cms-f-type',p.type);sv2('cms-f-period',p.period);
+  document.getElementById('cms-f-submit-btn').textContent='수정 완료';
+  document.getElementById('cms-f-cancel-btn').style.display='inline-block';
+  cmsSwitchTab(1);
+}
+function sv2(id,v){const e=document.getElementById(id);if(e)e.value=v}
+
+/* ── 탭2: 등록상품 관리 ── */
+function cmsRenderList(){
+  const q=(gv('cms-list-search')||'').trim().toLowerCase();
+  let list=cmsGetProducts();
+  if(q) list=list.filter(p=>(p.name||'').toLowerCase().includes(q)||(p.code||'').toLowerCase().includes(q));
+  const tbody=document.getElementById('cms-list-tbody');
+  if(!tbody)return;
+  if(!list.length){
+    tbody.innerHTML=`<tr><td colspan="11" style="text-align:center;color:var(--ink-faint);padding:2.2rem 0">등록된 상품이 없습니다</td></tr>`;
+    return;
+  }
+  tbody.innerHTML=list.map((p,i)=>`
+    <tr>
+      <td><input type="checkbox" class="cms-row-check" data-id="${p.id}"/></td>
+      <td>${i+1}</td>
+      <td>${aEsc(p.date)||'-'}</td>
+      <td>${aEsc(p.name)}</td>
+      <td>${Number(p.price||0).toLocaleString()}원</td>
+      <td>${aEsc(p.eventcode)||'-'}</td>
+      <td>${aEsc(p.code)}</td>
+      <td><span class="badge b-blue">${aEsc(p.type)}</span></td>
+      <td>${aEsc(p.period)}일</td>
+      <td><button class="btn-sm" onclick="cmsEditProduct('${p.id}')">확인 및 수정</button></td>
+      <td><button class="btn-sm btn-del" onclick="cmsDeleteProduct('${p.id}')">삭제</button></td>
+    </tr>`).join('');
+}
+function cmsToggleAll(cb){document.querySelectorAll('.cms-row-check').forEach(el=>el.checked=cb.checked)}
+let _cmsConfirmCb=null;
+function cmsConfirm(msg,cb){
+  _cmsConfirmCb=cb;
+  document.getElementById('cms-confirm-msg').textContent=msg;
+  document.getElementById('cms-confirm-modal-bg').classList.add('open');
+}
+function cmsConfirmCancel(){
+  document.getElementById('cms-confirm-modal-bg').classList.remove('open');
+  _cmsConfirmCb=null;
+}
+function cmsConfirmOk(){
+  const cb=_cmsConfirmCb;
+  document.getElementById('cms-confirm-modal-bg').classList.remove('open');
+  _cmsConfirmCb=null;
+  if(cb)cb();
+}
+function cmsDeleteProduct(id){
+  cmsConfirm('삭제하시겠습니까?', ()=>{
+    cmsSetProducts(cmsGetProducts().filter(x=>x.id!==id));
+    cmsRenderList();
+    aToast('🗑 삭제되었습니다');
+  });
+}
+function cmsDeleteSelected(){
+  const checked=Array.from(document.querySelectorAll('.cms-row-check:checked')).map(el=>el.dataset.id);
+  if(!checked.length){aToast('⚠ 선택된 항목이 없습니다');return}
+  cmsConfirm(`선택한 ${checked.length}건을 삭제하시겠습니까?`, ()=>{
+    cmsSetProducts(cmsGetProducts().filter(x=>!checked.includes(x.id)));
+    cmsRenderList();
+    aToast('🗑 선택 항목이 삭제되었습니다');
+  });
+}
+
+/* ── 탭3: 엑셀 등록 (그리드 붙여넣기 / 직접입력) ── */
+function cmsExcelEmptyRow(){return{name:'',price:'',eventcode:'',code:'',type:'',period:''}}
+function cmsExcelInit(){cmsExcelRows=Array.from({length:5},cmsExcelEmptyRow);cmsExcelRenderRows()}
+function cmsExcelRenderRows(){
+  const tbody=document.getElementById('cms-excel-tbody');
+  if(!tbody)return;
+  tbody.innerHTML=cmsExcelRows.map((r,i)=>`
+    <tr>
+      <td style="text-align:center;color:var(--ink-faint);font-weight:700">${i+1}</td>
+      <td><input class="cms-excel-cell-input" type="text" value="${aEsc(r.name)}" oninput="cmsExcelUpdate(${i},'name',this.value)" onpaste="cmsExcelPaste(event,${i},0)"/></td>
+      <td><input class="cms-excel-cell-input" type="number" value="${aEsc(r.price)}" oninput="cmsExcelUpdate(${i},'price',this.value)" onpaste="cmsExcelPaste(event,${i},1)"/></td>
+      <td><input class="cms-excel-cell-input" type="text" value="${aEsc(r.eventcode)}" oninput="cmsExcelUpdate(${i},'eventcode',this.value)" onpaste="cmsExcelPaste(event,${i},2)"/></td>
+      <td><input class="cms-excel-cell-input" type="text" value="${aEsc(r.code)}" oninput="cmsExcelUpdate(${i},'code',this.value)" onpaste="cmsExcelPaste(event,${i},3)"/></td>
+      <td><input class="cms-excel-cell-input" type="text" value="${aEsc(r.type)}" oninput="cmsExcelUpdate(${i},'type',this.value)" onpaste="cmsExcelPaste(event,${i},4)"/></td>
+      <td><input class="cms-excel-cell-input" type="number" value="${aEsc(r.period)}" oninput="cmsExcelUpdate(${i},'period',this.value)" onpaste="cmsExcelPaste(event,${i},5)"/></td>
+    </tr>`).join('');
+}
+function cmsExcelUpdate(i,key,val){if(cmsExcelRows[i])cmsExcelRows[i][key]=val}
+function cmsExcelAddRow(){cmsExcelRows.push(cmsExcelEmptyRow());cmsExcelRenderRows()}
+function cmsExcelPaste(e,rowIdx,colIdx){
+  const text=(e.clipboardData||window.clipboardData).getData('text');
+  if(!text||!/[\t\n]/.test(text))return; // 단일 값 붙여넣기는 기본 동작 유지
+  e.preventDefault();
+  const keys=['name','price','eventcode','code','type','period'];
+  const lines=text.replace(/\r/g,'').split('\n').filter(l=>l.length);
+  lines.forEach((line,r)=>{
+    const cells=line.split('\t');
+    const targetRow=rowIdx+r;
+    while(cmsExcelRows.length<=targetRow)cmsExcelRows.push(cmsExcelEmptyRow());
+    cells.forEach((val,c)=>{
+      const key=keys[colIdx+c];
+      if(!key)return;
+      let v=val.trim();
+      if(key==='price'||key==='period') v=v.replace(/[^\d.]/g,''); // 엑셀에서 복사한 "10,000원" 등의 쉼표·단위 제거
+      cmsExcelRows[targetRow][key]=v;
+    });
+  });
+  cmsExcelRenderRows();
+}
+function cmsExcelSubmit(){
+  const errEl=document.getElementById('cms-excel-err');
+  errEl.style.display='none';
+  const valid=cmsExcelRows.filter(r=>r.name.trim()&&r.code.trim());
+  if(!valid.length){errEl.textContent='등록할 데이터가 없습니다. 상품명과 상품코드는 필수입니다.';errEl.style.display='block';return}
+  const products=cmsGetProducts();
+  const now=new Date().toISOString().slice(0,10);
+  valid.forEach(r=>{
+    products.push({id:'cms_'+Date.now()+'_'+Math.random().toString(36).slice(2,7),name:r.name.trim(),vendor:'교촌치킨',price:r.price||'0',eventcode:r.eventcode||'',code:r.code.trim(),type:r.type||'상품교환권',period:r.period||'59',date:now});
+  });
+  cmsSetProducts(products);
+  cmsExcelInit();
+  aToast(`📥 ${valid.length}건이 일괄 등록되었습니다`);
+  cmsSwitchTab(2);
+}
+
+
+
+/* ══════════════════════════════════════════════════════
+   기타 > 쿠폰데이터 분석
+   - 탭1 파일 업로드(엑셀/CSV 파싱+저장, 목록 10건 페이징, 수정/삭제)
+   - 탭2 AI 분석(Mistral AI 연동, 파일의 정확한 통계를 프롬프트에 주입)
+   - 탭3 분석 결과(목록 10건 페이징, 상세보기, Word/Excel/PPT 다운로드)
+   파일 목록/분석 결과 모두 회사 공용 데이터로 간주하여 AK_LIST와 동일하게
+   syncSave/syncRefresh(서버 KV)로 동기화한다. ══════════════════════════════════════════════════════ */
+const CSA_FILES_KEY = 'csa_files_v1';
+const CSA_RESULTS_KEY = 'csa_results_v1';
+const CSA_PAGE_SIZE = 10;
+const csaGetFiles = () => { try{return JSON.parse(localStorage.getItem(CSA_FILES_KEY)||'[]')}catch{return[]} };
+const csaSetFiles = v => syncSave(CSA_FILES_KEY, JSON.stringify(v));
+const csaGetResults = () => { try{return JSON.parse(localStorage.getItem(CSA_RESULTS_KEY)||'[]')}catch{return[]} };
+const csaSetResults = v => syncSave(CSA_RESULTS_KEY, JSON.stringify(v));
+
+let csaFilePage = 1;
+let csaResultPage = 1;
+let csaRenameTargetId = null;
+let csaDetailId = null;
+let _csaConfirmCb = null;
+let csaCurrentAnalysisText = '';
+let csaSampleEditId = null;
+
+/* ── 쿠폰데이터 분석 프롬프트 샘플 (사이트관리 > 쿠폰데이터 분석 프롬프트 관리, 마스터 전용 편집) ──
+   'AI 분석' 화면에 노출되는 예시 버튼들의 원본 데이터. API프롬프트 관리와 동일하게
+   마스터가 관리하고 모든 계정+기기가 동일하게 보는 전역 데이터이므로
+   localStorage 캐시 + 서버(KV) 동기화 방식을 사용한다. */
+const CSA_PROMPT_SAMPLES_KEY = 'csa_prompt_samples_v1';
+const CSA_PROMPT_SAMPLE_DEFAULTS = [
+  { id:'default-trend', label:'발행/사용 추이 분석', text:'월별/기간별 발행량과 사용량 추이를 분석하고 특징을 짚어줘' },
+  { id:'default-outlier', label:'이상치·특이사항 확인', text:'데이터에서 이상치나 특이사항이 있는지 확인해줘' },
+  { id:'default-rank', label:'항목별 상위 순위 정리', text:'주요 항목별 상위 순위를 정리해줘' }
+];
+const csaGetSamples = () => { try{const r=JSON.parse(localStorage.getItem(CSA_PROMPT_SAMPLES_KEY));return (r&&r.length)?r:[...CSA_PROMPT_SAMPLE_DEFAULTS]}catch{return [...CSA_PROMPT_SAMPLE_DEFAULTS]} };
+const csaSetSamples = v => syncSave(CSA_PROMPT_SAMPLES_KEY, JSON.stringify(v));
+
+function csaInit(){
+  csaFilePage = 1;
+  csaResultPage = 1;
+  csaSwitchTab(1);
+  csaRenderFileList();
+  csaRefreshTargetSelect();
+  csaRenderResultList();
+  csaRenderPromptSamples();
+  document.getElementById('csa-analyze-result').classList.remove('show');
+  document.getElementById('csa-stats-card').style.display = 'none';
+  syncRefresh(CSA_FILES_KEY, ()=>{ csaRenderFileList(); csaRefreshTargetSelect(); });
+  syncRefresh(CSA_RESULTS_KEY, csaRenderResultList);
+}
+function csaSwitchTab(n){
+  document.querySelectorAll('#page-business-sales .csa-tab-btn').forEach((b,i)=>b.classList.toggle('active', i===n-1));
+  document.querySelectorAll('#page-business-sales .csa-tab-panel').forEach((p,i)=>p.classList.toggle('active', i===n-1));
+  if(n===2) csaRenderPromptSamples();
+}
+
+/* 공용 페이지네이션 렌더러: containerId에 이전/숫자/다음 버튼을 그린다 */
+function csaRenderPagination(containerId, currentPage, totalPages, gotoFnName){
+  const el = document.getElementById(containerId);
+  if(!el) return;
+  if(totalPages<=1){ el.innerHTML=''; return; }
+  let html = `<button class="csa-page-btn" ${currentPage===1?'disabled':''} onclick="${gotoFnName}(${currentPage-1})">‹</button>`;
+  for(let p=1;p<=totalPages;p++){
+    html += `<button class="csa-page-btn ${p===currentPage?'active':''}" onclick="${gotoFnName}(${p})">${p}</button>`;
+  }
+  html += `<button class="csa-page-btn" ${currentPage===totalPages?'disabled':''} onclick="${gotoFnName}(${currentPage+1})">›</button>`;
+  el.innerHTML = html;
+}
+
+/* 커스텀 확인 모달 (네이티브 confirm() 미사용) */
+function csaConfirm(msg, cb){
+  _csaConfirmCb = cb;
+  document.getElementById('csa-confirm-msg').textContent = msg;
+  document.getElementById('csa-confirm-modal-bg').classList.add('open');
+}
+function csaConfirmCancel(){
+  document.getElementById('csa-confirm-modal-bg').classList.remove('open');
+  _csaConfirmCb = null;
+}
+function csaConfirmOk(){
+  const cb = _csaConfirmCb;
+  document.getElementById('csa-confirm-modal-bg').classList.remove('open');
+  _csaConfirmCb = null;
+  if(cb) cb();
+}
+
+/* ── 탭1: 파일 업로드/관리 ── */
+function csaParseCSV(text){
+  const lines = text.split(/\r?\n/).filter(l=>l.trim().length);
+  if(!lines.length) return [];
+  const headers = lines[0].split(',').map(h=>h.replace(/^"|"$/g,'').trim());
+  return lines.slice(1).map(line=>{
+    const cells = line.match(/(".*?"|[^,]+)/g) || [];
+    return headers.reduce((o,h,i)=>{ o[h] = (cells[i]||'').replace(/^"|"$/g,'').trim(); return o; }, {});
+  });
+}
+
+/* 업로드된 전체 행(rows) 기준으로 정확한 집계 통계를 계산한다.
+   (숫자/텍스트 컬럼 판별 → 숫자 컬럼은 합계/평균/최소/최대, 텍스트 컬럼은 상위 빈도값) */
+function csaComputeStats(rows){
+  if(!rows.length) return { columns:[], numeric:{}, text:{}, rowCount:0 };
+  const columns = Object.keys(rows[0]);
+  const numeric = {}, text = {};
+  columns.forEach(col=>{
+    const vals = rows.map(r=>r[col]).filter(v=>v!==undefined && v!==null && String(v).trim()!=='');
+    const nums = vals.map(v=>Number(String(v).replace(/,/g,''))).filter(v=>!isNaN(v));
+    if(vals.length && nums.length >= vals.length*0.7){
+      const sum = nums.reduce((a,b)=>a+b,0);
+      numeric[col] = { count: nums.length, sum, avg: sum/nums.length, min: Math.min(...nums), max: Math.max(...nums) };
+    } else if(vals.length){
+      const freq = {};
+      vals.forEach(v=>{ const k=String(v); freq[k]=(freq[k]||0)+1; });
+      const top = Object.entries(freq).sort((a,b)=>b[1]-a[1]).slice(0,5);
+      text[col] = { count: vals.length, uniqueCount: Object.keys(freq).length, top };
+    }
+  });
+  return { columns, numeric, text, rowCount: rows.length };
+}
+
+function csaHandleUpload(e){
+  const file = e.target.files[0];
+  if(!file) return;
+  const errEl = document.getElementById('csa-upload-err');
+  errEl.style.display = 'none';
+  const MAX_SIZE = 10*1024*1024;
+  if(file.size > MAX_SIZE){
+    errEl.textContent = `파일 크기가 너무 큽니다 (${(file.size/1024/1024).toFixed(1)}MB). 10MB 이하 파일만 업로드 가능합니다.`;
+    errEl.style.display = 'block';
+    e.target.value = '';
+    return;
+  }
+  const ext = file.name.split('.').pop().toLowerCase();
+  if(ext==='csv'){
+    const r = new FileReader();
+    r.onload = ev=>{
+      try{ csaSaveParsedFile(file, csaParseCSV(ev.target.result)); }
+      catch(err){ errEl.textContent = 'CSV 파싱 오류: '+err.message; errEl.style.display='block'; }
+    };
+    r.readAsText(file, 'UTF-8');
+  }else if(ext==='xlsx'||ext==='xls'){
+    if(typeof XLSX==='undefined'){ errEl.textContent='엑셀 라이브러리 로드 실패. 페이지를 새로고침 후 다시 시도해주세요.'; errEl.style.display='block'; return; }
+    const r = new FileReader();
+    r.onload = ev=>{
+      try{
+        const wb = XLSX.read(ev.target.result, {type:'array'});
+        const ws = wb.Sheets[wb.SheetNames[0]];
+        const rows = XLSX.utils.sheet_to_json(ws, {defval:''});
+        csaSaveParsedFile(file, rows);
+      }catch(err){ errEl.textContent = '엑셀 파싱 오류: '+err.message; errEl.style.display='block'; }
+    };
+    r.readAsArrayBuffer(file);
+  }else{
+    errEl.textContent = '지원하지 않는 형식입니다. (.xlsx, .xls, .csv)';
+    errEl.style.display = 'block';
+  }
+}
+
+function csaSaveParsedFile(file, rows){
+  const errEl = document.getElementById('csa-upload-err');
+  if(!rows.length){ errEl.textContent='파싱된 데이터가 없습니다. 헤더 행과 데이터가 포함된 파일인지 확인해주세요.'; errEl.style.display='block'; document.getElementById('csa-file-input').value=''; return; }
+  const stats = csaComputeStats(rows);
+  const files = csaGetFiles();
+  files.unshift({
+    id: 'csaf_'+Date.now()+'_'+Math.random().toString(36).slice(2,7),
+    name: file.name,
+    size: file.size,
+    columns: stats.columns,
+    rowCount: stats.rowCount,
+    numeric: stats.numeric,
+    text: stats.text,
+    previewRows: rows.slice(0,200), // 저장용량 절약을 위해 미리보기/AI참고용 표본은 최대 200행까지만 보관 (집계 통계는 전체 행 기준으로 이미 계산됨)
+    date: new Date().toLocaleString('ko-KR')
+  });
+  csaSetFiles(files);
+  document.getElementById('csa-file-input').value = '';
+  csaFilePage = 1;
+  csaRenderFileList();
+  csaRefreshTargetSelect();
+  aToast(`✅ "${file.name}" 파일이 저장되었습니다 (총 ${stats.rowCount.toLocaleString()}행)`);
+}
+
+function csaRenderFileList(){
+  const q = (gv('csa-file-search')||'').trim().toLowerCase();
+  let list = csaGetFiles();
+  if(q) list = list.filter(f=>f.name.toLowerCase().includes(q));
+  sv('csa-file-count', `총 ${list.length}건`);
+  const totalPages = Math.max(1, Math.ceil(list.length/CSA_PAGE_SIZE));
+  if(csaFilePage > totalPages) csaFilePage = totalPages;
+  const startIdx = (csaFilePage-1)*CSA_PAGE_SIZE;
+  const pageItems = list.slice(startIdx, startIdx+CSA_PAGE_SIZE);
+  const tbody = document.getElementById('csa-file-tbody');
+  if(!pageItems.length){
+    tbody.innerHTML = `<tr><td colspan="7" style="text-align:center;color:var(--ink-faint);padding:2.2rem 0">저장된 파일이 없습니다</td></tr>`;
+  }else{
+    tbody.innerHTML = pageItems.map((f,i)=>`
+      <tr>
+        <td>${startIdx+i+1}</td>
+        <td>${aEsc(f.name)}</td>
+        <td>${f.rowCount.toLocaleString()}행 / ${f.columns.length}열</td>
+        <td>${(f.size/1024).toFixed(0)}KB</td>
+        <td>${aEsc(f.date)}</td>
+        <td><button class="btn-sm" onclick="csaOpenRenameModal('${f.id}')">수정</button></td>
+        <td><button class="btn-sm btn-del" onclick="csaDeleteFile('${f.id}')">삭제</button></td>
+      </tr>`).join('');
+  }
+  csaRenderPagination('csa-file-pagination', csaFilePage, totalPages, 'csaGoFilePage');
+}
+function csaGoFilePage(p){ csaFilePage = p; csaRenderFileList(); }
+
+function csaOpenRenameModal(id){
+  const f = csaGetFiles().find(x=>x.id===id);
+  if(!f) return;
+  csaRenameTargetId = id;
+  document.getElementById('csa-rename-input').value = f.name;
+  document.getElementById('csa-rename-err').style.display = 'none';
+  document.getElementById('csa-rename-modal-bg').classList.add('open');
+  setTimeout(()=>document.getElementById('csa-rename-input').focus(), 80);
+}
+function csaCloseRenameModal(){
+  document.getElementById('csa-rename-modal-bg').classList.remove('open');
+  csaRenameTargetId = null;
+}
+function csaSubmitRename(){
+  const name = document.getElementById('csa-rename-input').value.trim();
+  const errEl = document.getElementById('csa-rename-err');
+  if(!name){ errEl.textContent='파일명을 입력하세요.'; errEl.style.display='block'; return; }
+  const files = csaGetFiles();
+  const idx = files.findIndex(x=>x.id===csaRenameTargetId);
+  if(idx>-1){ files[idx].name = name; csaSetFiles(files); }
+  csaCloseRenameModal();
+  csaRenderFileList();
+  csaRefreshTargetSelect();
+  aToast('✏️ 파일명이 수정되었습니다');
+}
+function csaDeleteFile(id){
+  csaConfirm('이 파일을 삭제하시겠습니까?\n이미 저장된 분석 결과는 유지됩니다.', ()=>{
+    const wasSelected = document.getElementById('csa-analyze-target').value === id;
+    csaSetFiles(csaGetFiles().filter(x=>x.id!==id));
+    csaRenderFileList();
+    csaRefreshTargetSelect();
+    if(wasSelected){
+      document.getElementById('csa-stats-card').style.display = 'none';
+      document.getElementById('csa-analyze-result').classList.remove('show');
+    }
+    aToast('🗑 삭제되었습니다');
+  });
+}
+
+/* ── 탭2: AI 분석 ── */
+function csaRefreshTargetSelect(){
+  const sel = document.getElementById('csa-analyze-target');
+  if(!sel) return;
+  const cur = sel.value;
+  const files = csaGetFiles();
+  sel.innerHTML = '<option value="">-- 저장된 파일을 선택하세요 --</option>' +
+    files.map(f=>`<option value="${f.id}">${aEsc(f.name)} (${f.rowCount.toLocaleString()}행)</option>`).join('');
+  if(files.find(x=>x.id===cur)) sel.value = cur;
+}
+
+function csaBuildStatsHTML(f){
+  let html = `<div class="cards-row" style="margin-bottom:.8rem">
+    <div class="info-card"><div class="ic-label">총 행수</div><div class="ic-val">${f.rowCount.toLocaleString()}</div></div>
+    <div class="info-card"><div class="ic-label">컬럼 수</div><div class="ic-val">${f.columns.length}</div></div>
+    <div class="info-card"><div class="ic-label">파일 크기</div><div class="ic-val">${(f.size/1024).toFixed(0)}KB</div></div>
+    <div class="info-card"><div class="ic-label">업로드일</div><div class="ic-val" style="font-size:13px">${aEsc((f.date||'').split(' ')[0])}</div></div>
+  </div>`;
+  const numericCols = Object.keys(f.numeric||{});
+  if(numericCols.length){
+    html += `<div class="tbl-wrap" style="margin-bottom:.6rem"><table><thead><tr><th>숫자 컬럼</th><th>합계</th><th>평균</th><th>최소</th><th>최대</th></tr></thead><tbody>`;
+    numericCols.forEach(col=>{
+      const s = f.numeric[col];
+      html += `<tr><td>${aEsc(col)}</td><td>${s.sum.toLocaleString()}</td><td>${s.avg.toFixed(1)}</td><td>${s.min.toLocaleString()}</td><td>${s.max.toLocaleString()}</td></tr>`;
+    });
+    html += `</tbody></table></div>`;
+  }
+  const textCols = Object.keys(f.text||{});
+  if(textCols.length){
+    html += `<div class="tbl-wrap"><table><thead><tr><th>텍스트 컬럼</th><th>고유값 수</th><th>최다값 Top3</th></tr></thead><tbody>`;
+    textCols.forEach(col=>{
+      const s = f.text[col];
+      const topStr = (s.top||[]).slice(0,3).map(([v,c])=>`${v}(${c})`).join(', ');
+      html += `<tr><td>${aEsc(col)}</td><td>${s.uniqueCount}</td><td>${aEsc(topStr)}</td></tr>`;
+    });
+    html += `</tbody></table></div>`;
+  }
+  return html;
+}
+
+function csaOnTargetChange(){
+  const id = document.getElementById('csa-analyze-target').value;
+  const card = document.getElementById('csa-stats-card');
+  document.getElementById('csa-analyze-result').classList.remove('show');
+  if(!id){ card.style.display='none'; return; }
+  const f = csaGetFiles().find(x=>x.id===id);
+  if(!f){ card.style.display='none'; return; }
+  card.style.display = 'block';
+  card.innerHTML = csaBuildStatsHTML(f);
+}
+
+function csaRenderPromptSamplesInner(){
+  const el = document.getElementById('csa-prompt-sample-row');
+  if(!el) return;
+  const samples = csaGetSamples();
+  el.innerHTML = samples.length
+    ? samples.map(s=>`<button type="button" class="api-prompt-sample-btn" onclick="csaUsePromptSample('${s.id}')">${aEsc(s.label)}</button>`).join('')
+    : '<span class="api-prompt-sample-empty">등록된 예시가 없습니다 (사이트관리 &gt; 쿠폰데이터 분석 프롬프트 관리에서 추가)</span>';
+}
+function csaRenderPromptSamples(){
+  csaRenderPromptSamplesInner();
+  syncRefresh(CSA_PROMPT_SAMPLES_KEY, csaRenderPromptSamplesInner); // 다른 기기(마스터)가 관리한 최신 샘플 반영
+}
+function csaUsePromptSample(id){
+  const s = csaGetSamples().find(x=>x.id===id);
+  if(!s) return;
+  document.getElementById('csa-analyze-prompt').value = s.text;
+  aToast(`✅ "${s.label}" 예시가 입력되었습니다`);
+}
+
+/* ── 사이트관리 > 쿠폰데이터 분석 프롬프트 관리 (마스터 전용) ──
+   API프롬프트 관리와 동일한 방식으로 샘플버튼/샘플내용 추가·수정·삭제 */
+function csaSampleOpenForm(editId){
+  csaSampleEditId = editId || null;
+  document.getElementById('csa-sample-form').classList.add('open');
+  document.getElementById('csas-err').style.display = 'none';
+  if(editId){
+    const s = csaGetSamples().find(x=>x.id===editId);
+    if(!s) return;
+    document.getElementById('csa-sample-form-title').textContent = '샘플 수정';
+    document.getElementById('csas-label').value = s.label;
+    document.getElementById('csas-text').value = s.text;
+    document.getElementById('csa-sample-submit-btn').textContent = '수정';
+  }else{
+    document.getElementById('csa-sample-form-title').textContent = '샘플 추가';
+    document.getElementById('csas-label').value = '';
+    document.getElementById('csas-text').value = '';
+    document.getElementById('csa-sample-submit-btn').textContent = '추가';
+  }
+}
+function csaSampleCancelForm(){
+  csaSampleEditId = null;
+  document.getElementById('csa-sample-form').classList.remove('open');
+}
+function csaSampleSubmit(){
+  const label = gv('csas-label').trim(), text = gv('csas-text').trim();
+  const err = document.getElementById('csas-err');
+  if(!label || !text){ err.style.display = 'block'; return; }
+  err.style.display = 'none';
+  const list = csaGetSamples();
+  if(csaSampleEditId){
+    const idx = list.findIndex(x=>x.id===csaSampleEditId);
+    if(idx>=0){ list[idx].label = label; list[idx].text = text; }
+    aToast('✅ 샘플이 수정되었습니다');
+  }else{
+    list.push({ id: 'csasmp_'+Date.now().toString(), label, text });
+    aToast('✅ 샘플이 추가되었습니다');
+  }
+  csaSetSamples(list);
+  csaSampleEditId = null;
+  document.getElementById('csa-sample-form').classList.remove('open');
+  renderCsaSampleList();
+}
+function csaSampleDelete(id){
+  csaConfirm('이 샘플을 삭제하시겠습니까?', ()=>{
+    csaSetSamples(csaGetSamples().filter(x=>x.id!==id));
+    renderCsaSampleList();
+    aToast('🗑 삭제되었습니다');
+  });
+}
+function renderCsaSampleListInner(){
+  const tb = document.getElementById('csa-sample-tbody');
+  if(!tb) return;
+  const list = csaGetSamples();
+  tb.innerHTML = list.length ? list.map((s,i)=>`
+    <tr>
+      <td>${i+1}</td>
+      <td><b>${aEsc(s.label)}</b></td>
+      <td>${aEsc(s.text)}</td>
+      <td><button class="btn-sm" onclick="csaSampleOpenForm('${s.id}')">수정</button> <button class="btn-sm btn-del" onclick="csaSampleDelete('${s.id}')">삭제</button></td>
+    </tr>`).join('') : '<tr><td colspan="4" style="text-align:center;color:#aab;padding:2rem">등록된 샘플이 없습니다</td></tr>';
+}
+function renderCsaSampleList(){
+  renderCsaSampleListInner();
+  syncRefresh(CSA_PROMPT_SAMPLES_KEY, renderCsaSampleListInner); // 다른 기기에서 편집한 최신 샘플 반영
+}
+
+/* AI가 수치를 임의로 지어내지 않도록, JS로 미리 정확히 계산한 통계와
+   샘플 데이터를 프롬프트에 그대로 주입한다. */
+function csaBuildDataContext(f){
+  let ctx = `[파일 정보]\n- 파일명: ${f.name}\n- 전체 행수: ${f.rowCount.toLocaleString()}행\n- 컬럼: ${f.columns.join(', ')}\n\n`;
+  const numericCols = Object.keys(f.numeric||{});
+  if(numericCols.length){
+    ctx += `[숫자 컬럼 통계 — 전체 ${f.rowCount.toLocaleString()}행 기준으로 정확히 계산됨. 이 수치를 그대로 사용할 것]\n`;
+    numericCols.forEach(col=>{
+      const s = f.numeric[col];
+      ctx += `- ${col}: 합계=${s.sum.toLocaleString()}, 평균=${s.avg.toFixed(2)}, 최소=${s.min.toLocaleString()}, 최대=${s.max.toLocaleString()}, 유효값 개수=${s.count}\n`;
+    });
+    ctx += '\n';
+  }
+  const textCols = Object.keys(f.text||{});
+  if(textCols.length){
+    ctx += `[텍스트 컬럼 상위값]\n`;
+    textCols.forEach(col=>{
+      const s = f.text[col];
+      const topStr = (s.top||[]).map(([v,c])=>`${v}(${c}건)`).join(', ');
+      ctx += `- ${col} (고유값 ${s.uniqueCount}개): ${topStr}\n`;
+    });
+    ctx += '\n';
+  }
+  const sample = (f.previewRows||[]).slice(0,10);
+  ctx += `[샘플 데이터 (최대 10행)]\n`;
+  if(sample.length){
+    ctx += f.columns.join(' | ') + '\n';
+    sample.forEach(row=>{ ctx += f.columns.map(c=>row[c]??'').join(' | ') + '\n'; });
+  }else{
+    ctx += '(샘플 데이터 없음)\n';
+  }
+  return ctx;
+}
+
+async function csaRunAnalysis(){
+  const targetId = document.getElementById('csa-analyze-target').value;
+  if(!targetId){ aToast('⚠ 분석할 파일을 먼저 선택하세요'); return; }
+  const userPrompt = document.getElementById('csa-analyze-prompt').value.trim();
+  if(!userPrompt){ aToast('⚠ 분석 요청 내용을 입력하세요'); return; }
+  const f = csaGetFiles().find(x=>x.id===targetId);
+  if(!f){ aToast('⚠ 파일 정보를 찾을 수 없습니다'); return; }
+
+  const engine = document.querySelector('input[name="csa-ai-engine"]:checked').value;
+  const engineLabel = { gemini:'Gemini', mistral:'Mistral AI', claude:'Claude' }[engine] || engine;
+  const btn = document.getElementById('csa-btn-analyze');
+  btn.disabled = true;
+  btn.innerHTML = `<span class="api-spinner"></span> ${engineLabel} 분석 중...`;
+
+  const fullPrompt = `당신은 쿠폰관리시스템(CMS)의 쿠폰 발행/사용 데이터 분석 전문가입니다.
+아래는 업로드된 데이터 파일에서 정확하게 계산된 통계와 샘플 데이터입니다. 이 수치를 반드시 그대로 인용하여 분석하고, 수치를 임의로 추정하거나 변경하지 마세요.
+
+${csaBuildDataContext(f)}
+
+[분석 요청]
+${userPrompt}
+
+실행자가 이해하기 쉬운 평이한 말로 설명하고, 위에 제시된 통계 수치를 근거로 인사이트와 특이사항을 구조적으로 정리해주세요.`;
+
+  try{
+    if(engine !== 'mistral') throw new Error('해당 엔진은 준비중입니다. 현재는 Mistral AI를 이용해주세요.');
+    let resp;
+    try{
+      resp = await fetch(API_MISTRAL_PROXY_URL, {
+        method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ prompt: fullPrompt })
+      });
+    }catch(networkErr){ throw new Error('네트워크 연결에 실패했습니다. 인터넷 연결을 확인해주세요.'); }
+    const data = await resp.json();
+    if(!resp.ok || data.error) throw new Error(data.error || `서버 응답 오류 (상태코드: ${resp.status})`);
+    if(!data.text || !data.text.trim()) throw new Error('분석 결과가 비어있습니다. 요청 내용을 더 구체적으로 입력해보세요.');
+    csaCurrentAnalysisText = data.text;
+    document.getElementById('csa-analyze-content').value = data.text;
+    document.getElementById('csa-analyze-result').classList.add('show');
+    aToast('✅ 분석이 완료되었습니다. 아래 내용은 직접 수정할 수 있습니다');
+  }catch(e){
+    aToast('❌ 분석 실패: ' + e.message);
+  }finally{
+    btn.disabled = false;
+    btn.innerHTML = '✨ AI 분석 실행';
+  }
+}
+
+function csaSaveAnalysis(){
+  const targetId = document.getElementById('csa-analyze-target').value;
+  if(!targetId){ aToast('⚠ 파일을 먼저 선택하세요'); return; }
+  const content = document.getElementById('csa-analyze-content').value.trim();
+  if(!content){ aToast('⚠ 저장할 분석 내용이 없습니다'); return; }
+  const f = csaGetFiles().find(x=>x.id===targetId);
+  const results = csaGetResults();
+  results.unshift({
+    id: 'csar_'+Date.now()+'_'+Math.random().toString(36).slice(2,7),
+    fileId: targetId,
+    fileName: f ? f.name : '(삭제된 파일)',
+    prompt: document.getElementById('csa-analyze-prompt').value.trim(),
+    content,
+    engine: 'Mistral AI',
+    date: new Date().toLocaleString('ko-KR')
+  });
+  csaSetResults(results);
+  aToast('💾 분석결과가 저장되었습니다');
+  csaResultPage = 1;
+  csaRenderResultList();
+}
+
+/* ── 탭3: 분석 결과 ── */
+function csaRenderResultList(){
+  const q = (gv('csa-result-search')||'').trim().toLowerCase();
+  let list = csaGetResults();
+  if(q) list = list.filter(r=>r.fileName.toLowerCase().includes(q) || r.prompt.toLowerCase().includes(q));
+  const totalPages = Math.max(1, Math.ceil(list.length/CSA_PAGE_SIZE));
+  if(csaResultPage > totalPages) csaResultPage = totalPages;
+  const startIdx = (csaResultPage-1)*CSA_PAGE_SIZE;
+  const pageItems = list.slice(startIdx, startIdx+CSA_PAGE_SIZE);
+  const tbody = document.getElementById('csa-result-tbody');
+  if(!pageItems.length){
+    tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;color:var(--ink-faint);padding:2.2rem 0">저장된 분석 결과가 없습니다</td></tr>`;
+  }else{
+    tbody.innerHTML = pageItems.map((r,i)=>`
+      <tr>
+        <td>${startIdx+i+1}</td>
+        <td>${aEsc(r.fileName)}</td>
+        <td>${aEsc(r.prompt.slice(0,40))}${r.prompt.length>40?'...':''}</td>
+        <td>${aEsc(r.date)}</td>
+        <td><button class="btn-sm" onclick="csaOpenDetailModal('${r.id}')">상세보기</button></td>
+        <td><button class="btn-sm btn-del" onclick="csaDeleteResult('${r.id}')">삭제</button></td>
+      </tr>`).join('');
+  }
+  csaRenderPagination('csa-result-pagination', csaResultPage, totalPages, 'csaGoResultPage');
+}
+function csaGoResultPage(p){ csaResultPage = p; csaRenderResultList(); }
+
+function csaOpenDetailModal(id){
+  const r = csaGetResults().find(x=>x.id===id);
+  if(!r) return;
+  csaDetailId = id;
+  document.getElementById('csa-detail-sub').textContent = `${r.fileName} · ${r.engine} · ${r.date}`;
+  document.getElementById('csa-detail-content').value = r.content;
+  document.getElementById('csa-detail-modal-bg').classList.add('open');
+}
+function csaCloseDetailModal(){
+  document.getElementById('csa-detail-modal-bg').classList.remove('open');
+  csaDetailId = null;
+}
+function csaDeleteResult(id){
+  csaConfirm('이 분석 결과를 삭제하시겠습니까?', ()=>{
+    csaSetResults(csaGetResults().filter(x=>x.id!==id));
+    if(csaDetailId===id) csaCloseDetailModal();
+    csaRenderResultList();
+    aToast('🗑 삭제되었습니다');
+  });
+}
+
+/* ── 분석결과 다운로드: Word / Excel / PPT ── */
+function csaExportWord(){
+  const r = csaGetResults().find(x=>x.id===csaDetailId);
+  if(!r){ aToast('⚠ 내보낼 분석 결과를 찾을 수 없습니다'); return; }
+  const content = document.getElementById('csa-detail-content').value.trim();
+  if(!content){ aToast('⚠ 내보낼 내용이 없습니다'); return; }
+  const html = `<html><head><meta charset="utf-8"></head><body><h2>${aEsc(r.fileName)} - 쿠폰데이터 분석결과</h2><p style="color:#888;font-size:12px">${aEsc(r.date)} · ${aEsc(r.engine)}</p><pre style="font-family:맑은고딕;white-space:pre-wrap">${aEsc(content)}</pre></body></html>`;
+  const blob = new Blob(['\ufeff', html], {type:'application/msword'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `쿠폰데이터분석_${r.fileName.replace(/[^\w가-힣]/g,'')}_${Date.now()}.doc`;
+  a.click();
+  aToast('📄 Word 파일로 다운로드되었습니다');
+}
+
+function csaExportExcel(){
+  const r = csaGetResults().find(x=>x.id===csaDetailId);
+  if(!r){ aToast('⚠ 내보낼 분석 결과를 찾을 수 없습니다'); return; }
+  const content = document.getElementById('csa-detail-content').value.trim();
+  if(!content){ aToast('⚠ 내보낼 내용이 없습니다'); return; }
+  if(typeof XLSX==='undefined'){ aToast('❌ 엑셀 라이브러리 로드 실패. 페이지를 새로고침 후 다시 시도해주세요.'); return; }
+
+  const wb = XLSX.utils.book_new();
+  const paragraphs = content.split('\n').map(line=>({내용: line}));
+  const ws1 = XLSX.utils.json_to_sheet(paragraphs.length ? paragraphs : [{내용:''}]);
+  XLSX.utils.book_append_sheet(wb, ws1, '분석결과');
+
+  const f = csaGetFiles().find(x=>x.id===r.fileId);
+  if(f){
+    const statRows = [];
+    Object.keys(f.numeric||{}).forEach(col=>{
+      const s = f.numeric[col];
+      statRows.push({ 컬럼: col, 유형:'숫자', 합계: s.sum, 평균: Number(s.avg.toFixed(2)), 최소: s.min, 최대: s.max, 유효값개수: s.count });
+    });
+    Object.keys(f.text||{}).forEach(col=>{
+      const s = f.text[col];
+      statRows.push({ 컬럼: col, 유형:'텍스트', 고유값수: s.uniqueCount, 최다값: (s.top[0]||['',''])[0], 최다값건수: (s.top[0]||['',0])[1] });
+    });
+    if(statRows.length){
+      const ws2 = XLSX.utils.json_to_sheet(statRows);
+      XLSX.utils.book_append_sheet(wb, ws2, '데이터통계');
+    }
+  }
+
+  XLSX.writeFile(wb, `쿠폰데이터분석_${r.fileName.replace(/[^\w가-힣]/g,'')}_${Date.now()}.xlsx`);
+  aToast('📊 Excel 파일로 다운로드되었습니다');
+}
+
+function csaExportPPT(){
+  const r = csaGetResults().find(x=>x.id===csaDetailId);
+  if(!r){ aToast('⚠ 내보낼 분석 결과를 찾을 수 없습니다'); return; }
+  const content = document.getElementById('csa-detail-content').value.trim();
+  if(!content){ aToast('⚠ 내보낼 내용이 없습니다'); return; }
+
+  const slides = apiParseSlidesFromText(content); // '기획서 작성'과 동일한 "## 제목" 파서 재사용
+  const pptx = new PptxGenJS();
+  pptx.defineLayout({ name:'A4', width:10, height:5.63 });
+  pptx.layout = 'A4';
+
+  const cover = pptx.addSlide();
+  cover.background = { color:'0D2251' };
+  cover.addText('쿠폰데이터 분석결과', { x:0.5, y:1.8, w:9, h:1, fontSize:32, bold:true, color:'FFFFFF', align:'center' });
+  cover.addText(r.fileName, { x:0.5, y:2.9, w:9, h:0.6, fontSize:18, color:'8AAEE0', align:'center' });
+  cover.addText('다우기술 쿠폰사업본부', { x:0.5, y:4.8, w:9, h:0.4, fontSize:12, color:'8AAEE0', align:'center' });
+
+  if(slides.length){
+    slides.forEach(s=>{
+      const slide = pptx.addSlide();
+      slide.background = { color:'FFFFFF' };
+      slide.addText(s.title, { x:0.4, y:0.3, w:9.2, h:0.7, fontSize:24, bold:true, color:'0D2251' });
+      slide.addShape(pptx.ShapeType.line, { x:0.4, y:1.0, w:9.2, h:0, line:{color:'3B7FF5', width:2} });
+      const bulletText = s.bullets.length
+        ? s.bullets.map(b=>({text:b, options:{bullet:true, fontSize:16, color:'2D4270', breakLine:true}}))
+        : [{text:'(내용 없음)', options:{fontSize:16, color:'AAAAAA'}}];
+      slide.addText(bulletText, { x:0.6, y:1.3, w:8.8, h:3.9, valign:'top', lineSpacingMultiple:1.4 });
+    });
+  }else{
+    const slide = pptx.addSlide();
+    slide.background = { color:'FFFFFF' };
+    slide.addText('분석 결과', { x:0.4, y:0.3, w:9.2, h:0.7, fontSize:24, bold:true, color:'0D2251' });
+    slide.addShape(pptx.ShapeType.line, { x:0.4, y:1.0, w:9.2, h:0, line:{color:'3B7FF5', width:2} });
+    slide.addText(content, { x:0.5, y:1.3, w:9, h:4, fontSize:13, color:'2D4270', valign:'top' });
+  }
+
+  pptx.writeFile({ fileName:`쿠폰데이터분석_${r.fileName.replace(/[^\w가-힣]/g,'')}_${Date.now()}.pptx` }).then(()=>{
+    aToast('🖥 PPT 파일이 다운로드되었습니다');
+  }).catch(e=>{
+    aToast('❌ PPT 생성 실패: ' + e.message);
+  });
+}
+
+/* ══════════════════════════════════════════════════════
+   서비스기획문서 작성 (탭: 운영페이지 개선개발 / 신규 서비스 개발)
+   - 참고자료(이미지/PPT/PDF) 업로드 → PPT는 JSZip으로 슬라이드 텍스트를 직접 추출해 AI 프롬프트에 그대로 주입
+   - 사이트관리 > 서비스 기획문서 양식파일 관리에서 "내 계정"에 등록해 둔 양식파일을 자동으로 함께 참고
+   - AI 엔진: Gemini(준비중) / Mistral AI(무료, 연동) / Claude(유료, 연동 — 실제 서비스에는 전용 프록시 서버 주소 설정 필요)
+   ══════════════════════════════════════════════════════ */
+
+/* ⚠ 실제 운영 반영 시 Gemini/Mistral과 동일한 방식(Cloudflare Worker)의
+   Claude 프록시 서버를 배포한 뒤 아래 URL을 교체해야 실제로 응답을 받을 수 있습니다.
+   그 전까지는 Claude 선택 시 연결 실패 안내가 표시됩니다. */
+const API_CLAUDE_PROXY_URL = 'https://REPLACE-WITH-CLAUDE-PROXY.workers.dev';
+
+let sdInitialized = false;
+let sdRefFiles = { ops: [], new: [] };
+
+function sdInit(){
+  if(!sdInitialized){
+    document.getElementById('sd-panel-ops').innerHTML = sdBuildPanelHTML('ops');
+    document.getElementById('sd-panel-new').innerHTML = sdBuildPanelHTML('new');
+    sdInitialized = true;
+  }
+  sdSwitchTab('ops');
+  sdRefreshTemplateNote('ops');
+  sdRefreshTemplateNote('new');
+  sdRenderRefList('ops');
+  sdRenderRefList('new');
+  sdRenderDocList('ops');
+  sdRenderDocList('new');
+}
+
+function sdSwitchTab(cat){
+  document.querySelectorAll('#page-service-doc .csa-tab-btn').forEach((b,i)=>b.classList.toggle('active', (i===0&&cat==='ops')||(i===1&&cat==='new')));
+  document.getElementById('sd-panel-ops').classList.toggle('active', cat==='ops');
+  document.getElementById('sd-panel-new').classList.toggle('active', cat==='new');
+  sdRefreshTemplateNote(cat); // 사이트관리에서 등록한 양식파일이 새로 반영됐을 수 있으므로 탭 전환 시마다 갱신
+}
+
+function sdBuildPanelHTML(cat){
+  const label = cat==='ops' ? '운영페이지 개선개발' : '신규 서비스 개발';
+  const placeholder = cat==='ops'
+    ? '예) 기존 쿠폰 발행 화면에 일괄 등록 기능을 추가하는 개선 기획서를 작성해줘'
+    : '예) 모바일쿠폰 신규 발송 서비스에 대한 신규 서비스 기획서를 작성해줘';
+  return `
+    <div class="upload-box" onclick="document.getElementById('sd-${cat}-file-input').click()">
+      <div class="ub-icon">📎</div>
+      <p>참고 자료 업로드 (이미지, PPT, PDF)</p>
+      <span>여러 파일 선택 가능 | 파일당 최대 20MB</span>
+      <input type="file" id="sd-${cat}-file-input" accept="image/*,.pptx,.ppt,.pdf" multiple style="display:none" onchange="sdHandleRefUpload(event,'${cat}')"/>
+    </div>
+    <div class="form-err" id="sd-${cat}-upload-err" style="display:none"></div>
+    <div class="sd-ref-list" id="sd-${cat}-ref-list"></div>
+
+    <div class="sec-note" id="sd-${cat}-template-note">양식파일을 확인하는 중...</div>
+
+    <div class="api-analyze-prompt-box">
+      <div class="aapb-title">${label} 기획서 작성 요청</div>
+      <textarea class="aapb-textarea" id="sd-${cat}-prompt" placeholder="${placeholder}"></textarea>
+      <div class="aapb-engine-select">
+        <span class="aapb-engine-label">분석 엔진</span>
+        <label class="aapb-engine-opt" style="opacity:.5" title="추후 지원 예정"><input type="radio" name="sd-${cat}-engine" value="gemini" disabled/> Gemini (준비중)</label>
+        <label class="aapb-engine-opt"><input type="radio" name="sd-${cat}-engine" value="mistral" checked/> Mistral AI (무료)</label>
+        <label class="aapb-engine-opt"><input type="radio" name="sd-${cat}-engine" value="claude"/> Claude (유료)</label>
+      </div>
+      <button class="api-btn-analyze" id="sd-${cat}-btn-generate" onclick="sdGenerate('${cat}')">✨ AI로 기획서 작성</button>
+    </div>
+
+    <div class="api-analyze-result-card" id="sd-${cat}-result">
+      <div class="aarc-header">
+        <span class="aarc-title">📄 생성된 기획서 내용 <span style="font-weight:400;color:#9099ab;font-size:11px">(직접 수정 가능)</span></span>
+        <div class="aarc-actions">
+          <button class="aarc-btn" onclick="sdExportPPT('${cat}')">📊 PPT 다운로드</button>
+          <button class="aarc-btn" onclick="sdExportWord('${cat}')">📄 Word 다운로드</button>
+          <button class="aarc-btn" onclick="sdSaveDoc('${cat}')">💾 목록에 저장</button>
+        </div>
+      </div>
+      <textarea class="aarc-content aarc-textarea" id="sd-${cat}-content"></textarea>
+    </div>
+
+    <div class="api-saved-analysis-list" style="margin-top:1.1rem">
+      <div class="asal-title">저장된 기획서 목록 (내 계정에만 표시됩니다)</div>
+      <div class="tbl-wrap">
+        <table><thead><tr><th style="width:40px">#</th><th>문서명</th><th>생성일</th><th>PPT</th><th>Word</th><th>삭제</th></tr></thead><tbody id="sd-${cat}-doc-tbody"></tbody></table>
+      </div>
+    </div>
+  `;
+}
+
+/* PPTX 파일 내부 XML을 직접 열어 슬라이드별 텍스트(제목/본문)를 추출한다.
+   AI가 실제 양식의 슬라이드 구성을 "읽고" 따라 쓸 수 있도록 하기 위함. */
+function sdExtractPptxOutline(file){
+  return new Promise((resolve, reject)=>{
+    if(typeof JSZip==='undefined'){ reject(new Error('JSZip 라이브러리 로드 실패')); return; }
+    const reader = new FileReader();
+    reader.onload = async (ev)=>{
+      try{
+        const zip = await JSZip.loadAsync(ev.target.result);
+        const slideFiles = Object.keys(zip.files)
+          .filter(name=>/^ppt\/slides\/slide\d+\.xml$/.test(name))
+          .sort((a,b)=>{
+            const na = parseInt(a.match(/slide(\d+)\.xml/)[1]);
+            const nb = parseInt(b.match(/slide(\d+)\.xml/)[1]);
+            return na-nb;
+          });
+        let outline = '';
+        for(let i=0;i<slideFiles.length;i++){
+          const xml = await zip.files[slideFiles[i]].async('text');
+          const texts = [...xml.matchAll(/<a:t>([^<]*)<\/a:t>/g)].map(m=>m[1]).filter(t=>t.trim());
+          if(texts.length) outline += `[슬라이드 ${i+1}] ${texts.join(' / ')}\n`;
+        }
+        resolve(outline.trim() || null);
+      }catch(err){ reject(err); }
+    };
+    reader.onerror = ()=>reject(new Error('파일 읽기 실패'));
+    reader.readAsArrayBuffer(file);
+  });
+}
+
+function sdHandleRefUpload(e, cat){
+  const files = Array.from(e.target.files || []);
+  if(!files.length) return;
+  const errEl = document.getElementById(`sd-${cat}-upload-err`);
+  errEl.style.display = 'none';
+  const MAX_SIZE = 20*1024*1024;
+  files.forEach(file=>{
+    if(file.size > MAX_SIZE){
+      errEl.textContent = `"${file.name}" 파일이 너무 큽니다 (20MB 이하만 업로드 가능합니다).`;
+      errEl.style.display = 'block';
+      return;
+    }
+    const ext = file.name.split('.').pop().toLowerCase();
+    if(ext==='pptx'){
+      sdExtractPptxOutline(file)
+        .then(outline=>{ sdRefFiles[cat].push({ name:file.name, size:file.size, type:ext, outlineText:outline }); sdRenderRefList(cat); })
+        .catch(()=>{ sdRefFiles[cat].push({ name:file.name, size:file.size, type:ext, outlineText:null }); sdRenderRefList(cat); });
+    }else{
+      sdRefFiles[cat].push({ name:file.name, size:file.size, type:ext, outlineText:null });
+      sdRenderRefList(cat);
+    }
+  });
+  e.target.value = '';
+}
+
+function sdRenderRefList(cat){
+  const el = document.getElementById(`sd-${cat}-ref-list`);
+  if(!el) return;
+  el.innerHTML = sdRefFiles[cat].map((f,i)=>`
+    <span class="sd-ref-chip">📎 ${aEsc(f.name)} (${(f.size/1024).toFixed(0)}KB)${f.outlineText?' · 내용추출됨':''} <button onclick="sdRemoveRef('${cat}',${i})" title="제거">✕</button></span>
+  `).join('');
+}
+function sdRemoveRef(cat, idx){
+  sdRefFiles[cat].splice(idx,1);
+  sdRenderRefList(cat);
+}
+
+/* 사이트관리 > 서비스 기획문서 양식파일 관리에서 "현재 로그인 계정"이 등록해 둔
+   해당 카테고리 양식파일을 확인해 안내 문구를 갱신한다. */
+function sdRefreshTemplateNote(cat){
+  const el = document.getElementById(`sd-${cat}-template-note`);
+  if(!el) return;
+  const templates = sdtGetTemplates().filter(t=>t.category===cat);
+  if(!templates.length){
+    el.innerHTML = `💡 적용할 양식파일이 아직 없습니다. <a href="#" onclick="showPage('site-prompt-doc');return false" style="color:var(--daou-blue);font-weight:700">사이트관리 &gt; 서비스 기획문서 양식파일 관리</a>에서 내 계정에 등록해보세요.`;
+    return;
+  }
+  el.innerHTML = `💡 적용될 양식파일: ` + templates.map(t=>`<b>${aEsc(t.fileName)}</b>${t.outlineText?' (슬라이드 구성 자동반영)':''}`).join(', ');
+}
+
+async function sdGenerate(cat){
+  const label = cat==='ops' ? '운영페이지 개선개발' : '신규 서비스 개발';
+  const prompt = gv(`sd-${cat}-prompt`).trim();
+  if(!prompt){ aToast('⚠ 작성 요청 내용을 입력하세요'); return; }
+
+  const engineEl = document.querySelector(`input[name="sd-${cat}-engine"]:checked`);
+  const engine = engineEl ? engineEl.value : 'mistral';
+  const engineLabel = { gemini:'Gemini', mistral:'Mistral AI', claude:'Claude' }[engine] || engine;
+  const btn = document.getElementById(`sd-${cat}-btn-generate`);
+  btn.disabled = true;
+  btn.innerHTML = `<span class="api-spinner"></span> ${engineLabel} 작성 중...`;
+
+  const templates = sdtGetTemplates().filter(t=>t.category===cat);
+  let context = `[문서 종류] ${label} 서비스 기획문서\n\n`;
+  if(templates.length){
+    context += `[참고 양식 — 아래 양식의 슬라이드 구성·형식을 최대한 그대로 따라서 작성할 것]\n`;
+    templates.forEach(t=>{
+      context += `- 양식파일: ${t.fileName}${t.description?` (${t.description})`:''}\n`;
+      if(t.outlineText) context += t.outlineText + '\n';
+    });
+    context += '\n';
+  }
+  if(sdRefFiles[cat].length){
+    context += `[첨부 참고자료]\n`;
+    sdRefFiles[cat].forEach(f=>{
+      context += `- ${f.name} (${f.type})\n`;
+      if(f.outlineText) context += f.outlineText + '\n';
+    });
+    context += '\n';
+  }
+
+  const fullPrompt = `당신은 쿠폰관리시스템(CMS)/모바일쿠폰 서비스 기획 전문가입니다.
+아래 내용을 참고하여 PPT 슬라이드로 만들 서비스 기획문서 내용을 작성해주세요.
+
+${context}
+[작성 요청]
+${prompt}
+
+[출력 형식 — 매우 중요]
+각 슬라이드를 "## 슬라이드제목" 으로 구분하고, 그 아래 핵심 내용을 "- " 목록으로 3~5개씩 작성해주세요.
+위에 참고 양식이 제공된 경우 그 슬라이드 구성 순서를 최대한 그대로 따르고, 없다면 아래 기본 순서를 따르세요:
+## 서비스 개요
+## 추진 배경
+## 주요 기능
+## 시스템 구성도 (텍스트로 설명)
+## 일정 계획
+## 기대 효과
+
+목록 항목은 짧고 명확하게, 발표 슬라이드에 어울리는 간결한 문장으로 작성해주세요.`;
+
+  try{
+    let proxyUrl;
+    if(engine==='mistral') proxyUrl = API_MISTRAL_PROXY_URL;
+    else if(engine==='claude') proxyUrl = API_CLAUDE_PROXY_URL;
+    else throw new Error('해당 엔진은 준비중입니다. 현재는 Mistral AI 또는 Claude를 이용해주세요.');
+
+    let resp;
+    try{
+      resp = await fetch(proxyUrl, {
+        method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ prompt: fullPrompt })
+      });
+    }catch(networkErr){
+      throw new Error(engine==='claude'
+        ? 'Claude 연동 서버에 연결할 수 없습니다. (Claude 프록시 서버 설정이 아직 완료되지 않았을 수 있습니다 — 관리자에게 문의해주세요)'
+        : '네트워크 연결에 실패했습니다. 인터넷 연결을 확인해주세요.');
+    }
+    const data = await resp.json();
+    if(!resp.ok || data.error) throw new Error(data.error || `서버 응답 오류 (상태코드: ${resp.status})`);
+    if(!data.text || !data.text.trim()) throw new Error('생성된 내용이 비어있습니다. 요청 내용을 더 구체적으로 입력해보세요.');
+
+    document.getElementById(`sd-${cat}-content`).value = data.text;
+    document.getElementById(`sd-${cat}-result`).classList.add('show');
+    aToast('✅ 기획서 내용이 생성되었습니다. 필요시 직접 수정 후 다운로드하세요.');
+  }catch(e){
+    aToast('❌ 생성 실패: ' + e.message);
+  }finally{
+    btn.disabled = false;
+    btn.innerHTML = '✨ AI로 기획서 작성';
+  }
+}
+
+/* PPT 생성 core (라이브 편집중인 내용 다운로드 / 저장목록의 항목 다운로드 양쪽에서 공용으로 사용) */
+function sdBuildPPTX(label, content){
+  const slides = apiParseSlidesFromText(content); // 기획서 작성과 동일한 "## 제목" 파서 재사용
+  const pptx = new PptxGenJS();
+  pptx.defineLayout({ name:'A4', width:10, height:5.63 });
+  pptx.layout = 'A4';
+
+  const cover = pptx.addSlide();
+  cover.background = { color:'0D2251' };
+  cover.addText('서비스 기획문서', { x:0.5, y:1.8, w:9, h:1, fontSize:32, bold:true, color:'FFFFFF', align:'center' });
+  cover.addText(label, { x:0.5, y:2.9, w:9, h:0.6, fontSize:18, color:'8AAEE0', align:'center' });
+  cover.addText('다우기술 쿠폰사업본부', { x:0.5, y:4.8, w:9, h:0.4, fontSize:12, color:'8AAEE0', align:'center' });
+
+  if(slides.length){
+    slides.forEach(s=>{
+      const slide = pptx.addSlide();
+      slide.background = { color:'FFFFFF' };
+      slide.addText(s.title, { x:0.4, y:0.3, w:9.2, h:0.7, fontSize:24, bold:true, color:'0D2251' });
+      slide.addShape(pptx.ShapeType.line, { x:0.4, y:1.0, w:9.2, h:0, line:{color:'3B7FF5', width:2} });
+      const bulletText = s.bullets.length
+        ? s.bullets.map(b=>({text:b, options:{bullet:true, fontSize:16, color:'2D4270', breakLine:true}}))
+        : [{text:'(내용 없음)', options:{fontSize:16, color:'AAAAAA'}}];
+      slide.addText(bulletText, { x:0.6, y:1.3, w:8.8, h:3.9, valign:'top', lineSpacingMultiple:1.4 });
+    });
+  }else{
+    const slide = pptx.addSlide();
+    slide.background = { color:'FFFFFF' };
+    slide.addText('기획 내용', { x:0.4, y:0.3, w:9.2, h:0.7, fontSize:24, bold:true, color:'0D2251' });
+    slide.addShape(pptx.ShapeType.line, { x:0.4, y:1.0, w:9.2, h:0, line:{color:'3B7FF5', width:2} });
+    slide.addText(content, { x:0.5, y:1.3, w:9, h:4, fontSize:13, color:'2D4270', valign:'top' });
+  }
+  return pptx;
+}
+function sdSafeFileName(s){ return (s||'').replace(/[^\w가-힣]/g,''); }
+
+function sdExportPPT(cat){
+  const label = cat==='ops' ? '운영페이지 개선개발' : '신규 서비스 개발';
+  const content = gv(`sd-${cat}-content`).trim();
+  if(!content){ aToast('⚠ 내보낼 내용이 없습니다'); return; }
+  sdBuildPPTX(label, content).writeFile({ fileName:`서비스기획문서_${sdSafeFileName(label)}_${Date.now()}.pptx` }).then(()=>{
+    aToast('📊 PPT 파일이 다운로드되었습니다');
+  }).catch(e=>{
+    aToast('❌ PPT 생성 실패: ' + e.message);
+  });
+}
+
+function sdExportWord(cat){
+  const label = cat==='ops' ? '운영페이지 개선개발' : '신규 서비스 개발';
+  const content = gv(`sd-${cat}-content`).trim();
+  if(!content){ aToast('⚠ 내보낼 내용이 없습니다'); return; }
+  const html = `<html><head><meta charset="utf-8"></head><body><h2>서비스 기획문서 - ${aEsc(label)}</h2><pre style="font-family:맑은고딕;white-space:pre-wrap">${aEsc(content)}</pre></body></html>`;
+  const blob = new Blob(['\ufeff', html], {type:'application/msword'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `서비스기획문서_${sdSafeFileName(label)}_${Date.now()}.doc`;
+  a.click();
+  aToast('📄 Word 파일로 다운로드되었습니다');
+}
+
+/* ── 생성된 기획서 저장 목록(계정별) ──
+   양식파일 관리와 동일하게 uGetItem/uSetItem으로 계정 스코프 저장 →
+   같은 계정으로 로그인했을 때만 본인이 저장한 기획서가 보인다. */
+const SD_DOCS_KEY = 'sd_generated_docs_v1';
+const sdGetDocs = () => { try{ return JSON.parse(uGetItem(SD_DOCS_KEY)||'[]') }catch{return []} };
+const sdSetDocs = v => uSetItem(SD_DOCS_KEY, JSON.stringify(v));
+let _sdConfirmCb = null;
+
+function sdSaveDoc(cat){
+  const content = gv(`sd-${cat}-content`).trim();
+  if(!content){ aToast('⚠ 저장할 내용이 없습니다'); return; }
+  const label = cat==='ops' ? '운영페이지 개선개발' : '신규 서비스 개발';
+  const firstLine = content.split('\n').map(l=>l.trim()).find(l=>l.length);
+  const title = (firstLine ? firstLine.replace(/^#+\s*/,'') : label).slice(0,60);
+  const engineEl = document.querySelector(`input[name="sd-${cat}-engine"]:checked`);
+  const docs = sdGetDocs();
+  docs.unshift({
+    id: 'sddoc_'+Date.now()+'_'+Math.random().toString(36).slice(2,7),
+    category: cat,
+    title,
+    content,
+    engine: engineEl ? engineEl.value : '',
+    date: new Date().toLocaleString('ko-KR')
+  });
+  sdSetDocs(docs);
+  sdRenderDocList(cat);
+  aToast('💾 기획서가 목록에 저장되었습니다');
+}
+
+function sdRenderDocList(cat){
+  const tb = document.getElementById(`sd-${cat}-doc-tbody`);
+  if(!tb) return;
+  const list = sdGetDocs().filter(d=>d.category===cat);
+  tb.innerHTML = list.length ? list.map((d,i)=>`
+    <tr>
+      <td>${i+1}</td>
+      <td>${aEsc(d.title)}</td>
+      <td>${aEsc(d.date)}</td>
+      <td><button class="btn-sm" onclick="sdDownloadSavedPPT('${d.id}')">PPT</button></td>
+      <td><button class="btn-sm" onclick="sdDownloadSavedWord('${d.id}')">Word</button></td>
+      <td><button class="btn-sm btn-del" onclick="sdDeleteDoc('${d.id}')">삭제</button></td>
+    </tr>`).join('') : `<tr><td colspan="6" style="text-align:center;color:#aab;padding:1.6rem">저장된 기획서가 없습니다 (본인 계정에만 표시됩니다)</td></tr>`;
+}
+
+function sdDownloadSavedPPT(id){
+  const d = sdGetDocs().find(x=>x.id===id);
+  if(!d){ aToast('⚠ 문서를 찾을 수 없습니다'); return; }
+  const label = d.category==='ops' ? '운영페이지 개선개발' : '신규 서비스 개발';
+  sdBuildPPTX(label, d.content).writeFile({ fileName:`${sdSafeFileName(d.title)}_${Date.now()}.pptx` }).then(()=>{
+    aToast('📊 PPT 파일이 다운로드되었습니다');
+  }).catch(e=>{
+    aToast('❌ PPT 생성 실패: ' + e.message);
+  });
+}
+function sdDownloadSavedWord(id){
+  const d = sdGetDocs().find(x=>x.id===id);
+  if(!d){ aToast('⚠ 문서를 찾을 수 없습니다'); return; }
+  const label = d.category==='ops' ? '운영페이지 개선개발' : '신규 서비스 개발';
+  const html = `<html><head><meta charset="utf-8"></head><body><h2>서비스 기획문서 - ${aEsc(d.title)}</h2><p style="color:#888;font-size:12px">${aEsc(label)} · ${aEsc(d.date)}</p><pre style="font-family:맑은고딕;white-space:pre-wrap">${aEsc(d.content)}</pre></body></html>`;
+  const blob = new Blob(['\ufeff', html], {type:'application/msword'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `${sdSafeFileName(d.title)}_${Date.now()}.doc`;
+  a.click();
+  aToast('📄 Word 파일로 다운로드되었습니다');
+}
+function sdConfirm(msg, cb){
+  _sdConfirmCb = cb;
+  document.getElementById('sd-confirm-msg').textContent = msg;
+  document.getElementById('sd-confirm-modal-bg').classList.add('open');
+}
+function sdConfirmCancel(){
+  document.getElementById('sd-confirm-modal-bg').classList.remove('open');
+  _sdConfirmCb = null;
+}
+function sdConfirmOk(){
+  const cb = _sdConfirmCb;
+  document.getElementById('sd-confirm-modal-bg').classList.remove('open');
+  _sdConfirmCb = null;
+  if(cb) cb();
+}
+function sdDeleteDoc(id){
+  sdConfirm('이 기획서를 삭제하시겠습니까?', ()=>{
+    const d = sdGetDocs().find(x=>x.id===id);
+    sdSetDocs(sdGetDocs().filter(x=>x.id!==id));
+    if(d) sdRenderDocList(d.category);
+    aToast('🗑 삭제되었습니다');
+  });
+}
+
+/* ── 사이트관리 > 서비스 기획문서 양식파일 관리 ──
+   계정별로 완전히 분리 저장(uGetItem/uSetItem)하여, 같은 계정으로 로그인했을 때만
+   본인이 등록한 양식파일이 보이고 위 '서비스기획문서 작성' 화면에 적용된다. */
+const SD_TEMPLATES_KEY = 'sd_template_files_v1';
+const sdtGetTemplates = () => { try{ return JSON.parse(uGetItem(SD_TEMPLATES_KEY)||'[]') }catch{return []} };
+const sdtSetTemplates = v => uSetItem(SD_TEMPLATES_KEY, JSON.stringify(v));
+let sdtActiveCat = 'ops';
+let sdtEditId = null;
+let _sdtConfirmCb = null;
+
+function sdtInit(){
+  sdtSwitchCat('ops');
+}
+function sdtSwitchCat(cat){
+  sdtActiveCat = cat;
+  document.querySelectorAll('#page-site-prompt-doc .csa-tab-btn').forEach((b,i)=>b.classList.toggle('active', (i===0&&cat==='ops')||(i===1&&cat==='new')));
+  sdtCancelForm();
+  sdtRenderList();
+}
+function sdtRenderList(){
+  const tb = document.getElementById('sdt-tbody');
+  if(!tb) return;
+  const list = sdtGetTemplates().filter(t=>t.category===sdtActiveCat);
+  tb.innerHTML = list.length ? list.map((t,i)=>`
+    <tr>
+      <td>${i+1}</td>
+      <td>📎 ${aEsc(t.fileName)}</td>
+      <td>${aEsc(t.description)||'-'}</td>
+      <td>${aEsc(t.date)}</td>
+      <td><button class="btn-sm" onclick="sdtOpenForm('${t.id}')">수정</button> <button class="btn-sm btn-del" onclick="sdtDelete('${t.id}')">삭제</button></td>
+    </tr>`).join('') : `<tr><td colspan="5" style="text-align:center;color:#aab;padding:2rem">등록된 양식파일이 없습니다 (본인 계정에만 표시됩니다)</td></tr>`;
+}
+function sdtOpenForm(editId){
+  sdtEditId = editId || null;
+  document.getElementById('sdt-form').classList.add('open');
+  document.getElementById('sdt-err').style.display = 'none';
+  document.getElementById('sdt-file').value = '';
+  if(editId){
+    const t = sdtGetTemplates().find(x=>x.id===editId);
+    if(!t) return;
+    document.getElementById('sdt-form-title').textContent = '양식파일 수정';
+    document.getElementById('sdt-desc').value = t.description || '';
+    document.getElementById('sdt-file-label').textContent = `현재 파일: ${t.fileName} (새 파일을 선택하면 교체됩니다. 선택하지 않으면 설명만 수정됩니다)`;
+    document.getElementById('sdt-submit-btn').textContent = '수정';
+  }else{
+    document.getElementById('sdt-form-title').textContent = '양식파일 추가';
+    document.getElementById('sdt-desc').value = '';
+    document.getElementById('sdt-file-label').textContent = '';
+    document.getElementById('sdt-submit-btn').textContent = '추가';
+  }
+}
+function sdtCancelForm(){
+  sdtEditId = null;
+  const f = document.getElementById('sdt-form');
+  if(f) f.classList.remove('open');
+}
+async function sdtSubmit(){
+  const fileInput = document.getElementById('sdt-file');
+  const description = gv('sdt-desc').trim();
+  const err = document.getElementById('sdt-err');
+  err.style.display = 'none';
+  const file = fileInput.files[0];
+
+  if(!file && !sdtEditId){ err.textContent = '양식파일을 선택하세요.'; err.style.display = 'block'; return; }
+
+  const MAX_SIZE = 20*1024*1024;
+  if(file && file.size > MAX_SIZE){
+    err.textContent = `파일 크기가 너무 큽니다 (${(file.size/1024/1024).toFixed(1)}MB). 20MB 이하만 업로드 가능합니다.`;
+    err.style.display = 'block';
+    return;
+  }
+
+  const submitBtn = document.getElementById('sdt-submit-btn');
+  const originalLabel = submitBtn.textContent;
+  submitBtn.disabled = true;
+  submitBtn.textContent = '처리 중...';
+
+  try{
+    let list = sdtGetTemplates();
+    let uploaded = null, outline = null;
+    if(file){
+      uploaded = await apiUploadFileToServer(file);
+      if(file.name.toLowerCase().endsWith('.pptx')){
+        try{ outline = await sdExtractPptxOutline(file); }catch(e){ outline = null; }
+      }
+    }
+    if(sdtEditId){
+      const idx = list.findIndex(x=>x.id===sdtEditId);
+      if(idx<0) throw new Error('대상을 찾을 수 없습니다.');
+      if(file){
+        list[idx] = { ...list[idx], fileName: uploaded.fileName||file.name, fileKey: uploaded.fileKey, downloadUrl: uploaded.downloadUrl, size: file.size, fileType: file.type, outlineText: outline, description, date: new Date().toLocaleString('ko-KR') };
+      }else{
+        list[idx].description = description;
+      }
+      aToast('✅ 양식파일이 수정되었습니다');
+    }else{
+      list.unshift({
+        id: 'sdt_'+Date.now()+'_'+Math.random().toString(36).slice(2,7),
+        category: sdtActiveCat,
+        fileName: uploaded.fileName || file.name,
+        fileKey: uploaded.fileKey,
+        downloadUrl: uploaded.downloadUrl,
+        size: file.size,
+        fileType: file.type,
+        outlineText: outline,
+        description,
+        date: new Date().toLocaleString('ko-KR')
+      });
+      aToast('✅ 양식파일이 등록되었습니다');
+    }
+    sdtSetTemplates(list);
+    sdtCancelForm();
+    sdtRenderList();
+  }catch(e){
+    err.textContent = e.message || '업로드 중 오류가 발생했습니다.';
+    err.style.display = 'block';
+  }finally{
+    submitBtn.disabled = false;
+    submitBtn.textContent = originalLabel;
+  }
+}
+function sdtConfirm(msg, cb){
+  _sdtConfirmCb = cb;
+  document.getElementById('sdt-confirm-msg').textContent = msg;
+  document.getElementById('sdt-confirm-modal-bg').classList.add('open');
+}
+function sdtConfirmCancel(){
+  document.getElementById('sdt-confirm-modal-bg').classList.remove('open');
+  _sdtConfirmCb = null;
+}
+function sdtConfirmOk(){
+  const cb = _sdtConfirmCb;
+  document.getElementById('sdt-confirm-modal-bg').classList.remove('open');
+  _sdtConfirmCb = null;
+  if(cb) cb();
+}
+function sdtDelete(id){
+  sdtConfirm('이 양식파일을 삭제하시겠습니까?', ()=>{
+    const t = sdtGetTemplates().find(x=>x.id===id);
+    sdtSetTemplates(sdtGetTemplates().filter(x=>x.id!==id));
+    if(t && t.fileKey) apiDeleteServerFile(t.fileKey);
+    sdtRenderList();
+    aToast('🗑 삭제되었습니다');
+  });
+}
 
 function renderAccount(){
   const q=gv('acct-search'),all=getUsers(),users=all.filter(u=>u.id.includes(q));
@@ -1446,6 +3118,7 @@ function delUser(i){
 function updateStats(){
   sv('stat-competitor', cdaGetAnalysisList().length);
   sv('stat-api', aGetList().length);
+  sv('stat-sales', csaGetResults().length);
   sv('stat-users',getUsers().length);
 }
 
@@ -2012,7 +3685,12 @@ async function syncRefresh(key, onUpdated) {
 }
 /* 로컬에 즉시 저장(항상 동작) + 서버로 비동기 반영(성공 시 다른 기기에도 전파) */
 function syncSave(key, valueString) {
-  localStorage.setItem(key, valueString);
+  try {
+    localStorage.setItem(key, valueString);
+  } catch(e) {
+    mmToast_safe('⚠ 저장공간이 부족하여 브라우저에 저장하지 못했습니다. 오래된 파일/데이터를 정리한 후 다시 시도해주세요.');
+    return;
+  }
   syncPut(key, valueString); // fire-and-forget: 실패해도 로컬 저장은 이미 완료된 상태
 }
 
@@ -2052,7 +3730,7 @@ const API_PROMPT_SAMPLE_DEFAULTS = [
   { id:'default-issue', label:'발행API 샘플', text:'이 API 문서에서 쿠폰 발행 요청/응답 파라미터와 에러 코드를 표로 정리해줘' },
   { id:'default-auth',  label:'인증API 샘플', text:'이 API 문서에서 인증 방식(토큰 발급/갱신 절차 포함)과 필수 파라미터를 정리해줘' }
 ];
-const apGetSamples = () => { try{const r=JSON.parse(localStorage.getItem(AK_PROMPT_SAMPLES));return (r&&r.length)?r:API_PROMPT_SAMPLE_DEFAULTS}catch{return API_PROMPT_SAMPLE_DEFAULTS} };
+const apGetSamples = () => { try{const r=JSON.parse(localStorage.getItem(AK_PROMPT_SAMPLES));return (r&&r.length)?r:[...API_PROMPT_SAMPLE_DEFAULTS]}catch{return [...API_PROMPT_SAMPLE_DEFAULTS]} };
 const apSetSamples = v => syncSave(AK_PROMPT_SAMPLES, JSON.stringify(v));
 
 let apiUploadedFile = null;
@@ -2316,13 +3994,13 @@ async function apiDeleteServerFile(fileKey) {
 }
 
 function apiDeleteItem(id) {
-  if(!confirm('이 API 업무를 삭제하시겠습니까?\n관련된 분석결과·문의사항과 업로드된 문서도 함께 삭제됩니다.')) return;
+  if(!confirm('이 API 업무를 삭제하시겠습니까?\n관련된 분석결과와 업로드된 문서도 함께 삭제됩니다.')) return;
   const target = aGetList().find(x=>x.id===id);
   if(target && target.doc && target.doc.fileKey) apiDeleteServerFile(target.doc.fileKey);
   let list = aGetList().filter(x=>x.id!==id);
   aSetList(list);
   aSetAnalysis(aGetAnalysis().filter(x=>x.apiId!==id));
-  aSetInquiry(aGetInquiry().filter(x=>x.apiId!==id));
+  aSetInquiry(aGetInquiry().filter(x=>x.apiId!==id)); // 과거에 저장된 문의사항 잔여 데이터 정리(현재는 신규 생성되지 않음)
   aToast('🗑 삭제되었습니다');
   apiRenderList();
 }
@@ -2405,7 +4083,6 @@ function apiOnAnalyzeTargetChange() {
   const id = document.getElementById('api-analyze-target').value;
   document.getElementById('api-analyze-result').classList.remove('show');
   apiSavedAnalysisEditId = null; // 대상 변경 시 이전 수정모드는 해제
-  apiRenderInquiries(id);
   apiRenderSavedAnalysis(id);
 }
 
@@ -2472,15 +4149,10 @@ ${prompt}
   }
 }
 
-/* AI가 생성한 분석 내용 + 정리된 연동처 문의사항을 하나의 편집 가능한 텍스트로 결합한다.
-   ('분석된 내용 + API연동처 문의사항'을 화면 아래에 함께 노출하기 위함) */
+/* AI가 생성한 분석 내용을 편집 가능한 텍스트로 반환한다.
+   (연동처 문의사항 영역은 삭제되어 더 이상 결합하지 않음) */
 function apiBuildCombinedContent(targetId) {
-  const inquiries = aGetInquiry().filter(x=>x.apiId===targetId);
-  let combined = `[분석된 내용]\n${apiCurrentAnalysisText}\n\n[API연동처 문의사항]\n`;
-  combined += inquiries.length
-    ? inquiries.map((q,i)=>`${i+1}. ${q.text}`).join('\n')
-    : '(등록된 문의사항이 없습니다)';
-  return combined;
+  return apiCurrentAnalysisText;
 }
 
 function apiExportWord() {
@@ -2580,49 +4252,9 @@ function apiDeleteSavedAnalysis(id, targetId) {
   aToast('🗑 삭제되었습니다');
 }
 
-function apiRenderInquiries(targetId) {
-  const el = document.getElementById('api-inquiry-items');
-  if(!targetId) { el.innerHTML = '<p class="api-empty-state">API 업무를 선택하면 문의사항을 정리할 수 있습니다</p>'; return; }
-  const list = aGetInquiry().filter(x=>x.apiId===targetId);
-  el.innerHTML = list.length ? list.map((x,i)=>`
-    <div class="aib-item">
-      <span class="aib-item-num">${i+1}.</span>
-      <span class="aib-item-text" id="inq-text-${x.id}">${aEsc(x.text)}</span>
-      <div class="aib-item-actions">
-        <button class="api-btn-sm" onclick="apiEditInquiry('${x.id}')">수정</button>
-        <button class="api-btn-sm del" onclick="apiDeleteInquiry('${x.id}','${targetId}')">삭제</button>
-      </div>
-    </div>`).join('') : '<p class="api-empty-state">정리된 문의사항이 없습니다</p>';
-}
+/* 연동처 문의사항(apiRenderInquiries/apiAddInquiry/apiEditInquiry/apiDeleteInquiry)은
+   'API문서 분석' 화면에서 해당 영역이 삭제되며 더 이상 사용하지 않음 */
 
-function apiAddInquiry() {
-  const targetId = document.getElementById('api-analyze-target').value;
-  if(!targetId) { aToast('⚠ API 업무를 먼저 선택하세요'); return; }
-  const text = prompt('연동처(상대방)에 문의할 내용을 입력하세요:');
-  if(!text || !text.trim()) return;
-  const list = aGetInquiry();
-  list.push({ id: Date.now().toString(), apiId: targetId, text: text.trim() });
-  aSetInquiry(list);
-  apiRenderInquiries(targetId);
-  aToast('✅ 문의사항이 추가되었습니다');
-}
-
-function apiEditInquiry(id) {
-  const list = aGetInquiry();
-  const item = list.find(x=>x.id===id);
-  if(!item) return;
-  const newText = prompt('문의 내용 수정:', item.text);
-  if(newText===null || !newText.trim()) return;
-  item.text = newText.trim();
-  aSetInquiry(list);
-  apiRenderInquiries(item.apiId);
-}
-
-function apiDeleteInquiry(id, targetId) {
-  if(!confirm('삭제하시겠습니까?')) return;
-  aSetInquiry(aGetInquiry().filter(x=>x.id!==id));
-  apiRenderInquiries(targetId);
-}
 
 /* ── 분석요청 프롬프트 예시 버튼 (②API문서 분석 화면) ──
    버튼을 누르면 분석요청 textarea에 샘플 내용이 자동 입력된다.
@@ -2752,16 +4384,19 @@ function apiOnDocTargetChange() {
   const id = document.getElementById('api-doc-target').value;
   const summaryEl = document.getElementById('api-doc-source-summary');
   if(!id) {
-    summaryEl.textContent = '연동할 API 업무를 선택하면 분석결과와 문의사항이 표시됩니다';
+    summaryEl.innerHTML = '연동할 API 업무를 선택하면 API문서 분석 결과가 표시됩니다';
     return;
   }
   const analyses = aGetAnalysis().filter(x=>x.apiId===id);
-  const inquiries = aGetInquiry().filter(x=>x.apiId===id);
-  let summary = '';
-  if(analyses.length) summary += `📄 분석결과 ${analyses.length}건 있음 — AI 생성 시 자동으로 참고합니다\n`;
-  if(inquiries.length) summary += `📨 정리된 문의사항 ${inquiries.length}건 있음 — AI 생성 시 자동으로 참고합니다\n`;
-  if(!analyses.length && !inquiries.length) summary = '이 API 업무에 대한 분석결과/문의사항이 아직 없습니다.\n②탭에서 먼저 분석을 진행하면 더 정확한 문서가 생성됩니다.';
-  summaryEl.textContent = summary;
+  if(!analyses.length) {
+    summaryEl.innerHTML = '이 API 업무에 대한 분석결과가 아직 없습니다.\n②탭(API문서 분석)에서 먼저 분석을 진행하면 더 정확한 문서가 생성됩니다.';
+    return;
+  }
+  summaryEl.innerHTML = analyses.map(x=>`
+    <div class="adsb-analysis-item">
+      <div class="adsb-analysis-head"><span>${aEsc(x.prompt.slice(0,40))}${x.prompt.length>40?'...':''}</span><span class="adsb-analysis-date">${x.date}</span></div>
+      <div class="adsb-analysis-body">${aEsc(x.content)}</div>
+    </div>`).join('');
 }
 
 async function apiGenerateDoc() {
@@ -2769,23 +4404,20 @@ async function apiGenerateDoc() {
   const userPrompt = document.getElementById('api-doc-prompt').value.trim();
   if(!userPrompt) { aToast('⚠ 작성 요청 내용을 입력하세요'); return; }
 
+  const engine = document.querySelector('input[name="doc-ai-engine"]:checked').value;
+  const engineLabel = { gemini: 'Gemini', mistral: 'Mistral AI', claude: 'Claude' }[engine] || engine;
   const btn = document.getElementById('api-btn-doc-generate');
   btn.disabled = true;
-  btn.innerHTML = '<span class="api-spinner"></span> 생성 중...';
+  btn.innerHTML = `<span class="api-spinner"></span> ${engineLabel} 생성 중...`;
 
   let context = '';
   if(targetId) {
     const item = aGetList().find(x=>x.id===targetId);
     const analyses = aGetAnalysis().filter(x=>x.apiId===targetId);
-    const inquiries = aGetInquiry().filter(x=>x.apiId===targetId);
     context += `[연동 대상 API]\n- API명: ${item.name}\n- 제공사: ${item.provider||'-'}\n- 연동방식: ${item.method}\n\n`;
     if(analyses.length) {
       context += `[기존 분석 결과]\n`;
       analyses.forEach(a=>{ context += `질문: ${a.prompt}\n답변: ${a.content}\n\n`; });
-    }
-    if(inquiries.length) {
-      context += `[연동처(상대방) 문의사항]\n`;
-      inquiries.forEach((q,i)=>{ context += `${i+1}. ${q.text}\n`; });
     }
   }
 
@@ -2832,7 +4464,9 @@ ${userPrompt}
   }
 
   try {
-    const resp = await fetch(API_GEMINI_PROXY_URL, {
+    if(engine !== 'mistral' && engine !== 'gemini') throw new Error('해당 엔진은 준비중입니다. 현재는 Mistral AI를 이용해주세요.');
+    const proxyUrl = engine === 'gemini' ? API_GEMINI_PROXY_URL : API_MISTRAL_PROXY_URL;
+    const resp = await fetch(proxyUrl, {
       method: 'POST',
       headers: {'Content-Type':'application/json'},
       body: JSON.stringify({ prompt: fullPrompt })
