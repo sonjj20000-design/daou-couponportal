@@ -6,7 +6,6 @@
 <title>다우기술 쿠폰사업본부 업무포털</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pptxgenjs/3.12.0/pptxgen.bundle.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -761,7 +760,7 @@ input,select,textarea{font-family:inherit}
             <span class="aapb-engine-label">분석 엔진</span>
             <label class="aapb-engine-opt" style="opacity:.5" title="추후 지원 예정"><input type="radio" name="csa-ai-engine" value="gemini" disabled/> Gemini (준비중)</label>
             <label class="aapb-engine-opt"><input type="radio" name="csa-ai-engine" value="mistral" checked/> Mistral AI (무료)</label>
-            <label class="aapb-engine-opt" style="opacity:.5" title="추후 지원 예정"><input type="radio" name="csa-ai-engine" value="claude" disabled/> Claude (준비중)</label>
+            <label class="aapb-engine-opt"><input type="radio" name="csa-ai-engine" value="claude"/> Claude (유료)</label>
           </div>
           <button class="api-btn-analyze" id="csa-btn-analyze" onclick="csaRunAnalysis()">✨ AI 분석 실행</button>
         </div>
@@ -871,7 +870,7 @@ input,select,textarea{font-family:inherit}
               <span class="aapb-engine-label">분석 엔진</span>
               <label class="aapb-engine-opt" style="opacity:.5" title="추후 지원 예정"><input type="radio" name="ai-engine" value="gemini" disabled/> Gemini (준비중)</label>
               <label class="aapb-engine-opt"><input type="radio" name="ai-engine" value="mistral" checked/> Mistral AI (무료)</label>
-              <label class="aapb-engine-opt" style="opacity:.5" title="추후 지원 예정"><input type="radio" name="ai-engine" value="claude" disabled/> Claude (준비중)</label>
+              <label class="aapb-engine-opt"><input type="radio" name="ai-engine" value="claude"/> Claude (유료)</label>
             </div>
             <button class="api-btn-analyze" id="api-btn-analyze" onclick="apiRunAnalysis()">✨ AI 분석 실행</button>
           </div>
@@ -921,7 +920,7 @@ input,select,textarea{font-family:inherit}
               <span class="aapb-engine-label">분석 엔진</span>
               <label class="aapb-engine-opt" style="opacity:.5" title="추후 지원 예정"><input type="radio" name="doc-ai-engine" value="gemini" disabled/> Gemini (준비중)</label>
               <label class="aapb-engine-opt"><input type="radio" name="doc-ai-engine" value="mistral" checked/> Mistral AI (무료)</label>
-              <label class="aapb-engine-opt" style="opacity:.5" title="추후 지원 예정"><input type="radio" name="doc-ai-engine" value="claude" disabled/> Claude (준비중)</label>
+              <label class="aapb-engine-opt"><input type="radio" name="doc-ai-engine" value="claude"/> Claude (유료)</label>
             </div>
             <button class="api-btn-analyze" id="api-btn-doc-generate" onclick="apiGenerateDoc()">✨ AI로 문서 내용 생성</button>
           </div>
@@ -1145,7 +1144,7 @@ input,select,textarea{font-family:inherit}
 
     <section class="page" id="page-site-prompt">
       <div class="page-hd"><h2>API프롬프트 관리</h2><p>API연동 업무관리문서 &gt; API문서 분석 화면에 노출되는 분석요청 예시 샘플을 관리합니다 (마스터 전용)</p></div>
-      <div class="sec-note">💡 여기서 추가·수정한 샘플 버튼은 모든 계정의 'API문서 분석' 화면에 동일하게 노출됩니다.</div>
+      <div class="sec-note">💡 여기서 추가·수정한 샘플 버튼은 <b>내 계정으로 로그인했을 때만</b> 'API문서 분석' 화면에 노출됩니다. (계정별 개별 관리 — 다른 계정에는 보이지 않습니다)</div>
       <div class="toolbar">
         <button class="btn-add" onclick="apSampleOpenForm()">+ 샘플 추가</button>
       </div>
@@ -1166,7 +1165,7 @@ input,select,textarea{font-family:inherit}
 
     <section class="page" id="page-site-prompt-csa">
       <div class="page-hd"><h2>쿠폰데이터 분석 프롬프트 관리</h2><p>쿠폰데이터 분석 &gt; AI 분석 화면에 노출되는 분석요청 예시 샘플을 관리합니다 (마스터 전용)</p></div>
-      <div class="sec-note">💡 여기서 추가·수정한 샘플 버튼은 모든 계정의 '쿠폰데이터 분석 &gt; AI 분석' 화면에 동일하게 노출됩니다.</div>
+      <div class="sec-note">💡 여기서 추가·수정한 샘플 버튼은 <b>내 계정으로 로그인했을 때만</b> '쿠폰데이터 분석 &gt; AI 분석' 화면에 노출됩니다. (계정별 개별 관리 — 다른 계정에는 보이지 않습니다)</div>
       <div class="toolbar">
         <button class="btn-add" onclick="csaSampleOpenForm()">+ 샘플 추가</button>
       </div>
@@ -1352,6 +1351,13 @@ function userScopedKey(rawKey){
 function uGetItem(rawKey){ return localStorage.getItem(userScopedKey(rawKey)); }
 function uSetItem(rawKey, val){ localStorage.setItem(userScopedKey(rawKey), val); }
 function uRemoveItem(rawKey){ localStorage.removeItem(userScopedKey(rawKey)); }
+/* 계정별(uid) 데이터를 로컬 캐시 + 원격 KV 서버(syncSave/syncRefresh)에 함께 저장한다.
+   실제 로컬 저장 키는 uGetItem/uSetItem과 동일한 'u:{uid}::{rawKey}' 형태를 그대로 사용하므로
+   uGetItem으로 읽는 기존 코드는 수정 없이 그대로 최신값을 읽는다.
+   → 이렇게 하면 (1) 계정별로 완전히 분리되어 보이고, (2) 코드가 새로 배포되어 접속 주소(origin)가
+   바뀌어도 원격 서버에 저장된 값이므로 데이터가 사라지지 않는다. */
+function uSyncSave(rawKey, valueString){ syncSave(userScopedKey(rawKey), valueString); }
+function uSyncRefresh(rawKey, onUpdated){ syncRefresh(userScopedKey(rawKey), onUpdated); }
 
 async function sha256(s){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join('')}
 function getUsers(){try{return JSON.parse(localStorage.getItem(USERS_KEY)||'[]')}catch(e){return[]}}
@@ -1955,8 +1961,8 @@ const CSA_PROMPT_SAMPLE_DEFAULTS = [
   { id:'default-outlier', label:'이상치·특이사항 확인', text:'데이터에서 이상치나 특이사항이 있는지 확인해줘' },
   { id:'default-rank', label:'항목별 상위 순위 정리', text:'주요 항목별 상위 순위를 정리해줘' }
 ];
-const csaGetSamples = () => { try{const r=JSON.parse(localStorage.getItem(CSA_PROMPT_SAMPLES_KEY));return (r&&r.length)?r:[...CSA_PROMPT_SAMPLE_DEFAULTS]}catch{return [...CSA_PROMPT_SAMPLE_DEFAULTS]} };
-const csaSetSamples = v => syncSave(CSA_PROMPT_SAMPLES_KEY, JSON.stringify(v));
+const csaGetSamples = () => { try{const r=JSON.parse(uGetItem(CSA_PROMPT_SAMPLES_KEY));return (r&&r.length)?r:[...CSA_PROMPT_SAMPLE_DEFAULTS]}catch{return [...CSA_PROMPT_SAMPLE_DEFAULTS]} };
+const csaSetSamples = v => uSyncSave(CSA_PROMPT_SAMPLES_KEY, JSON.stringify(v));
 
 function csaInit(){
   csaFilePage = 1;
@@ -2230,7 +2236,7 @@ function csaRenderPromptSamplesInner(){
 }
 function csaRenderPromptSamples(){
   csaRenderPromptSamplesInner();
-  syncRefresh(CSA_PROMPT_SAMPLES_KEY, csaRenderPromptSamplesInner); // 다른 기기(마스터)가 관리한 최신 샘플 반영
+  uSyncRefresh(CSA_PROMPT_SAMPLES_KEY, csaRenderPromptSamplesInner); // 같은 계정의 다른 기기에서 등록한 최신 샘플 반영
 }
 function csaUsePromptSample(id){
   const s = csaGetSamples().find(x=>x.id===id);
@@ -2303,7 +2309,7 @@ function renderCsaSampleListInner(){
 }
 function renderCsaSampleList(){
   renderCsaSampleListInner();
-  syncRefresh(CSA_PROMPT_SAMPLES_KEY, renderCsaSampleListInner); // 다른 기기에서 편집한 최신 샘플 반영
+  uSyncRefresh(CSA_PROMPT_SAMPLES_KEY, renderCsaSampleListInner); // 같은 계정의 다른 기기에서 편집한 최신 샘플 반영
 }
 
 /* AI가 수치를 임의로 지어내지 않도록, JS로 미리 정확히 계산한 통계와
@@ -2365,13 +2371,20 @@ ${userPrompt}
 실행자가 이해하기 쉬운 평이한 말로 설명하고, 위에 제시된 통계 수치를 근거로 인사이트와 특이사항을 구조적으로 정리해주세요.`;
 
   try{
-    if(engine !== 'mistral') throw new Error('해당 엔진은 준비중입니다. 현재는 Mistral AI를 이용해주세요.');
+    let proxyUrl;
+    if(engine==='mistral') proxyUrl = API_MISTRAL_PROXY_URL;
+    else if(engine==='claude') proxyUrl = API_CLAUDE_PROXY_URL;
+    else throw new Error('해당 엔진은 준비중입니다. 현재는 Mistral AI 또는 Claude를 이용해주세요.');
     let resp;
     try{
-      resp = await fetch(API_MISTRAL_PROXY_URL, {
+      resp = await fetch(proxyUrl, {
         method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ prompt: fullPrompt })
       });
-    }catch(networkErr){ throw new Error('네트워크 연결에 실패했습니다. 인터넷 연결을 확인해주세요.'); }
+    }catch(networkErr){
+      throw new Error(engine==='claude'
+        ? 'Claude 연동 서버에 연결할 수 없습니다. 관리자에게 문의해주세요.'
+        : '네트워크 연결에 실패했습니다. 인터넷 연결을 확인해주세요.');
+    }
     const data = await resp.json();
     if(!resp.ok || data.error) throw new Error(data.error || `서버 응답 오류 (상태코드: ${resp.status})`);
     if(!data.text || !data.text.trim()) throw new Error('분석 결과가 비어있습니다. 요청 내용을 더 구체적으로 입력해보세요.');
@@ -2511,54 +2524,57 @@ function csaExportPPT(){
   const content = document.getElementById('csa-detail-content').value.trim();
   if(!content){ aToast('⚠ 내보낼 내용이 없습니다'); return; }
 
-  const slides = apiParseSlidesFromText(content); // '기획서 작성'과 동일한 "## 제목" 파서 재사용
-  const pptx = new PptxGenJS();
-  pptx.defineLayout({ name:'A4', width:10, height:5.63 });
-  pptx.layout = 'A4';
+  try{
+    const slides = apiParseSlidesFromText(content); // '기획서 작성'과 동일한 "## 제목" 파서 재사용
+    const pptx = new PptxGenJS();
+    pptx.defineLayout({ name:'A4', width:10, height:5.63 });
+    pptx.layout = 'A4';
 
-  const cover = pptx.addSlide();
-  cover.background = { color:'0D2251' };
-  cover.addText('쿠폰데이터 분석결과', { x:0.5, y:1.8, w:9, h:1, fontSize:32, bold:true, color:'FFFFFF', align:'center' });
-  cover.addText(r.fileName, { x:0.5, y:2.9, w:9, h:0.6, fontSize:18, color:'8AAEE0', align:'center' });
-  cover.addText('다우기술 쿠폰사업본부', { x:0.5, y:4.8, w:9, h:0.4, fontSize:12, color:'8AAEE0', align:'center' });
+    const cover = pptx.addSlide();
+    cover.background = { color:'0D2251' };
+    cover.addText('쿠폰데이터 분석결과', { x:0.5, y:1.8, w:9, h:1, fontSize:32, bold:true, color:'FFFFFF', align:'center' });
+    cover.addText(r.fileName, { x:0.5, y:2.9, w:9, h:0.6, fontSize:18, color:'8AAEE0', align:'center' });
+    cover.addText('다우기술 쿠폰사업본부', { x:0.5, y:4.8, w:9, h:0.4, fontSize:12, color:'8AAEE0', align:'center' });
 
-  if(slides.length){
-    slides.forEach(s=>{
+    if(slides.length){
+      slides.forEach(s=>{
+        const slide = pptx.addSlide();
+        slide.background = { color:'FFFFFF' };
+        slide.addText(s.title, { x:0.4, y:0.3, w:9.2, h:0.7, fontSize:24, bold:true, color:'0D2251' });
+        slide.addShape(pptx.ShapeType.line, { x:0.4, y:1.0, w:9.2, h:0, line:{color:'3B7FF5', width:2} });
+        const bulletText = s.bullets.length
+          ? s.bullets.map(b=>({text:b, options:{bullet:true, fontSize:16, color:'2D4270', breakLine:true}}))
+          : [{text:'(내용 없음)', options:{fontSize:16, color:'AAAAAA'}}];
+        slide.addText(bulletText, { x:0.6, y:1.3, w:8.8, h:3.9, valign:'top', lineSpacingMultiple:1.4 });
+      });
+    }else{
       const slide = pptx.addSlide();
       slide.background = { color:'FFFFFF' };
-      slide.addText(s.title, { x:0.4, y:0.3, w:9.2, h:0.7, fontSize:24, bold:true, color:'0D2251' });
+      slide.addText('분석 결과', { x:0.4, y:0.3, w:9.2, h:0.7, fontSize:24, bold:true, color:'0D2251' });
       slide.addShape(pptx.ShapeType.line, { x:0.4, y:1.0, w:9.2, h:0, line:{color:'3B7FF5', width:2} });
-      const bulletText = s.bullets.length
-        ? s.bullets.map(b=>({text:b, options:{bullet:true, fontSize:16, color:'2D4270', breakLine:true}}))
-        : [{text:'(내용 없음)', options:{fontSize:16, color:'AAAAAA'}}];
-      slide.addText(bulletText, { x:0.6, y:1.3, w:8.8, h:3.9, valign:'top', lineSpacingMultiple:1.4 });
-    });
-  }else{
-    const slide = pptx.addSlide();
-    slide.background = { color:'FFFFFF' };
-    slide.addText('분석 결과', { x:0.4, y:0.3, w:9.2, h:0.7, fontSize:24, bold:true, color:'0D2251' });
-    slide.addShape(pptx.ShapeType.line, { x:0.4, y:1.0, w:9.2, h:0, line:{color:'3B7FF5', width:2} });
-    slide.addText(content, { x:0.5, y:1.3, w:9, h:4, fontSize:13, color:'2D4270', valign:'top' });
-  }
+      slide.addText(content, { x:0.5, y:1.3, w:9, h:4, fontSize:13, color:'2D4270', valign:'top' });
+    }
 
-  pptx.writeFile({ fileName:`쿠폰데이터분석_${r.fileName.replace(/[^\w가-힣]/g,'')}_${Date.now()}.pptx` }).then(()=>{
-    aToast('🖥 PPT 파일이 다운로드되었습니다');
-  }).catch(e=>{
-    aToast('❌ PPT 생성 실패: ' + e.message);
-  });
+    pptx.writeFile({ fileName:`쿠폰데이터분석_${r.fileName.replace(/[^\w가-힣]/g,'')}_${Date.now()}.pptx` }).then(()=>{
+      aToast('🖥 PPT 파일이 다운로드되었습니다');
+    }).catch(e=>{
+      aToast('❌ PPT 생성 실패: ' + e.message);
+    });
+  }catch(e){
+    aToast('❌ PPT 생성 중 오류가 발생했습니다: ' + e.message);
+  }
 }
 
 /* ══════════════════════════════════════════════════════
    서비스기획문서 작성 (탭: 운영페이지 개선개발 / 신규 서비스 개발)
    - 참고자료(이미지/PPT/PDF) 업로드 → PPT는 JSZip으로 슬라이드 텍스트를 직접 추출해 AI 프롬프트에 그대로 주입
    - 사이트관리 > 서비스 기획문서 양식파일 관리에서 "내 계정"에 등록해 둔 양식파일을 자동으로 함께 참고
-   - AI 엔진: Gemini(준비중) / Mistral AI(무료, 연동) / Claude(유료, 연동 — 실제 서비스에는 전용 프록시 서버 주소 설정 필요)
+   - AI 엔진: Gemini(준비중) / Mistral AI(무료, 연동) / Claude(유료, 연동 — 전용 프록시 서버 배포 완료)
    ══════════════════════════════════════════════════════ */
 
-/* ⚠ 실제 운영 반영 시 Gemini/Mistral과 동일한 방식(Cloudflare Worker)의
-   Claude 프록시 서버를 배포한 뒤 아래 URL을 교체해야 실제로 응답을 받을 수 있습니다.
-   그 전까지는 Claude 선택 시 연결 실패 안내가 표시됩니다. */
-const API_CLAUDE_PROXY_URL = 'https://REPLACE-WITH-CLAUDE-PROXY.workers.dev';
+/* Claude 프록시 서버(Cloudflare Worker, Gemini/Mistral과 동일한 방식) 배포 완료.
+   실제 API 키는 이 워커의 환경변수(Secret)에만 저장되어 있으며 이 코드에는 노출되지 않는다. */
+const API_CLAUDE_PROXY_URL = 'https://dark-term-e031daou-claude-proxy.sonjj20000.workers.dev';
 
 let sdInitialized = false;
 let sdRefFiles = { ops: [], new: [] };
@@ -2576,6 +2592,8 @@ function sdInit(){
   sdRenderRefList('new');
   sdRenderDocList('ops');
   sdRenderDocList('new');
+  uSyncRefresh(SD_TEMPLATES_KEY, ()=>{ sdRefreshTemplateNote('ops'); sdRefreshTemplateNote('new'); }); // 다른 기기에서 등록한 양식파일 반영
+  uSyncRefresh(SD_DOCS_KEY, ()=>{ sdRenderDocList('ops'); sdRenderDocList('new'); }); // 다른 기기에 저장한 기획서 목록 반영
 }
 
 function sdSwitchTab(cat){
@@ -2635,11 +2653,27 @@ function sdBuildPanelHTML(cat){
   `;
 }
 
+/* JSZip은 PPT 텍스트 추출이 실제로 필요한 순간에만 로드한다.
+   (페이지 전역에 항상 로드해두면 PptxGenJS의 내부 zip 처리와 충돌할 가능성이 있어,
+   PPT 다운로드 기능과 완전히 분리하기 위해 지연 로딩 방식으로 변경) */
+let _jsZipLoadPromise = null;
+function ensureJSZipLoaded(){
+  if(typeof JSZip !== 'undefined') return Promise.resolve();
+  if(_jsZipLoadPromise) return _jsZipLoadPromise;
+  _jsZipLoadPromise = new Promise((resolve, reject)=>{
+    const s = document.createElement('script');
+    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
+    s.onload = () => resolve();
+    s.onerror = () => { _jsZipLoadPromise = null; reject(new Error('JSZip 라이브러리 로드 실패')); };
+    document.head.appendChild(s);
+  });
+  return _jsZipLoadPromise;
+}
+
 /* PPTX 파일 내부 XML을 직접 열어 슬라이드별 텍스트(제목/본문)를 추출한다.
    AI가 실제 양식의 슬라이드 구성을 "읽고" 따라 쓸 수 있도록 하기 위함. */
 function sdExtractPptxOutline(file){
-  return new Promise((resolve, reject)=>{
-    if(typeof JSZip==='undefined'){ reject(new Error('JSZip 라이브러리 로드 실패')); return; }
+  return ensureJSZipLoaded().then(() => new Promise((resolve, reject)=>{
     const reader = new FileReader();
     reader.onload = async (ev)=>{
       try{
@@ -2662,7 +2696,7 @@ function sdExtractPptxOutline(file){
     };
     reader.onerror = ()=>reject(new Error('파일 읽기 실패'));
     reader.readAsArrayBuffer(file);
-  });
+  }));
 }
 
 function sdHandleRefUpload(e, cat){
@@ -2835,11 +2869,15 @@ function sdExportPPT(cat){
   const label = cat==='ops' ? '운영페이지 개선개발' : '신규 서비스 개발';
   const content = gv(`sd-${cat}-content`).trim();
   if(!content){ aToast('⚠ 내보낼 내용이 없습니다'); return; }
-  sdBuildPPTX(label, content).writeFile({ fileName:`서비스기획문서_${sdSafeFileName(label)}_${Date.now()}.pptx` }).then(()=>{
-    aToast('📊 PPT 파일이 다운로드되었습니다');
-  }).catch(e=>{
-    aToast('❌ PPT 생성 실패: ' + e.message);
-  });
+  try{
+    sdBuildPPTX(label, content).writeFile({ fileName:`서비스기획문서_${sdSafeFileName(label)}_${Date.now()}.pptx` }).then(()=>{
+      aToast('📊 PPT 파일이 다운로드되었습니다');
+    }).catch(e=>{
+      aToast('❌ PPT 생성 실패: ' + e.message);
+    });
+  }catch(e){
+    aToast('❌ PPT 생성 중 오류가 발생했습니다: ' + e.message);
+  }
 }
 
 function sdExportWord(cat){
@@ -2860,7 +2898,7 @@ function sdExportWord(cat){
    같은 계정으로 로그인했을 때만 본인이 저장한 기획서가 보인다. */
 const SD_DOCS_KEY = 'sd_generated_docs_v1';
 const sdGetDocs = () => { try{ return JSON.parse(uGetItem(SD_DOCS_KEY)||'[]') }catch{return []} };
-const sdSetDocs = v => uSetItem(SD_DOCS_KEY, JSON.stringify(v));
+const sdSetDocs = v => uSyncSave(SD_DOCS_KEY, JSON.stringify(v));
 let _sdConfirmCb = null;
 
 function sdSaveDoc(cat){
@@ -2903,11 +2941,15 @@ function sdDownloadSavedPPT(id){
   const d = sdGetDocs().find(x=>x.id===id);
   if(!d){ aToast('⚠ 문서를 찾을 수 없습니다'); return; }
   const label = d.category==='ops' ? '운영페이지 개선개발' : '신규 서비스 개발';
-  sdBuildPPTX(label, d.content).writeFile({ fileName:`${sdSafeFileName(d.title)}_${Date.now()}.pptx` }).then(()=>{
-    aToast('📊 PPT 파일이 다운로드되었습니다');
-  }).catch(e=>{
-    aToast('❌ PPT 생성 실패: ' + e.message);
-  });
+  try{
+    sdBuildPPTX(label, d.content).writeFile({ fileName:`${sdSafeFileName(d.title)}_${Date.now()}.pptx` }).then(()=>{
+      aToast('📊 PPT 파일이 다운로드되었습니다');
+    }).catch(e=>{
+      aToast('❌ PPT 생성 실패: ' + e.message);
+    });
+  }catch(e){
+    aToast('❌ PPT 생성 중 오류가 발생했습니다: ' + e.message);
+  }
 }
 function sdDownloadSavedWord(id){
   const d = sdGetDocs().find(x=>x.id===id);
@@ -2950,13 +2992,14 @@ function sdDeleteDoc(id){
    본인이 등록한 양식파일이 보이고 위 '서비스기획문서 작성' 화면에 적용된다. */
 const SD_TEMPLATES_KEY = 'sd_template_files_v1';
 const sdtGetTemplates = () => { try{ return JSON.parse(uGetItem(SD_TEMPLATES_KEY)||'[]') }catch{return []} };
-const sdtSetTemplates = v => uSetItem(SD_TEMPLATES_KEY, JSON.stringify(v));
+const sdtSetTemplates = v => uSyncSave(SD_TEMPLATES_KEY, JSON.stringify(v));
 let sdtActiveCat = 'ops';
 let sdtEditId = null;
 let _sdtConfirmCb = null;
 
 function sdtInit(){
   sdtSwitchCat('ops');
+  uSyncRefresh(SD_TEMPLATES_KEY, sdtRenderList); // 같은 계정의 다른 기기에서 등록한 양식파일 반영
 }
 function sdtSwitchCat(cat){
   sdtActiveCat = cat;
@@ -3730,8 +3773,8 @@ const API_PROMPT_SAMPLE_DEFAULTS = [
   { id:'default-issue', label:'발행API 샘플', text:'이 API 문서에서 쿠폰 발행 요청/응답 파라미터와 에러 코드를 표로 정리해줘' },
   { id:'default-auth',  label:'인증API 샘플', text:'이 API 문서에서 인증 방식(토큰 발급/갱신 절차 포함)과 필수 파라미터를 정리해줘' }
 ];
-const apGetSamples = () => { try{const r=JSON.parse(localStorage.getItem(AK_PROMPT_SAMPLES));return (r&&r.length)?r:[...API_PROMPT_SAMPLE_DEFAULTS]}catch{return [...API_PROMPT_SAMPLE_DEFAULTS]} };
-const apSetSamples = v => syncSave(AK_PROMPT_SAMPLES, JSON.stringify(v));
+const apGetSamples = () => { try{const r=JSON.parse(uGetItem(AK_PROMPT_SAMPLES));return (r&&r.length)?r:[...API_PROMPT_SAMPLE_DEFAULTS]}catch{return [...API_PROMPT_SAMPLE_DEFAULTS]} };
+const apSetSamples = v => uSyncSave(AK_PROMPT_SAMPLES, JSON.stringify(v));
 
 let apiUploadedFile = null;
 let apiPendingUploadFile = null;
@@ -4117,8 +4160,8 @@ ${prompt}
   btn.innerHTML = `<span class="api-spinner"></span> ${engineLabel} 분석 중...`;
 
   try {
-    if(engine === 'gemini' || engine === 'mistral') {
-      const proxyUrl = engine === 'gemini' ? API_GEMINI_PROXY_URL : API_MISTRAL_PROXY_URL;
+    if(engine === 'mistral' || engine === 'claude') {
+      const proxyUrl = engine === 'claude' ? API_CLAUDE_PROXY_URL : API_MISTRAL_PROXY_URL;
       let resp;
       try {
         resp = await fetch(proxyUrl, {
@@ -4127,14 +4170,16 @@ ${prompt}
           body: JSON.stringify({ prompt: fullPrompt })
         });
       } catch(networkErr) {
-        throw new Error('네트워크 연결에 실패했습니다. 인터넷 연결을 확인해주세요.');
+        throw new Error(engine === 'claude'
+          ? 'Claude 연동 서버에 연결할 수 없습니다. 관리자에게 문의해주세요.'
+          : '네트워크 연결에 실패했습니다. 인터넷 연결을 확인해주세요.');
       }
       const data = await resp.json();
       if(!resp.ok || data.error) throw new Error(data.error || `서버 응답 오류 (상태코드: ${resp.status})`);
       if(!data.text || !data.text.trim()) throw new Error('분석 결과가 비어있습니다. 분석 요청 내용을 더 구체적으로 입력해보세요.');
       apiCurrentAnalysisText = data.text;
     } else {
-      throw new Error('해당 엔진은 준비중입니다. 현재는 Mistral AI를 이용해주세요.');
+      throw new Error('해당 엔진은 준비중입니다. 현재는 Mistral AI 또는 Claude를 이용해주세요.');
     }
 
     apiSavedAnalysisEditId = null; // 새로 분석 실행 시 기존 수정모드는 해제
@@ -4269,7 +4314,7 @@ function apiRenderPromptSamplesInner() {
 }
 function apiRenderPromptSamples() {
   apiRenderPromptSamplesInner();
-  syncRefresh(AK_PROMPT_SAMPLES, apiRenderPromptSamplesInner); // 다른 기기(마스터)가 관리한 최신 샘플 반영
+  uSyncRefresh(AK_PROMPT_SAMPLES, apiRenderPromptSamplesInner); // 같은 계정의 다른 기기에서 등록한 최신 샘플 반영
 }
 function apiUsePromptSample(id) {
   const s = apGetSamples().find(x=>x.id===id);
@@ -4341,7 +4386,7 @@ function renderApSampleListInner() {
 }
 function renderApSampleList() {
   renderApSampleListInner();
-  syncRefresh(AK_PROMPT_SAMPLES, renderApSampleListInner); // 다른 기기에서 편집한 최신 샘플 반영
+  uSyncRefresh(AK_PROMPT_SAMPLES, renderApSampleListInner); // 같은 계정의 다른 기기에서 편집한 최신 샘플 반영
 }
 
 /* ── ③ 기획서 작성 — AI 생성 + PPT/MD 다운로드 ── */
@@ -4464,13 +4509,22 @@ ${userPrompt}
   }
 
   try {
-    if(engine !== 'mistral' && engine !== 'gemini') throw new Error('해당 엔진은 준비중입니다. 현재는 Mistral AI를 이용해주세요.');
-    const proxyUrl = engine === 'gemini' ? API_GEMINI_PROXY_URL : API_MISTRAL_PROXY_URL;
-    const resp = await fetch(proxyUrl, {
-      method: 'POST',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({ prompt: fullPrompt })
-    });
+    let proxyUrl;
+    if(engine === 'mistral') proxyUrl = API_MISTRAL_PROXY_URL;
+    else if(engine === 'claude') proxyUrl = API_CLAUDE_PROXY_URL;
+    else throw new Error('해당 엔진은 준비중입니다. 현재는 Mistral AI 또는 Claude를 이용해주세요.');
+    let resp;
+    try {
+      resp = await fetch(proxyUrl, {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({ prompt: fullPrompt })
+      });
+    } catch(networkErr) {
+      throw new Error(engine === 'claude'
+        ? 'Claude 연동 서버에 연결할 수 없습니다. 관리자에게 문의해주세요.'
+        : '네트워크 연결에 실패했습니다. 인터넷 연결을 확인해주세요.');
+    }
     const data = await resp.json();
     if(!resp.ok || data.error) throw new Error(data.error || `서버 오류 (${resp.status})`);
     if(!data.text || !data.text.trim()) throw new Error('생성된 내용이 비어있습니다. 다시 시도해주세요.');
@@ -4590,35 +4644,39 @@ function apiDocExportPPT() {
   const targetId = document.getElementById('api-doc-target').value;
   const item = targetId ? aGetList().find(x=>x.id===targetId) : null;
 
-  const pptx = new PptxGenJS();
-  pptx.defineLayout({ name: 'A4', width: 10, height: 5.63 });
-  pptx.layout = 'A4';
+  try{
+    const pptx = new PptxGenJS();
+    pptx.defineLayout({ name: 'A4', width: 10, height: 5.63 });
+    pptx.layout = 'A4';
 
-  const cover = pptx.addSlide();
-  cover.background = { color: '0D2251' };
-  cover.addText('서비스 기획서', { x:0.5, y:1.8, w:9, h:1, fontSize:32, bold:true, color:'FFFFFF', align:'center' });
-  cover.addText(item ? item.name : '쿠폰사업본부 API 연동', { x:0.5, y:2.9, w:9, h:0.6, fontSize:18, color:'8AAEE0', align:'center' });
-  cover.addText('다우기술 쿠폰사업본부', { x:0.5, y:4.8, w:9, h:0.4, fontSize:12, color:'8AAEE0', align:'center' });
+    const cover = pptx.addSlide();
+    cover.background = { color: '0D2251' };
+    cover.addText('서비스 기획서', { x:0.5, y:1.8, w:9, h:1, fontSize:32, bold:true, color:'FFFFFF', align:'center' });
+    cover.addText(item ? item.name : '쿠폰사업본부 API 연동', { x:0.5, y:2.9, w:9, h:0.6, fontSize:18, color:'8AAEE0', align:'center' });
+    cover.addText('다우기술 쿠폰사업본부', { x:0.5, y:4.8, w:9, h:0.4, fontSize:12, color:'8AAEE0', align:'center' });
 
-  slides.forEach(s => {
-    const slide = pptx.addSlide();
-    slide.background = { color: 'FFFFFF' };
-    slide.addText(s.title, { x:0.4, y:0.3, w:9.2, h:0.7, fontSize:24, bold:true, color:'0D2251' });
-    slide.addShape(pptx.ShapeType.line, { x:0.4, y:1.0, w:9.2, h:0, line:{color:'3B7FF5', width:2} });
+    slides.forEach(s => {
+      const slide = pptx.addSlide();
+      slide.background = { color: 'FFFFFF' };
+      slide.addText(s.title, { x:0.4, y:0.3, w:9.2, h:0.7, fontSize:24, bold:true, color:'0D2251' });
+      slide.addShape(pptx.ShapeType.line, { x:0.4, y:1.0, w:9.2, h:0, line:{color:'3B7FF5', width:2} });
 
-    const bulletText = s.bullets.length
-      ? s.bullets.map(b=>({text:b, options:{bullet:true, fontSize:16, color:'2D4270', breakLine:true}}))
-      : [{text:'(내용 없음)', options:{fontSize:16, color:'AAAAAA'}}];
+      const bulletText = s.bullets.length
+        ? s.bullets.map(b=>({text:b, options:{bullet:true, fontSize:16, color:'2D4270', breakLine:true}}))
+        : [{text:'(내용 없음)', options:{fontSize:16, color:'AAAAAA'}}];
 
-    slide.addText(bulletText, { x:0.6, y:1.3, w:8.8, h:3.9, valign:'top', lineSpacingMultiple:1.4 });
-  });
+      slide.addText(bulletText, { x:0.6, y:1.3, w:8.8, h:3.9, valign:'top', lineSpacingMultiple:1.4 });
+    });
 
-  const fileName = `서비스기획서_${item?item.name.replace(/[^\w가-힣]/g,''):'문서'}_${Date.now()}.pptx`;
-  pptx.writeFile({ fileName }).then(()=>{
-    aToast('📊 PPT 파일이 다운로드되었습니다');
-  }).catch(e=>{
-    aToast('❌ PPT 생성 실패: ' + e.message);
-  });
+    const fileName = `서비스기획서_${item?item.name.replace(/[^\w가-힣]/g,''):'문서'}_${Date.now()}.pptx`;
+    pptx.writeFile({ fileName }).then(()=>{
+      aToast('📊 PPT 파일이 다운로드되었습니다');
+    }).catch(e=>{
+      aToast('❌ PPT 생성 실패: ' + e.message);
+    });
+  }catch(e){
+    aToast('❌ PPT 생성 중 오류가 발생했습니다: ' + e.message);
+  }
 }
 
 function aEsc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
