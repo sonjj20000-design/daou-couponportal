@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>다우기술 쿠폰사업본부 업무포털</title>
+<title>다우기술 쿠폰기획팀 업무포털</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pptxgenjs/3.12.0/pptxgen.bundle.js"></script>
 <style>
@@ -481,7 +481,7 @@ input,select,textarea{font-family:inherit}
 <header id="header">
   <div id="header-logo" onclick="showPage('home')">
     <div class="logo-icon">D</div>
-    <span class="logo-text">다우기술<span class="logo-sub">쿠폰사업본부</span></span>
+    <span class="logo-text">다우기술<span class="logo-sub">쿠폰기획팀</span></span>
   </div>
   <div id="header-auth">
     <button class="btn-login" onclick="openLogin()">로그인</button>
@@ -534,7 +534,7 @@ input,select,textarea{font-family:inherit}
   <main id="main-content">
 
     <section class="page active" id="page-home">
-      <div id="home-hero"><h1>쿠폰사업본부 업무 포털</h1><p>업무 효율화·자동화 통합 관리 시스템 | 다우기술</p></div>
+      <div id="home-hero"><h1>쿠폰기획팀 업무 포털</h1><p>업무 효율화·자동화 통합 관리 시스템 | 다우기술</p></div>
       <div id="home-stats">
         <div class="stat-card"><div class="stat-label">경쟁사 기업분석</div><div class="stat-value" id="stat-competitor">0</div><span class="stat-sub sub-blue">DART 분석 저장건</span></div>
         <div class="stat-card"><div class="stat-label">쿠폰데이터 분석</div><div class="stat-value" id="stat-sales">0</div><span class="stat-sub sub-amber">분석 저장건</span></div>
@@ -1229,7 +1229,7 @@ input,select,textarea{font-family:inherit}
 <!-- 로그인 모달 -->
 <div class="modal-bg" id="modal-login">
   <div class="modal">
-    <h2>로그인</h2><p class="modal-sub">쿠폰사업본부 업무포털</p>
+    <h2>로그인</h2><p class="modal-sub">쿠폰기획팀 업무포털</p>
     <label>아이디</label><input type="text" id="login-id" placeholder="아이디" autocomplete="username"/>
     <label>패스워드</label><input type="password" id="login-pw" placeholder="패스워드" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()"/>
     <div class="modal-err" id="login-err">아이디 또는 패스워드가 올바르지 않습니다.</div>
@@ -2534,7 +2534,7 @@ function csaExportPPT(){
     cover.background = { color:'0D2251' };
     cover.addText('쿠폰데이터 분석결과', { x:0.5, y:1.8, w:9, h:1, fontSize:32, bold:true, color:'FFFFFF', align:'center' });
     cover.addText(r.fileName, { x:0.5, y:2.9, w:9, h:0.6, fontSize:18, color:'8AAEE0', align:'center' });
-    cover.addText('다우기술 쿠폰사업본부', { x:0.5, y:4.8, w:9, h:0.4, fontSize:12, color:'8AAEE0', align:'center' });
+    cover.addText('다우기술 쿠폰기획팀', { x:0.5, y:4.8, w:9, h:0.4, fontSize:12, color:'8AAEE0', align:'center' });
 
     if(slides.length){
       slides.forEach(s=>{
@@ -2841,7 +2841,7 @@ function sdBuildPPTX(label, content){
   cover.background = { color:'0D2251' };
   cover.addText('서비스 기획문서', { x:0.5, y:1.8, w:9, h:1, fontSize:32, bold:true, color:'FFFFFF', align:'center' });
   cover.addText(label, { x:0.5, y:2.9, w:9, h:0.6, fontSize:18, color:'8AAEE0', align:'center' });
-  cover.addText('다우기술 쿠폰사업본부', { x:0.5, y:4.8, w:9, h:0.4, fontSize:12, color:'8AAEE0', align:'center' });
+  cover.addText('다우기술 쿠폰기획팀', { x:0.5, y:4.8, w:9, h:0.4, fontSize:12, color:'8AAEE0', align:'center' });
 
   if(slides.length){
     slides.forEach(s=>{
@@ -4652,8 +4652,8 @@ function apiDocExportPPT() {
     const cover = pptx.addSlide();
     cover.background = { color: '0D2251' };
     cover.addText('서비스 기획서', { x:0.5, y:1.8, w:9, h:1, fontSize:32, bold:true, color:'FFFFFF', align:'center' });
-    cover.addText(item ? item.name : '쿠폰사업본부 API 연동', { x:0.5, y:2.9, w:9, h:0.6, fontSize:18, color:'8AAEE0', align:'center' });
-    cover.addText('다우기술 쿠폰사업본부', { x:0.5, y:4.8, w:9, h:0.4, fontSize:12, color:'8AAEE0', align:'center' });
+    cover.addText(item ? item.name : '쿠폰기획팀 API 연동', { x:0.5, y:2.9, w:9, h:0.6, fontSize:18, color:'8AAEE0', align:'center' });
+    cover.addText('다우기술 쿠폰기획팀', { x:0.5, y:4.8, w:9, h:0.4, fontSize:12, color:'8AAEE0', align:'center' });
 
     slides.forEach(s => {
       const slide = pptx.addSlide();
