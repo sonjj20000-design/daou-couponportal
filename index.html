@@ -135,6 +135,8 @@ input,select,textarea{font-family:inherit}
 .fg label{font-size:10px;color:var(--ink-faint);font-weight:700}
 .fg input,.fg select{padding:7px 10px;border:1px solid var(--line);border-radius:6px;font-size:12px;outline:none;min-width:110px}
 .fg input:focus{border-color:var(--daou-blue)}
+.aps-textarea{padding:7px 10px;border:1px solid var(--line);border-radius:6px;font-size:12px;outline:none;min-width:110px;height:150px;resize:vertical;font-family:inherit;line-height:1.5}
+.aps-textarea:focus{border-color:var(--daou-blue)}
 .form-err{color:var(--danger);font-size:11px;margin-top:6px;display:none}
 .lock-box{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:5.5rem 2rem;text-align:center;color:var(--ink-faint)}
 .lock-box .lock-emoji{font-size:50px;margin-bottom:1.1rem;opacity:.35}
@@ -509,11 +511,11 @@ input,select,textarea{font-family:inherit}
     <nav class="wsb-nav" id="wsb-nav">
       <a href="#" class="wsb-link active" data-page="home" onclick="showPage('home');return false"><span class="wsb-ic">🏠</span>업무 홈</a>
       <a href="#" class="wsb-link" data-page="business-market" onclick="showPage('business-market');return false"><span class="wsb-ic">📊</span>시장현황 모니터링</a>
-      <a href="#" class="wsb-link" data-page="business-competitor" onclick="showPage('business-competitor');return false"><span class="wsb-ic">🏢</span>경쟁사 기업분석</a>
+      <a href="#" class="wsb-link" data-page="business-competitor" onclick="showPage('business-competitor');return false"><span class="wsb-ic">🏢</span>경쟁사 기업분석(준비중)</a>
       <a href="#" class="wsb-link" data-page="business-sales" onclick="showPage('business-sales');return false"><span class="wsb-ic">📈</span>쿠폰데이터 분석</a>
       <a href="#" class="wsb-link" data-page="service-api" onclick="showPage('service-api');return false"><span class="wsb-ic">🔗</span>API 업무문서</a>
       <a href="#" class="wsb-link" data-page="service-doc" onclick="showPage('service-doc');return false"><span class="wsb-ic">📝</span>서비스기획문서</a>
-      <a href="#" class="wsb-link" data-page="etc-cms" onclick="showPage('etc-cms');return false"><span class="wsb-ic">⚙️</span>CMS 상품등록</a>
+      <a href="#" class="wsb-link" data-page="etc-cms" onclick="showPage('etc-cms');return false"><span class="wsb-ic">⚙️</span>CMS 상품등록 자동화 테스트(준비중)</a>
       <div class="wsb-divider" id="wsb-divider-admin" style="display:none"></div>
       <a href="#" class="wsb-link" id="wsb-li-account" style="display:none" data-page="account-manage" onclick="showPage('account-manage');return false"><span class="wsb-ic">👤</span>계정관리</a>
       <a href="#" class="wsb-link" id="wsb-li-site-prompt" style="display:none" data-page="site-prompt" onclick="showPage('site-prompt');return false"><span class="wsb-ic">🧩</span>API프롬프트 관리</a>
@@ -1057,7 +1059,7 @@ input,select,textarea{font-family:inherit}
     </section>
 
     <section class="page" id="page-etc-cms">
-      <div class="page-hd"><h2>CMS 상품등록 자동화 <span class="mc-badge">테스트페이지</span></h2><p>상품등록 · 엑셀 일괄등록 · 등록상품 관리를 한 화면에서 처리합니다</p></div>
+      <div class="page-hd"><h2>CMS 상품등록 자동화(준비중) <span class="mc-badge">테스트페이지</span></h2><p>상품등록 · 엑셀 일괄등록 · 등록상품 관리를 한 화면에서 처리합니다</p></div>
 
       <div class="cms-tabnav">
         <div class="cms-tab-group">
@@ -1163,7 +1165,7 @@ input,select,textarea{font-family:inherit}
         <div class="form-row">
           <div class="fg"><label>아이디 *</label><input id="acf-id" placeholder="아이디"/></div>
           <div class="fg"><label>패스워드 *</label><input id="acf-pw" type="password" placeholder="패스워드"/></div>
-          <div class="fg"><label>권한</label><select id="acf-role"><option value="user">일반</option></select></div>
+          <div class="fg"><label>권한</label><select id="acf-role"><option value="user">일반</option><option value="master">마스터</option></select></div>
           <button class="btn-add" style="height:32px;align-self:flex-end" onclick="addUser()">추가</button>
         </div>
         <div class="form-err" id="acf-err"></div>
@@ -1183,7 +1185,7 @@ input,select,textarea{font-family:inherit}
         <div class="fi-title" id="ap-sample-form-title">샘플 추가</div>
         <div class="form-row">
           <div class="fg"><label>버튼 이름 *</label><input id="aps-label" placeholder="예) 인증API 샘플" style="min-width:180px"/></div>
-          <div class="fg" style="flex:1"><label>샘플 내용 *</label><input id="aps-text" placeholder="분석요청 프롬프트 예시 내용" style="min-width:320px"/></div>
+          <div class="fg" style="flex:1"><label>샘플 내용 *</label><textarea id="aps-text" class="aps-textarea" placeholder="분석요청 프롬프트 예시 내용" style="min-width:320px"></textarea></div>
           <button class="btn-add" style="height:32px;align-self:flex-end" id="ap-sample-submit-btn" onclick="apSampleSubmit()">추가</button>
           <button class="btn-export" style="height:32px;align-self:flex-end" onclick="apSampleCancelForm()">취소</button>
         </div>
@@ -1371,11 +1373,11 @@ function uRemoveItem(rawKey){ localStorage.removeItem(userScopedKey(rawKey)); }
    → 이렇게 하면 (1) 계정별로 완전히 분리되어 보이고, (2) 코드가 새로 배포되어 접속 주소(origin)가
    바뀌어도 원격 서버에 저장된 값이므로 데이터가 사라지지 않는다. */
 function uSyncSave(rawKey, valueString){ syncSave(userScopedKey(rawKey), valueString); }
-function uSyncRefresh(rawKey, onUpdated){ syncRefresh(userScopedKey(rawKey), onUpdated); }
+function uSyncRefresh(rawKey, onUpdated){ return syncRefresh(userScopedKey(rawKey), onUpdated); }
 
 async function sha256(s){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join('')}
 function getUsers(){try{return JSON.parse(localStorage.getItem(USERS_KEY)||'[]')}catch(e){return[]}}
-function saveUsers(u){localStorage.setItem(USERS_KEY,JSON.stringify(u))}
+function saveUsers(u){syncSave(USERS_KEY,JSON.stringify(u))}
 function getData(){try{return JSON.parse(uGetItem(DATA_KEY)||'{}')}catch(e){return{}}}
 function saveData(d){uSetItem(DATA_KEY,JSON.stringify(d))}
 const today=()=>new Date().toLocaleDateString('ko-KR');
@@ -1397,7 +1399,7 @@ async function doLogin(){
   const err=document.getElementById('login-err');err.style.display='none';
   const mHash=await sha256(MASTER.pw),iHash=await sha256(pw);
   if(id===MASTER.id&&iHash===mHash){currentUser={id,role:'master'}}
-  else{const u=getUsers().find(u=>u.id===id&&u.pwHash===iHash);if(u)currentUser={id,role:'user'};else{err.style.display='block';return}}
+  else{const u=getUsers().find(u=>u.id===id&&u.pwHash===iHash);if(u)currentUser={id,role:u.role==='master'?'master':'user'};else{err.style.display='block';return}}
   resetSessionMemoryState(); // 새 계정 진입 시 이전 계정의 메모리 잔존 상태 제거
   cleanupLegacyMarketData(); // 로그인한 사용자 스코프에서 구버전 잔존 데이터 정리
   document.getElementById('login-id').value='';document.getElementById('login-pw').value='';
@@ -1502,7 +1504,7 @@ function showPage(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   const pg=document.getElementById('page-'+id);if(pg)pg.classList.add('active');
   document.querySelectorAll('.wsb-link').forEach(a=>a.classList.toggle('active', a.dataset.page===id));
-  const rm={'business-market':mmInit,'business-competitor':cdaInit,'service-api':apiInit,'account-manage':renderAccount,'site-prompt':renderApSampleList,'etc-cms':cmsInit,'business-sales':csaInit,'site-prompt-csa':renderCsaSampleList,'service-doc':sdInit,'site-prompt-doc':sdtInit};
+  const rm={'business-market':mmInit,'business-competitor':cdaInit,'service-api':apiInit,'account-manage':renderAccountWithSync,'site-prompt':renderApSampleList,'etc-cms':cmsInit,'business-sales':csaInit,'site-prompt-csa':renderCsaSampleList,'service-doc':sdInit,'site-prompt-doc':sdtInit};
   if(rm[id])rm[id]();updateStats();
 }
 
@@ -1761,12 +1763,12 @@ function cdaDeleteAnalysis(id){
    CMS상품등록 자동화 (테스트페이지)
    기획서(20260702_01_상품등록 페이지 개발) 기준 개발:
    - 탭1 상품등록 / 탭2 등록상품 관리 / 탭3 엑셀 등록
-   - 등록상품 목록(CMS_PRODUCTS_KEY)은 회사 공용 데이터이므로
-     AK_LIST와 동일하게 syncSave/syncRefresh(서버 KV)로 동기화한다.
+   - 등록상품 목록(CMS_PRODUCTS_KEY)은 로그인한 아이디별로 분리해서 저장하고,
+     uSyncSave/uSyncRefresh(서버 KV)로 동기화하여 재배포·다른 기기에서도 유지된다.
    ══════════════════════════════════════════════════════ */
 const CMS_PRODUCTS_KEY = 'cms_products_v1';
-const cmsGetProducts = () => { try{return JSON.parse(localStorage.getItem(CMS_PRODUCTS_KEY)||'[]')}catch{return[]} };
-const cmsSetProducts = v => syncSave(CMS_PRODUCTS_KEY, JSON.stringify(v));
+const cmsGetProducts = () => { try{return JSON.parse(uGetItem(CMS_PRODUCTS_KEY)||'[]')}catch{return[]} };
+const cmsSetProducts = v => uSyncSave(CMS_PRODUCTS_KEY, JSON.stringify(v));
 let cmsEditId = null;
 let cmsExcelRows = [];
 
@@ -1774,7 +1776,7 @@ function cmsInit(){
   cmsEditId = null;
   cmsExcelInit();
   cmsSwitchTab(1);
-  syncRefresh(CMS_PRODUCTS_KEY, ()=>{ if(document.getElementById('cms-tab-2')?.classList.contains('active')) cmsRenderList(); });
+  uSyncRefresh(CMS_PRODUCTS_KEY, ()=>{ if(document.getElementById('cms-tab-2')?.classList.contains('active')) cmsRenderList(); });
 }
 
 function cmsSwitchTab(n){
@@ -3176,14 +3178,19 @@ function renderAccount(){
   const q=gv('acct-search'),all=getUsers(),users=all.filter(u=>u.id.includes(q));
   const tb=document.getElementById('acct-tbody');if(!tb)return;
   tb.innerHTML=`<tr style="background:#fafbff"><td>-</td><td><b>sonjj2000</b></td><td style="font-family:monospace;font-size:10px;color:#aab">SHA-256</td><td><span class="badge b-amber">마스터</span></td><td>-</td><td><span style="font-size:11px;color:#aab">수정불가</span></td></tr>`
-  +(users.length?users.map((u,i)=>`<tr><td>${i+1}</td><td>${u.id}</td><td style="font-family:monospace;font-size:10px;color:#aab">••••••••</td><td><span class="badge b-blue">일반</span></td><td>${u.date||'-'}</td><td><button class="btn-sm" style="margin-right:4px" onclick="openEditModal(${all.indexOf(u)})">패스워드 수정</button><button class="btn-sm btn-del" onclick="delUser(${all.indexOf(u)})">삭제</button></td></tr>`).join(''):'<tr><td colspan="6" style="text-align:center;color:#aab;padding:1.5rem">등록된 사용자가 없습니다</td></tr>');
+  +(users.length?users.map((u,i)=>`<tr><td>${i+1}</td><td>${u.id}</td><td style="font-family:monospace;font-size:10px;color:#aab">••••••••</td><td>${u.role==='master'?'<span class="badge b-amber">마스터</span>':'<span class="badge b-blue">일반</span>'}</td><td>${u.date||'-'}</td><td><button class="btn-sm" style="margin-right:4px" onclick="openEditModal(${all.indexOf(u)})">패스워드 수정</button><button class="btn-sm btn-del" onclick="delUser(${all.indexOf(u)})">삭제</button></td></tr>`).join(''):'<tr><td colspan="6" style="text-align:center;color:#aab;padding:1.5rem">등록된 사용자가 없습니다</td></tr>');
+}
+function renderAccountWithSync(){
+  renderAccount();
+  syncRefresh(USERS_KEY, renderAccount); // 다른 기기/재배포 후에도 계정 목록이 최신으로 유지되도록 새로고침
 }
 async function addUser(){
   const id=gv('acf-id').trim(),pw=gv('acf-pw').trim(),err=document.getElementById('acf-err');
+  const role=(document.getElementById('acf-role')?.value==='master')?'master':'user';
   if(!id||!pw){err.textContent='아이디와 패스워드를 입력하세요.';err.style.display='block';return}
   if(id===MASTER.id){err.textContent='이미 사용중인 아이디입니다.';err.style.display='block';return}
   const users=getUsers();if(users.find(u=>u.id===id)){err.textContent='이미 존재하는 아이디입니다.';err.style.display='block';return}
-  const pwHash=await sha256(pw);users.push({id,pwHash,role:'user',date:today()});saveUsers(users);
+  const pwHash=await sha256(pw);users.push({id,pwHash,role,date:today()});saveUsers(users);
   clr('acf-id','acf-pw');err.style.display='none';document.getElementById('acct-form').classList.remove('open');renderAccount();updateStats();
 }
 function delUser(i){
@@ -3235,13 +3242,12 @@ const MM_DEF_KW = {
   welfare: ['복지서비스','임직원선물','복지몰','이지웰','베네피아','명절선물','근로자의날 선물']
 };
 const mmGetReports = () => { try{return JSON.parse(uGetItem(MM_RK)||'[]')}catch{return[]} };
-const mmSetReports = a => uSetItem(MM_RK, JSON.stringify(a));
-/* 키워드는 계정별 데이터가 아니라 '모든 계정 + 모든 기기 공통' 데이터이므로
-   userScopedKey(u:아이디::...)를 거치지 않고 localStorage를 캐시로 사용하면서
-   syncSave/syncRefresh로 서버(KV)와 동기화한다 (SYNC_API_BASE 참고).
+const mmSetReports = a => uSyncSave(MM_RK, JSON.stringify(a));
+/* 키워드/모니터링 게시판은 로그인한 아이디별로 완전히 분리해서 저장하고,
+   uSyncSave/uSyncRefresh로 서버(KV)와 동기화하여 재배포·다른 기기에서도 유지된다.
    ⚠ 재배포 후에도 값이 유지되도록 MM_KK 키 이름은 절대 변경하지 않는다. */
-const mmGetKw = () => { try{const r=JSON.parse(localStorage.getItem(MM_KK));return r||MM_DEF_KW}catch{return MM_DEF_KW} };
-const mmSetKw = o => syncSave(MM_KK, JSON.stringify(o));
+const mmGetKw = () => { try{const r=JSON.parse(uGetItem(MM_KK));return r||MM_DEF_KW}catch{return MM_DEF_KW} };
+const mmSetKw = o => uSyncSave(MM_KK, JSON.stringify(o));
 
 let mmCurrentResult = null;
 let mmDetailReport  = null;
@@ -3272,8 +3278,8 @@ function mmSwitchTab(n) {
     const b = document.getElementById('mm-tn'+i);
     if(b) b.classList.toggle('active', i===n);
   });
-  if(n===2) mmRenderBoard();
-  if(n===4) { mmRenderKw(); syncRefresh(MM_KK, mmRenderKw); } // 캐시로 즉시 표시 후 서버 최신값으로 갱신
+  if(n===2) { mmRenderBoard(); uSyncRefresh(MM_RK, mmRenderBoard); } // 캐시로 즉시 표시 후 서버 최신값으로 갱신
+  if(n===4) { mmRenderKw(); uSyncRefresh(MM_KK, mmRenderKw); } // 캐시로 즉시 표시 후 서버 최신값으로 갱신
 }
 
 async function mmRunCollect() {
@@ -3301,7 +3307,7 @@ async function mmRunCollect() {
 
   const log = (msg, type='') => { pbLog.innerHTML += `<div class="${type}">• ${msg}</div>`; };
 
-  await syncRefresh(MM_KK); // 다른 기기에서 추가/삭제한 최신 키워드를 반영한 뒤 수집 시작
+  await uSyncRefresh(MM_KK); // 다른 기기에서 추가/삭제한 최신 키워드를 반영한 뒤 수집 시작
   const kw = mmGetKw();
   log(`뉴스발행일 기간: <b>${from}</b> ~ <b>${to}</b>`);
   log(`검색 사이트: 네이버 뉴스 API`);
@@ -3796,7 +3802,7 @@ const AK_INQUIRY = 'api_devops_inquiry_v1';
 const aGetList = () => { try{return JSON.parse(localStorage.getItem(AK_LIST)||'[]')}catch{return[]} };
 const aSetList = v => syncSave(AK_LIST, JSON.stringify(v));
 const aGetAnalysis = () => { try{return JSON.parse(uGetItem(AK_ANALYSIS)||'[]')}catch{return[]} };
-const aSetAnalysis = v => uSetItem(AK_ANALYSIS, JSON.stringify(v));
+const aSetAnalysis = v => uSyncSave(AK_ANALYSIS, JSON.stringify(v));
 const aGetDocs = () => { try{return JSON.parse(uGetItem(AK_DOCS)||'[]')}catch{return[]} };
 const aSetDocs = v => uSetItem(AK_DOCS, JSON.stringify(v));
 const aGetInquiry = () => { try{return JSON.parse(uGetItem(AK_INQUIRY)||'[]')}catch{return[]} };
@@ -4288,7 +4294,7 @@ function apiSaveAnalysis() {
   apiRenderSavedAnalysis(targetId);
 }
 
-function apiRenderSavedAnalysis(targetId) {
+function apiRenderSavedAnalysisInner(targetId) {
   const el = document.getElementById('api-saved-analysis-items');
   if(!targetId) { el.innerHTML = '<p class="api-empty-state">API 업무를 선택하면 저장된 분석결과가 표시됩니다</p>'; return; }
   const list = aGetAnalysis().filter(x=>x.apiId===targetId);
@@ -4301,6 +4307,10 @@ function apiRenderSavedAnalysis(targetId) {
         <button class="api-btn-sm del" onclick="apiDeleteSavedAnalysis('${x.id}','${targetId}')">삭제</button>
       </div>
     </div>`).join('') : '<p class="api-empty-state">저장된 분석 결과가 없습니다</p>';
+}
+function apiRenderSavedAnalysis(targetId) {
+  apiRenderSavedAnalysisInner(targetId);
+  uSyncRefresh(AK_ANALYSIS, ()=>apiRenderSavedAnalysisInner(targetId)); // 다른 기기/재배포 후에도 저장된 분석결과가 최신으로 유지되도록 새로고침
 }
 
 /* 저장된 목록에서 '수정'을 누르면 편집 텍스트를 화면에 불러오고 수정모드로 전환한다.
@@ -4728,6 +4738,7 @@ function aToast(msg){
 document.getElementById('htl-date').textContent = formatKoreanDate(new Date());
 updateHeader();
 showPage('home');
+syncRefresh(USERS_KEY, ()=>{}); // 로그인 시도 전에 최신 계정 목록을 미리 확보 (재배포/다른 기기 대비)
 </script>
 </body>
 </html>
